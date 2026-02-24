@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Portfólio | Gabriel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ESTILO DA PÁGINA (CSS)
+           Focado em um visual Dark/Moderno 
+        */
+        :root {
+            --primary-color: #f7df1e; /* JS Yellow */
+            --bg-dark: #0d1117;
+            --card-bg: rgba(23, 28, 36, 0.8);
+            --text-main: #e6edf3;
+            --accent: #30363d;
+            --glow: rgba(247, 223, 30, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 2px 2px, #1f242c 1px, transparent 0);
+            background-size: 40px 40px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Cabeçalho */
+        header {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(13,17,23,0) 0%, rgba(13,17,23,1) 100%);
+            border-bottom: 1px solid var(--accent);
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px var(--glow);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+
+        header h1 span {
+            color: var(--primary-color);
+        }
+
+        .bio {
+            max-width: 600px;
+            color: #8b949e;
+            font-size: 1.1rem;
+        }
+
+        /* Grid de Projetos */
+        .main-content {
+            max-width: 1100px;
+            margin: -50px auto 100px;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: var(--accent);
+        }
+
+        .grid-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* Estilo dos Cards */
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--accent);
+            border-radius: 16px;
+            padding: 25px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .project-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 4px; height: 100%;
+            background: var(--primary-color);
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .project-card p {
+            color: #8b949e;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .card-footer {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tech-stack {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        /* Botão Adicionar (Placeholder) */
+        .add-more {
+            grid-column: 1 / -1;
+            border: 2px dashed var(--accent);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #8b949e;
+            font-weight: bold;
+        }
+
+        .add-more:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: rgba(247, 223, 30, 0.05);
+        }
+
+        /* Rodapé */
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid var(--accent);
+            color: #484f58;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            .grid-links { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="https://github.com/identicons/gabriel.png" alt="User" class="profile-pic">
+        <h1>Olá, eu sou o <span>Gabriel</span></h1>
+        <p class="bio">Explorando o mundo do desenvolvimento através de pequenos scripts e grandes ideias.</p>
+    </header>
+
+    <main class="main-content">
+        <h2 class="section-title">📂 Meus Scripts & Sites</h2>
+
+        <div class="grid-links" id="link-container">
+            
+            <a href="https://github.com/SEU-USUARIO/SEU-REPO/blob/main/carro.js" target="_blank" class="project-card">
+                <div class="card-icon">🚗</div>
+                <h3>Análise de Veículos</h3>
+                <p>Script JS para comparação de desempenho entre dois veículos baseado em KM e preço.</p>
+                <div class="card-footer">
+                    <span class="tech-stack">JavaScript / Logic</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/SEU-USUARIO/SEU-REPO/blob/main/notas.js" target="_blank" class="project-card">
+                <div class="card-icon">🎓</div>
+                <h3>Calculadora de Médias</h3>
+                <p>Sistema simples para processar notas escolares e retornar a média final do aluno.</p>
+                <div class="card-footer">
+                    <span class="tech-stack">Math / JS</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/SEU-USUARIO/SEU-REPO/blob/main/teste%202.js" target="_blank" class="project-card">
+                <div class="card-icon">📐</div>
+                <h3>Geometria Básica</h3>
+                <p>Cálculo de área de triângulos e formas geométricas fundamentais.</p>
+                <div class="card-footer">
+                    <span class="tech-stack">Geometry</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/SEU-USUARIO/SEU-REPO/blob/main/teste%203.js" target="_blank" class="project-card">
+                <div class="card-icon">🧪</div>
+                <h3>Bhaskara Lab</h3>
+                <p>Resolução de equações de segundo grau, calculando Delta e raízes.</p>
+                <div class="card-footer">
+                    <span class="tech-stack">Algebra / JS</span>
+                </div>
+            </a>
+
+            <a href="https://github.com/SEU-USUARIO/SEU-REPO/blob/main/teste.html" target="_blank" class="project-card">
+                <div class="card-icon">🌐</div>
+                <h3>Página de Testes</h3>
+                <p>Onde a mágica acontece. Experimentos em HTML e integração de scripts externos.</p>
+                <div class="card-footer">
+                    <span class="tech-stack">HTML5 / Console</span>
+                </div>
+            </a>
+
+            <div class="add-more" onclick="alert('Basta copiar o código de um card no HTML e colar aqui para adicionar mais um!')">
+                <p>+ Adicionar Novo Site</p>
+                <small>Edite o HTML para expandir sua lista</small>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Gabriel - Desenvolvido com ❤️ e JavaScript</p>
+        <p>Hospedado no GitHub</p>
+    </footer>
+
+    <script>
+        // Espaço para funções futuras (como carregar repositórios automaticamente via API do GitHub)
+        console.log("Portfólio carregado com sucesso!");
+    </script>
+</body>
+</html>
