@@ -1,219 +1,481 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Dev Portfólio | Gabriel</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+
     
+
     <style>
+
         :root {
-            --primary: #E6AF2E;    /* Amarelo Ouro */
-            --bg-dark: #090446;     /* Azul Profundo */
-            --card-bg: #6B0504;     /* Vinho/Vermelho Escuro */
-            --text-main: #FBFFFE;   /* Branco Off-white */
-            --accent: #A3320B;      /* Laranja Queimado */
+
+            --primary-color: #f7df1e;
+
+            --bg-dark: #0d1117;
+
+            --card-bg: rgba(23, 28, 36, 0.8);
+
+            --text-main: #e6edf3;
+
+            --accent: #30363d;
+
+            --glow: rgba(247, 223, 30, 0.2);
+
         }
+
+
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+
+
         body {
+
             background-color: var(--bg-dark);
+
+            background-image: radial-gradient(circle at 2px 2px, #1f242c 1px, transparent 0);
+
+            background-size: 40px 40px;
+
             font-family: 'Inter', sans-serif;
+
             color: var(--text-main);
+
             line-height: 1.6;
+
         }
+
+
 
         header {
-            padding: 50px 20px;
+
+            height: 50vh;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            align-items: center;
+
             text-align: center;
-            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, var(--bg-dark) 100%);
+
+            background: linear-gradient(180deg, rgba(13,17,23,0) 0%, rgba(13,17,23,1) 100%);
+
+            padding: 20px;
+
         }
+
+
 
         .profile-pic {
-            width: 120px; height: 120px;
+
+            width: 100px; height: 100px;
+
             border-radius: 50%;
-            border: 4px solid var(--primary);
-            box-shadow: 0 0 20px rgba(230, 175, 46, 0.3);
+
+            border: 3px solid var(--primary-color);
+
             margin-bottom: 15px;
+
         }
 
-        /* --- SEÇÃO DO PROFESSOR --- */
-        .teacher-section {
-            background: var(--accent);
-            max-width: 400px;
-            margin: -20px auto 40px;
-            padding: 15px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border: 2px solid var(--primary);
-        }
 
-        .teacher-pic {
-            width: 60px; height: 60px;
-            border-radius: 8px;
-            object-fit: cover;
-            background: #eee; /* Fundo enquanto não tem a foto */
-        }
 
-        .teacher-info h4 { color: var(--primary); font-size: 0.9rem; }
-        .teacher-info p { font-size: 0.8rem; font-weight: bold; }
+        /* Barra de Pesquisa e Filtros */
 
-        /* --- CONTROLES --- */
         .controls {
+
             max-width: 1100px;
+
             margin: 0 auto 30px;
+
             padding: 0 20px;
+
             display: flex;
+
             flex-wrap: wrap;
+
             gap: 15px;
+
             justify-content: space-between;
+
+            align-items: center;
+
         }
+
+
 
         .search-box {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid var(--primary);
+
+            background: var(--card-bg);
+
+            border: 1px solid var(--accent);
+
             padding: 12px 20px;
-            border-radius: 8px;
+
+            border-radius: 30px;
+
             color: white;
+
             width: 100%;
+
             max-width: 400px;
+
             outline: none;
+
         }
+
+
+
+        .search-box:focus { border-color: var(--primary-color); }
+
+
+
+        .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
+
+
 
         .btn-filter {
-            background: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 8px 20px;
-            border-radius: 8px;
+
+            background: var(--accent);
+
+            border: none;
+
+            color: white;
+
+            padding: 8px 16px;
+
+            border-radius: 20px;
+
             cursor: pointer;
-            font-weight: bold;
+
             transition: 0.3s;
+
         }
+
+
 
         .btn-filter.active, .btn-filter:hover {
-            background: var(--primary);
-            color: var(--bg-dark);
+
+            background: var(--primary-color);
+
+            color: black;
+
         }
 
-        /* --- GRID --- */
+
+
+        /* Grid */
+
         .main-content { max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; }
 
+
+
         .grid-links {
+
             display: grid;
+
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
             gap: 25px;
+
         }
+
+
 
         .project-card {
+
             background: var(--card-bg);
-            border-left: 5px solid var(--primary);
-            border-radius: 8px;
+
+            border: 1px solid var(--accent);
+
+            border-radius: 16px;
+
             padding: 25px;
+
             cursor: pointer;
-            transition: 0.4s ease;
+
+            transition: 0.3s;
+
+            display: flex;
+
+            flex-direction: column;
+
         }
+
+
 
         .project-card:hover {
-            transform: scale(1.03);
-            background: var(--accent);
+
+            transform: translateY(-5px);
+
+            border-color: var(--primary-color);
+
         }
 
-        .card-icon { font-size: 2rem; margin-bottom: 10px; }
-        .card-footer { margin-top: 20px; font-family: 'Fira Code', monospace; color: var(--primary); font-size: 0.8rem; }
+
+
+        .card-icon { font-size: 2rem; margin-bottom: 15px; }
+
+        .card-footer { margin-top: 20px; font-family: 'Fira Code', monospace; color: var(--primary-color); font-size: 0.8rem; }
+
         
+
+        /* Esconder cards filtrados */
+
         .hidden { display: none; }
 
-        footer { text-align: center; padding: 40px; color: var(--primary); opacity: 0.7; }
+
+
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--accent); color: #484f58; }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <header>
-        <img src="https://github.com/identicons/gabriel.png" alt="Gabriel" class="profile-pic">
-        <h1>Projetos de <span style="color: var(--primary);">Gabriel</span></h1>
+
+        <img src="https://github.com/identicons/gabriel.png" alt="User" class="profile-pic">
+
+        <h1>Projetos de <span>Gabriel</span></h1>
+
+        <p>Busque e execute meus scripts diretamente por aqui.</p>
+
     </header>
 
-    <div class="teacher-section">
-        <img src="URL_DA_FOTO_DO_ROBSON_AQUI" alt="Prof. Robson" class="teacher-pic">
-        <div class="teacher-info">
-            <h4>Mentor & Professor</h4>
-            <p>Robson</p>
-        </div>
-    </div>
+
 
     <section class="controls">
+
         <input type="text" class="search-box" id="searchInput" placeholder="Pesquisar projeto...">
+
         <div class="filter-buttons">
+
             <button class="btn-filter active" onclick="filterSelection('all')">Todos</button>
+
             <button class="btn-filter" onclick="filterSelection('math')">Matemática</button>
+
             <button class="btn-filter" onclick="filterSelection('logic')">Lógica</button>
+
             <button class="btn-filter" onclick="filterSelection('web')">Web</button>
+
         </div>
+
     </section>
 
+
+
     <main class="main-content">
+
         <div class="grid-links" id="link-container">
-            <div class="project-card math logic" onclick="alert('Executando lógica de carros...')">
+
+            
+
+            <div class="project-card math logic" onclick="window.location.href = 'carro.js'">
+
                 <div class="card-icon">🚗</div>
+
                 <h3>Análise de Veículos</h3>
-                <p>Compara rendimento entre Carro A e B.</p>
+
+                <p>Compara rendimento entre Carro A e B baseado em KM e preço.</p>
+
                 <div class="card-footer">#logica #carros</div>
+
             </div>
 
-            <div class="project-card math" onclick="alert('Calculando médias...')">
+
+
+            <div class="project-card math" onclick="window.location.href = 'notas.js'">
+
                 <div class="card-icon">🎓</div>
+
                 <h3>Calculadora de Médias</h3>
-                <p>Média aritmética do aluno Petro.</p>
+
+                <p>Calcula a média aritmética do aluno Petro.</p>
+
                 <div class="card-footer">#escola #calculo</div>
+
             </div>
 
-            <div class="project-card math" onclick="alert('Calculando Geometria...')">
+
+
+            <div class="project-card math"onclick="window.location.href = 'teste2.js'">
+
                 <div class="card-icon">📐</div>
+
                 <h3>Geometria (Área)</h3>
-                <p>Cálculo de área de triângulo.</p>
-                <div class="card-footer">#geometria</div>
+
+                <p>Cálculo de área de triângulo (Base x Altura).</p>
+
+                <div class="card-footer">#geometria #triangulo</div>
+
             </div>
 
-            <div class="project-card web" onclick="alert('Abrindo página...')">
-                <div class="card-icon">🌐</div>
-                <h3>Página de Testes</h3>
-                <p>Experimentos HTML/JS.</p>
-                <div class="card-footer">#web #dev</div>
+
+
+            <div class="project-card math" onclick="window.location.href = 'teste3.js'">
+
+                <div class="card-icon">🧪</div>
+
+                <h3>Bhaskara Lab</h3>
+
+                <p>Resolve equações de 2º grau e encontra o Delta.</p>
+
+                <div class="card-footer">#algebra #bhaskara</div>
+
             </div>
+
+
+
+            <div class="project-card web" onclick="window.open('teste.html', '_blank')">
+
+                <div class="card-icon">🌐</div>
+
+                <h3>Página de Testes</h3>
+
+                <p>Abre o seu arquivo HTML de experimentos.</p>
+
+                <div class="card-footer">#html #javascript</div>
+
+            </div>
+
+
+
         </div>
+
     </main>
 
+
+
     <footer>
-        <p>&copy; 2026 Gabriel | Inspirado pelas aulas do Prof. Robson</p>
+
+        <p>&copy; 2026 Gabriel | Desenvolvedor</p>
+
     </footer>
 
+
+
     <script>
-        // Lógica de pesquisa
+
+        // --- LÓGICA DE FILTRO E PESQUISA ---
+
         const searchInput = document.getElementById('searchInput');
+
         const cards = document.getElementsByClassName('project-card');
 
+
+
         searchInput.addEventListener('keyup', function() {
+
             let filter = searchInput.value.toLowerCase();
+
             for (let i = 0; i < cards.length; i++) {
+
                 let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+
                 cards[i].classList.toggle('hidden', !title.includes(filter));
+
             }
+
         });
 
+
+
         function filterSelection(c) {
+
+            let i;
+
             if (c == "all") c = "";
-            for (let i = 0; i < cards.length; i++) {
+
+            for (i = 0; i < cards.length; i++) {
+
                 cards[i].classList.add("hidden");
+
                 if (cards[i].className.indexOf(c) > -1) cards[i].classList.remove("hidden");
+
             }
+
+            // Mudar botão ativo
+
             let btns = document.getElementsByClassName("btn-filter");
+
             for (let btn of btns) btn.classList.remove("active");
+
             event.currentTarget.classList.add("active");
+
         }
+
+
+
+        // --- FUNÇÕES DOS SEUS SCRIPTS (Transformados para funcionar na Web) ---
+
+        
+
+        function executarCarro() {
+
+            let km1=100; let km2=20; let p1=7.50; let p2=8;
+
+            let res1 = km1 * p1;
+
+            let res2 = km2 * p2;
+
+            alert(`Carro A: ${res1}\nCarro B: ${res2}\nComparação concluída!`);
+
+        }
+
+
+
+        function executarNotas() {
+
+            let n1=10, n2=9, n3=8, n4=7;
+
+            let media = (n1+n2+n3+n4)/4;
+
+            alert(`A média do aluno Petro é: ${media}`);
+
+        }
+
+
+
+        function executarGeometria() {
+
+            let B=5, A=12;
+
+            let T = (B*A)/2;
+
+            alert(`A área do triângulo é: ${T}`);
+
+        }
+
+
+
+        function executarBhaskara() {
+
+            let b=5, a=22, c=3;
+
+            let D = (b*b)-(4*a*c);
+
+            alert(`O Delta (D) é: ${D}`);
+
+        }
+
     </script>
+
 </body>
-</html>
+
+</html>                    
