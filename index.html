@@ -13,6 +13,7 @@
             --card-bg: rgba(23, 28, 36, 0.8);
             --text-main: #e6edf3;
             --accent: #30363d;
+            --glow: rgba(247, 223, 30, 0.2);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -23,26 +24,27 @@
             background-size: 40px 40px;
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
+            line-height: 1.6;
         }
 
         header {
-            height: 40vh;
+            height: 50vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            background: linear-gradient(180deg, rgba(13,17,23,0) 0%, rgba(13,17,23,1) 100%);
             padding: 20px;
         }
 
         .profile-pic {
-            width: 80px; height: 80px;
+            width: 100px; height: 100px;
             border-radius: 50%;
             border: 3px solid var(--primary-color);
             margin-bottom: 15px;
         }
 
-        /* Controles */
         .controls {
             max-width: 1100px;
             margin: 0 auto 30px;
@@ -50,7 +52,8 @@
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .search-box {
@@ -64,43 +67,42 @@
             outline: none;
         }
 
+        .search-box:focus { border-color: var(--primary-color); }
+
         .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
 
         .btn-filter {
             background: var(--accent);
             border: none;
             color: white;
-            padding: 8px 20px;
+            padding: 8px 16px;
             border-radius: 20px;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .btn-filter.active {
+        .btn-filter.active, .btn-filter:hover {
             background: var(--primary-color);
             color: black;
-            font-weight: bold;
         }
 
-        /* Grid de Projetos */
         .main-content { max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; }
 
         .grid-links {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
         }
 
         .project-card {
             background: var(--card-bg);
             border: 1px solid var(--accent);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 16px;
+            padding: 25px;
+            cursor: pointer;
             transition: 0.3s;
             display: flex;
             flex-direction: column;
-            text-decoration: none;
-            color: inherit;
         }
 
         .project-card:hover {
@@ -108,83 +110,153 @@
             border-color: var(--primary-color);
         }
 
-        /* Classe para esconder os itens */
-        .esconder { display: none !important; }
+        .card-icon { font-size: 2rem; margin-bottom: 15px; }
+        .card-footer { margin-top: auto; padding-top: 20px; font-family: 'Fira Code', monospace; color: var(--primary-color); font-size: 0.8rem; }
+        
+        .hidden { display: none !important; }
 
-        .card-footer { 
-            margin-top: auto; 
-            padding-top: 15px; 
-            color: var(--primary-color); 
-            font-size: 0.8rem; 
-            font-family: 'Fira Code', monospace; 
-        }
-
-        footer { text-align: center; padding: 40px; color: #484f58; }
+        footer { text-align: center; padding: 40px; border-top: 1px solid var(--accent); color: #484f58; }
     </style>
 </head>
 <body>
 
     <header>
         <img src="https://github.com/identicons/gabriel.png" alt="User" class="profile-pic">
-        <h1>Meus Projetos</h1>
+        <h1>Projetos de <span>Gabriel</span></h1>
+        <p>Busque e execute meus scripts diretamente por aqui.</p>
     </header>
 
     <section class="controls">
-        <input type="text" id="campoBusca" class="search-box" placeholder="Digite para buscar...">
-        
+        <input type="text" class="search-box" id="searchInput" placeholder="Pesquisar projeto...">
         <div class="filter-buttons">
-            <button class="btn-filter active" onclick="filtrarCategoria('todos')">Todos</button>
-            <button class="btn-filter" onclick="filtrarCategoria('web')">Web</button>
-            <button class="btn-filter" onclick="filtrarCategoria('js')">JS</button>
-            <button class="btn-filter" onclick="filtrarCategoria('mat')">Matemática</button>
+            <button class="btn-filter active" onclick="filterSelection('all', event)">Todos</button>
+            <button class="btn-filter" onclick="filterSelection('math', event)">Matemática</button>
+            <button class="btn-filter" onclick="filterSelection('web', event)">Web</button>
+            <button class="btn-filter" onclick="filterSelection('js', event)">JS</button>
         </div>
     </section>
 
     <main class="main-content">
-        <div class="grid-links" id="containerProjetos">
+        <div class="grid-links" id="link-container">
             
-            <div class="project-card mat" onclick="window.location.href='notas.js'">
+            <div class="project-card math logic" onclick="window.location.href = 'carro.js'">
+                <div class="card-icon">🚗</div>
+                <h3>Análise de Veículos</h3>
+                <p>Compara rendimento entre Carro A e B baseado em KM e preço.</p>
+                <div class="card-footer">#logica #carros</div>
+            </div>
+
+            <div class="project-card math" onclick="window.location.href = 'notas.js'">
+                <div class="card-icon">🎓</div>
                 <h3>Calculadora de Médias</h3>
-                <p>Calcula a média aritmética.</p>
-                <div class="card-footer">#mat #calculo</div>
+                <p>Calcula a média aritmética do aluno Petro.</p>
+                <div class="card-footer">#escola #calculo</div>
             </div>
 
-            <div class="project-card mat" onclick="window.location.href='teste3.js'">
+            <div class="project-card math" onclick="window.location.href = 'teste2.js'">
+                <div class="card-icon">📐</div>
+                <h3>Geometria (Área)</h3>
+                <p>Cálculo de área de triângulo (Base x Altura).</p>
+                <div class="card-footer">#geometria #triangulo</div>
+            </div>
+
+            <div class="project-card math" onclick="window.location.href = 'teste3.js'">
+                <div class="card-icon">🧪</div>
                 <h3>Bhaskara Lab</h3>
-                <p>Resolve equações de 2º grau.</p>
-                <div class="card-footer">#mat #algebra</div>
-            </div>
-
-            <div class="project-card js" onclick="window.location.href='filtrar.js'">
-                <h3>Ordenar Objetos</h3>
-                <p>Filtra e ordena por idade.</p>
-                <div class="card-footer">#js #logica</div>
-            </div>
-
-            <div class="project-card js" onclick="window.location.href='selectionSorts.js'">
-                <h3>Selection Sort</h3>
-                <p>Algoritmo de ordenação numérica.</p>
-                <div class="card-footer">#js #algoritmo</div>
+                <p>Resolve equações de 2º grau e encontra o Delta.</p>
+                <div class="card-footer">#algebra #bhaskara</div>
             </div>
 
             <div class="project-card web js" onclick="window.open('teste.html', '_blank')">
+                <div class="card-icon">🌐</div>
                 <h3>Página de Testes</h3>
-                <p>Interface experimental em HTML.</p>
-                <div class="card-footer">#web #html</div>
+                <p>Abre o seu arquivo HTML de experimentos.</p>
+                <div class="card-footer">#html #javascript</div>
             </div>
 
-            <div class="project-card web" onclick="window.open('https://gamma.app/docs/Agenda-Escolar-Inteligente-zhlc75xq821pwub', '_blank')">
-                <h3>Agenda Inteligente</h3>
-                <p>Apresentação de projeto educacional.</p>
-                <div class="card-footer">#web #gamma</div>
+            <div class="project-card web js" onclick="window.open('media_se.js', '_blank')">
+                <div class="card-icon">📁</div>
+                <h3>Página de Testes/ let</h3>
+                <p>Abre o seu arquivo js de experimentos.</p>
+                <div class="card-footer">#javascript</div>
             </div>
 
-            <div class="project-card mat js" onclick="window.location.href='listaLivros.js'">
+            <div class="project-card web js" onclick="window.open('variaveis.js', '_blank')">
+                <div class="card-icon">📁</div>
+                <h3>Página de Testes de variaveis</h3>
+                <p>Abre o seu arquivo js de experimentos.</p>
+                <div class="card-footer">#javascript</div>
+            </div>
+            
+            <div class="project-card web" onclick="window.open('https://gamma.app/docs/Agenda-Escolar-Inteligente-zhlc75xq821pwub ', '_blank')">
+                <div class="card-icon">📊</div>
+                <h3>Agenda Escolar Inteligente</h3>
+                <p>Clique para visualizar a apresentação do projeto no Gamma.</p>
+                <div class="card-footer">#Gamma #Educacao</div>
+            </div>
+            
+            <div class="project-card web" onclick="window.open('https://gamma.app/docs/Os-Pilares-da-Propriedade-Intelectual-pbq519sk1847qzm', '_blank')">
+                <div class="card-icon">📊</div>
+                <h3>Os-Pilares-da-Propriedade-Intelectual</h3>
+                <p>Clique para visualizar a apresentação do projeto no Gamma.</p>
+                <div class="card-footer">#Gamma #Educacao</div>
+            </div>
+          
+            <div class="project-card math" onclick="window.location.href = 'brake_continue.js'">
+                <div class="card-icon">🚗</div>
+                <h3>carros_estacionados</h3>
+                <p>Simulação de estacionamento.</p>
+                <div class="card-footer">#carros</div>
+            </div>
+
+            <div class="project-card web" onclick="window.open('https://gamma.app/docs/O-Ecossistema-de-Startups-2026-jkcqttp70rfdif2', '_blank')">
+                <div class="card-icon">📊</div>
+                <h3>O Ecossistema de Startups 2026</h3>
+                <p>Clique para visualizar a apresentação do projeto no Gamma.</p>
+                <div class="card-footer">#Gamma #Educacao</div>
+            </div>
+
+            <div class="project-card math js" onclick="window.location.href = 'filtrar.js'">
+                <div class="card-icon">🧪</div>
+                <h3>Filtrar Objetos</h3>
+                <p>Ordenando objetos por idade.</p>
+                <div class="card-footer">#javascript</div>
+            </div>
+
+            <div class="project-card math js" onclick="window.location.href = 'selectionSorts.js'">
+                <div class="card-icon">🔢</div>
+                <h3>Selection Sort</h3>
+                <p>Ordenando de 0 a ...</p>
+                <div class="card-footer">#javascript</div>
+            </div>
+
+            <div class="project-card math js" onclick="window.location.href = 'ordenando.js'">
+                <div class="card-icon">🔢</div>
+                <h3>Ordenando Geral</h3>
+                <p>Algoritmos de ordenação.</p>
+                <div class="card-footer">#javascript</div>
+            </div>
+            
+            <div class="project-card math js" onclick="window.location.href = 'listaLivros.js'">
+                <div class="card-icon">📚</div>
                 <h3>Lista de Livros</h3>
-                <p>Sistema de ordenação de títulos.</p>
-                <div class="card-footer">#js #mat</div>
+                <p>Ordenando lista de livros.</p>
+                <div class="card-footer">#javascript</div>
             </div>
-
+              
+            <div class="project-card math js" onclick="window.location.href = 'alterar.js'">
+                <div class="card-icon">🔄</div>
+                <h3>Alterar Dados</h3>
+                <p>Manipulação de objetos.</p>
+                <div class="card-footer">#javascript</div>
+            </div>
+    
+            <div class="project-card math js" onclick="window.location.href = 'leitura.js'">
+                <div class="card-icon">📖</div>
+                <h3>Leitura de Arquivos</h3>
+                <p>Script de leitura.</p>
+                <div class="card-footer">#javascript</div>
+            </div>
         </div>
     </main>
 
@@ -193,55 +265,58 @@
     </footer>
 
     <script>
-        const campoBusca = document.getElementById('campoBusca');
-        const listaCards = document.getElementsByClassName('project-card');
-        const botoesFiltro = document.getElementsByClassName('btn-filter');
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.getElementsByClassName('project-card');
 
-        // 1. Função de Filtro por Categoria (Botões)
-        function filtrarCategoria(categoria) {
-            // Limpa o campo de busca quando clica no botão
-            campoBusca.value = "";
+        // Busca por texto (Filtro por digitação)
+        searchInput.addEventListener('keyup', function() {
+            let filter = searchInput.value.toLowerCase();
+            
+            // Quando digitar, o botão "Todos" fica ativo
+            let btns = document.getElementsByClassName("btn-filter");
+            for (let btn of btns) btn.classList.remove("active");
+            btns[0].classList.add("active");
 
-            // Gerencia a cor do botão ativo
-            for (let btn of botoesFiltro) {
-                btn.classList.remove('active');
-            }
-            event.currentTarget.classList.add('active');
-
-            // Mostra ou Esconde os cards
-            for (let card of listaCards) {
-                if (categoria === 'todos') {
-                    card.classList.remove('esconder');
+            for (let i = 0; i < cards.length; i++) {
+                let title = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+                let text = cards[i].getElementsByTagName('p')[0].innerText.toLowerCase();
+                
+                // Pesquisa no título ou na descrição
+                if (title.includes(filter) || text.includes(filter)) {
+                    cards[i].classList.remove('hidden');
                 } else {
-                    // Verifica se o card tem a classe da categoria (web, js ou mat)
-                    if (card.classList.contains(categoria)) {
-                        card.classList.remove('esconder');
-                    } else {
-                        card.classList.add('esconder');
-                    }
-                }
-            }
-        }
-
-        // 2. Função de Busca por Texto (Input)
-        campoBusca.addEventListener('input', function() {
-            const termo = campoBusca.value.toLowerCase();
-
-            // Ao digitar, volta o botão para o "Todos" para não dar conflito
-            for (let btn of botoesFiltro) btn.classList.remove('active');
-            botoesFiltro[0].classList.add('active');
-
-            for (let card of listaCards) {
-                const titulo = card.querySelector('h3').innerText.toLowerCase();
-                const texto = card.querySelector('p').innerText.toLowerCase();
-
-                if (titulo.includes(termo) || texto.includes(termo)) {
-                    card.classList.remove('esconder');
-                } else {
-                    card.classList.add('esconder');
+                    cards[i].classList.add('hidden');
                 }
             }
         });
+
+        // Filtro por categoria (Botões)
+        function filterSelection(c, event) {
+            // Limpa a barra de busca ao clicar em um botão de categoria
+            searchInput.value = "";
+
+            for (let i = 0; i < cards.length; i++) {
+                if (c === "all") {
+                    cards[i].classList.remove("hidden");
+                } else {
+                    // Verifica se o card contém a classe (math, web ou js)
+                    if (cards[i].classList.contains(c)) {
+                        cards[i].classList.remove("hidden");
+                    } else {
+                        cards[i].classList.add("hidden");
+                    }
+                }
+            }
+
+            // Gerencia o estilo dos botões (Active)
+            let btns = document.getElementsByClassName("btn-filter");
+            for (let btn of btns) {
+                btn.classList.remove("active");
+            }
+            if (event) {
+                event.currentTarget.classList.add("active");
+            }
+        }
     </script>
 </body>
 </html>
