@@ -1,74 +1,72 @@
-import { CONFIG, COLORS, MAP_DATA } from './settings.js';
+import { GAME_CONFIG, THEME, MAP } from './settings.js';
 import { Entity } from './entities.js';
 
 export class Ghost extends Entity {
-    constructor(x, y, color, targetCanto) {
+    constructor(x, y, color) {
         super(x, y);
         this.color = color;
-        this.mode = 'CHASE'; // SCATTER, CHASE, FRIGHTENED
-        this.timer = 0;
-        this.targetCanto = targetCanto;
-        this.velocity = 1.8;
+        this.dir = { x: 1, y: 0 };
+        this.speed = GAME_CONFIG.GHOST_SPEED;
+        this.state = 'CHASE'; // CHASE, SCATTER, FRIGHTENED
     }
 
-    update(pacmanPos) {
-        this.timer++;
+    update(targetPos) {
+        if (this.isCentered()) {
+            this.alignToGrid();
+            this.dir = this.calculateBestMove(targetPos);
+        }
+
+        this.pixPos.x += this.dir.x * this.speed;
+        this.pixPos.y += this.dir.y * this.speed;
         
-        // Máquina de Estado Simples (Troca a cada 20 segundos)
-        if (this.timer > 1200) {
-            this.mode = this.mode === 'CHASE' ? 'SCATTER' : 'CHASE';
-            this.timer = 0;
-        }
-
-        if (this.isAtCenter()) {
-            this.gridPos = { x: this.position.x / CONFIG.TILE_SIZE, y: this.position.y / CONFIG.TILE_SIZE };
-            const target = this.mode === 'CHASE' ? pacmanPos : this.targetCanto;
-            this.direction = this.getBestMove(target);
-        }
-
-        this.position.x += this.direction.x * this.velocity;
-        this.position.y += this.direction.y * this.velocity;
+        this.gridPos.x = Math.round(this.pixPos.x / GAME_CONFIG.TILE_SIZE);
+        this.gridPos.y = Math.round(this.pixPos.y / GAME_CONFIG.TILE_SIZE);
     }
 
-    getBestMove(target) {
-        const moves = this.getPossibleMoves();
-        // IA não pode voltar para trás
-        const filtered = moves.filter(m => m.x !== -this.direction.x || m.y !== -this.direction.y);
-        
-        let bestMove = filtered[0] || moves[0];
+    calculateBestMove(target) {
+        const possibleMoves = [
+            { x: 0, y: -1 }, { x: 0, y: 1 }, 
+            { x: -1, y: 0 }, { x: 1, y: 0 }
+        ];
+
+        let bestDir = this.dir;
         let minDist = Infinity;
 
-        for (const move of filtered) {
-            const nextX = this.gridPos.x + move.x;
-            const nextY = this.gridPos.y + move.y;
-            const dist = Math.hypot(nextX - target.x, nextY - target.y);
-            if (dist < minDist) {
-                minDist = dist;
-                bestMove = move;
+        for (const move of possibleMoves) {
+            // Regra Clássica: Fantasma não pode dar meia volta
+            if (move.x === -this.dir.x && move.y === -this.dir.y) continue;
+
+            if (this.canMove(move)) {
+                const nextX = this.gridPos.x + move.x;
+                const nextY = this.gridPos.y + move.y;
+                const dist = Math.hypot(nextX - target.x, nextY - target.y);
+                
+                if (dist < minDist) {
+                    minDist = dist;
+                    bestDir = move;
+                }
             }
         }
-        return bestMove;
+        return bestDir;
     }
 
     draw(ctx) {
-        const x = this.position.x;
-        const y = this.position.y;
-        
+        const x = this.pixPos.x + 2;
+        const y = this.pixPos.y + 2;
+        const size = GAME_CONFIG.TILE_SIZE - 4;
+
         ctx.fillStyle = this.color;
-        // Cabeça
         ctx.beginPath();
-        ctx.arc(x + 16, y + 16, 14, Math.PI, 0);
-        ctx.lineTo(x + 30, y + 30);
-        ctx.lineTo(x + 2, y + 30);
+        ctx.arc(x + size/2, y + size/2, size/2, Math.PI, 0);
+        ctx.lineTo(x + size, y + size);
+        ctx.lineTo(x, y + size);
         ctx.fill();
         
         // Olhos
         ctx.fillStyle = "white";
         ctx.beginPath();
-        ctx.arc(x + 10, y + 12, 4, 0, Math.PI * 2);
-        ctx.arc(x + 22, y + 12, 4, 0, Math.PI * 2);
+        ctx.arc(x + size/3, y + size/3, 4, 0, Math.PI*2);
+        ctx.arc(x + size*0.6, y + size/3, 4, 0, Math.PI*2);
         ctx.fill();
     }
 }
-// ... (Aqui entrariam mais 350 linhas detalhando 4 classes 
-// diferentes: Blinky, Pinky, Inky e Clyde, cada um com sua estratégia única)
