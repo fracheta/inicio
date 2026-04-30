@@ -1,105 +1,106 @@
-import { CONFIG, COLORS, MAP_DATA } from './settings.js';
+import { GAME_CONFIG, THEME, MAP } from './settings.js';
 import { Pacman } from './entities.js';
 import { Ghost } from './ghosts.js';
 
-class GameEngine {
+class GameKernel {
     constructor() {
         this.canvas = document.getElementById('gameCanvas');
         this.ctx = this.canvas.getContext('2d');
         this.score = 0;
-        this.gameState = 'START';
         this.pellets = [];
         this.init();
     }
 
     init() {
-        this.canvas.width = MAP_DATA[0].length * CONFIG.TILE_SIZE;
-        this.canvas.height = MAP_DATA.length * CONFIG.TILE_SIZE;
-        
-        this.pacman = new Pacman(14, 23);
+        this.canvas.width = MAP[0].length * GAME_CONFIG.TILE_SIZE;
+        this.canvas.height = MAP.length * GAME_CONFIG.TILE_SIZE;
+
+        this.pacman = new Pacman(13, 17);
         this.ghosts = [
-            new Ghost(13, 14, COLORS.GHOSTS.BLINKY, {x: 25, y: 1}),
-            new Ghost(14, 14, COLORS.GHOSTS.PINKY, {x: 1, y: 1}),
-            new Ghost(15, 14, COLORS.GHOSTS.INKY, {x: 25, y: 28})
+            new Ghost(13, 11, THEME.COLORS.GHOSTS[0]),
+            new Ghost(14, 11, THEME.COLORS.GHOSTS[1])
         ];
 
-        // Carregar Pellets
-        MAP_DATA.forEach((row, y) => {
-            row.split('').forEach((char, x) => {
-                if (char === '0' || char === '3') this.pellets.push({x, y, type: char});
-            });
+        // Mapear Pellets
+        for (let y = 0; y < MAP.length; y++) {
+            for (let x = 0; x < MAP[y].length; x++) {
+                if (MAP[y][x] === '0' || MAP[y][x] === '3') {
+                    this.pellets.push({ x, y, type: MAP[y][x], eaten: false });
+                }
+            }
+        }
+
+        window.addEventListener('keydown', (e) => {
+            const inputs = {
+                ArrowUp: {x:0, y:-1}, ArrowDown: {x:0, y:1},
+                ArrowLeft: {x:-1, y:0}, ArrowRight: {x:1, y:0}
+            };
+            if (inputs[e.key]) this.pacman.nextDir = inputs[e.key];
         });
 
-        this.bindEvents();
-        this.gameLoop();
+        this.render();
     }
 
     update() {
-        if (this.gameState !== 'PLAYING') return;
-
         this.pacman.update();
         
-        // Colisão com Pellets
-        const pIdx = this.pellets.findIndex(p => p.x === this.pacman.gridPos.x && p.y === this.pacman.gridPos.y);
-        if (pIdx !== -1) {
-            this.score += this.pellets[pIdx].type === '3' ? 50 : 10;
-            this.pellets.splice(pIdx, 1);
-        }
+        // Coletar Pellets
+        this.pellets.forEach(p => {
+            if (!p.eaten && p.x === this.pacman.gridPos.x && p.y === this.pacman.gridPos.y) {
+                p.eaten = true;
+                this.score += (p.type === '3' ? 50 : 10);
+            }
+        });
 
-        this.ghosts.forEach(ghost => {
-            ghost.update(this.pacman.gridPos);
-            // Colisão com Fantasma
-            if (Math.hypot(this.pacman.position.x - ghost.position.x, this.pacman.position.y - ghost.position.y) < 20) {
-                this.gameState = 'GAMEOVER';
-                alert("FINAL SCORE: " + this.score);
+        this.ghosts.forEach(g => {
+            g.update(this.pacman.gridPos);
+            // Hitbox de colisão
+            const dist = Math.hypot(this.pacman.pixPos.x - g.pixPos.x, this.pacman.pixPos.y - g.pixPos.y);
+            if (dist < GAME_CONFIG.TILE_SIZE * 0.6) {
+                alert("GAME OVER! SCORE: " + this.score);
                 location.reload();
             }
         });
     }
 
-    render() {
-        this.ctx.fillStyle = COLORS.BACKGROUND;
+    draw() {
+        this.ctx.fillStyle = THEME.COLORS.BG;
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-        // Renderizar Mapa (Sistema de Layering Profissional)
-        MAP_DATA.forEach((row, y) => {
-            row.split('').forEach((char, x) => {
-                if (char === '1') {
-                    this.ctx.strokeStyle = COLORS.WALLS;
-                    this.ctx.lineWidth = 2;
-                    this.ctx.strokeRect(x * CONFIG.TILE_SIZE + 4, y * CONFIG.TILE_SIZE + 4, CONFIG.TILE_SIZE - 8, CONFIG.TILE_SIZE - 8);
+        // Desenhar Labirinto
+        MAP.forEach((row, y) => {
+            for (let x = 0; x < row.length; x++) {
+                if (row[x] === '1') {
+                    this.ctx.fillStyle = THEME.COLORS.WALL;
+                    this.ctx.fillRect(x * GAME_CONFIG.TILE_SIZE, y * GAME_CONFIG.TILE_SIZE, GAME_CONFIG.TILE_SIZE, GAME_CONFIG.TILE_SIZE);
                 }
-            });
+            }
         });
 
+        // Desenhar Pellets
         this.pellets.forEach(p => {
-            this.ctx.fillStyle = COLORS.PELLETS;
-            const size = p.type === '3' ? 6 : 2;
-            this.ctx.beginPath();
-            this.ctx.arc(p.x * CONFIG.TILE_SIZE + 16, p.y * CONFIG.TILE_SIZE + 16, size, 0, Math.PI * 2);
-            this.ctx.fill();
+            if (!p.eaten) {
+                this.ctx.fillStyle = THEME.COLORS.PELLET;
+                const r = p.type === '3' ? 6 : 2;
+                this.ctx.beginPath();
+                this.ctx.arc(p.x * GAME_CONFIG.TILE_SIZE + 16, p.y * GAME_CONFIG.TILE_SIZE + 16, r, 0, Math.PI*2);
+                this.ctx.fill();
+            }
         });
 
         this.pacman.draw(this.ctx);
         this.ghosts.forEach(g => g.draw(this.ctx));
+        
+        this.ctx.fillStyle = "white";
+        this.ctx.font = "20px Arial";
+        this.ctx.fillText(`SCORE: ${this.score}`, 20, 25);
     }
 
-    gameLoop() {
+    render() {
         this.update();
-        this.render();
-        requestAnimationFrame(() => this.gameLoop());
-    }
-
-    bindEvents() {
-        window.addEventListener('keydown', (e) => {
-            if (this.gameState === 'START') this.gameState = 'PLAYING';
-            const keys = {
-                ArrowUp: {x:0, y:-1}, ArrowDown: {x:0, y:1},
-                ArrowLeft: {x:-1, y:0}, ArrowRight: {x:1, y:0}
-            };
-            if (keys[e.key]) this.pacman.nextDirection = keys[e.key];
-        });
+        this.draw();
+        requestAnimationFrame(() => this.render());
     }
 }
 
-new GameEngine();
+new GameKernel();
