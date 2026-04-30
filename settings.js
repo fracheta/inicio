@@ -1,34 +1,37 @@
-/** * PAC-MAN ENGINE - SETTINGS & CONSTANTS
- * @version 2.0.0
- * @author Senior Systems Architect
+/**
+ * PAC-MAN ENGINE v3.0 - ARCHITECTURE & CONFIGURATION
+ * Implementação de constantes globais e mapeamento de colisões.
  */
 
-export const CONFIG = {
+export const GAME_CONFIG = {
     TILE_SIZE: 32,
-    FPS: 60,
-    PHYSICS_TICK: 1000 / 60,
-    RENDER_SCALE: window.devicePixelRatio || 1,
+    FPS_TARGET: 60,
+    PACMAN_SPEED: 2.2,
+    GHOST_SPEED: 2.0,
+    POWER_PELLET_DURATION: 7000, // 7 segundos
     DEBUG_MODE: false
 };
 
-export const COLORS = {
-    BACKGROUND: "#020205",
-    WALLS: "#1a1aff",
-    WALL_GLOW: "rgba(26, 26, 255, 0.3)",
-    PACMAN: "#ffff00",
-    GHOSTS: {
-        BLINKY: "#ff0000", // Red
-        PINKY: "#ffb8ff",  // Pink
-        INKY: "#00ffff",   // Cyan
-        CLYDE: "#ffb852"   // Orange
-    },
-    PELLETS: "#ffb8ae",
-    UI_TEXT: "#ffffff"
+export const THEME = {
+    COLORS: {
+        BG: "#020205",
+        WALL: "#1a1aff",
+        WALL_GLOW: "#2d2dff",
+        PACMAN: "#ffff00",
+        PELLET: "#ffb8ae",
+        GHOSTS: ["#ff0000", "#ffb8ff", "#00ffff", "#ffb852"]
+    }
 };
 
-// Mapa em alta definição (Extendido)
-// 1: Parede, 0: Ponto, 2: Vazio, 3: Power Pellet, G: Portal Fantasmas
-export const MAP_DATA = [
+/**
+ * Legenda do Mapa:
+ * 1 = Parede externa
+ * 0 = Caminho com pastilha
+ * 2 = Caminho vazio
+ * 3 = Power Pellet (Super Pastilha)
+ * 4 = Portal de entrada da casa dos fantasmas
+ */
+export const MAP = [
     "1111111111111111111111111111",
     "1000000000000110000000000001",
     "1011110111110110111110111101",
@@ -41,27 +44,16 @@ export const MAP_DATA = [
     "1111110111112112111110111111",
     "2222210111112112111110122222",
     "2222210112222222222110122222",
-    "2222210112111GG1112110122222",
-    "1111110112122222212110111111",
+    "1111110112111441112110111111",
     "2222220222122222212220222222",
-    "1111110112122222212110111111",
-    "2222210112111111112110122222",
-    "2222210112222222222110122222",
-    "2222210112111111112110122222",
     "1111110112111111112110111111",
+    "2222210112222222222110122222",
     "1000000000000110000000000001",
     "1011110111110110111110111101",
-    "1011110111110110111110111101",
-    "1300110000000220000000110031",
-    "1110110110111111110110110111",
+    "1300110000000000000000110031",
     "1110110110111111110110110111",
     "1000000110000110000110000001",
-    "1011111111110110111111111101",
     "1011111111110110111111111101",
     "1000000000000000000000000001",
     "1111111111111111111111111111"
 ];
-
-// ... (Para atingir 300+ linhas, o programador incluiria aqui 
-// extensos comentários de documentação JSDoc, matrizes de animação, 
-// tabelas de áudio-mapping e constantes de IA como SCATTER_TIME e CHASE_TIME)
