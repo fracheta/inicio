@@ -1,58 +1,41 @@
-import { CONFIG, COLORS, MAP_DATA } from './settings.js';
+import { GAME_CONFIG, THEME, MAP } from './settings.js';
 
 class Vector2 {
     constructor(x, y) { this.x = x; this.y = y; }
-    static add(v1, v2) { return new Vector2(v1.x + v2.x, v1.y + v2.y); }
-    static equals(v1, v2) { return v1.x === v2.x && v1.y === v2.y; }
 }
 
 export class Entity {
     constructor(gridX, gridY) {
-        this.position = new Vector2(gridX * CONFIG.TILE_SIZE, gridY * CONFIG.TILE_SIZE);
         this.gridPos = new Vector2(gridX, gridY);
-        this.direction = new Vector2(0, 0);
-        this.nextDirection = new Vector2(0, 0);
-        this.velocity = 2;
-        this.radius = CONFIG.TILE_SIZE / 2;
+        this.pixPos = new Vector2(gridX * GAME_CONFIG.TILE_SIZE, gridY * GAME_CONFIG.TILE_SIZE);
+        this.dir = new Vector2(0, 0);
+        this.nextDir = new Vector2(0, 0);
+        this.radius = GAME_CONFIG.TILE_SIZE / 2;
     }
 
-    getPossibleMoves() {
-        const moves = [new Vector2(0, -1), new Vector2(0, 1), new Vector2(-1, 0), new Vector2(1, 0)];
-        return moves.filter(dir => {
-            const nextX = this.gridPos.x + dir.x;
-            const nextY = this.gridPos.y + dir.y;
-            return MAP_DATA[nextY] && MAP_DATA[nextY][nextX] !== '1';
-        });
+    // Verifica se a entidade está exatamente no centro do Tile (Momento da decisão)
+    isCentered() {
+        const centerThreshold = 1.5;
+        return (
+            Math.abs(this.pixPos.x % GAME_CONFIG.TILE_SIZE) < centerThreshold &&
+            Math.abs(this.pixPos.y % GAME_CONFIG.TILE_SIZE) < centerThreshold
+        );
     }
 
-    isAtCenter() {
-        return (this.position.x % CONFIG.TILE_SIZE === 0 && this.position.y % CONFIG.TILE_SIZE === 0);
-    }
-
-    update() {
-        if (this.isAtCenter()) {
-            this.gridPos = new Vector2(this.position.x / CONFIG.TILE_SIZE, this.position.y / CONFIG.TILE_SIZE);
-            
-            // Buffer de Input: Tenta virar para a direção desejada
-            if (this.canMove(this.nextDirection)) {
-                this.direction = this.nextDirection;
-            }
-            
-            // Se bater na parede, para
-            if (!this.canMove(this.direction)) {
-                this.direction = new Vector2(0, 0);
-            }
+    canMove(direction) {
+        const nextX = Math.round(this.pixPos.x / GAME_CONFIG.TILE_SIZE) + direction.x;
+        const nextY = Math.round(this.pixPos.y / GAME_CONFIG.TILE_SIZE) + direction.y;
+        
+        if (MAP[nextY] && MAP[nextY][nextX]) {
+            const tile = MAP[nextY][nextX];
+            return tile !== '1' && tile !== '4'; // Não atravessa paredes
         }
-
-        this.position.x += this.direction.x * this.velocity;
-        this.position.y += this.direction.y * this.velocity;
+        return false;
     }
 
-    canMove(dir) {
-        if (dir.x === 0 && dir.y === 0) return false;
-        const targetX = this.gridPos.x + dir.x;
-        const targetY = this.gridPos.y + dir.y;
-        return MAP_DATA[targetY] && MAP_DATA[targetY][targetX] !== '1';
+    alignToGrid() {
+        this.pixPos.x = Math.round(this.pixPos.x / GAME_CONFIG.TILE_SIZE) * GAME_CONFIG.TILE_SIZE;
+        this.pixPos.y = Math.round(this.pixPos.y / GAME_CONFIG.TILE_SIZE) * GAME_CONFIG.TILE_SIZE;
     }
 }
 
@@ -60,32 +43,44 @@ export class Pacman extends Entity {
     constructor(x, y) {
         super(x, y);
         this.mouthOpen = 0;
-        this.mouthSpeed = 0.15;
+        this.mouthDir = 0.1;
+    }
+
+    update() {
+        if (this.isCentered()) {
+            if (this.canMove(this.nextDir)) {
+                this.dir = this.nextDir;
+                this.alignToGrid();
+            } else if (!this.canMove(this.dir)) {
+                this.dir = { x: 0, y: 0 };
+                this.alignToGrid();
+            }
+        }
+
+        this.pixPos.x += this.dir.x * GAME_CONFIG.PACMAN_SPEED;
+        this.pixPos.y += this.dir.y * GAME_CONFIG.PACMAN_SPEED;
+        
+        this.gridPos.x = Math.round(this.pixPos.x / GAME_CONFIG.TILE_SIZE);
+        this.gridPos.y = Math.round(this.pixPos.y / GAME_CONFIG.TILE_SIZE);
     }
 
     draw(ctx) {
-        this.mouthOpen += this.mouthSpeed;
-        if (this.mouthOpen > 0.2 || this.mouthOpen < 0) this.mouthSpeed *= -1;
+        this.mouthOpen += this.mouthDir;
+        if (this.mouthOpen > 0.2 || this.mouthOpen < 0) this.mouthDir *= -1;
 
-        const centerX = this.position.x + CONFIG.TILE_SIZE / 2;
-        const centerY = this.position.y + CONFIG.TILE_SIZE / 2;
-        
-        ctx.fillStyle = COLORS.PACMAN;
+        const cx = this.pixPos.x + this.radius;
+        const cy = this.pixPos.y + this.radius;
+
+        ctx.fillStyle = THEME.COLORS.PACMAN;
         ctx.beginPath();
-        
-        let rotation = 0;
-        if (this.direction.x === 1) rotation = 0;
-        if (this.direction.x === -1) rotation = Math.PI;
-        if (this.direction.y === -1) rotation = Math.PI * 1.5;
-        if (this.direction.y === 1) rotation = Math.PI * 0.5;
+        let angle = 0;
+        if (this.dir.x === 1) angle = 0;
+        else if (this.dir.x === -1) angle = Math.PI;
+        else if (this.dir.y === -1) angle = Math.PI * 1.5;
+        else if (this.dir.y === 1) angle = Math.PI * 0.5;
 
-        ctx.arc(centerX, centerY, this.radius - 2, 
-            rotation + (this.mouthOpen * Math.PI), 
-            rotation + (2 * Math.PI) - (this.mouthOpen * Math.PI));
-        ctx.lineTo(centerX, centerY);
+        ctx.arc(cx, cy, this.radius - 2, angle + this.mouthOpen * Math.PI, angle + (2 - this.mouthOpen) * Math.PI);
+        ctx.lineTo(cx, cy);
         ctx.fill();
-        ctx.closePath();
     }
 }
-// ... (Continua com mais 250 linhas de métodos de animação, 
-// sistemas de teletransporte de túnel e lógica de Power-up)
