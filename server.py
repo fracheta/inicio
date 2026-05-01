@@ -7,8 +7,8 @@ app = Flask(__name__, static_folder='.')
 high_scores = [{"name": "CPU", "score": 10000}]
 
 @app.route('/')
-def serve_index():
-    return send_from_directory('.', 'index.html')
+def serve_ind():
+    return send_from_directory('.', 'ind.html')
 
 @app.route('/<path:path>')
 def serve_static(path):
