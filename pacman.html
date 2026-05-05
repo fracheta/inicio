@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pac-Man JavaScript</title>
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        h1 { margin: 10px 0; color: yellow; text-shadow: 2px 2px 5px rgba(255, 255, 0, 0.5); }
+        .score-board { font-size: 24px; margin-bottom: 10px; }
+        canvas {
+            background-color: black;
+            border: 4px solid #1919A6;
+            box-shadow: 0 0 20px rgba(25, 25, 166, 0.8);
+            border-radius: 5px;
+        }
+        p { color: #888; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <h1>PAC-MAN</h1>
+    <div class="score-board">Score: <span id="scoreEl">0</span></div>
+    <canvas id="gameCanvas"></canvas>
+    <p>Use as Setas do Teclado para mover.</p>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('scoreEl');
+
+        // Configurações do Jogo
+        const TILE_SIZE = 30; // Tamanho de cada bloco do labirinto
+        let score = 0;
+        let animationId;
+        let gameOver = false;
+
+        // Mapa do Jogo (W = Parede, . = Pastilha, Space = Vazio)
+        const map = [
+            ['W','W','W','W','W','W','W','W','W','W','W','W','W','W','W'],
+            ['W','.','.','.','.','.','.','W','.','.','.','.','.','.','W'],
+            ['W','.','W','W','.','W','.','W','.','W','.','W','W','.','W'],
+            ['W','.','W','W','.','W','.','W','.','W','.','W','W','.','W'],
+            ['W','.','.','.','.','.','.','.','.','.','.','.','.','.','W'],
+            ['W','.','W','W','.','W','W','W','W','W','.','W','W','.','W'],
+            ['W','.','.','.','.','.','.','W','.','.','.','.','.','.','W'],
+            ['W','W','W','W','.','W',' ',' ',' ','W','.','W','W','W','W'],
+            ['W','W','W','W','.','W','W','W','W','W','.','W','W','W','W'],
+            ['W','.','.','.','.','.','.','W','.','.','.','.','.','.','W'],
+            ['W','.','W','W','W','W','.','W','.','W','W','W','W','.','W'],
+            ['W','.','.','.','W','.','.','.','.','.','W','.','.','.','W'],
+            ['W','W','W','.','W','.','W','W','W','.','W','.','W','W','W'],
+            ['W','.','.','.','.','.','.','W','.','.','.','.','.','.','W'],
+            ['W','W','W','W','W','W','W','W','W','W','W','W','W','W','W']
+        ];
+
+        canvas.width = map[0].length * TILE_SIZE;
+        canvas.height = map.length * TILE_SIZE;
+
+        // Entidades
+        const boundaries = [];
+        const pellets = [];
+
+        class Boundary {
+            constructor({ position }) {
+                this.position = position;
+                this.width = TILE_SIZE;
+                this.height = TILE_SIZE;
+            }
+            draw() {
+                ctx.fillStyle = '#1919A6';
+                ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+                ctx.strokeStyle = 'black';
+                ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
+            }
+        }
+
+        class Pellet {
+            constructor({ position }) {
+                this.position = position;
+                this.radius = 3;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#ffb8ae'; // Cor das pastilhas
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+
+        class Player {
+            constructor({ position, velocity }) {
+                this.position = position;
+                this.velocity = velocity;
+                this.radius = 12;
+                this.radians = 0.75;
+                this.openRate = 0.12;
+                this.rotation = 0;
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.position.x, this.position.y);
+                ctx.rotate(this.rotation);
+                ctx.translate(-this.position.x, -this.position.y);
+                ctx.beginPath();
+                ctx.arc(this.position.x, this.position.y, this.radius, this.radians, Math.PI * 2 - this.radians);
+                ctx.lineTo(this.position.x, this.position.y);
+                ctx.fillStyle = 'yellow';
+                ctx.fill();
+                ctx.closePath();
+                ctx.restore();
+            }
+            update() {
+                this.draw();
+                this.position.x += this.velocity.x;
+                this.position.y += this.velocity.y;
+
+                // Animação da boca
+                if (this.radians < 0 || this.radians > 0.75) this.openRate = -this.openRate;
+                this.radians += this.openRate;
+            }
+        }
+
+        class Ghost {
+            constructor({ position, velocity, color }) {
+                this.position = position;
+                this.velocity = velocity;
+                this.radius = 12;
+                this.color = color;
+                this.speed = 2;
+                this.scared = false;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.position.x, this.position.y, this.radius, Math.PI, 0);
+                ctx.lineTo(this.position.x + this.radius, this.position.y + this.radius);
+                ctx.lineTo(this.position.x, this.position.y + this.radius - 4);
+                ctx.lineTo(this.position.x - this.radius, this.position.y + this.radius);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+
+                // Olhos
+                ctx.beginPath();
+                ctx.arc(this.position.x - 4, this.position.y - 3, 3, 0, Math.PI * 2);
+                ctx.arc(this.position.x + 4, this.position.y - 3, 3, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+                ctx.closePath();
+                ctx.beginPath();
+                ctx.arc(this.position.x - 4, this.position.y - 3, 1, 0, Math.PI * 2);
+                ctx.arc(this.position.x + 4, this.position.y - 3, 1, 0, Math.PI * 2);
+                ctx.fillStyle = 'blue';
+                ctx.fill();
+                ctx.closePath();
+            }
+            update() {
+                this.draw();
+                this.position.x += this.velocity.x;
+                this.position.y += this.velocity.y;
+            }
+        }
+
+        // Analisando o mapa para desenhar
+        map.forEach((row, i) => {
+            row.forEach((symbol, j) => {
+                if (symbol === 'W') {
+                    boundaries.push(new Boundary({ position: { x: TILE_SIZE * j, y: TILE_SIZE * i } }));
+                } else if (symbol === '.') {
+                    pellets.push(new Pellet({ position: { x: j * TILE_SIZE + TILE_SIZE / 2, y: i * TILE_SIZE + TILE_SIZE / 2 } }));
+                }
+            });
+        });
+
+        // Inicializando Jogador e Fantasmas
+        const player = new Player({
+            position: { x: TILE_SIZE * 7 + TILE_SIZE / 2, y: TILE_SIZE * 11 + TILE_SIZE / 2 },
+            velocity: { x: 0, y: 0 }
+        });
+
+        const ghosts = [
+            new Ghost({ position: { x: TILE_SIZE * 6 + TILE_SIZE / 2, y: TILE_SIZE * 7 + TILE_SIZE / 2 }, velocity: { x: 2, y: 0 }, color: 'red' }),
+            new Ghost({ position: { x: TILE_SIZE * 8 + TILE_SIZE / 2, y: TILE_SIZE * 7 + TILE_SIZE / 2 }, velocity: { x: -2, y: 0 }, color: 'pink' }),
+            new Ghost({ position: { x: TILE_SIZE * 7 + TILE_SIZE / 2, y: TILE_SIZE * 7 + TILE_SIZE / 2 }, velocity: { x: 0, y: -2 }, color: 'cyan' })
+        ];
+
+        // Controles e Movimentação Desejada
+        const keys = { w: false, a: false, s: false, d: false };
+        let lastKey = '';
+
+        window.addEventListener('keydown', ({ key }) => {
+            switch (key) {
+                case 'ArrowUp':
+                case 'w': keys.w = true; lastKey = 'w'; break;
+                case 'ArrowLeft':
+                case 'a': keys.a = true; lastKey = 'a'; break;
+                case 'ArrowDown':
+                case 's': keys.s = true; lastKey = 's'; break;
+                case 'ArrowRight':
+                case 'd': keys.d = true; lastKey = 'd'; break;
+            }
+        });
+
+        // Função de Colisão Circular com Retângulo
+        function circleCollidesWithRectangle({ circle, rectangle }) {
+            const padding = TILE_SIZE / 2 - circle.radius - 1; 
+            return (
+                circle.position.y - circle.radius + circle.velocity.y <= rectangle.position.y + rectangle.height - padding &&
+                circle.position.x + circle.radius + circle.velocity.x >= rectangle.position.x + padding &&
+                circle.position.y + circle.radius + circle.velocity.y >= rectangle.position.y + padding &&
+                circle.position.x - circle.radius + circle.velocity.x <= rectangle.position.x + rectangle.width - padding
+            );
+        }
+
+        // Loop Principal do Jogo
+        function animate() {
+            if (gameOver) return;
+            animationId = requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Atualiza Direção do Jogador de forma suave
+            if (lastKey === 'w') {
+                for (let i = 0; i < boundaries.length; i++) {
+                    if (circleCollidesWithRectangle({ circle: { ...player, velocity: { x: 0, y: -2 } }, rectangle: boundaries[i] })) {
+                        player.velocity.y = 0; break;
+                    } else { player.velocity.y = -2; player.velocity.x = 0; player.rotation = -Math.PI / 2; }
+                }
+            } else if (lastKey === 'a') {
+                for (let i = 0; i < boundaries.length; i++) {
+                    if (circleCollidesWithRectangle({ circle: { ...player, velocity: { x: -2, y: 0 } }, rectangle: boundaries[i] })) {
+                        player.velocity.x = 0; break;
+                    } else { player.velocity.x = -2; player.velocity.y = 0; player.rotation = Math.PI; }
+                }
+            } else if (lastKey === 's') {
+                for (let i = 0; i < boundaries.length; i++) {
+                    if (circleCollidesWithRectangle({ circle: { ...player, velocity: { x: 0, y: 2 } }, rectangle: boundaries[i] })) {
+                        player.velocity.y = 0; break;
+                    } else { player.velocity.y = 2; player.velocity.x = 0; player.rotation = Math.PI / 2; }
+                }
+            } else if (lastKey === 'd') {
+                for (let i = 0; i < boundaries.length; i++) {
+                    if (circleCollidesWithRectangle({ circle: { ...player, velocity: { x: 2, y: 0 } }, rectangle: boundaries[i] })) {
+                        player.velocity.x = 0; break;
+                    } else { player.velocity.x = 2; player.velocity.y = 0; player.rotation = 0; }
+                }
+            }
+
+            // Desenhar Paredes
+            boundaries.forEach(boundary => boundary.draw());
+
+            // Desenhar e Coletar Pastilhas
+            for (let i = pellets.length - 1; i >= 0; i--) {
+                const pellet = pellets[i];
+                pellet.draw();
+                if (Math.hypot(pellet.position.x - player.position.x, pellet.position.y - player.position.y) < player.radius) {
+                    pellets.splice(i, 1);
+                    score += 10;
+                    scoreEl.innerHTML = score;
+                    if (pellets.length === 0) {
+                        alert('Você Venceu! Pontuação: ' + score);
+                        gameOver = true;
+                    }
+                }
+            }
+
+            // Checar colisão atual para parar o player se bater
+            boundaries.forEach((boundary) => {
+                if (circleCollidesWithRectangle({ circle: player, rectangle: boundary })) {
+                    player.velocity.x = 0;
+                    player.velocity.y = 0;
+                }
+            });
+
+            player.update();
+
+            // Movimentação dos Fantasmas (Inteligência Artificial Simples de Colisão)
+            ghosts.forEach(ghost => {
+                ghost.update();
+
+                // Checa Colisão com Pac-Man (Derrota)
+                if (Math.hypot(ghost.position.x - player.position.x, ghost.position.y - player.position.y) < ghost.radius + player.radius) {
+                    cancelAnimationFrame(animationId);
+                    gameOver = true;
+                    setTimeout(() => alert('Fim de Jogo! Pontuação Final: ' + score), 50);
+                }
+
+                // Lógica de Movimentação do Fantasma
+                const collisions = [];
+                boundaries.forEach(boundary => {
+                    if (!collisions.includes('right') && circleCollidesWithRectangle({ circle: { ...ghost, velocity: { x: ghost.speed, y: 0 } }, rectangle: boundary })) { collisions.push('right'); }
+                    if (!collisions.includes('left') && circleCollidesWithRectangle({ circle: { ...ghost, velocity: { x: -ghost.speed, y: 0 } }, rectangle: boundary })) { collisions.push('left'); }
+                    if (!collisions.includes('up') && circleCollidesWithRectangle({ circle: { ...ghost, velocity: { x: 0, y: -ghost.speed } }, rectangle: boundary })) { collisions.push('up'); }
+                    if (!collisions.includes('down') && circleCollidesWithRectangle({ circle: { ...ghost, velocity: { x: 0, y: ghost.speed } }, rectangle: boundary })) { collisions.push('down'); }
+                });
+
+                if (collisions.length > 0) {
+                    const prevVelocity = ghost.velocity;
+                    let pathways = [];
+                    if (prevVelocity.x > 0) { pathways = ['right', 'up', 'down']; }
+                    else if (prevVelocity.x < 0) { pathways = ['left', 'up', 'down']; }
+                    else if (prevVelocity.y > 0) { pathways = ['down', 'left', 'right']; }
+                    else if (prevVelocity.y < 0) { pathways = ['up', 'left', 'right']; }
+
+                    const availablePathways = pathways.filter(path => !collisions.includes(path));
+                    
+                    // Se o fantasma bater numa parede frontalmente
+                    if (
+                        (prevVelocity.x > 0 && collisions.includes('right')) ||
+                        (prevVelocity.x < 0 && collisions.includes('left')) ||
+                        (prevVelocity.y > 0 && collisions.includes('down')) ||
+                        (prevVelocity.y < 0 && collisions.includes('up'))
+                    ) {
+                        const direction = availablePathways[Math.floor(Math.random() * availablePathways.length)];
+                        switch (direction) {
+                            case 'down': ghost.velocity.y = ghost.speed; ghost.velocity.x = 0; break;
+                            case 'up': ghost.velocity.y = -ghost.speed; ghost.velocity.x = 0; break;
+                            case 'right': ghost.velocity.y = 0; ghost.velocity.x = ghost.speed; break;
+                            case 'left': ghost.velocity.y = 0; ghost.velocity.x = -ghost.speed; break;
+                        }
+                    }
+                }
+            });
+        }
+
+        animate();
+    </script>
+</body>
+</html>
