@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo ao Meu Portfólio</title>
+    <style>
+        /* Reset básico e fontes */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        /* Seção de Boas-vindas */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #4f46e5, #06b6d4);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Seção Sobre */
+        .about-section {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .about-section h2 {
+            color: #4f46e5;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 8px;
+        }
+
+        .about-section p {
+            color: #4b5563;
+            margin-bottom: 15px;
+        }
+
+        /* Botão de Acesso */
+        .cta-container {
+            text-align: center;
+        }
+
+        .btn-enter {
+            display: inline-block;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            background-color: #4f46e5;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-enter:hover {
+            background-color: #4338ca;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 15px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Responsividade para celulares */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .container { margin: 20px auto; }
+            .btn-enter { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1>Olá! Seja muito bem-vindo.</h1>
+            <p>Conheça um pouco mais sobre mim e explore as minhas criações.</p>
+        </header>
+
+        <main class="about-section">
+            <h2>Sobre o Site & Portfólio</h2>
+            <p>
+                Este espaço foi criado para centralizar meus principais projetos, habilidades e evolução como desenvolvedor. Aqui você encontrará aplicações práticas, códigos limpos e soluções focadas na experiência do usuário.
+            </p>
+            <p>
+                Sinta-se à vontade para navegar, analisar o código e entender a lógica por trás de cada projeto. Se quiser bater um papo ou propor uma parceria, as informações de contato estão logo a seguir.
+            </p>
+        </main>
+
+        <div class="cta-container">
+            <a href="index.html" class="btn-enter">Entrar no Portfólio</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
