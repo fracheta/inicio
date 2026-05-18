@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gabriel Dev | Portfólio Acadêmico</title>
+    <title>Gabriel Dev | Plataforma de Inovação</title>
     <style>
         * {
             margin: 0;
@@ -12,349 +12,101 @@
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             background: #0a0a0a;
             color: #e0e0e0;
             overflow-x: hidden;
         }
 
-        /* Grid de fundo estilo matrix */
-        .bg-grid {
+        /* Animated Tech Background */
+        .tech-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 200, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 200, 0, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
             z-index: 1;
-            pointer-events: none;
+            overflow: hidden;
         }
 
-        /* Efeito de brilho amarelo */
-        .glow-effect {
-            position: fixed;
+        .circuit-pattern {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(45deg, rgba(255, 200, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(-45deg, rgba(255, 200, 0, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            font-family: monospace;
+            font-size: 14px;
+            white-space: pre;
+            overflow: hidden;
+        }
+
+        .glow-orb {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 200, 0, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
             top: 50%;
             left: 50%;
-            width: 60vw;
-            height: 60vh;
-            background: radial-gradient(circle, rgba(255, 200, 0, 0.08) 0%, transparent 70%);
             transform: translate(-50%, -50%);
-            z-index: 1;
-            pointer-events: none;
+            filter: blur(60px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
         }
 
         .container {
             position: relative;
             z-index: 2;
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 40px 60px;
-        }
-
-        /* Header - Estilo sério/inovador */
-        .header {
+            min-height: 100vh;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 200, 0, 0.3);
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-            gap: 20px;
+            padding: 40px 20px;
         }
 
-        .logo {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-        }
-
-        .logo-symbol {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #ffc800;
-        }
-
-        .logo-text {
-            font-size: 1.2rem;
-            font-weight: 500;
-            letter-spacing: 2px;
-        }
-
-        .logo-sub {
-            font-size: 0.8rem;
-            color: #ffc800aa;
-            margin-left: 5px;
-        }
-
-        .badge {
-            background: rgba(255, 200, 0, 0.1);
-            border: 1px solid rgba(255, 200, 0, 0.3);
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .badge span {
-            color: #ffc800;
-        }
-
-        /* Título de boas-vindas */
-        .welcome-section {
-            margin-bottom: 60px;
-        }
-
-        .greeting {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #ffc800;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .highlight {
-            color: #ffc800;
-        }
-
-        .sub-line {
-            font-size: 1.1rem;
-            color: #aaa;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
-        /* Grid de projetos */
-        .projects-section {
-            margin: 60px 0;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin-bottom: 35px;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-
-        .section-title small {
-            font-size: 0.9rem;
-            color: #ffc800;
-            font-weight: 400;
-        }
-
-        /* Filtros */
-        .filters {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 200, 0, 0.3);
-            color: #e0e0e0;
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: #ffc800;
-            color: #0a0a0a;
-            border-color: #ffc800;
-        }
-
-        /* Barra de pesquisa */
-        .search-bar {
-            margin-bottom: 35px;
-        }
-
-        .search-input {
+        /* Main Card */
+        .hero-card {
+            max-width: 1000px;
             width: 100%;
-            max-width: 400px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(10, 10, 10, 0.75);
+            backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 200, 0, 0.2);
-            padding: 12px 20px;
             border-radius: 40px;
-            color: #fff;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #ffc800;
-            background: rgba(255, 200, 0, 0.05);
-        }
-
-        .search-input::placeholder {
-            color: #666;
-        }
-
-        /* Grid de cards */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 25px;
-        }
-
-        /* Card de projeto - estilo sério */
-        .project-card {
-            background: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 200, 0, 0.15);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .project-card:hover {
-            border-color: rgba(255, 200, 0, 0.5);
-            transform: translateY(-4px);
-            background: rgba(25, 25, 25, 0.95);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .card-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #ffc800;
-        }
-
-        .card-description {
-            font-size: 0.9rem;
-            color: #bbb;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            padding: 4px 10px;
-            background: rgba(255, 200, 0, 0.1);
-            border-radius: 20px;
-            color: #ffc800;
-        }
-
-        .card-meta {
-            font-size: 0.75rem;
-            color: #666;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 12px;
-            border-top: 1px solid rgba(255, 200, 0, 0.1);
-        }
-
-        /* Seção Sobre - estilo sério */
-        .about-section {
-            margin: 80px 0;
-            padding: 50px 0;
-            border-top: 1px solid rgba(255, 200, 0, 0.2);
-            border-bottom: 1px solid rgba(255, 200, 0, 0.2);
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-        }
-
-        .about-card {
-            background: rgba(20, 20, 20, 0.6);
-            padding: 30px;
-            border-radius: 20px;
-            border-left: 3px solid #ffc800;
-        }
-
-        .about-card h3 {
-            color: #ffc800;
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .about-card p {
-            line-height: 1.7;
-            color: #ccc;
-            margin-bottom: 15px;
-        }
-
-        .status-badge {
-            display: inline-block;
-            background: rgba(255, 200, 0, 0.15);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            margin-top: 15px;
-        }
-
-        /* Footer */
-        .footer {
+            padding: 60px;
             text-align: center;
-            padding: 40px 0 20px;
-            border-top: 1px solid rgba(255, 200, 0, 0.1);
-            color: #666;
-            font-size: 0.85rem;
+            animation: fadeInUp 0.8s ease-out;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Responsividade */
-        @media (max-width: 900px) {
-            .container {
-                padding: 30px 20px;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animações */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -362,171 +114,353 @@
             }
         }
 
-        .project-card {
-            animation: fadeInUp 0.5s ease forwards;
+        /* Tech Badge */
+        .tech-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+
+        .tech-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #ffc800;
+            border-radius: 50%;
+            animation: blink 1.5s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        /* Main Title */
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .highlight {
+            color: #ffc800;
+            position: relative;
+            display: inline-block;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ffc800, transparent);
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: 1.2rem;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+        }
+
+        /* Tech Stack Icons */
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            border: 1px solid rgba(255, 200, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .tech-icon:hover {
+            border-color: #ffc800;
+            transform: translateY(-5px);
+            background: rgba(255, 200, 0, 0.05);
+        }
+
+        /* Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 50px 0;
+            text-align: left;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+            border-radius: 20px;
+            border-left: 3px solid #ffc800;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: rgba(255, 200, 0, 0.05);
+            transform: translateX(5px);
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .info-title {
+            font-weight: 600;
+            color: #ffc800;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .info-text {
+            font-size: 0.85rem;
+            color: #999;
+            line-height: 1.5;
+        }
+
+        /* Enter Button */
+        .enter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #ffc800, #ffaa00);
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0a0a0a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 200, 0, 0.4);
+            gap: 20px;
+        }
+
+        .enter-btn i {
+            font-size: 1.3rem;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            font-size: 0.75rem;
+            color: #555;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-card {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .tech-stack {
+                gap: 15px;
+            }
+            
+            .tech-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+        }
+
+        /* Estatísticas animadas */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffc800;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
     </style>
 </head>
 <body>
-    <div class="bg-grid"></div>
-    <div class="glow-effect"></div>
+    <div class="tech-bg">
+        <div class="circuit-pattern"></div>
+        <div class="glow-orb"></div>
+    </div>
 
     <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">
-                <div class="logo-symbol">◢</div>
-                <div class="logo-text">Gabriel<span class="logo-sub">dev</span></div>
+        <div class="hero-card">
+            <div class="tech-badge">
+                <span class="dot"></span>
+                <span>PLATAFORMA DE INOVAÇÃO TECNOLÓGICA</span>
+                <span class="dot"></span>
             </div>
-            <div class="badge">
-                <span>●</span> ESTUDANTE · DESENVOLVEDOR EM FORMAÇÃO
-            </div>
-        </div>
 
-        <!-- Welcome Section -->
-        <div class="welcome-section">
-            <div class="greeting">PORTFÓLIO ACADÊMICO v2.0</div>
             <h1>
-                Gabriel · <span class="highlight">Explorando</span><br>
-                o universo da programação
+                <span class="highlight">Gabriel</span><br>
+                Laboratório Digital
             </h1>
-            <div class="sub-line">
-                Estudante de desenvolvimento full-stack · 20+ projetos práticos · Foco em lógica, algoritmos e inovação
-            </div>
-        </div>
 
-        <!-- Filtros e Projetos -->
-        <div class="projects-section">
-            <div class="section-header">
-                <div class="section-title">
-                    Biblioteca de Projetos <small>· Em constante evolução</small>
-                </div>
-                <div class="filters" id="filterContainer">
-                    <button class="filter-btn active" data-filter="all">Todos</button>
-                    <button class="filter-btn" data-filter="javascript">Scripts JS</button>
-                    <button class="filter-btn" data-filter="apresentacao">Apresentações</button>
-                    <button class="filter-btn" data-filter="mobile">Mobile</button>
-                    <button class="filter-btn" data-filter="python">Python</button>
-                </div>
-            </div>
-            
-            <div class="search-bar">
-                <input type="text" class="search-input" id="searchInput" placeholder="Pesquisar projeto...">
+            <div class="subtitle">
+                Estudante de desenvolvimento · Explorando as fronteiras da tecnologia através de código e criatividade
             </div>
 
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Os cards serão inseridos via JavaScript -->
+            <!-- Tech Stack Visual -->
+            <div class="tech-stack">
+                <div class="tech-icon">📜</div>
+                <div class="tech-icon">⚛️</div>
+                <div class="tech-icon">🐍</div>
+                <div class="tech-icon">🎨</div>
+                <div class="tech-icon">🗄️</div>
+                <div class="tech-icon">☁️</div>
             </div>
-        </div>
 
-        <!-- Sobre - Seção séria e acadêmica -->
-        <div class="about-section">
-            <div class="about-grid">
-                <div class="about-card">
-                    <h3>⟡ Sobre minha jornada</h3>
-                    <p>Sou um estudante apaixonado por tecnologia e programação. Atualmente estou no processo de aprendizado constante, explorando desde lógica de programação até desenvolvimento de projetos completos.</p>
-                    <p>Este portfólio representa minha evolução — cada projeto aqui é um degrau na minha caminhada. Acredito que a melhor forma de aprender é construindo, errando e refatorando.</p>
-                    <div class="status-badge">🎓 Em busca do primeiro estágio</div>
+            <!-- Informações de Tecnologia -->
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-icon">🧠</div>
+                    <div class="info-title">Lógica & Algoritmos</div>
+                    <div class="info-text">Estudo aprofundado de estruturas de dados, complexidade e resolução de problemas computacionais.</div>
                 </div>
-                <div class="about-card">
-                    <h3>⟡ Foco atual</h3>
-                    <p>📌 <strong>JavaScript/TypeScript</strong> — Aprofundando conceitos de lógica e manipulação de DOM</p>
-                    <p>📌 <strong>Python</strong> — Explorando POO e desenvolvimento de jogos com Pygame</p>
-                    <p>📌 <strong>HTML/CSS</strong> — Criando interfaces cada vez mais sofisticadas</p>
-                    <p>📌 <strong>Algoritmos</strong> — Estudando estruturas de dados e complexidade</p>
+                <div class="info-item">
+                    <div class="info-icon">🌐</div>
+                    <div class="info-title">Desenvolvimento Web</div>
+                    <div class="info-text">Criação de interfaces modernas, responsivas e interativas com as tecnologias mais atuais.</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🤖</div>
+                    <div class="info-title">Inovação & Futuro</div>
+                    <div class="info-text">Explorando tendências como IA, automação e novas paradigmas de desenvolvimento.</div>
                 </div>
             </div>
-        </div>
 
-        <div class="footer">
-            <p>© 2026 Gabriel | Desenvolvedor em formação</p>
-            <p style="margin-top: 10px; font-size: 0.75rem;">"Cada linha de código é um passo em direção ao domínio"</p>
+            <!-- Estatísticas de aprendizado -->
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">Projetos Práticos</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">1.200+</div>
+                    <div class="stat-label">Horas de Código</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Aprendizado Contínuo</div>
+                </div>
+            </div>
+
+            <!-- Botão para index.html -->
+            <a href="index.html" class="enter-btn" id="enterBtn">
+                <span>ACESSAR PORTFÓLIO COMPLETO</span>
+                <i>▶</i>
+            </a>
+
+            <div class="footer">
+                <p>Ambiente de desenvolvimento · Estudante em formação · { códigos, ideias e inovação }</p>
+            </div>
         </div>
     </div>
 
     <script>
-        // Base de dados dos projetos
-        const projects = [
-            { name: "Análise de Veículos", description: "Compara rendimento entre Carro A e B baseado em KM e preço.", icon: "🚗", tags: ["javascript", "logica"], category: "javascript" },
-            { name: "Calculadora de Médias", description: "Calcula a média aritmética do aluno Petro.", icon: "🎓", tags: ["javascript", "calculo"], category: "javascript" },
-            { name: "Geometria (Área)", description: "Cálculo de área de triângulo (Base x Altura).", icon: "📐", tags: ["javascript", "geometria"], category: "javascript" },
-            { name: "Bhaskara Lab", description: "Resolve equações de 2º grau e encontra o Delta.", icon: "🧪", tags: ["javascript", "algebra"], category: "javascript" },
-            { name: "Página de Testes", description: "Abre o seu arquivo HTML de experimentos.", icon: "🌐", tags: ["html", "javascript"], category: "javascript" },
-            { name: "Agenda Escolar Inteligente", description: "Apresentação de projeto no Gamma.", icon: "📊", tags: ["Gamma", "Apresentacao"], category: "apresentacao" },
-            { name: "Propriedade Intelectual", description: "Apresentação sobre os pilares da PI.", icon: "📊", tags: ["Gamma", "Direito"], category: "apresentacao" },
-            { name: "Ecossistema de Startups 2026", description: "Futuro das startups e inovação.", icon: "🚀", tags: ["Gamma", "Inovacao"], category: "apresentacao" },
-            { name: "Visualizar Print 1", description: "Captura de tela do projeto em ambiente mobile.", icon: "📱", tags: ["mobile", "print"], category: "mobile" },
-            { name: "Visualizar Print 2", description: "Captura de tela do código ou interface mobile.", icon: "📱", tags: ["mobile", "galeria"], category: "mobile" },
-            { name: "Estacionamento", description: "Simulação de carros estacionados.", icon: "🅿️", tags: ["javascript", "logica"], category: "javascript" },
-            { name: "Filtrar Objetos", description: "Ordenando objetos por idade.", icon: "🧪", tags: ["javascript"], category: "javascript" },
-            { name: "Selection Sort", description: "Algoritmo de ordenação eficiente.", icon: "🔢", tags: ["javascript"], category: "javascript" },
-            { name: "Ordenando Geral", description: "Diversos algoritmos de ordenação.", icon: "🔢", tags: ["javascript"], category: "javascript" },
-            { name: "Lista de Livros", description: "Manipulação de arrays de objetos.", icon: "📚", tags: ["javascript"], category: "javascript" },
-            { name: "Alterar Dados", description: "Manipulação dinâmica de dados.", icon: "🔄", tags: ["javascript"], category: "javascript" },
-            { name: "Leitura de Arquivos", description: "Script de processamento de arquivos.", icon: "📖", tags: ["javascript"], category: "javascript" },
-            { name: "Página de Testes/let", description: "Arquivo JS de experimentos.", icon: "📁", tags: ["javascript"], category: "javascript" },
-            { name: "Testes de Variáveis", description: "Estudos sobre escopo e tipos.", icon: "📁", tags: ["javascript"], category: "javascript" },
-            { name: "Pac-Man Python Pro", description: "Jogo desenvolvido com Pygame, aplicando POO e vetores.", icon: "🐍", tags: ["python", "pygame"], category: "python" },
-            { name: "Ecossistema das IA's 2026", description: "Inovação e futuro da inteligência artificial.", icon: "🚀", tags: ["NotebookLM", "Inovacao"], category: "apresentacao" }
-        ];
-
-        let currentFilter = "all";
-        let currentSearch = "";
-
-        function renderProjects() {
-            const grid = document.getElementById("projectsGrid");
-            const filtered = projects.filter(project => {
-                const matchFilter = currentFilter === "all" || project.category === currentFilter;
-                const matchSearch = project.name.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                                   project.description.toLowerCase().includes(currentSearch.toLowerCase()) ||
-                                   project.tags.some(tag => tag.toLowerCase().includes(currentSearch.toLowerCase()));
-                return matchFilter && matchSearch;
-            });
-
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:60px; color:#666;">Nenhum projeto encontrado com os filtros atuais.</div>`;
-                return;
+        // Binary rain effect
+        const binaryContainer = document.createElement('div');
+        binaryContainer.className = 'binary-rain';
+        document.querySelector('.tech-bg').appendChild(binaryContainer);
+        
+        const chars = '01';
+        let binaryHTML = '';
+        for (let i = 0; i < 200; i++) {
+            let line = '';
+            for (let j = 0; j < 40; j++) {
+                line += chars[Math.floor(Math.random() * chars.length)] + ' ';
             }
-
-            grid.innerHTML = filtered.map(project => `
-                <div class="project-card" onclick="alert('🔧 Projeto: ${project.name}\\n\\n📝 ${project.description}\\n\\n🏷️ Tags: ${project.tags.join(", ")}')">
-                    <div class="card-icon">${project.icon}</div>
-                    <div class="card-title">${project.name}</div>
-                    <div class="card-description">${project.description}</div>
-                    <div class="card-tags">
-                        ${project.tags.map(tag => `<span class="tag">#${tag}</span>`).join("")}
-                    </div>
-                    <div class="card-meta">
-                        <span>⚡ ${project.category === "javascript" ? "Script JS" : project.category === "apresentacao" ? "Apresentação" : project.category === "mobile" ? "Mobile" : "Python"}</span>
-                        <span>🔍 Clique para detalhes</span>
-                    </div>
-                </div>
-            `).join("");
+            binaryHTML += line + '<br>';
         }
-
-        // Configurar filtros
-        document.querySelectorAll(".filter-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                currentFilter = btn.dataset.filter;
-                renderProjects();
-            });
+        binaryContainer.innerHTML = binaryHTML;
+        
+        // Animate binary rain
+        setInterval(() => {
+            let newHTML = '';
+            for (let i = 0; i < 200; i++) {
+                let line = '';
+                for (let j = 0; j < 40; j++) {
+                    line += chars[Math.floor(Math.random() * chars.length)] + ' ';
+                }
+                newHTML += line + '<br>';
+            }
+            binaryContainer.innerHTML = newHTML;
+        }, 3000);
+        
+        // Efeito de digitação no título
+        const titleElement = document.querySelector('h1');
+        const originalHTML = titleElement.innerHTML;
+        titleElement.innerHTML = '<span class="highlight">Carregando</span><br>Sistema Digital';
+        
+        setTimeout(() => {
+            titleElement.innerHTML = originalHTML;
+        }, 500);
+        
+        // Console message
+        console.log('%c🚀 PLATAFORMA GABRIEL LAB', 'color: #ffc800; font-size: 18px; font-weight: bold;');
+        console.log('%cEstudante de Desenvolvimento | Tecnologia & Inovação', 'color: #aaa; font-size: 12px;');
+        console.log('%cAcesse o portfólio completo clicando no botão amarelo', 'color: #ffc800; font-size: 12px;');
+        
+        // Prevenir clique sem o index.html
+        document.getElementById('enterBtn').addEventListener('click', function(e) {
+            // Se o index.html não existir, mostra alerta
+            // Este é apenas um fallback - o link real tentará navegar
+            console.log('Redirecionando para index.html...');
         });
-
-        // Configurar pesquisa
-        const searchInput = document.getElementById("searchInput");
-        searchInput.addEventListener("input", (e) => {
-            currentSearch = e.target.value;
-            renderProjects();
-        });
-
-        // Render inicial
-        renderProjects();
-
-        // Pequeno efeito de console
-        console.log("%c◢ Portfólio Gabriel | Estudante de Programação", "color: #ffc800; font-size: 16px; font-weight: bold;");
-        console.log("%c20+ projetos disponíveis | JavaScript | Python | Apresentações", "color: #aaa; font-size: 12px;");
     </script>
 </body>
 </html>
