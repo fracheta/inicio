@@ -58,6 +58,7 @@
             font-size: 14px;
             white-space: pre;
             overflow: hidden;
+            pointer-events: none;
         }
 
         .glow-orb {
@@ -82,23 +83,19 @@
             position: relative;
             z-index: 2;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             padding: 40px 20px;
         }
 
         /* Main Card */
         .hero-card {
-            max-width: 1000px;
+            max-width: 1200px;
             width: 100%;
-            background: rgba(10, 10, 10, 0.75);
+            margin: 0 auto;
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 200, 0, 0.2);
             border-radius: 40px;
-            padding: 60px;
-            text-align: center;
+            padding: 50px;
             animation: fadeInUp 0.8s ease-out;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
@@ -143,7 +140,7 @@
 
         /* Main Title */
         h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             font-weight: 700;
             margin-bottom: 20px;
             line-height: 1.2;
@@ -165,13 +162,227 @@
             background: linear-gradient(90deg, #ffc800, transparent);
         }
 
-        /* Subtitle */
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #aaa;
-            max-width: 600px;
-            margin: 0 auto 20px;
+            max-width: 700px;
             line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 20px 30px;
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+            border: 1px solid rgba(255, 200, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffc800;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        /* Sobre Mim Grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            padding: 30px;
+            border-left: 3px solid #ffc800;
+        }
+
+        .about-card h3 {
+            color: #ffc800;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-card p {
+            color: #bbb;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .info-list li {
+            padding: 8px 0;
+            color: #aaa;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255, 200, 0, 0.1);
+        }
+
+        .info-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Aulas Section */
+        .aulas-section {
+            margin: 50px 0;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #ffc800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .aulas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .aula-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid rgba(255, 200, 0, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .aula-card:hover {
+            border-color: rgba(255, 200, 0, 0.5);
+            transform: translateY(-5px);
+            background: rgba(255, 200, 0, 0.05);
+        }
+
+        .aula-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .aula-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffc800;
+        }
+
+        .aula-desc {
+            font-size: 0.85rem;
+            color: #999;
+            line-height: 1.5;
+        }
+
+        .aula-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            color: #ffc800;
+            transition: all 0.3s ease;
+        }
+
+        .aula-card:hover .aula-btn {
+            background: #ffc800;
+            color: #0a0a0a;
+        }
+
+        /* Index Explanation */
+        .index-explanation {
+            background: rgba(255, 200, 0, 0.05);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 40px 0;
+            border: 1px solid rgba(255, 200, 0, 0.2);
+        }
+
+        .index-explanation h4 {
+            color: #ffc800;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .index-explanation p {
+            color: #bbb;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: #0a0a0a;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #ffc800;
+            margin: 15px 0;
+            border-left: 3px solid #ffc800;
+        }
+
+        /* Enter Button */
+        .enter-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #ffc800, #ffaa00);
+            border: none;
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0a0a0a;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin: 20px 0;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 200, 0, 0.4);
+            gap: 20px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 200, 0, 0.1);
+            text-align: center;
+            font-size: 0.8rem;
+            color: #555;
         }
 
         /* Tech Stack Icons */
@@ -202,132 +413,27 @@
             background: rgba(255, 200, 0, 0.05);
         }
 
-        /* Info Cards */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 50px 0;
-            text-align: left;
-        }
-
-        .info-item {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 20px;
-            border-radius: 20px;
-            border-left: 3px solid #ffc800;
-            transition: all 0.3s ease;
-        }
-
-        .info-item:hover {
-            background: rgba(255, 200, 0, 0.05);
-            transform: translateX(5px);
-        }
-
-        .info-icon {
-            font-size: 2rem;
-            margin-bottom: 12px;
-        }
-
-        .info-title {
-            font-weight: 600;
-            color: #ffc800;
-            margin-bottom: 8px;
-            font-size: 1rem;
-        }
-
-        .info-text {
-            font-size: 0.85rem;
-            color: #999;
-            line-height: 1.5;
-        }
-
-        /* Enter Button */
-        .enter-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: linear-gradient(135deg, #ffc800, #ffaa00);
-            border: none;
-            padding: 18px 45px;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #0a0a0a;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            text-decoration: none;
-        }
-
-        .enter-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(255, 200, 0, 0.4);
-            gap: 20px;
-        }
-
-        .enter-btn i {
-            font-size: 1.3rem;
-        }
-
-        /* Footer */
-        .footer {
-            margin-top: 60px;
-            font-size: 0.75rem;
-            color: #555;
-            text-align: center;
-        }
-
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .hero-card {
                 padding: 30px 20px;
             }
             
             h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
-            .info-grid {
+            .about-grid {
                 grid-template-columns: 1fr;
-                gap: 15px;
             }
             
-            .tech-stack {
-                gap: 15px;
+            .stats-section {
+                flex-direction: column;
             }
             
-            .tech-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
+            .aulas-grid {
+                grid-template-columns: 1fr;
             }
-        }
-
-        /* Estatísticas animadas */
-        .stats {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin: 30px 0;
-            flex-wrap: wrap;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #ffc800;
-        }
-
-        .stat-label {
-            font-size: 0.75rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -364,49 +470,106 @@
                 <div class="tech-icon">☁️</div>
             </div>
 
-            <!-- Informações de Tecnologia -->
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-icon">🧠</div>
-                    <div class="info-title">Lógica & Algoritmos</div>
-                    <div class="info-text">Estudo aprofundado de estruturas de dados, complexidade e resolução de problemas computacionais.</div>
+            <!-- Stats -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-number">300+</div>
+                    <div class="stat-label">HORAS DE CÓDIGO</div>
                 </div>
-                <div class="info-item">
-                    <div class="info-icon">🌐</div>
-                    <div class="info-title">Desenvolvimento Web</div>
-                    <div class="info-text">Criação de interfaces modernas, responsivas e interativas com as tecnologias mais atuais.</div>
+                <div class="stat-card">
+                    <div class="stat-number">20+</div>
+                    <div class="stat-label">PROJETOS FINALIZADOS</div>
                 </div>
-                <div class="info-item">
-                    <div class="info-icon">🤖</div>
-                    <div class="info-title">Inovação & Futuro</div>
-                    <div class="info-text">Explorando tendências como IA, automação e novas paradigmas de desenvolvimento.</div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">TECNOLOGIAS DOMINADAS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">APRENDIZADO CONTÍNUO</div>
                 </div>
             </div>
 
-            <!-- Estatísticas de aprendizado -->
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number">20+</div>
-                    <div class="stat-label">Projetos Práticos</div>
+            <!-- Sobre Mim - Grid -->
+            <div class="about-grid">
+                <div class="about-card">
+                    <h3>🧑‍💻 Sobre Mim</h3>
+                    <p>Olá! Meu nome é <strong>Gabriel</strong>, sou um estudante apaixonado por tecnologia e desenvolvimento de software. Atualmente estou no 3º ano do curso técnico em Desenvolvimento de Sistemas.</p>
+                    <p>Minha jornada na programação começou há pouco mais de um ano, e desde então já acumulei <strong>mais de 300 horas de código</strong>, desenvolvendo projetos que vão desde scripts em JavaScript até jogos em Python.</p>
+                    <p>Acredito que a melhor forma de aprender é praticando, errando e refatorando. Cada linha de código escrita é um passo em direção à excelência.</p>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">1.200+</div>
-                    <div class="stat-label">Horas de Código</div>
+                <div class="about-card">
+                    <h3>📚 Minha Trajetória</h3>
+                    <ul class="info-list">
+                        <li>🎓 3º Ano - Desenvolvimento de Sistemas</li>
+                        <li>⏰ 300+ horas dedicadas à programação</li>
+                        <li>💻 20+ projetos práticos desenvolvidos</li>
+                        <li>🎯 Foco: Lógica de Programação, JavaScript, Python</li>
+                        <li>🚀 Objetivo: Primeiro estágio na área de tecnologia</li>
+                        <li>📖 Aprendizado contínuo através de cursos e prática diária</li>
+                    </ul>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">∞</div>
-                    <div class="stat-label">Aprendizado Contínuo</div>
+            </div>
+
+            <!-- Explicação sobre o Index.html -->
+            <div class="index-explanation">
+                <h4>📄 O que é o arquivo INDEX.HTML?</h4>
+                <p>O <strong>index.html</strong> é o arquivo principal de qualquer site — é como a "porta de entrada" de um projeto web. Quando você acessa um site, o navegador procura automaticamente por esse arquivo para exibir o conteúdo.</p>
+                <div class="code-block">
+                    📁 meu-portfolio/<br>
+                    &nbsp;&nbsp;├── 📄 <strong style="color:#ffc800">index.html</strong>  ← Página principal (meus projetos)<br>
+                    &nbsp;&nbsp;├── 📄 welcome.html ← Esta tela de boas-vindas<br>
+                    &nbsp;&nbsp;├── 🎨 style.css<br>
+                    &nbsp;&nbsp;└── 📜 script.js
                 </div>
+                <p>No meu portfólio, o <strong>index.html</strong> contém todos os meus projetos organizados — os scripts JavaScript, as apresentações, os apps mobile e muito mais. É lá que você vai encontrar tudo o que eu já desenvolvi durante meus estudos.</p>
+                <p>🔽 <strong>Clique no botão amarelo abaixo para acessar o index.html e explorar meus projetos!</strong></p>
             </div>
 
             <!-- Botão para index.html -->
-            <a href="index.html" class="enter-btn" id="enterBtn">
-                <span>ACESSAR PORTFÓLIO COMPLETO</span>
-                <i>▶</i>
-            </a>
+            <div style="text-align: center;">
+                <a href="index.html" class="enter-btn" id="enterBtn">
+                    <span>🎯 ACESSAR INDEX.HTML - MEUS PROJETOS</span>
+                    <span>▶</span>
+                </a>
+            </div>
 
+            <!-- Seção de Aulas -->
+            <div class="aulas-section">
+                <div class="section-title">
+                    <span>📖</span>
+                    <span>MATÉRIAS EM ANDAMENTO</span>
+                </div>
+                <div class="aulas-grid">
+                    <div class="aula-card" onclick="alert('🔧 Arquivo: programacao-backend.html\n\n📘 Programação Back-End - 3º Ano\n\nConteúdos: APIs, Banco de Dados, Node.js, Autenticação, Segurança')">
+                        <div class="aula-icon">⚙️</div>
+                        <div class="aula-title">Programação Back-End</div>
+                        <div class="aula-desc">Construção de servidores, APIs RESTful, integração com bancos de dados e lógica por trás das aplicações web.</div>
+                        <div class="aula-btn">📁 programacao-backend.html →</div>
+                    </div>
+                    <div class="aula-card" onclick="alert('🔧 Arquivo: analise-projetos.html\n\n📘 Análise e Projeto de Sistemas - 3º Ano\n\nConteúdos: UML, Engenharia de Requisitos, Metodologias Ágeis, Design Patterns')">
+                        <div class="aula-icon">📐</div>
+                        <div class="aula-title">Análise e Projeto de Sistemas</div>
+                        <div class="aula-desc">Modelagem de software, levantamento de requisitos, UML, metodologias ágeis e documentação de sistemas.</div>
+                        <div class="aula-btn">📁 analise-projetos.html →</div>
+                    </div>
+                    <div class="aula-card" onclick="alert('🔧 Arquivo: programacao-mobile.html\n\n📘 Programação Mobile - 3º Ano\n\nConteúdos: React Native, Desenvolvimento iOS/Android, APIs Mobile, Interface Responsiva')">
+                        <div class="aula-icon">📱</div>
+                        <div class="aula-title">Programação Mobile</div>
+                        <div class="aula-desc">Desenvolvimento de aplicativos para dispositivos móveis, UI/UX para telas pequenas e uso de APIs nativas.</div>
+                        <div class="aula-btn">📁 programacao-mobile.html →</div>
+                    </div>
+                </div>
+                <p style="font-size: 0.75rem; color: #555; text-align: center; margin-top: 15px;">
+                    💡 Clique em qualquer card acima para ver mais informações sobre a matéria.
+                </p>
+            </div>
+
+            <!-- Footer -->
             <div class="footer">
-                <p>Ambiente de desenvolvimento · Estudante em formação · { códigos, ideias e inovação }</p>
+                <p>© 2026 Gabriel | Desenvolvedor em formação</p>
+                <p style="margin-top: 8px;">"Cada linha de código é um degrau — 300+ horas subindo essa escada"</p>
+                <p style="margin-top: 8px; font-size: 0.7rem;">⚡ Ambiente de desenvolvimento · Estudante 3º Ano · Técnico em Desenvolvimento de Sistemas</p>
             </div>
         </div>
     </div>
@@ -441,25 +604,28 @@
             binaryContainer.innerHTML = newHTML;
         }, 3000);
         
-        // Efeito de digitação no título
-        const titleElement = document.querySelector('h1');
-        const originalHTML = titleElement.innerHTML;
-        titleElement.innerHTML = '<span class="highlight">Carregando</span><br>Sistema Digital';
-        
-        setTimeout(() => {
-            titleElement.innerHTML = originalHTML;
-        }, 500);
-        
         // Console message
-        console.log('%c🚀 PLATAFORMA GABRIEL LAB', 'color: #ffc800; font-size: 18px; font-weight: bold;');
-        console.log('%cEstudante de Desenvolvimento | Tecnologia & Inovação', 'color: #aaa; font-size: 12px;');
-        console.log('%cAcesse o portfólio completo clicando no botão amarelo', 'color: #ffc800; font-size: 12px;');
+        console.log('%c🚀 GABRIEL LAB - PLATAFORMA DE ESTUDOS', 'color: #ffc800; font-size: 18px; font-weight: bold;');
+        console.log('%cEstudante | 300+ horas de código | 3º Ano DS', 'color: #aaa; font-size: 12px;');
         
-        // Prevenir clique sem o index.html
-        document.getElementById('enterBtn').addEventListener('click', function(e) {
-            // Se o index.html não existir, mostra alerta
-            // Este é apenas um fallback - o link real tentará navegar
-            console.log('Redirecionando para index.html...');
+        // Animação de contagem dos números
+        const statNumbers = document.querySelectorAll('.stat-number');
+        statNumbers.forEach(el => {
+            const target = el.innerText;
+            if (target.includes('+')) {
+                const num = parseInt(target);
+                let current = 0;
+                const increment = num / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= num) {
+                        el.innerText = target;
+                        clearInterval(timer);
+                    } else {
+                        el.innerText = Math.floor(current) + '+';
+                    }
+                }, 20);
+            }
         });
     </script>
 </body>
