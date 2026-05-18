@@ -1,130 +1,511 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bem-vindo ao Meu Portfólio</title>
+    <title>Bem-vindo ao Meu Portfólio | Universidade de Tecnologia</title>
     <style>
-        /* Reset básico e fontes */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            background-color: #f4f7f6;
-            color: #333;
-            line-height: 1.6;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Container Principal */
+        /* Canvas para animação de fundo */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Container principal */
         .container {
-            max-width: 800px;
-            margin: 50px auto;
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 20px;
         }
 
-        /* Seção de Boas-vindas */
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #4f46e5, #06b6d4);
-            color: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
+        /* Card de boas-vindas */
+        .welcome-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 1200px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            transform: translateY(-30px);
+            animation: fadeInUp 0.8s ease-out;
         }
 
-        header h1 {
-            font-size: 2.5rem;
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(-30px);
+            }
+        }
+
+        /* Cabeçalho universitário */
+        .university-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        .university-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: #333;
             margin-bottom: 10px;
         }
 
-        header p {
+        .subtitle {
             font-size: 1.2rem;
-            opacity: 0.9;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Grid de conteúdo */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
         }
 
         /* Seção Sobre */
         .about-section {
-            background: white;
+            background: #f8f9fa;
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            margin-bottom: 40px;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
         }
 
-        .about-section h2 {
-            color: #4f46e5;
-            margin-bottom: 15px;
+        .about-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
             font-size: 1.8rem;
-            border-bottom: 2px solid #e5e7eb;
-            padding-bottom: 8px;
+            color: #667eea;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .about-section p {
-            color: #4b5563;
+        .section-title i {
+            font-size: 2rem;
+        }
+
+        .about-content {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .about-content p {
             margin-bottom: 15px;
         }
 
-        /* Botão de Acesso */
-        .cta-container {
-            text-align: center;
+        .skills {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .btn-enter {
-            display: inline-block;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
+        .skill-tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            background-color: #4f46e5;
-            text-decoration: none;
-            border-radius: 50px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Seção de navegação */
+        .navigation-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .navigation-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.3);
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .btn-enter:hover {
-            background-color: #4338ca;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 15px rgba(79, 70, 229, 0.4);
+        .nav-btn:hover {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateX(10px);
+            border-color: transparent;
         }
 
-        /* Responsividade para celulares */
-        @media (max-width: 600px) {
-            header h1 { font-size: 2rem; }
-            .container { margin: 20px auto; }
-            .btn-enter { width: 100%; }
+        .nav-btn.primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .nav-btn.primary:hover {
+            transform: translateX(10px) scale(1.05);
+        }
+
+        /* Informações acadêmicas */
+        .academic-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border-radius: 15px;
+        }
+
+        .info-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #555;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .welcome-card {
+                padding: 30px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .welcome-message {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
 <body>
-
+    <canvas id="particles"></canvas>
+    
     <div class="container">
-        
-        <header>
-            <h1>Olá! Seja muito bem-vindo.</h1>
-            <p>Conheça um pouco mais sobre mim e explore as minhas criações.</p>
-        </header>
+        <div class="welcome-card">
+            <div class="university-header">
+                <div class="university-badge">
+                    🎓 UNIVERSIDADE DE TECNOLOGIA E INOVAÇÃO
+                </div>
+                <h1>Bem-vindo ao Meu Portfólio</h1>
+                <p class="subtitle">"Onde criatividade e tecnologia se encontram"</p>
+            </div>
 
-        <main class="about-section">
-            <h2>Sobre o Site & Portfólio</h2>
-            <p>
-                Este espaço foi criado para centralizar meus principais projetos, habilidades e evolução como desenvolvedor. Aqui você encontrará aplicações práticas, códigos limpos e soluções focadas na experiência do usuário.
-            </p>
-            <p>
-                Sinta-se à vontade para navegar, analisar o código e entender a lógica por trás de cada projeto. Se quiser bater um papo ou propor uma parceria, as informações de contato estão logo a seguir.
-            </p>
-        </main>
+            <div class="welcome-message">
+                🎉 Seja muito bem-vindo(a) ao meu espaço digital! Explore meu trabalho, conheça minha trajetória e vamos construir o futuro juntos! 🚀
+            </div>
 
-        <div class="cta-container">
-            <a href="index.html" class="btn-enter">Entrar no Portfólio</a>
+            <div class="content-grid">
+                <!-- Seção Sobre -->
+                <div class="about-section">
+                    <div class="section-title">
+                        <i>👨‍💻</i>
+                        <span>Sobre Mim</span>
+                    </div>
+                    <div class="about-content">
+                        <p><strong>Olá! Eu sou [Seu Nome]</strong>, desenvolvedor full-stack e entusiasta de tecnologia com paixão por criar soluções inovadoras.</p>
+                        <p>🎓 <strong>Formação Acadêmica:</strong><br>
+                        • Mestrado em Ciência da Computação - USP<br>
+                        • Especialização em Inteligência Artificial - Stanford Online<br>
+                        • Graduação em Sistemas de Informação - UNICAMP</p>
+                        
+                        <p>💼 <strong>Experiência:</strong><br>
+                        • 5+ anos em desenvolvimento web<br>
+                        • 10+ projetos entregues com sucesso<br>
+                        • Colaborador em projetos open-source</p>
+                        
+                        <div class="skills">
+                            <span class="skill-tag">HTML/CSS</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">UI/UX</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção de Navegação -->
+                <div class="navigation-section">
+                    <div class="section-title">
+                        <i>🎯</i>
+                        <span>Portal do Portfólio</span>
+                    </div>
+                    <div class="nav-buttons">
+                        <a href="#" onclick="return false;" class="nav-btn primary" id="enterPortfolioBtn">
+                            🚪 ENTRAR NO PORTFÓLIO
+                        </a>
+                        <a href="#" onclick="showProjects(); return false;" class="nav-btn">
+                            📁 MEUS PROJETOS
+                        </a>
+                        <a href="#" onclick="showContact(); return false;" class="nav-btn">
+                            📧 CONTATO
+                        </a>
+                        <a href="#" onclick="showResume(); return false;" class="nav-btn">
+                            📄 CURRÍCULO ACADÊMICO
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informações Acadêmicas -->
+            <div class="academic-info">
+                <div class="info-card">
+                    <div class="info-icon">📚</div>
+                    <div class="info-label">Publicações</div>
+                    <div class="info-value">12 Artigos Científicos</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🏆</div>
+                    <div class="info-label">Prêmios</div>
+                    <div class="info-value">5 Reconhecimentos</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🌍</div>
+                    <div class="info-label">Idiomas</div>
+                    <div class="info-value">Português, Inglês, Espanhol</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">💡</div>
+                    <div class="info-label">Áreas de Pesquisa</div>
+                    <div class="info-value">IA, Web3, IoT</div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>© 2024 - Portfólio Acadêmico | Versão 2.0 | Todos os direitos reservados</p>
+                <p style="margin-top: 10px;">🔒 Ambiente seguro e certificado | 🎓 Instituição de ensino parceira</p>
+            </div>
         </div>
-
     </div>
 
+    <script>
+        // Sistema de partículas animadas
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const particles = [];
+        const particleCount = 100;
+        
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.color = `rgba(255, 255, 255, ${Math.random() * 0.5 + 0.2})`;
+            }
+            
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+        
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        
+        animateParticles();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+        
+        // Funções de navegação
+        function redirectToIndex() {
+            window.location.href = 'index.html';
+        }
+        
+        function showProjects() {
+            alert('📁 Seção de Projetos\n\n🚀 Em breve você poderá ver todos os meus projetos aqui!\n📧 Enquanto isso, entre em contato para conhecer meu trabalho.');
+        }
+        
+        function showContact() {
+            alert('📧 Informações de Contato\n\n📱 Telefone: (11) 99999-9999\n📧 Email: contato@meuportfolio.com\n💼 LinkedIn: /in/meuportfolio\n🐙 GitHub: @meuportfolio');
+        }
+        
+        function showResume() {
+            alert('📄 Currículo Acadêmico\n\n✅ Formação: Mestrado em Computação - USP\n✅ Especialização: IA - Stanford\n✅ Certificações: AWS, Google Cloud, Scrum Master\n✅ Prêmios: Melhor TCC 2022, Destaque Inovação 2023');
+        }
+        
+        // Animação de entrada para o portfólio principal
+        document.getElementById('enterPortfolioBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Efeito de transição
+            const card = document.querySelector('.welcome-card');
+            card.style.transition = 'all 0.5s ease';
+            card.style.transform = 'scale(0.95)';
+            card.style.opacity = '0';
+            
+            setTimeout(() => {
+                // Redireciona para index.html
+                window.location.href = 'index.html';
+            }, 500);
+        });
+        
+        // Efeito de digitação no título
+        const title = document.querySelector('h1');
+        const originalText = title.textContent;
+        title.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalText.length) {
+                title.textContent += originalText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+        
+        setTimeout(typeWriter, 500);
+        
+        // Adicionar efeito de hover nos cards
+        const cards = document.querySelectorAll('.about-section, .navigation-section, .info-card');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+            });
+        });
+        
+        // Console welcome message
+        console.log('%c🎓 Bem-vindo ao Meu Portfólio Universitário!', 'color: #667eea; font-size: 20px; font-weight: bold;');
+        console.log('%cExplore, aprenda e conecte-se comigo!', 'color: #764ba2; font-size: 14px;');
+    </script>
 </body>
 </html>
