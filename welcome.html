@@ -86,11 +86,128 @@
             padding: 40px 20px;
         }
 
-        /* Main Card */
+        /* Service Bar - Nova barra de serviços */
+        .service-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 200, 0, 0.3);
+            padding: 12px 0;
+            z-index: 1000;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-bar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .service-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .service-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .service-logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #ffc800, #ffaa00);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .service-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .service-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .service-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffc800;
+            transition: width 0.3s ease;
+        }
+
+        .service-link:hover {
+            color: #ffc800;
+        }
+
+        .service-link:hover::after {
+            width: 100%;
+        }
+
+        .service-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .service-toggle {
+            background: rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-toggle:hover {
+            background: rgba(255, 200, 0, 0.2);
+        }
+
+        /* Main Card - Ajustado para não ficar atrás da barra */
         .hero-card {
             max-width: 1200px;
             width: 100%;
-            margin: 0 auto;
+            margin: 60px auto 0;
             background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 200, 0, 0.2);
@@ -186,6 +303,13 @@
             flex: 1;
             min-width: 150px;
             border: 1px solid rgba(255, 200, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 200, 0, 0.3);
+            background: rgba(255, 200, 0, 0.05);
         }
 
         .stat-number {
@@ -213,6 +337,12 @@
             border-radius: 24px;
             padding: 30px;
             border-left: 3px solid #ffc800;
+            transition: all 0.3s ease;
+        }
+
+        .about-card:hover {
+            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.04);
         }
 
         .about-card h3 {
@@ -413,10 +543,41 @@
             background: rgba(255, 200, 0, 0.05);
         }
 
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 200, 0, 0.2);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: rgba(255, 200, 0, 0.3);
+            transform: translateY(-3px);
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .hero-card {
                 padding: 30px 20px;
+                margin-top: 80px;
             }
             
             h1 {
@@ -434,6 +595,15 @@
             .aulas-grid {
                 grid-template-columns: 1fr;
             }
+
+            .service-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .service-links {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -441,6 +611,29 @@
     <div class="tech-bg">
         <div class="circuit-pattern"></div>
         <div class="glow-orb"></div>
+    </div>
+
+    <!-- Service Bar -->
+    <div class="service-bar" id="serviceBar">
+        <div class="service-container">
+            <div class="service-logo">
+                <div class="service-logo-icon">⚡</div>
+                <span>GabrielDev Services</span>
+            </div>
+            <div class="service-links">
+                <a href="#" class="service-link" onclick="showServiceAlert('🏠 Início')">Início</a>
+                <a href="#" class="service-link" onclick="showServiceAlert('💼 Portfólio')">Portfólio</a>
+                <a href="#" class="service-link" onclick="showServiceAlert('📚 Projetos')">Projetos</a>
+                <a href="#" class="service-link" onclick="showServiceAlert('📞 Contato')">Contato</a>
+                <a href="#" class="service-link" onclick="showServiceAlert('📄 Certificados')">Certificados</a>
+                <a href="#" class="service-link" onclick="showServiceAlert('🎓 Cursos')">Cursos</a>
+            </div>
+            <div class="service-status">
+                <span class="status-dot"></span>
+                <span>Sistema Online</span>
+                <span class="service-toggle" onclick="toggleServiceBar()">🔽</span>
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -462,12 +655,12 @@
 
             <!-- Tech Stack Visual -->
             <div class="tech-stack">
-                <div class="tech-icon">📜</div>
-                <div class="tech-icon">⚛️</div>
-                <div class="tech-icon">🐍</div>
-                <div class="tech-icon">🎨</div>
-                <div class="tech-icon">🗄️</div>
-                <div class="tech-icon">☁️</div>
+                <div class="tech-icon" title="HTML5">📜</div>
+                <div class="tech-icon" title="React">⚛️</div>
+                <div class="tech-icon" title="Python">🐍</div>
+                <div class="tech-icon" title="CSS3">🎨</div>
+                <div class="tech-icon" title="SQL">🗄️</div>
+                <div class="tech-icon" title="Cloud">☁️</div>
             </div>
 
             <!-- Stats -->
@@ -574,6 +767,11 @@
         </div>
     </div>
 
+    <!-- Scroll to Top Button -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        ▲
+    </div>
+
     <script>
         // Binary rain effect
         const binaryContainer = document.createElement('div');
@@ -627,6 +825,62 @@
                 }, 20);
             }
         });
+
+        // Service Bar Functions
+        let lastScroll = 0;
+        const serviceBar = document.getElementById('serviceBar');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                serviceBar.classList.add('hidden');
+            } else {
+                serviceBar.classList.remove('hidden');
+            }
+            lastScroll = currentScroll;
+
+            // Show/hide scroll to top button
+            const scrollBtn = document.getElementById('scrollTop');
+            if (currentScroll > 300) {
+                scrollBtn.classList.add('visible');
+            } else {
+                scrollBtn.classList.remove('visible');
+            }
+        });
+
+        function toggleServiceBar() {
+            serviceBar.classList.toggle('hidden');
+        }
+
+        function showServiceAlert(service) {
+            alert(`🚀 Navegando para: ${service}\n\n📌 Em breve mais recursos estarão disponíveis!\n💡 Gabriel Dev - Sempre evoluindo.`);
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Adiciona tooltips e interatividade extra
+        const techIcons = document.querySelectorAll('.tech-icon');
+        techIcons.forEach(icon => {
+            icon.addEventListener('click', () => {
+                const techName = icon.getAttribute('title') || 'Tecnologia';
+                alert(`💻 ${techName}\n\n📚 Em constante aprendizado!\n🚀 Gabriel está dominando esta tecnologia.`);
+            });
+        });
+
+        // Efeito de digitação no título
+        const title = document.querySelector('h1 .highlight');
+        if (title) {
+            title.style.opacity = '0';
+            setTimeout(() => {
+                title.style.transition = 'opacity 1s ease';
+                title.style.opacity = '1';
+            }, 500);
+        }
     </script>
 </body>
 </html>
