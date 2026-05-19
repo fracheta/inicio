@@ -55,30 +55,6 @@
             border-top: 1px solid rgba(255,215,0,0.3);
         }
 
-        /* Imagem de fundo TECNOLOGIA (sobreposição sutil porém impactante) */
-        .bg-tech {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.2;
-            pointer-events: none;
-            z-index: 0;
-            filter: brightness(0.9) contrast(1.2);
-        }
-
-        .yellow-layer .bg-tech {
-            opacity: 0.25;
-            mix-blend-mode: overlay;
-        }
-
-        .black-layer .bg-tech {
-            opacity: 0.3;
-            mix-blend-mode: soft-light;
-        }
-
         /* Conteúdo principal da área amarela */
         .hero-content {
             position: relative;
@@ -129,7 +105,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 15px 25px -8px rgba(0,0,0,0.3);
-            backdrop-filter: blur(2px);
             font-family: inherit;
         }
 
@@ -143,6 +118,37 @@
 
         .btn-portfolio:active {
             transform: translateY(2px);
+        }
+
+        /* Botão para ir para welcome.html */
+        .btn-welcome {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #FFD700;
+            color: #000;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.3);
+            font-family: inherit;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+
+        .btn-welcome:hover {
+            background: #FFE55C;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -8px rgba(0,0,0,0.4);
+            gap: 14px;
+        }
+
+        .btn-welcome:active {
+            transform: translateY(1px);
         }
 
         /* Área preta: apresenta informações e skills tech */
@@ -208,6 +214,15 @@
             font-weight: 400;
         }
 
+        /* Botão container para agrupar os dois botões */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
         /* Animações */
         @keyframes fadeSlideUp {
             from {
@@ -220,7 +235,24 @@
             }
         }
 
-        /* Scroll caso algum conteúdo extra (mas sem overflow no body) */
+        @keyframes floatParticle {
+            0% { 
+                transform: translateY(0px) translateX(0px); 
+                opacity: 0; 
+            }
+            20% { 
+                opacity: 0.6; 
+            }
+            80% { 
+                opacity: 0.3; 
+            }
+            100% { 
+                transform: translateY(-80px) translateX(20px); 
+                opacity: 0; 
+            }
+        }
+
+        /* Responsividade */
         @media (max-width: 680px) {
             .tech-info {
                 gap: 1rem;
@@ -230,9 +262,12 @@
                 padding: 0.5rem 1rem;
                 min-width: 100px;
             }
-            .btn-portfolio {
+            .btn-portfolio, .btn-welcome {
                 padding: 0.7rem 1.6rem;
-                font-size: 1rem;
+                font-size: 0.9rem;
+            }
+            .button-group {
+                gap: 0.8rem;
             }
         }
 
@@ -248,27 +283,13 @@
             z-index: 15;
         }
 
-        /* Botão responsivo e foco */
-        button:focus-visible {
+        /* Foco e acessibilidade */
+        button:focus-visible, a:focus-visible {
             outline: 2px solid #FFD700;
             outline-offset: 3px;
         }
 
-        /* imagem de fundo estilo "tech" — usando SVG dataURI + gradiente de circuitos e grid + imagem de tecnologia abstrata 
-           Garantindo que seja uma imagem de tecnologia impactante e visualmente atraente */
-        .bg-tech-svg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Vamos construir uma imagem de fundo abstrata com pattern de linhas, pontos e glitch tech, sem depender de url externa */
+        /* Fundo tecnológico com padrões */
         .custom-tech-bg {
             position: absolute;
             top: 0;
@@ -279,14 +300,15 @@
                 repeating-linear-gradient(90deg, rgba(0,255,255,0.08) 0px, rgba(0,255,255,0.08) 2px, transparent 2px, transparent 8px),
                 repeating-linear-gradient(0deg, rgba(255,215,0,0.1) 0px, rgba(255,215,0,0.1) 1px, transparent 1px, transparent 12px),
                 radial-gradient(circle at 20% 40%, rgba(0,0,0,0.2) 0%, transparent 35%),
-                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBmaWxsPSIjZmZkYzAwIiBmaWxsLW9wYWNpdHk9IjAuMTUiIGQ9Ik0wIDBoNDB2NDBIMHoiLz48cGF0aCBkPSJNMjAgMTBhMTAgMTAgMCAwIDEgMCAyMCAxMCAxMCAwIDAgMSAwLTIweiIgc3Ryb2tlPSIjZmZkYzAwIiBzdHJva2Utd2lkdGg9IjEuNSIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjQiIGZpbGw9IiNmZmRjMDAiIGZpbGwtb3BhY2l0eT0iMC4yIi8+PC9zdmc+');
+                repeating-linear-gradient(45deg, rgba(255,215,0,0.05) 0px, rgba(255,215,0,0.05) 2px, transparent 2px, transparent 8px);
             background-repeat: repeat, repeat, no-repeat, repeat;
-            background-size: auto, auto, cover, 32px;
+            background-size: auto, auto, cover, auto;
             opacity: 0.7;
-            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        /* melhor adaptação para ambos os layers, garantindo imagem tecnológica */
+        /* Overlay de profundidade */
         .tech-overlay {
             position: absolute;
             top: 0;
@@ -298,14 +320,14 @@
             z-index: 1;
         }
 
-        /* Estrelinhas e dados binários decorativos */
+        /* Código binário decorativo */
         .binary-bg {
             position: absolute;
             bottom: 10px;
             right: 20px;
             font-family: monospace;
             font-size: 10px;
-            color: #ffd96630;
+            color: rgba(0,0,0,0.3);
             pointer-events: none;
             white-space: pre;
             z-index: 5;
@@ -315,15 +337,27 @@
             display: block;
             line-height: 1.2;
         }
+
+        /* Toast de notificação */
+        .tech-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            font-family: 'Poppins', sans-serif;
+            animation: fadeSlideUp 0.3s ease-out;
+        }
     </style>
-    <!-- ícones (fontawesome CDN para ícones modernos) -->
+    <!-- Ícones Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Fonte Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="welcome-screen">
         <!-- LAYER AMARELO 60% -->
         <div class="yellow-layer">
-            <!-- Imagem de fundo com tema TECNOLOGIA (abstrato, circuitos, código) -->
             <div class="custom-tech-bg"></div>
             <div class="tech-overlay"></div>
             <div class="binary-bg">
@@ -336,15 +370,20 @@
                 <div class="tagline">
                     <i class="fas fa-code"></i>  Desenvolvedor Full-Stack & Criador de Soluções Tech  <i class="fas fa-microchip"></i>
                 </div>
-                <button class="btn-portfolio" id="exploreBtn">
-                    Explorar Portfólio <i class="fas fa-arrow-right"></i>
-                </button>
+                <div class="button-group">
+                    <button class="btn-portfolio" id="exploreBtn">
+                        Explorar Portfólio <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <a href="welcome.html" class="btn-welcome" id="welcomeBtn">
+                        <i class="fas fa-door-open"></i> Ir para Welcome
+                    </a>
+                </div>
             </div>
         </div>
 
         <!-- LAYER PRETO 40% -->
         <div class="black-layer">
-            <div class="custom-tech-bg" style="opacity: 0.4; mix-blend-mode: screen;"></div>
+            <div class="custom-tech-bg" style="opacity: 0.4;"></div>
             <div class="tech-overlay" style="background: radial-gradient(circle at 70% 20%, rgba(255,215,0,0.05), transparent);"></div>
             
             <div class="tech-info">
@@ -375,22 +414,12 @@
         </div>
     </div>
 
-    <!-- Pequeno script para simular interatividade do botão e também adicionar um alerta estilizado ou redirecionamento 
-         como é um portfólio, podemos apenas mostrar um toast ou rolar suavemente para alguma seção, mas criaremos um efeito de "boas vindas" interativo -->
     <script>
         (function() {
             const exploreBtn = document.getElementById('exploreBtn');
             
-            // Função para animar um mini modal ou dar feedback de boas vindas interativo
-            // Como é apenas a tela de welcome, simulamos um efeito de "entrada no portfólio" 
-            // Para deixar mais atraente, criaremos um overlay de transição e depois redirecionaremos simbolicamente
-            // Ou apenas exibir mensagem e 'scroll' para alguma parte (mas não há mais conteúdo).
-            // Então farei uma ação criativa: criar um alerta personalizado que some com estilo, indicando que o portfólio será carregado.
-            // Como portfólio ainda em construção, mostraremos uma notificação bonita e opção de explorar seções.
-            
-            // Cria um container de notificação personalizada
+            // Função para criar notificação personalizada
             function createCustomToast(message, icon = '🚀') {
-                // Verifica se já existe e remove
                 const existingToast = document.querySelector('.tech-toast');
                 if(existingToast) existingToast.remove();
                 
@@ -403,67 +432,66 @@
                         <button id="closeToastBtn" style="background: none; border: none; color: #FFD700; font-size: 20px; cursor: pointer; margin-left: 8px;">&times;</button>
                     </div>
                 `;
-                toast.style.position = 'fixed';
-                toast.style.bottom = '30px';
-                toast.style.left = '50%';
-                toast.style.transform = 'translateX(-50%)';
-                toast.style.zIndex = '9999';
-                toast.style.fontFamily = "'Poppins', sans-serif";
-                toast.style.animation = 'fadeSlideUp 0.3s ease-out';
                 document.body.appendChild(toast);
                 
                 const closeBtn = toast.querySelector('#closeToastBtn');
-                closeBtn.addEventListener('click', () => toast.remove());
+                if(closeBtn) {
+                    closeBtn.addEventListener('click', () => toast.remove());
+                }
+                
                 setTimeout(() => {
                     if(toast && toast.remove) toast.remove();
                 }, 4000);
             }
             
-            // Interação do botão: mostrar uma mensagem de "seja bem-vindo ao portfólio interativo"
-            // e simular navegação elegante (como se fosse para a seção principal)
-            // Como é uma demo, apresentamos uma experiência de portfólio em construção, mas com encanto.
-            exploreBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                createCustomToast('✨ Portfólio em construção — mas você já pode explorar minhas skills! Em breve mais projetos. ✨', '💻');
-                // Adicionar um ripple effect no botão
-                exploreBtn.style.transform = 'scale(0.97)';
-                setTimeout(() => { exploreBtn.style.transform = ''; }, 150);
-                
-                // Efeito de luz no fundo
-                const yellowLayer = document.querySelector('.yellow-layer');
-                yellowLayer.style.transition = 'box-shadow 0.2s';
-                yellowLayer.style.boxShadow = '0 0 0 2px #FFD700, 0 0 0 5px rgba(0,0,0,0.2)';
-                setTimeout(() => { yellowLayer.style.boxShadow = ''; }, 400);
-                
-                // Também poderia rolar até a área preta demonstrando interação
-                document.querySelector('.black-layer').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
+            // Interação do botão explorar
+            if(exploreBtn) {
+                exploreBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    createCustomToast('✨ Portfólio em construção — Em breve mais projetos incríveis! ✨', '💻');
+                    
+                    // Efeito de clique
+                    exploreBtn.style.transform = 'scale(0.97)';
+                    setTimeout(() => { 
+                        if(exploreBtn) exploreBtn.style.transform = ''; 
+                    }, 150);
+                    
+                    // Efeito de brilho na camada amarela
+                    const yellowLayer = document.querySelector('.yellow-layer');
+                    if(yellowLayer) {
+                        yellowLayer.style.transition = 'box-shadow 0.2s';
+                        yellowLayer.style.boxShadow = '0 0 0 2px #FFD700, 0 0 0 5px rgba(0,0,0,0.2)';
+                        setTimeout(() => { 
+                            if(yellowLayer) yellowLayer.style.boxShadow = ''; 
+                        }, 400);
+                    }
+                });
+            }
             
-            // Criar efeito de digitação sutil no titulo? apenas para charme extra (opcional)
-            // pega o h1 e adiciona um efeito nostálgico? apenas para mostrar dinamismo.
-            // Pequeno efeito de "brilho" nos cards com intervalo
+            // Animação pulsante nos cards
             const cards = document.querySelectorAll('.card-tech');
             let index = 0;
+            
             function pulseCard() {
                 if(cards.length === 0) return;
                 cards.forEach(c => c.style.transition = 'all 0.2s');
-                cards[index].style.transform = 'scale(1.02)';
-                cards[index].style.borderColor = '#FFD700';
-                setTimeout(() => {
-                    if(cards[index]) {
-                        cards[index].style.transform = '';
-                        cards[index].style.borderColor = '';
-                    }
-                }, 400);
+                if(cards[index]) {
+                    cards[index].style.transform = 'scale(1.02)';
+                    cards[index].style.borderColor = '#FFD700';
+                    setTimeout(() => {
+                        if(cards[index]) {
+                            cards[index].style.transform = '';
+                            cards[index].style.borderColor = '';
+                        }
+                    }, 400);
+                }
                 index = (index + 1) % cards.length;
             }
+            
             setInterval(pulseCard, 1800);
             
-            // Adicionar tooltip mental: mostrar no console informações
-            console.log('🎉 Tela de boas-vindas carregada — Design com 60% amarelo e 40% preto + imagem tech');
-            
-            // Criar mais alguns elementos flutuantes tecnológicos? opcional para deixar ainda mais bonito, partículas simples (círculos)
-            const createParticles = () => {
+            // Criar partículas flutuantes
+            function createParticles() {
                 const particleContainer = document.createElement('div');
                 particleContainer.style.position = 'fixed';
                 particleContainer.style.top = '0';
@@ -474,7 +502,7 @@
                 particleContainer.style.zIndex = '999';
                 document.body.appendChild(particleContainer);
                 
-                for(let i=0; i<40; i++) {
+                for(let i = 0; i < 40; i++) {
                     const particle = document.createElement('div');
                     const size = Math.random() * 4 + 2;
                     particle.style.position = 'absolute';
@@ -488,43 +516,14 @@
                     particle.style.animation = `floatParticle ${Math.random() * 10 + 8}s infinite linear`;
                     particleContainer.appendChild(particle);
                 }
-                
-                // style da animação
-                const styleSheet = document.createElement("style");
-                styleSheet.textContent = `
-                    @keyframes floatParticle {
-                        0% { transform: translateY(0px) translateX(0px); opacity: 0; }
-                        20% { opacity: 0.6; }
-                        80% { opacity: 0.3; }
-                        100% { transform: translateY(-80px) translateX(20px); opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(styleSheet);
-            };
+            }
+            
             createParticles();
             
-            // Melhoria: imagem de fundo já possui pattern high-tech, mas também incluir uma segunda camada SVG para reforçar
-            const addExtraTechGlow = () => {
-                const svgFilter = document.createElement('div');
-                svgFilter.style.position = 'absolute';
-                svgFilter.style.top = '0';
-                svgFilter.style.left = '0';
-                svgFilter.style.width = '100%';
-                svgFilter.style.height = '100%';
-                svgFilter.style.background = `url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBkPSJNMzAgMjBhMTAgMTAgMCAwIDEtMjAgMCAxMCAxMCAwIDAgMSAyMCAweiIgc3Ryb2tlPSIjZmZkYzAwIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjEiLz48cGF0aCBkPSJNMjAgMTBhMTAgMTAgMCAwIDEgMCAyMCAxMCAxMCAwIDAgMSAwLTIweiIgc3Ryb2tlPSIjZmZkYzAwIiBmaWxsPSIjZmZkYzAwMTUiLz48L3N2Zz4=') repeat`;
-                svgFilter.style.pointerEvents = 'none';
-                svgFilter.style.opacity = '0.15';
-                svgFilter.style.mixBlendMode = 'overlay';
-                document.querySelector('.yellow-layer').appendChild(svgFilter);
-                
-                const blackFilter = svgFilter.cloneNode(true);
-                blackFilter.style.opacity = '0.1';
-                document.querySelector('.black-layer').appendChild(blackFilter);
-            };
-            addExtraTechGlow();
+            // Log no console
+            console.log('✅ Tela de boas-vindas carregada — Design 60% amarelo e 40% preto + fundo tech');
+            console.log('🔗 Botão "Ir para Welcome" redireciona para welcome.html');
         })();
     </script>
-    <!-- Ajuste de responsividade e fontes -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </body>
 </html>
