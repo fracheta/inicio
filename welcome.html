@@ -3,9 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Gabriel Dev | Início - Laboratório Digital</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Gabriel Dev | Laboratório Digital - Guia de Boas-Vindas</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ===== ANIMATED TECH BACKGROUND ===== */
+        .tech-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(45deg, rgba(255, 200, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(-45deg, rgba(255, 200, 0, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: drift 20s linear infinite;
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .binary-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.05;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            white-space: pre;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .glow-orb {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 200, 0, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: blur(80px);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .glow-orb-2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 150, 255, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 30%;
+            left: 20%;
+            filter: blur(60px);
+            animation: pulse 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.15); }
+        }
+
+        /* ===== SERVICE BAR ===== */
+        .service-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 200, 0, 0.3);
+            padding: 12px 0;
+            z-index: 1000;
+            transform: translateY(0);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-bar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .service-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .service-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .service-logo-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #ffc800, #ffaa00);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            animation: rotateIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes rotateIcon {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .service-links {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .service-link {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .service-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffc800;
+            transition: width 0.3s ease;
+        }
+
+        .service-link:hover {
+            color: #ffc800;
+        }
+
+        .service-link:hover::after {
+            width: 100%;
+        }
+
+        .service-status {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+            box-shadow: 0 0 5px #00ff00;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .service-toggle {
+            background: rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-toggle:hover {
+            background: rgba(255, 200, 0, 0.2);
+            transform: scale(1.05);
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* ===== HERO CARD ===== */
+        .hero-card {
+            max-width: 1300px;
+            width: 100%;
+            margin: 70px auto 40px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 200, 0, 0.2);
+            border-radius: 50px;
+            padding: 60px;
+            animation: fadeInUp 0.8s ease-out;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== WELCOME BADGE ===== */
         .welcome-badge {
             display: inline-flex;
             align-items: center;
@@ -36,6 +282,7 @@
             75% { transform: rotate(-15deg); }
         }
 
+        /* ===== MAIN TITLE ===== */
         h1 {
             font-size: 4rem;
             font-weight: 800;
@@ -50,12 +297,40 @@
             text-shadow: 0 0 20px rgba(255, 200, 0, 0.3);
         }
 
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ffc800, transparent);
+        }
+
         .subtitle {
             font-size: 1.2rem;
             color: #aaa;
             max-width: 700px;
             line-height: 1.6;
             margin-bottom: 40px;
+        }
+
+        /* ===== GUIDE STEPS ===== */
+        .guide-section {
+            margin: 60px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #ffc800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title .icon {
+            font-size: 2rem;
         }
 
         .steps-grid {
@@ -74,6 +349,21 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 200, 0, 0.05), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .step-card:hover::before {
+            left: 100%;
         }
 
         .step-card:hover {
@@ -104,6 +394,102 @@
             margin-bottom: 20px;
         }
 
+        .step-action {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: #ffc800;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover .step-action {
+            background: #ffc800;
+            color: #0a0a0a;
+            transform: translateX(5px);
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats-section {
+            display: flex;
+            gap: 25px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 25px 30px;
+            text-align: center;
+            flex: 1;
+            min-width: 160px;
+            border: 1px solid rgba(255, 200, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 200, 0, 0.3);
+            background: rgba(255, 200, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #ffc800;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== FEATURES GRID ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid rgba(255, 200, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: #ffc800;
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #ffc800;
+        }
+
+        .feature-desc {
+            font-size: 0.85rem;
+            color: #999;
+        }
+
+        /* ===== ENTER BUTTON ===== */
         .enter-section {
             text-align: center;
             margin: 50px 0 30px;
@@ -141,10 +527,134 @@
             box-shadow: 0 0 40px rgba(255, 200, 0, 0.6);
         }
 
+        .enter-hint {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        /* ===== TECH STACK ===== */
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .tech-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 1px solid rgba(255, 200, 0, 0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tech-icon:hover {
+            border-color: #ffc800;
+            transform: translateY(-8px) rotate(5deg);
+            background: rgba(255, 200, 0, 0.1);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 200, 0, 0.1);
+            text-align: center;
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        /* ===== SCROLL TOP BUTTON ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 200, 0, 0.2);
+            border: 1px solid rgba(255, 200, 0, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 1.3rem;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background: rgba(255, 200, 0, 0.4);
+            transform: translateY(-5px);
+        }
+
+        /* ===== TOOLTIP ===== */
+        .tooltip {
+            position: fixed;
+            background: rgba(0, 0, 0, 0.9);
+            color: #ffc800;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            pointer-events: none;
+            z-index: 2000;
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            white-space: nowrap;
+            font-family: monospace;
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 900px) {
-            h1 { font-size: 2.2rem; }
-            .steps-grid { grid-template-columns: 1fr; }
-            .enter-btn { padding: 15px 30px; font-size: 1rem; }
+            .hero-card {
+                padding: 30px 20px;
+                margin-top: 90px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-section {
+                flex-direction: column;
+            }
+            
+            .service-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 10px 20px;
+            }
+            
+            .service-links {
+                justify-content: center;
+            }
+            
+            .enter-btn {
+                padding: 15px 30px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -155,6 +665,7 @@
         <div class="glow-orb-2"></div>
     </div>
 
+    <!-- SERVICE BAR -->
     <div class="service-bar" id="serviceBar">
         <div class="service-container">
             <div class="service-logo">
@@ -162,12 +673,12 @@
                 <span>GabrielDev • Laboratório Digital</span>
             </div>
             <div class="service-links">
-                <a href="index.html" class="service-link">🏠 Início</a>
-                <a href="portfolio.html" class="service-link">💼 Portfólio</a>
-                <a href="projetos.html" class="service-link">📁 Projetos</a>
-                <a href="contato.html" class="service-link">📞 Contato</a>
-                <a href="certificados.html" class="service-link">📜 Certificados</a>
-                <a href="aulas.html" class="service-link">📚 Aulas</a>
+                <a class="service-link" data-service="Início">🏠 Início</a>
+                <a class="service-link" data-service="Portfólio">💼 Portfólio</a>
+                <a class="service-link" data-service="Projetos">📁 Projetos</a>
+                <a class="service-link" data-service="Contato">📞 Contato</a>
+                <a class="service-link" data-service="Certificados">📜 Certificados</a>
+                <a class="service-link" data-service="Aulas">📚 Aulas</a>
             </div>
             <div class="service-status">
                 <span class="status-dot"></span>
@@ -179,12 +690,14 @@
 
     <div class="container">
         <div class="hero-card">
+            <!-- WELCOME BADGE -->
             <div class="welcome-badge">
                 <span class="wave">👋</span>
                 <span>GUIA DE BOAS-VINDAS</span>
                 <span class="wave">✨</span>
             </div>
 
+            <!-- MAIN TITLE -->
             <h1>
                 <span class="highlight">Gabriel</span><br>
                 Laboratório Digital<br>
@@ -196,6 +709,17 @@
                 Este guia vai te ajudar a navegar por todo o conteúdo do meu portfólio.
             </div>
 
+            <!-- TECH STACK -->
+            <div class="tech-stack">
+                <div class="tech-icon" data-tech="HTML5">📜</div>
+                <div class="tech-icon" data-tech="CSS3">🎨</div>
+                <div class="tech-icon" data-tech="JavaScript">⚡</div>
+                <div class="tech-icon" data-tech="React">⚛️</div>
+                <div class="tech-icon" data-tech="Python">🐍</div>
+                <div class="tech-icon" data-tech="Node.js">🚀</div>
+            </div>
+
+            <!-- STATS -->
             <div class="stats-section">
                 <div class="stat-card">
                     <div class="stat-number">350+</div>
@@ -215,57 +739,101 @@
                 </div>
             </div>
 
-            <div class="steps-grid">
-                <div class="step-card" data-step="1">
-                    <div class="step-number">01</div>
-                    <div class="step-title">📂 Conheça o Portfólio</div>
-                    <div class="step-desc">Explore todos os meus projetos, scripts e aplicações organizados por categoria.</div>
-                    <div class="step-action">🎯 Ver Projetos →</div>
+            <!-- GUIDE STEPS -->
+            <div class="guide-section">
+                <div class="section-title">
+                    <span class="icon">🗺️</span>
+                    <span>Guia de Navegação</span>
                 </div>
-                <div class="step-card" data-step="2">
-                    <div class="step-number">02</div>
-                    <div class="step-title">📚 Matérias em Andamento</div>
-                    <div class="step-desc">Conteúdos do 3º ano: Back-End, Análise de Sistemas e Programação Mobile.</div>
-                    <div class="step-action">📖 Ver Aulas →</div>
-                </div>
-                <div class="step-card" data-step="3">
-                    <div class="step-number">03</div>
-                    <div class="step-title">💡 Minha Trajetória</div>
-                    <div class="step-desc">Mais de 350 horas de prática, 25 projetos finalizados e muito aprendizado.</div>
-                    <div class="step-action">👨‍💻 Sobre Mim →</div>
-                </div>
-                <div class="step-card" data-step="4">
-                    <div class="step-number">04</div>
-                    <div class="step-title">🎯 Próximos Passos</div>
-                    <div class="step-desc">Buscando primeiro estágio na área de tecnologia. Sempre evoluindo!</div>
-                    <div class="step-action">🚀 Objetivos →</div>
+                <div class="steps-grid">
+                    <div class="step-card" data-step="1">
+                        <div class="step-number">01</div>
+                        <div class="step-title">📂 Conheça o Index.html</div>
+                        <div class="step-desc">
+                            O arquivo principal do meu portfólio, onde todos os meus projetos, scripts e aplicações estão organizados e disponíveis para exploração.
+                        </div>
+                        <div class="step-action">🎯 Ver Projetos →</div>
+                    </div>
+                    <div class="step-card" data-step="2">
+                        <div class="step-number">02</div>
+                        <div class="step-title">📚 Matérias em Andamento</div>
+                        <div class="step-desc">
+                            Conteúdos do 3º ano do curso técnico: Back-End, Análise de Sistemas e Programação Mobile. Clique nos cards para detalhes.
+                        </div>
+                        <div class="step-action">📖 Ver Matérias →</div>
+                    </div>
+                    <div class="step-card" data-step="3">
+                        <div class="step-number">03</div>
+                        <div class="step-title">💡 Minha Trajetória</div>
+                        <div class="step-desc">
+                            Mais de 350 horas de prática, 25 projetos finalizados e muito aprendizado. Descubra minha evolução como desenvolvedor.
+                        </div>
+                        <div class="step-action">👨‍💻 Sobre Mim →</div>
+                    </div>
+                    <div class="step-card" data-step="4">
+                        <div class="step-number">04</div>
+                        <div class="step-title">🎯 Próximos Passos</div>
+                        <div class="step-desc">
+                            Buscando primeiro estágio na área de tecnologia. Sempre evoluindo e aprendendo novas tecnologias.
+                        </div>
+                        <div class="step-action">🚀 Objetivos →</div>
+                    </div>
                 </div>
             </div>
 
+            <!-- FEATURES -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Projetos Práticos</div>
+                    <div class="feature-desc">Scripts, aplicações web, jogos e muito mais</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Estatísticas Reais</div>
+                    <div class="feature-desc">Horas de código e projetos contabilizados</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <div class="feature-title">Formação Técnica</div>
+                    <div class="feature-desc">3º ano em Desenvolvimento de Sistemas</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Tecnologias Atuais</div>
+                    <div class="feature-desc">Sempre atualizado com as melhores techs</div>
+                </div>
+            </div>
+
+            <!-- ENTER SECTION -->
             <div class="enter-section">
-                <a href="portfolio.html" class="enter-btn">
-                    <span>🚀 ACESSAR PORTFÓLIO</span>
+                <a href="index.html" class="enter-btn" id="enterBtn">
+                    <span>🚀 ACESSAR INDEX.HTML</span>
                     <span>▶</span>
                 </a>
-                <div class="enter-hint" style="margin-top: 20px; font-size: 0.85rem; color: #666;">
+                <div class="enter-hint">
                     💡 Clique aqui para explorar todos os meus projetos e códigos desenvolvidos
                 </div>
             </div>
 
+            <!-- FOOTER -->
             <div class="footer">
                 <p>© 2026 Gabriel | Desenvolvedor em formação • 3º Ano Técnico em Desenvolvimento de Sistemas</p>
                 <p style="margin-top: 10px;">"Cada linha de código escrita é um passo mais perto da excelência"</p>
+                <p style="margin-top: 10px; font-size: 0.7rem;">⚡ Ambiente de desenvolvimento • Aprendizado contínuo • 350+ horas de código</p>
             </div>
         </div>
     </div>
 
+    <!-- SCROLL TOP BUTTON -->
     <div class="scroll-top" id="scrollTop">▲</div>
 
     <script>
-        // Binary rain
+        // ===== BINARY RAIN EFFECT =====
         const binaryContainer = document.createElement('div');
         binaryContainer.className = 'binary-rain';
         document.querySelector('.tech-bg').appendChild(binaryContainer);
+        
         const chars = '01';
         function generateBinaryRain() {
             let binaryHTML = '';
@@ -278,13 +846,15 @@
             }
             binaryContainer.innerHTML = binaryHTML;
         }
+        
         generateBinaryRain();
         setInterval(generateBinaryRain, 2500);
 
-        // Service bar scroll
+        // ===== SERVICE BAR FUNCTIONS =====
         let lastScroll = 0;
         const serviceBar = document.getElementById('serviceBar');
         const toggleBtn = document.getElementById('toggleBar');
+
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
             if (currentScroll > lastScroll && currentScroll > 100) {
@@ -293,6 +863,8 @@
                 serviceBar.classList.remove('hidden');
             }
             lastScroll = currentScroll;
+
+            // Show/hide scroll top button
             const scrollBtn = document.getElementById('scrollTop');
             if (currentScroll > 300) {
                 scrollBtn.classList.add('visible');
@@ -300,32 +872,77 @@
                 scrollBtn.classList.remove('visible');
             }
         });
+
         toggleBtn.addEventListener('click', () => {
             serviceBar.classList.toggle('hidden');
             toggleBtn.textContent = serviceBar.classList.contains('hidden') ? '🔽 Mostrar' : '🔽 Ocultar';
         });
 
-        document.getElementById('scrollTop').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // Step cards
-        document.querySelectorAll('.step-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const step = card.getAttribute('data-step');
-                if (step === '1') {
-                    window.location.href = 'portfolio.html';
-                } else if (step === '2') {
-                    window.location.href = 'aulas.html';
-                } else if (step === '3') {
-                    alert('👨‍💻 MINHA TRAJETÓRIA\n\n📊 Estatísticas:\n• 350+ horas de código\n• 25+ projetos finalizados\n• 6 tecnologias estudadas\n• 3º ano do curso técnico\n\n🎯 Objetivo: Primeiro estágio em tecnologia!');
-                } else {
-                    alert('🚀 PRÓXIMOS PASSOS\n\n🎯 Metas:\n• Conseguir primeiro estágio\n• Aprender novas tecnologias\n• Desenvolver projetos mais complexos\n• Contribuir com open source');
-                }
+        // Service links interaction
+        document.querySelectorAll('.service-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const service = link.getAttribute('data-service') || link.textContent;
+                showNotification(`🔧 Navegando para: ${service}`, 'info');
+                setTimeout(() => {
+                    alert(`🚀 ${service}\n\n📌 Em breve mais recursos estarão disponíveis!\n💡 Gabriel Dev - Sempre evoluindo.`);
+                }, 300);
             });
         });
 
-        // Stats animation
+        // ===== STEP CARDS INTERACTION =====
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const step = card.getAttribute('data-step');
+                const title = card.querySelector('.step-title').textContent;
+                showNotification(`📖 Guia: ${title}`, 'success');
+                
+                setTimeout(() => {
+                    if (step === '1') {
+                        alert('📂 INDEX.HTML - Meu Portfólio\n\n⬇️ Clique no botão amarelo "ACESSAR INDEX.HTML" para ver todos os meus projetos organizados!\n\nLá você encontrará:\n✅ Scripts JavaScript\n✅ Aplicações web\n✅ Projetos mobile\n✅ E muito mais!');
+                    } else if (step === '2') {
+                        alert('📚 MATÉRIAS EM ANDAMENTO\n\nRole a página para baixo e clique nos cards das matérias:\n\n⚙️ Programação Back-End\n📐 Análise de Sistemas\n📱 Programação Mobile\n\nCada card contém informações detalhadas sobre o conteúdo!');
+                    } else if (step === '3') {
+                        alert('👨‍💻 MINHA TRAJETÓRIA\n\n📊 Estatísticas:\n• 350+ horas de código\n• 25+ projetos finalizados\n• 6 tecnologias estudadas\n• 3º ano do curso técnico\n\n🎯 Objetivo: Primeiro estágio em tecnologia!');
+                    } else {
+                        alert('🚀 PRÓXIMOS PASSOS\n\n🎯 Metas:\n• Conseguir primeiro estágio\n• Aprender novas tecnologias\n• Desenvolver projetos mais complexos\n• Contribuir com open source\n\n✨ "A jornada é longa, mas cada dia é um aprendizado!"');
+                    }
+                }, 300);
+            });
+        });
+
+        // ===== TECH ICONS TOOLTIP =====
+        let tooltip = null;
+        
+        document.querySelectorAll('.tech-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', (e) => {
+                const tech = icon.getAttribute('data-tech');
+                tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = `💻 ${tech} • Em estudo avançado`;
+                document.body.appendChild(tooltip);
+                
+                const rect = icon.getBoundingClientRect();
+                tooltip.style.left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
+                tooltip.style.top = rect.top - 35 + 'px';
+            });
+            
+            icon.addEventListener('mouseleave', () => {
+                if (tooltip) {
+                    tooltip.remove();
+                    tooltip = null;
+                }
+            });
+            
+            icon.addEventListener('click', () => {
+                const tech = icon.getAttribute('data-tech');
+                showNotification(`🎯 Tecnologia: ${tech}`, 'tech');
+                setTimeout(() => {
+                    alert(`💻 ${tech}\n\n📚 Status: Em aprendizado avançado\n🎯 Próximo objetivo: Dominar completamente\n🚀 Gabriel está se dedicando a esta tecnologia!`);
+                }, 300);
+            });
+        });
+
+        // ===== STATS ANIMATION =====
         const statNumbers = document.querySelectorAll('.stat-number');
         statNumbers.forEach(el => {
             const targetText = el.innerText;
@@ -344,6 +961,19 @@
                 }, 20);
             }
         });
-    </script>
-</body>
-</html>
+
+        // ===== NOTIFICATION SYSTEM =====
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.9);
+                color: #ffc800;
+                padding: 12px 20px;
+                border-radius: 12px;
+                border-left: 3px solid #ffc800;
+                font-size: 0.9rem;
+                z-index: 2000;
+                animation: slide
