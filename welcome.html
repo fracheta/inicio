@@ -673,12 +673,12 @@
                 <span>GabrielDev • Laboratório Digital</span>
             </div>
             <div class="service-links">
-                <a class="service-link" data-service="Início">🏠 Início</a>
-                <a class="service-link" data-service="Portfólio">💼 Portfólio</a>
-                <a class="service-link" data-service="Projetos">📁 Projetos</a>
-                <a class="service-link" data-service="Contato">📞 Contato</a>
-                <a class="service-link" data-service="Certificados">📜 Certificados</a>
-                <a class="service-link" data-service="Aulas">📚 Aulas</a>
+                <a class="service-link" data-service="Início" data-url="10.html">🏠 Início</a>
+                <a class="service-link" data-service="Portfólio" data-url="20.html">💼 Portfólio</a>
+                <a class="service-link" data-service="Projetos" data-url="30.html">📁 Projetos</a>
+                <a class="service-link" data-service="Contato" data-url="40.html">📞 Contato</a>
+                <a class="service-link" data-service="Certificados" data-url="50.html">📜 Certificados</a>
+                <a class="service-link" data-service="Aulas" data-url="60.html">📚 Aulas</a>
             </div>
             <div class="service-status">
                 <span class="status-dot"></span>
@@ -746,7 +746,7 @@
                     <span>Guia de Navegação</span>
                 </div>
                 <div class="steps-grid">
-                    <div class="step-card" data-step="1">
+                    <div class="step-card" data-step="1" data-url="30.html">
                         <div class="step-number">01</div>
                         <div class="step-title">📂 Conheça o Index.html</div>
                         <div class="step-desc">
@@ -754,7 +754,7 @@
                         </div>
                         <div class="step-action">🎯 Ver Projetos →</div>
                     </div>
-                    <div class="step-card" data-step="2">
+                    <div class="step-card" data-step="2" data-url="60.html">
                         <div class="step-number">02</div>
                         <div class="step-title">📚 Matérias em Andamento</div>
                         <div class="step-desc">
@@ -762,7 +762,7 @@
                         </div>
                         <div class="step-action">📖 Ver Matérias →</div>
                     </div>
-                    <div class="step-card" data-step="3">
+                    <div class="step-card" data-step="3" data-url="20.html">
                         <div class="step-number">03</div>
                         <div class="step-title">💡 Minha Trajetória</div>
                         <div class="step-desc">
@@ -770,7 +770,7 @@
                         </div>
                         <div class="step-action">👨‍💻 Sobre Mim →</div>
                     </div>
-                    <div class="step-card" data-step="4">
+                    <div class="step-card" data-step="4" data-url="40.html">
                         <div class="step-number">04</div>
                         <div class="step-title">🎯 Próximos Passos</div>
                         <div class="step-desc">
@@ -878,35 +878,49 @@
             toggleBtn.textContent = serviceBar.classList.contains('hidden') ? '🔽 Mostrar' : '🔽 Ocultar';
         });
 
-        // Service links interaction
+        // ===== REDIRECT FUNCTION =====
+        function redirectTo(url, pageName) {
+            if (url) {
+                window.location.href = url;
+            }
+        }
+
+        // Service links - redirect to respective HTML files
         document.querySelectorAll('.service-link').forEach(link => {
             link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = link.getAttribute('data-url');
                 const service = link.getAttribute('data-service') || link.textContent;
-                showNotification(`🔧 Navegando para: ${service}`, 'info');
-                setTimeout(() => {
-                    alert(`🚀 ${service}\n\n📌 Em breve mais recursos estarão disponíveis!\n💡 Gabriel Dev - Sempre evoluindo.`);
-                }, 300);
+                if (url) {
+                    redirectTo(url, service);
+                }
             });
         });
 
-        // ===== STEP CARDS INTERACTION =====
+        // Step cards - redirect to pages
         document.querySelectorAll('.step-card').forEach(card => {
             card.addEventListener('click', () => {
-                const step = card.getAttribute('data-step');
-                const title = card.querySelector('.step-title').textContent;
-                showNotification(`📖 Guia: ${title}`, 'success');
-                
-                setTimeout(() => {
-                    if (step === '1') {
-                        alert('📂 INDEX.HTML - Meu Portfólio\n\n⬇️ Clique no botão amarelo "ACESSAR INDEX.HTML" para ver todos os meus projetos organizados!\n\nLá você encontrará:\n✅ Scripts JavaScript\n✅ Aplicações web\n✅ Projetos mobile\n✅ E muito mais!');
-                    } else if (step === '2') {
-                        alert('📚 MATÉRIAS EM ANDAMENTO\n\nRole a página para baixo e clique nos cards das matérias:\n\n⚙️ Programação Back-End\n📐 Análise de Sistemas\n📱 Programação Mobile\n\nCada card contém informações detalhadas sobre o conteúdo!');
-                    } else if (step === '3') {
-                        alert('👨‍💻 MINHA TRAJETÓRIA\n\n📊 Estatísticas:\n• 350+ horas de código\n• 25+ projetos finalizados\n• 6 tecnologias estudadas\n• 3º ano do curso técnico\n\n🎯 Objetivo: Primeiro estágio em tecnologia!');
-                    } else {
-                        alert('🚀 PRÓXIMOS PASSOS\n\n🎯 Metas:\n• Conseguir primeiro estágio\n• Aprender novas tecnologias\n• Desenvolver projetos mais complexos\n• Contribuir com open source\n\n✨ "A jornada é longa, mas cada dia é um aprendizado!"');
-                    }
-                }, 300);
+                const url = card.getAttribute('data-url');
+                if (url) {
+                    redirectTo(url, '');
+                }
+            });
+        });
+
+        // Feature cards click redirect
+        const featureRedirects = {
+            '🎯 Projetos Práticos': '30.html',
+            '📊 Estatísticas Reais': '20.html',
+            '🎓 Formação Técnica': '60.html',
+            '⚡ Tecnologias Atuais': '20.html'
+        };
+
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.querySelector('.feature-title')?.textContent;
+                if (title && featureRedirects[title]) {
+                    redirectTo(featureRedirects[title], '');
+                }
             });
         });
 
@@ -935,10 +949,7 @@
             
             icon.addEventListener('click', () => {
                 const tech = icon.getAttribute('data-tech');
-                showNotification(`🎯 Tecnologia: ${tech}`, 'tech');
-                setTimeout(() => {
-                    alert(`💻 ${tech}\n\n📚 Status: Em aprendizado avançado\n🎯 Próximo objetivo: Dominar completamente\n🚀 Gabriel está se dedicando a esta tecnologia!`);
-                }, 300);
+                alert(`💻 ${tech}\n\n📚 Status: Em aprendizado avançado\n🎯 Próximo objetivo: Dominar completamente\n🚀 Gabriel está se dedicando a esta tecnologia!`);
             });
         });
 
@@ -962,18 +973,10 @@
             }
         });
 
-        // ===== NOTIFICATION SYSTEM =====
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 80px;
-                right: 20px;
-                background: rgba(0, 0, 0, 0.9);
-                color: #ffc800;
-                padding: 12px 20px;
-                border-radius: 12px;
-                border-left: 3px solid #ffc800;
-                font-size: 0.9rem;
-                z-index: 2000;
-                animation: slide
+        // Scroll to top button
+        document.getElementById('scrollTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
