@@ -673,12 +673,13 @@
                 <span>GabrielDev • Laboratório Digital</span>
             </div>
             <div class="service-links">
-                <a class="service-link" data-service="Início" data-url="10.html">🏠 Início</a>
-                <a class="service-link" data-service="Portfólio" data-url="20.html">💼 Portfólio</a>
-                <a class="service-link" data-service="Projetos" data-url="30.html">📁 Projetos</a>
-                <a class="service-link" data-service="Contato" data-url="40.html">📞 Contato</a>
-                <a class="service-link" data-service="Certificados" data-url="50.html">📜 Certificados</a>
-                <a class="service-link" data-service="Aulas" data-url="60.html">📚 Aulas</a>
+                <!-- Botões agora com redirecionamento direto para os arquivos -->
+                <a class="service-link" data-dest="10.html">🏠 Início</a>
+                <a class="service-link" data-dest="20.html">💼 Portfólio</a>
+                <a class="service-link" data-dest="30.html">📁 Projetos</a>
+                <a class="service-link" data-dest="40.html">📞 Contato</a>
+                <a class="service-link" data-dest="50.html">📜 Certificados</a>
+                <a class="service-link" data-dest="60.html">📚 Aulas</a>
             </div>
             <div class="service-status">
                 <span class="status-dot"></span>
@@ -746,7 +747,7 @@
                     <span>Guia de Navegação</span>
                 </div>
                 <div class="steps-grid">
-                    <div class="step-card" data-step="1" data-url="30.html">
+                    <div class="step-card" data-step="1">
                         <div class="step-number">01</div>
                         <div class="step-title">📂 Conheça o Index.html</div>
                         <div class="step-desc">
@@ -754,7 +755,7 @@
                         </div>
                         <div class="step-action">🎯 Ver Projetos →</div>
                     </div>
-                    <div class="step-card" data-step="2" data-url="60.html">
+                    <div class="step-card" data-step="2">
                         <div class="step-number">02</div>
                         <div class="step-title">📚 Matérias em Andamento</div>
                         <div class="step-desc">
@@ -762,7 +763,7 @@
                         </div>
                         <div class="step-action">📖 Ver Matérias →</div>
                     </div>
-                    <div class="step-card" data-step="3" data-url="20.html">
+                    <div class="step-card" data-step="3">
                         <div class="step-number">03</div>
                         <div class="step-title">💡 Minha Trajetória</div>
                         <div class="step-desc">
@@ -770,7 +771,7 @@
                         </div>
                         <div class="step-action">👨‍💻 Sobre Mim →</div>
                     </div>
-                    <div class="step-card" data-step="4" data-url="40.html">
+                    <div class="step-card" data-step="4">
                         <div class="step-number">04</div>
                         <div class="step-title">🎯 Próximos Passos</div>
                         <div class="step-desc">
@@ -864,7 +865,6 @@
             }
             lastScroll = currentScroll;
 
-            // Show/hide scroll top button
             const scrollBtn = document.getElementById('scrollTop');
             if (currentScroll > 300) {
                 scrollBtn.classList.add('visible');
@@ -878,49 +878,45 @@
             toggleBtn.textContent = serviceBar.classList.contains('hidden') ? '🔽 Mostrar' : '🔽 Ocultar';
         });
 
-        // ===== REDIRECT FUNCTION =====
-        function redirectTo(url, pageName) {
-            if (url) {
-                window.location.href = url;
-            }
-        }
-
-        // Service links - redirect to respective HTML files
+        // ===== REDIRECIONAMENTO DOS BOTÕES DA BARRA DE SERVIÇO =====
+        // Cada botão agora redireciona para o arquivo especificado em data-dest
         document.querySelectorAll('.service-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                const url = link.getAttribute('data-url');
-                const service = link.getAttribute('data-service') || link.textContent;
-                if (url) {
-                    redirectTo(url, service);
+                const destino = link.getAttribute('data-dest');
+                if (destino) {
+                    // Pequeno efeito visual de feedback
+                    link.style.opacity = '0.7';
+                    setTimeout(() => { link.style.opacity = '1'; }, 200);
+                    // Redireciona para a página
+                    window.location.href = destino;
+                } else {
+                    console.warn('Destino não definido para este link');
                 }
             });
         });
 
-        // Step cards - redirect to pages
+        // ===== STEP CARDS INTERACTION =====
         document.querySelectorAll('.step-card').forEach(card => {
             card.addEventListener('click', () => {
-                const url = card.getAttribute('data-url');
-                if (url) {
-                    redirectTo(url, '');
-                }
-            });
-        });
-
-        // Feature cards click redirect
-        const featureRedirects = {
-            '🎯 Projetos Práticos': '30.html',
-            '📊 Estatísticas Reais': '20.html',
-            '🎓 Formação Técnica': '60.html',
-            '⚡ Tecnologias Atuais': '20.html'
-        };
-
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const title = card.querySelector('.feature-title')?.textContent;
-                if (title && featureRedirects[title]) {
-                    redirectTo(featureRedirects[title], '');
-                }
+                const step = card.getAttribute('data-step');
+                const title = card.querySelector('.step-title').textContent;
+                
+                // Feedback visual
+                card.style.transform = 'scale(0.98)';
+                setTimeout(() => { card.style.transform = ''; }, 200);
+                
+                setTimeout(() => {
+                    if (step === '1') {
+                        alert('📂 INDEX.HTML - Meu Portfólio\n\n⬇️ Clique no botão amarelo "ACESSAR INDEX.HTML" para ver todos os meus projetos organizados!\n\nLá você encontrará:\n✅ Scripts JavaScript\n✅ Aplicações web\n✅ Projetos mobile\n✅ E muito mais!');
+                    } else if (step === '2') {
+                        alert('📚 MATÉRIAS EM ANDAMENTO\n\nRole a página para baixo e clique nos cards das matérias:\n\n⚙️ Programação Back-End\n📐 Análise de Sistemas\n📱 Programação Mobile\n\nCada card contém informações detalhadas sobre o conteúdo!');
+                    } else if (step === '3') {
+                        alert('👨‍💻 MINHA TRAJETÓRIA\n\n📊 Estatísticas:\n• 350+ horas de código\n• 25+ projetos finalizados\n• 6 tecnologias estudadas\n• 3º ano do curso técnico\n\n🎯 Objetivo: Primeiro estágio em tecnologia!');
+                    } else {
+                        alert('🚀 PRÓXIMOS PASSOS\n\n🎯 Metas:\n• Conseguir primeiro estágio\n• Aprender novas tecnologias\n• Desenvolver projetos mais complexos\n• Contribuir com open source\n\n✨ "A jornada é longa, mas cada dia é um aprendizado!"');
+                    }
+                }, 150);
             });
         });
 
@@ -973,8 +969,9 @@
             }
         });
 
-        // Scroll to top button
-        document.getElementById('scrollTop').addEventListener('click', () => {
+        // ===== SCROLL TOP BUTTON =====
+        const scrollTopBtn = document.getElementById('scrollTop');
+        scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
