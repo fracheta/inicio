@@ -19,15 +19,15 @@
             position: relative;
         }
 
-        /* ===== ANIMATED TECH BACKGROUND ===== */
-        .tech-bg {
+        /* ===== ANIMATED PARTICLE BACKGROUND ===== */
+        #particle-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: 0;
-            overflow: hidden;
+            pointer-events: none;
         }
 
         .circuit-pattern {
@@ -37,10 +37,11 @@
             top: -50%;
             left: -50%;
             background-image: 
-                linear-gradient(45deg, rgba(255, 200, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(-45deg, rgba(255, 200, 0, 0.03) 1px, transparent 1px);
+                linear-gradient(45deg, rgba(255, 200, 0, 0.02) 1px, transparent 1px),
+                linear-gradient(-45deg, rgba(255, 200, 0, 0.02) 1px, transparent 1px);
             background-size: 60px 60px;
             animation: drift 20s linear infinite;
+            pointer-events: none;
         }
 
         @keyframes drift {
@@ -48,48 +49,36 @@
             100% { transform: translate(60px, 60px); }
         }
 
-        .binary-rain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.05;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            white-space: pre;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
         .glow-orb {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 200, 0, 0.12) 0%, transparent 70%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255, 200, 0, 0.15) 0%, transparent 70%);
             border-radius: 50%;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            filter: blur(80px);
-            animation: pulse 4s ease-in-out infinite;
+            filter: blur(100px);
+            animation: pulse 6s ease-in-out infinite;
+            pointer-events: none;
         }
 
         .glow-orb-2 {
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0, 150, 255, 0.08) 0%, transparent 70%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 150, 255, 0.1) 0%, transparent 70%);
             border-radius: 50%;
-            top: 30%;
-            left: 20%;
-            filter: blur(60px);
-            animation: pulse 6s ease-in-out infinite reverse;
+            top: 20%;
+            left: 10%;
+            filter: blur(80px);
+            animation: pulse 8s ease-in-out infinite reverse;
+            pointer-events: none;
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
-            50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.15); }
+            0%, 100% { opacity: 0.4; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); }
         }
 
         /* ===== SERVICE BAR ===== */
@@ -98,9 +87,9 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 200, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 200, 0, 0.4);
             padding: 12px 0;
             z-index: 1000;
             transform: translateY(0);
@@ -128,6 +117,10 @@
             gap: 12px;
             font-weight: bold;
             font-size: 1.1rem;
+            background: linear-gradient(135deg, #fff, #ffc800);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
         .service-logo-icon {
@@ -140,6 +133,7 @@
             justify-content: center;
             font-size: 1.3rem;
             animation: rotateIcon 3s ease-in-out infinite;
+            box-shadow: 0 0 10px rgba(255, 200, 0, 0.5);
         }
 
         @keyframes rotateIcon {
@@ -159,8 +153,9 @@
             font-size: 0.9rem;
             padding: 5px 0;
             position: relative;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             cursor: pointer;
+            font-weight: 500;
         }
 
         .service-link::after {
@@ -170,12 +165,14 @@
             left: 0;
             width: 0;
             height: 2px;
-            background: #ffc800;
+            background: linear-gradient(90deg, #ffc800, #ffaa00);
             transition: width 0.3s ease;
+            border-radius: 2px;
         }
 
         .service-link:hover {
             color: #ffc800;
+            text-shadow: 0 0 5px rgba(255, 200, 0, 0.5);
         }
 
         .service-link:hover::after {
@@ -231,13 +228,19 @@
             max-width: 1300px;
             width: 100%;
             margin: 70px auto 40px;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 200, 0, 0.2);
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 200, 0, 0.25);
             border-radius: 50px;
             padding: 60px;
             animation: fadeInUp 0.8s ease-out;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+
+        .hero-card:hover {
+            border-color: rgba(255, 200, 0, 0.5);
+            box-shadow: 0 0 40px rgba(255, 200, 0, 0.1);
         }
 
         @keyframes fadeInUp {
@@ -256,19 +259,20 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: linear-gradient(135deg, rgba(255, 200, 0, 0.15), rgba(255, 200, 0, 0.05));
-            border: 1px solid rgba(255, 200, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255, 200, 0, 0.2), rgba(255, 200, 0, 0.05));
+            border: 1px solid rgba(255, 200, 0, 0.4);
             padding: 10px 25px;
             border-radius: 60px;
             font-size: 0.85rem;
             margin-bottom: 30px;
             letter-spacing: 1.5px;
             animation: glowPulse 2s infinite;
+            backdrop-filter: blur(5px);
         }
 
         @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 5px rgba(255, 200, 0, 0.3); }
-            50% { box-shadow: 0 0 15px rgba(255, 200, 0, 0.6); }
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 200, 0, 0.3); border-color: rgba(255, 200, 0, 0.4); }
+            50% { box-shadow: 0 0 20px rgba(255, 200, 0, 0.7); border-color: rgba(255, 200, 0, 0.8); }
         }
 
         .welcome-badge .wave {
@@ -291,25 +295,33 @@
         }
 
         .highlight {
-            color: #ffc800;
+            background: linear-gradient(135deg, #ffc800, #ffaa00, #ffdd55);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
             position: relative;
             display: inline-block;
             text-shadow: 0 0 20px rgba(255, 200, 0, 0.3);
         }
 
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: 8px;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #ffc800, transparent);
+        .typewriter {
+            font-size: 1.8rem;
+            color: #aaa;
+            min-height: 70px;
+            border-right: 2px solid #ffc800;
+            display: inline-block;
+            padding-right: 8px;
+            animation: blinkCursor 0.8s infinite;
+        }
+
+        @keyframes blinkCursor {
+            0%, 100% { border-color: #ffc800; }
+            50% { border-color: transparent; }
         }
 
         .subtitle {
             font-size: 1.2rem;
-            color: #aaa;
+            color: #ccc;
             max-width: 700px;
             line-height: 1.6;
             margin-bottom: 40px;
@@ -323,7 +335,10 @@
         .section-title {
             font-size: 2rem;
             margin-bottom: 30px;
-            color: #ffc800;
+            background: linear-gradient(135deg, #ffc800, #ffaa00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
             display: flex;
             align-items: center;
             gap: 12px;
@@ -331,6 +346,7 @@
 
         .section-title .icon {
             font-size: 2rem;
+            filter: drop-shadow(0 0 5px #ffc800);
         }
 
         .steps-grid {
@@ -341,11 +357,12 @@
         }
 
         .step-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(8px);
             border-radius: 25px;
             padding: 30px;
-            border: 1px solid rgba(255, 200, 0, 0.15);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 200, 0, 0.2);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -354,28 +371,34 @@
         .step-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 200, 0, 0.05), transparent);
-            transition: left 0.5s ease;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 200, 0, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.6s;
+            pointer-events: none;
         }
 
         .step-card:hover::before {
-            left: 100%;
+            opacity: 1;
         }
 
         .step-card:hover {
-            border-color: rgba(255, 200, 0, 0.4);
+            border-color: #ffc800;
             transform: translateY(-8px) scale(1.02);
-            background: rgba(255, 200, 0, 0.05);
+            background: rgba(255, 200, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3), 0 0 20px rgba(255,200,0,0.2);
         }
 
         .step-number {
             font-size: 3rem;
             font-weight: 800;
-            color: rgba(255, 200, 0, 0.3);
+            background: linear-gradient(135deg, rgba(255,200,0,0.5), rgba(255,200,0,0.1));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
             margin-bottom: 15px;
             font-family: monospace;
         }
@@ -397,18 +420,20 @@
         .step-action {
             display: inline-block;
             padding: 8px 20px;
-            background: rgba(255, 200, 0, 0.1);
-            border: 1px solid rgba(255, 200, 0, 0.3);
+            background: rgba(255, 200, 0, 0.15);
+            border: 1px solid rgba(255, 200, 0, 0.4);
             border-radius: 30px;
             font-size: 0.85rem;
             color: #ffc800;
             transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
         }
 
         .step-card:hover .step-action {
             background: #ffc800;
             color: #0a0a0a;
             transform: translateX(5px);
+            box-shadow: 0 0 15px #ffc800;
         }
 
         /* ===== STATS SECTION ===== */
@@ -420,31 +445,36 @@
         }
 
         .stat-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(8px);
             border-radius: 20px;
             padding: 25px 30px;
             text-align: center;
             flex: 1;
             min-width: 160px;
-            border: 1px solid rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.2);
             transition: all 0.3s ease;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(255, 200, 0, 0.3);
-            background: rgba(255, 200, 0, 0.05);
+            border-color: #ffc800;
+            background: rgba(255, 200, 0, 0.1);
+            box-shadow: 0 5px 20px rgba(255,200,0,0.15);
         }
 
         .stat-number {
             font-size: 2.8rem;
             font-weight: 800;
-            color: #ffc800;
+            background: linear-gradient(135deg, #ffc800, #ffaa00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
         }
 
         .stat-label {
             font-size: 0.85rem;
-            color: #888;
+            color: #aaa;
             margin-top: 8px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -459,22 +489,31 @@
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(20, 20, 20, 0.5);
+            backdrop-filter: blur(8px);
             border-radius: 20px;
             padding: 25px;
             text-align: center;
-            border: 1px solid rgba(255, 200, 0, 0.1);
+            border: 1px solid rgba(255, 200, 0, 0.15);
             transition: all 0.3s ease;
         }
 
         .feature-card:hover {
             border-color: #ffc800;
             transform: translateY(-5px);
+            background: rgba(255, 200, 0, 0.08);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
         .feature-icon {
             font-size: 2.5rem;
             margin-bottom: 15px;
+            filter: drop-shadow(0 0 5px #ffc800);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
         }
 
         .feature-title {
@@ -486,7 +525,7 @@
 
         .feature-desc {
             font-size: 0.85rem;
-            color: #999;
+            color: #bbb;
         }
 
         /* ===== ENTER BUTTON ===== */
@@ -494,9 +533,10 @@
             text-align: center;
             margin: 50px 0 30px;
             padding: 40px;
-            background: linear-gradient(135deg, rgba(255, 200, 0, 0.05), rgba(255, 200, 0, 0.01));
+            background: linear-gradient(135deg, rgba(255, 200, 0, 0.08), rgba(255, 200, 0, 0.02));
             border-radius: 40px;
-            border: 1px solid rgba(255, 200, 0, 0.2);
+            border: 1px solid rgba(255, 200, 0, 0.3);
+            backdrop-filter: blur(5px);
         }
 
         .enter-btn {
@@ -505,7 +545,7 @@
             gap: 20px;
             background: linear-gradient(135deg, #ffc800, #ffaa00);
             border: none;
-            padding: 20px 60px;
+            padding: 18px 50px;
             border-radius: 60px;
             font-size: 1.3rem;
             font-weight: 700;
@@ -514,23 +554,24 @@
             transition: all 0.3s ease;
             text-decoration: none;
             animation: btnPulse 2s infinite;
+            box-shadow: 0 0 15px rgba(255,200,0,0.3);
         }
 
         @keyframes btnPulse {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 200, 0, 0.4); }
-            50% { box-shadow: 0 0 0 15px rgba(255, 200, 0, 0); }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 200, 0, 0.5); transform: scale(1); }
+            50% { box-shadow: 0 0 0 15px rgba(255, 200, 0, 0); transform: scale(1.02); }
         }
 
         .enter-btn:hover {
             transform: scale(1.08);
             gap: 30px;
-            box-shadow: 0 0 40px rgba(255, 200, 0, 0.6);
+            box-shadow: 0 0 40px rgba(255, 200, 0, 0.8);
         }
 
         .enter-hint {
             margin-top: 20px;
             font-size: 0.85rem;
-            color: #666;
+            color: #888;
         }
 
         /* ===== TECH STACK ===== */
@@ -545,13 +586,14 @@
         .tech-icon {
             width: 70px;
             height: 70px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(5px);
             border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2rem;
-            border: 1px solid rgba(255, 200, 0, 0.15);
+            border: 1px solid rgba(255, 200, 0, 0.2);
             transition: all 0.3s ease;
             cursor: pointer;
         }
@@ -559,17 +601,18 @@
         .tech-icon:hover {
             border-color: #ffc800;
             transform: translateY(-8px) rotate(5deg);
-            background: rgba(255, 200, 0, 0.1);
+            background: rgba(255, 200, 0, 0.2);
+            box-shadow: 0 0 20px rgba(255,200,0,0.3);
         }
 
         /* ===== FOOTER ===== */
         .footer {
             margin-top: 60px;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 200, 0, 0.1);
+            border-top: 1px solid rgba(255, 200, 0, 0.2);
             text-align: center;
             font-size: 0.85rem;
-            color: #555;
+            color: #777;
         }
 
         /* ===== SCROLL TOP BUTTON ===== */
@@ -580,7 +623,7 @@
             width: 50px;
             height: 50px;
             background: rgba(255, 200, 0, 0.2);
-            border: 1px solid rgba(255, 200, 0, 0.4);
+            border: 1px solid rgba(255, 200, 0, 0.5);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -591,6 +634,7 @@
             transition: all 0.3s ease;
             z-index: 1000;
             font-size: 1.3rem;
+            backdrop-filter: blur(5px);
         }
 
         .scroll-top.visible {
@@ -599,23 +643,26 @@
         }
 
         .scroll-top:hover {
-            background: rgba(255, 200, 0, 0.4);
+            background: rgba(255, 200, 0, 0.5);
             transform: translateY(-5px);
+            box-shadow: 0 0 15px #ffc800;
         }
 
         /* ===== TOOLTIP ===== */
         .tooltip {
             position: fixed;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             color: #ffc800;
             padding: 8px 15px;
             border-radius: 20px;
             font-size: 0.8rem;
             pointer-events: none;
             z-index: 2000;
-            border: 1px solid rgba(255, 200, 0, 0.3);
+            border: 1px solid #ffc800;
             white-space: nowrap;
             font-family: monospace;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
         }
 
         /* ===== RESPONSIVE ===== */
@@ -627,6 +674,10 @@
             
             h1 {
                 font-size: 2.2rem;
+            }
+            
+            .typewriter {
+                font-size: 1.2rem;
             }
             
             .section-title {
@@ -652,14 +703,15 @@
             }
             
             .enter-btn {
-                padding: 15px 30px;
+                padding: 12px 25px;
                 font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="tech-bg">
+    <canvas id="particle-canvas"></canvas>
+    <div class="tech-bg" style="position: fixed; top:0; left:0; width:100%; height:100%; z-index:0;">
         <div class="circuit-pattern"></div>
         <div class="glow-orb"></div>
         <div class="glow-orb-2"></div>
@@ -673,7 +725,6 @@
                 <span>GabrielDev • Laboratório Digital</span>
             </div>
             <div class="service-links">
-                <!-- Botões agora com redirecionamento direto para os arquivos -->
                 <a class="service-link" data-dest="10.html">🏠 Início</a>
                 <a class="service-link" data-dest="20.html">💼 Portfólio</a>
                 <a class="service-link" data-dest="30.html">📁 Projetos</a>
@@ -691,26 +742,23 @@
 
     <div class="container">
         <div class="hero-card">
-            <!-- WELCOME BADGE -->
             <div class="welcome-badge">
                 <span class="wave">👋</span>
                 <span>GUIA DE BOAS-VINDAS</span>
                 <span class="wave">✨</span>
             </div>
 
-            <!-- MAIN TITLE -->
             <h1>
                 <span class="highlight">Gabriel</span><br>
-                Laboratório Digital<br>
-                <span style="font-size: 1.8rem; color: #888;">Sua jornada começa aqui</span>
+                Laboratório Digital
             </h1>
+            <div class="typewriter" id="typewriter"></div>
 
             <div class="subtitle">
                 🚀 Explore meu universo de código, projetos e aprendizado contínuo. 
                 Este guia vai te ajudar a navegar por todo o conteúdo do meu portfólio.
             </div>
 
-            <!-- TECH STACK -->
             <div class="tech-stack">
                 <div class="tech-icon" data-tech="HTML5">📜</div>
                 <div class="tech-icon" data-tech="CSS3">🎨</div>
@@ -720,7 +768,6 @@
                 <div class="tech-icon" data-tech="Node.js">🚀</div>
             </div>
 
-            <!-- STATS -->
             <div class="stats-section">
                 <div class="stat-card">
                     <div class="stat-number">350+</div>
@@ -740,7 +787,6 @@
                 </div>
             </div>
 
-            <!-- GUIDE STEPS -->
             <div class="guide-section">
                 <div class="section-title">
                     <span class="icon">🗺️</span>
@@ -750,74 +796,45 @@
                     <div class="step-card" data-step="1">
                         <div class="step-number">01</div>
                         <div class="step-title">📂 Conheça o Index.html</div>
-                        <div class="step-desc">
-                            O arquivo principal do meu portfólio, onde todos os meus projetos, scripts e aplicações estão organizados e disponíveis para exploração.
-                        </div>
+                        <div class="step-desc">O arquivo principal do meu portfólio, onde todos os meus projetos, scripts e aplicações estão organizados.</div>
                         <div class="step-action">🎯 Ver Projetos →</div>
                     </div>
                     <div class="step-card" data-step="2">
                         <div class="step-number">02</div>
                         <div class="step-title">📚 Matérias em Andamento</div>
-                        <div class="step-desc">
-                            Conteúdos do 3º ano do curso técnico: Back-End, Análise de Sistemas e Programação Mobile. Clique nos cards para detalhes.
-                        </div>
+                        <div class="step-desc">Conteúdos do 3º ano do curso técnico: Back-End, Análise de Sistemas e Programação Mobile.</div>
                         <div class="step-action">📖 Ver Matérias →</div>
                     </div>
                     <div class="step-card" data-step="3">
                         <div class="step-number">03</div>
                         <div class="step-title">💡 Minha Trajetória</div>
-                        <div class="step-desc">
-                            Mais de 350 horas de prática, 25 projetos finalizados e muito aprendizado. Descubra minha evolução como desenvolvedor.
-                        </div>
+                        <div class="step-desc">Mais de 350 horas de prática, 25 projetos finalizados e muito aprendizado.</div>
                         <div class="step-action">👨‍💻 Sobre Mim →</div>
                     </div>
                     <div class="step-card" data-step="4">
                         <div class="step-number">04</div>
                         <div class="step-title">🎯 Próximos Passos</div>
-                        <div class="step-desc">
-                            Buscando primeiro estágio na área de tecnologia. Sempre evoluindo e aprendendo novas tecnologias.
-                        </div>
+                        <div class="step-desc">Buscando primeiro estágio na área de tecnologia. Sempre evoluindo.</div>
                         <div class="step-action">🚀 Objetivos →</div>
                     </div>
                 </div>
             </div>
 
-            <!-- FEATURES -->
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <div class="feature-title">Projetos Práticos</div>
-                    <div class="feature-desc">Scripts, aplicações web, jogos e muito mais</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <div class="feature-title">Estatísticas Reais</div>
-                    <div class="feature-desc">Horas de código e projetos contabilizados</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎓</div>
-                    <div class="feature-title">Formação Técnica</div>
-                    <div class="feature-desc">3º ano em Desenvolvimento de Sistemas</div>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <div class="feature-title">Tecnologias Atuais</div>
-                    <div class="feature-desc">Sempre atualizado com as melhores techs</div>
-                </div>
+                <div class="feature-card"><div class="feature-icon">🎯</div><div class="feature-title">Projetos Práticos</div><div class="feature-desc">Scripts, aplicações web, jogos e muito mais</div></div>
+                <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-title">Estatísticas Reais</div><div class="feature-desc">Horas de código e projetos contabilizados</div></div>
+                <div class="feature-card"><div class="feature-icon">🎓</div><div class="feature-title">Formação Técnica</div><div class="feature-desc">3º ano em Desenvolvimento de Sistemas</div></div>
+                <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Tecnologias Atuais</div><div class="feature-desc">Sempre atualizado com as melhores techs</div></div>
             </div>
 
-            <!-- ENTER SECTION -->
             <div class="enter-section">
-                <a href="index.html" class="enter-btn" id="enterBtn">
+                <a href="index.html" class="enter-btn">
                     <span>🚀 ACESSAR INDEX.HTML</span>
                     <span>▶</span>
                 </a>
-                <div class="enter-hint">
-                    💡 Clique aqui para explorar todos os meus projetos e códigos desenvolvidos
-                </div>
+                <div class="enter-hint">💡 Clique aqui para explorar todos os meus projetos e códigos desenvolvidos</div>
             </div>
 
-            <!-- FOOTER -->
             <div class="footer">
                 <p>© 2026 Gabriel | Desenvolvedor em formação • 3º Ano Técnico em Desenvolvimento de Sistemas</p>
                 <p style="margin-top: 10px;">"Cada linha de código escrita é um passo mais perto da excelência"</p>
@@ -826,51 +843,113 @@
         </div>
     </div>
 
-    <!-- SCROLL TOP BUTTON -->
     <div class="scroll-top" id="scrollTop">▲</div>
 
     <script>
-        // ===== BINARY RAIN EFFECT =====
-        const binaryContainer = document.createElement('div');
-        binaryContainer.className = 'binary-rain';
-        document.querySelector('.tech-bg').appendChild(binaryContainer);
-        
-        const chars = '01';
-        function generateBinaryRain() {
-            let binaryHTML = '';
-            for (let i = 0; i < 200; i++) {
-                let line = '';
-                for (let j = 0; j < 50; j++) {
-                    line += chars[Math.floor(Math.random() * chars.length)] + ' ';
-                }
-                binaryHTML += line + '<br>';
-            }
-            binaryContainer.innerHTML = binaryHTML;
-        }
-        
-        generateBinaryRain();
-        setInterval(generateBinaryRain, 2500);
+        // ===== PARTICLE SYSTEM =====
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
 
-        // ===== SERVICE BAR FUNCTIONS =====
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.4 + 0.1;
+                this.color = `rgba(255, 200, 0, ${this.opacity})`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(150, Math.floor(window.innerWidth * 0.15));
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            animationId = requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+        resizeCanvas();
+        initParticles();
+        animateParticles();
+
+        // ===== TYPEWRITER EFFECT =====
+        const phrases = ["Desenvolvedor Full Stack", "Criador de Soluções", "Apaixonado por Tecnologia", "3º Ano • DS", "350+ Horas de Código"];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById('typewriter');
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                typewriterEl.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                }
+            } else {
+                typewriterEl.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(() => {}, 1500);
+                }
+            }
+            const speed = isDeleting ? 50 : 100;
+            setTimeout(typeEffect, speed);
+        }
+        typeEffect();
+
+        // ===== SERVICE BAR =====
         let lastScroll = 0;
         const serviceBar = document.getElementById('serviceBar');
         const toggleBtn = document.getElementById('toggleBar');
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                serviceBar.classList.add('hidden');
-            } else if (currentScroll < lastScroll) {
-                serviceBar.classList.remove('hidden');
-            }
+            if (currentScroll > lastScroll && currentScroll > 100) serviceBar.classList.add('hidden');
+            else if (currentScroll < lastScroll) serviceBar.classList.remove('hidden');
             lastScroll = currentScroll;
-
             const scrollBtn = document.getElementById('scrollTop');
-            if (currentScroll > 300) {
-                scrollBtn.classList.add('visible');
-            } else {
-                scrollBtn.classList.remove('visible');
-            }
+            if (currentScroll > 300) scrollBtn.classList.add('visible');
+            else scrollBtn.classList.remove('visible');
         });
 
         toggleBtn.addEventListener('click', () => {
@@ -878,51 +957,34 @@
             toggleBtn.textContent = serviceBar.classList.contains('hidden') ? '🔽 Mostrar' : '🔽 Ocultar';
         });
 
-        // ===== REDIRECIONAMENTO DOS BOTÕES DA BARRA DE SERVIÇO =====
-        // Cada botão agora redireciona para o arquivo especificado em data-dest
+        // ===== REDIRECT SERVICE LINKS =====
         document.querySelectorAll('.service-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const destino = link.getAttribute('data-dest');
                 if (destino) {
-                    // Pequeno efeito visual de feedback
                     link.style.opacity = '0.7';
-                    setTimeout(() => { link.style.opacity = '1'; }, 200);
-                    // Redireciona para a página
+                    setTimeout(() => link.style.opacity = '1', 150);
                     window.location.href = destino;
-                } else {
-                    console.warn('Destino não definido para este link');
                 }
             });
         });
 
-        // ===== STEP CARDS INTERACTION =====
+        // ===== STEP CARDS =====
         document.querySelectorAll('.step-card').forEach(card => {
             card.addEventListener('click', () => {
                 const step = card.getAttribute('data-step');
-                const title = card.querySelector('.step-title').textContent;
-                
-                // Feedback visual
-                card.style.transform = 'scale(0.98)';
-                setTimeout(() => { card.style.transform = ''; }, 200);
-                
-                setTimeout(() => {
-                    if (step === '1') {
-                        alert('📂 INDEX.HTML - Meu Portfólio\n\n⬇️ Clique no botão amarelo "ACESSAR INDEX.HTML" para ver todos os meus projetos organizados!\n\nLá você encontrará:\n✅ Scripts JavaScript\n✅ Aplicações web\n✅ Projetos mobile\n✅ E muito mais!');
-                    } else if (step === '2') {
-                        alert('📚 MATÉRIAS EM ANDAMENTO\n\nRole a página para baixo e clique nos cards das matérias:\n\n⚙️ Programação Back-End\n📐 Análise de Sistemas\n📱 Programação Mobile\n\nCada card contém informações detalhadas sobre o conteúdo!');
-                    } else if (step === '3') {
-                        alert('👨‍💻 MINHA TRAJETÓRIA\n\n📊 Estatísticas:\n• 350+ horas de código\n• 25+ projetos finalizados\n• 6 tecnologias estudadas\n• 3º ano do curso técnico\n\n🎯 Objetivo: Primeiro estágio em tecnologia!');
-                    } else {
-                        alert('🚀 PRÓXIMOS PASSOS\n\n🎯 Metas:\n• Conseguir primeiro estágio\n• Aprender novas tecnologias\n• Desenvolver projetos mais complexos\n• Contribuir com open source\n\n✨ "A jornada é longa, mas cada dia é um aprendizado!"');
-                    }
-                }, 150);
+                let msg = '';
+                if (step === '1') msg = '📂 INDEX.HTML - Clique no botão amarelo para ver todos os meus projetos!';
+                else if (step === '2') msg = '📚 MATÉRIAS: Back-End, Análise de Sistemas, Mobile.';
+                else if (step === '3') msg = '👨‍💻 350+ horas, 25+ projetos. Rumo ao primeiro estágio!';
+                else msg = '🚀 Próximos passos: estágio, novas tecnologias, projetos complexos.';
+                alert(msg);
             });
         });
 
         // ===== TECH ICONS TOOLTIP =====
         let tooltip = null;
-        
         document.querySelectorAll('.tech-icon').forEach(icon => {
             icon.addEventListener('mouseenter', (e) => {
                 const tech = icon.getAttribute('data-tech');
@@ -930,50 +992,16 @@
                 tooltip.className = 'tooltip';
                 tooltip.textContent = `💻 ${tech} • Em estudo avançado`;
                 document.body.appendChild(tooltip);
-                
                 const rect = icon.getBoundingClientRect();
-                tooltip.style.left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + 'px';
+                tooltip.style.left = rect.left + rect.width/2 - tooltip.offsetWidth/2 + 'px';
                 tooltip.style.top = rect.top - 35 + 'px';
             });
-            
-            icon.addEventListener('mouseleave', () => {
-                if (tooltip) {
-                    tooltip.remove();
-                    tooltip = null;
-                }
-            });
-            
-            icon.addEventListener('click', () => {
-                const tech = icon.getAttribute('data-tech');
-                alert(`💻 ${tech}\n\n📚 Status: Em aprendizado avançado\n🎯 Próximo objetivo: Dominar completamente\n🚀 Gabriel está se dedicando a esta tecnologia!`);
-            });
+            icon.addEventListener('mouseleave', () => { if(tooltip) { tooltip.remove(); tooltip=null; } });
+            icon.addEventListener('click', () => alert(`💻 ${icon.getAttribute('data-tech')}\n📚 Status: Em aprendizado avançado`));
         });
 
-        // ===== STATS ANIMATION =====
-        const statNumbers = document.querySelectorAll('.stat-number');
-        statNumbers.forEach(el => {
-            const targetText = el.innerText;
-            if (targetText.includes('+')) {
-                const num = parseInt(targetText);
-                let current = 0;
-                const increment = num / 60;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= num) {
-                        el.innerText = targetText;
-                        clearInterval(timer);
-                    } else {
-                        el.innerText = Math.floor(current) + '+';
-                    }
-                }, 20);
-            }
-        });
-
-        // ===== SCROLL TOP BUTTON =====
-        const scrollTopBtn = document.getElementById('scrollTop');
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        // ===== SCROLL TOP =====
+        document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     </script>
 </body>
 </html>
