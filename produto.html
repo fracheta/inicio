@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Mini Loja - Produtos com Desconto e Parcelamento</title>
+    <title>Mini Loja - Resumo com desconto e parcelamento</title>
     <style>
         * {
             box-sizing: border-box;
@@ -20,7 +20,6 @@
             padding: 2rem 1rem;
         }
 
-        /* card principal */
         .shop-card {
             max-width: 1100px;
             width: 100%;
@@ -31,7 +30,6 @@
             transition: all 0.2s ease;
         }
 
-        /* cabeçalho */
         .header {
             background: #1e293b;
             color: white;
@@ -52,7 +50,6 @@
             font-size: 0.95rem;
         }
 
-        /* container produtos */
         .produtos-container {
             display: flex;
             flex-wrap: wrap;
@@ -62,7 +59,6 @@
             background: #ffffff;
         }
 
-        /* card individual produto */
         .produto-item {
             background: #fefefe;
             border-radius: 1.5rem;
@@ -110,7 +106,6 @@
             color: #5b6e8c;
         }
 
-        /* área de totais */
         .resumo-area {
             background: #f8fafc;
             margin: 0.5rem 2rem 1.5rem 2rem;
@@ -167,12 +162,12 @@
             margin-top: 0.5rem;
         }
 
-        /* opções de pagamento */
         .pagamento-opcoes {
             background: white;
             border-radius: 1.2rem;
             padding: 1rem 1.5rem;
             margin-top: 1rem;
+            margin-bottom: 1.5rem;
             box-shadow: 0 1px 2px rgba(0,0,0,0.03);
             border: 1px solid #e9edf2;
         }
@@ -241,22 +236,29 @@
             color: #075985;
         }
 
-        .btn-calcular {
-            background: #1e293b;
+        .btn-comprar {
+            background: #0f3b2c;
             border: none;
             color: white;
-            padding: 0.7rem 1.2rem;
-            border-radius: 2rem;
-            font-weight: 600;
+            padding: 0.9rem 1.8rem;
+            border-radius: 3rem;
+            font-weight: 700;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: 0.2s;
-            margin-left: auto;
-            display: inline-block;
+            width: 100%;
+            margin-top: 0.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            letter-spacing: 0.5px;
         }
 
-        .btn-calcular:hover {
-            background: #0f172a;
-            transform: scale(0.97);
+        .btn-comprar:hover {
+            background: #0a2a1f;
+            transform: scale(0.98);
+        }
+
+        .btn-comprar:active {
+            background: #062116;
         }
 
         footer {
@@ -321,7 +323,6 @@
         </div>
 
         <div class="resumo-area" id="resumoArea">
-            <!-- valores dinâmicos via JS -->
             <div class="info-valores">
                 <div class="linha-valor">
                     <span class="label-total">Subtotal (produtos):</span>
@@ -337,7 +338,6 @@
                 </div>
             </div>
 
-            <!-- opções de parcelamento / à vista -->
             <div class="pagamento-opcoes">
                 <div class="radio-group">
                     <label>
@@ -360,9 +360,12 @@
                     💰 Valor à vista: R$ 0,00
                 </div>
             </div>
+
+            <!-- BOTÃO CONFIRMAR COMPRA (atualiza a tela) -->
+            <button class="btn-comprar" id="btnConfirmarCompra">✅ Confirmar Compra / Atualizar Tela</button>
         </div>
         <footer>
-            ⚡ 10% de desconto aplicado automaticamente • Parcelamento sem juros • Simulador simples
+            ⚡ 10% de desconto aplicado automaticamente • Parcelamento sem juros • Finalize a compra para atualizar a página.
         </footer>
     </div>
 
@@ -386,6 +389,7 @@
         const parcelasContainer = document.getElementById('parcelasContainer');
         const numeroParcelasInput = document.getElementById('numeroParcelas');
         const resultadoPagamentoDiv = document.getElementById('resultadoPagamento');
+        const btnComprar = document.getElementById('btnConfirmarCompra');
 
         // formata moeda brasileira
         function formatMoney(value) {
@@ -399,14 +403,35 @@
             totalComDescontoSpan.textContent = formatMoney(totalComDesconto);
         }
 
-        // renderiza mensagem de pagamento com base na opção selecionada e parcelas
-        function atualizarResultadoPagamento() {
+        // obtém o valor atual da parcela (se parcelado) ou o total à vista
+        function obterDetalhesPagamento() {
             const isParcelado = radioParcelado.checked;
-            let parcelas = 1; // padrão à vista
+            let parcelas = 1;
+            let valorFinal = totalComDesconto;
+            let valorParcela = totalComDesconto;
 
             if (isParcelado) {
                 let parcelasRaw = parseInt(numeroParcelasInput.value, 10);
-                // validação: mínimo 2, máximo 12
+                if (isNaN(parcelasRaw) || parcelasRaw < 2) parcelasRaw = 2;
+                if (parcelasRaw > 12) parcelasRaw = 12;
+                parcelas = parcelasRaw;
+                valorParcela = totalComDesconto / parcelas;
+            }
+            return {
+                tipo: isParcelado ? 'parcelado' : 'avista',
+                parcelas: isParcelado ? parcelas : 1,
+                valorTotal: totalComDesconto,
+                valorParcela: valorParcela
+            };
+        }
+
+        // atualiza mensagem de pagamento na interface
+        function atualizarResultadoPagamento() {
+            const isParcelado = radioParcelado.checked;
+            let parcelas = 1;
+
+            if (isParcelado) {
+                let parcelasRaw = parseInt(numeroParcelasInput.value, 10);
                 if (isNaN(parcelasRaw) || parcelasRaw < 2) {
                     parcelasRaw = 2;
                     numeroParcelasInput.value = 2;
@@ -418,23 +443,19 @@
             }
 
             if (!isParcelado) {
-                // à vista: mostra o valor total com desconto
                 resultadoPagamentoDiv.innerHTML = `💰 Pagamento à vista: <strong>${formatMoney(totalComDesconto)}</strong> (10% OFF incluso)`;
                 resultadoPagamentoDiv.style.background = "#e6f0ff";
             } else {
-                // parcelado: divide o total com desconto pelo número de parcelas
                 const valorParcela = totalComDesconto / parcelas;
                 resultadoPagamentoDiv.innerHTML = `💳 Parcelado em <strong>${parcelas}x</strong> sem juros: <strong>${formatMoney(valorParcela)}</strong> por parcela<br><span style="font-size:0.85rem;">Total a prazo: ${formatMoney(totalComDesconto)}</span>`;
                 resultadoPagamentoDiv.style.background = "#fff0e0";
             }
         }
 
-        // controla visibilidade do campo de parcelas + reação a mudanças
         function toggleParcelasVisibility() {
             const isParcelado = radioParcelado.checked;
             if (isParcelado) {
                 parcelasContainer.style.display = 'block';
-                // quando ativar parcelamento, garante que o valor da parcela seja recalculado
                 atualizarResultadoPagamento();
             } else {
                 parcelasContainer.style.display = 'none';
@@ -442,35 +463,43 @@
             }
         }
 
-        // Eventos: ao mudar opção de pagamento (radio)
+        // ========== FUNÇÃO DE CONFIRMAÇÃO E RECARREGAR A TELA ==========
+        function confirmarCompraEAtualizar() {
+            // Obtém detalhes da compra atual para mostrar um resumo antes de recarregar
+            const detalhes = obterDetalhesPagamento();
+            let mensagemConfirmacao = '';
+            if (detalhes.tipo === 'avista') {
+                mensagemConfirmacao = `✅ Compra finalizada com sucesso!\n\n💰 Total à vista: ${formatMoney(detalhes.valorTotal)}\n🛍️ Produtos: Headset Bluetooth + Smartwatch Esportivo\n\nA página será recarregada para uma nova compra.`;
+            } else {
+                mensagemConfirmacao = `✅ Compra finalizada com sucesso!\n\n💳 Pagamento parcelado em ${detalhes.parcelas}x de ${formatMoney(detalhes.valorParcela)} (total ${formatMoney(detalhes.valorTotal)})\n🛍️ Produtos: Headset Bluetooth + Smartwatch Esportivo\n\nA página será recarregada para uma nova compra.`;
+            }
+            
+            // Exibe alerta com resumo da compra
+            alert(mensagemConfirmacao);
+            
+            // Recarrega a página para resetar a interface (voltar ao estado inicial)
+            location.reload();
+        }
+
+        // Eventos dos radios
         radioAvista.addEventListener('change', () => {
-            if (radioAvista.checked) {
-                toggleParcelasVisibility();
-            }
+            if (radioAvista.checked) toggleParcelasVisibility();
         });
-
         radioParcelado.addEventListener('change', () => {
-            if (radioParcelado.checked) {
-                toggleParcelasVisibility();
-            }
+            if (radioParcelado.checked) toggleParcelasVisibility();
         });
 
-        // ao alterar o número de parcelas, atualiza exibição (se parcelado estiver ativo)
+        // Evento de input no número de parcelas
         numeroParcelasInput.addEventListener('input', () => {
             if (radioParcelado.checked) {
-                // valida limites para não quebrar visual
                 let val = parseInt(numeroParcelasInput.value, 10);
                 if (isNaN(val)) val = 2;
-                if (val < 2) {
-                    numeroParcelasInput.value = 2;
-                } else if (val > 12) {
-                    numeroParcelasInput.value = 12;
-                }
+                if (val < 2) numeroParcelasInput.value = 2;
+                if (val > 12) numeroParcelasInput.value = 12;
                 atualizarResultadoPagamento();
             }
         });
 
-        // Garantir que se o usuário digitar valores inválidos manualmente, corrija
         numeroParcelasInput.addEventListener('blur', () => {
             let val = parseInt(numeroParcelasInput.value, 10);
             if (isNaN(val)) val = 3;
@@ -480,22 +509,18 @@
             if (radioParcelado.checked) atualizarResultadoPagamento();
         });
 
-        // Inicialização da página: exibe valores fixos de produtos, totais, e opção à vista padrão
+        // BOTÃO DE COMPRA -> atualiza a tela (reload)
+        btnComprar.addEventListener('click', confirmarCompraEAtualizar);
+
+        // Inicialização
         function inicializar() {
             atualizarTotaisFixos();
-            // estado padrão: à vista marcado, parcelas container invisível
             radioAvista.checked = true;
             radioParcelado.checked = false;
             parcelasContainer.style.display = 'none';
-            atualizarResultadoPagamento(); // mostra valor à vista
+            atualizarResultadoPagamento();
         }
 
-        // Caso ocorra alguma interação extra: também garantir sincronia se o número de parcelas mudar via tecla enter
-        numeroParcelasInput.addEventListener('change', () => {
-            if (radioParcelado.checked) atualizarResultadoPagamento();
-        });
-
-        // Iniciar tudo
         inicializar();
     </script>
 </body>
