@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>📸 Meu Insta | Feed + Skills Tech</title>
+    <title>📸 Unidade Polo Arapongas | Feed + Destaques</title>
     <style>
         * {
             margin: 0;
@@ -18,7 +18,7 @@
             padding-bottom: 40px;
         }
 
-        /* ===== HEADER ESTILO INSTAGRAM ===== */
+        /* ===== BARRA DE NAVEGAÇÃO (Instagram-style + links) ===== */
         .instagram-header {
             background: #FFFFFF;
             border-bottom: 1px solid #dbdbdb;
@@ -42,6 +42,7 @@
             -webkit-background-clip: text;
             color: transparent;
             letter-spacing: -0.5px;
+            cursor: pointer;
         }
 
         .logo i {
@@ -51,9 +52,38 @@
             margin-right: 5px;
         }
 
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #0D47A1;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a i {
+            font-size: 1.1rem;
+        }
+
+        .nav-links a:hover {
+            color: #FFC107;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 18px;
+        }
+
         .header-icons i {
             font-size: 1.5rem;
-            margin-left: 20px;
             color: #0D47A1;
             transition: 0.2s;
             cursor: pointer;
@@ -66,8 +96,8 @@
         /* ===== CONTAINER DO FEED ===== */
         .feed-container {
             max-width: 600px;
-            margin: 0 auto;
-            padding: 20px 0;
+            margin: 20px auto;
+            padding: 0 12px;
         }
 
         /* CARD DE POST (ESTILO INSTAGRAM) */
@@ -145,10 +175,6 @@
             color: #262626;
         }
 
-        .post-actions i:hover {
-            transform: scale(1.05);
-        }
-
         .fa-heart.liked {
             color: #ed4956;
         }
@@ -179,7 +205,7 @@
             justify-content: space-between;
         }
 
-        /* ===== SEÇÃO DE SKILLS (no final, cores azul/branco/amarelo) ===== */
+        /* ===== SEÇÃO DE DIFERENCIAIS / SKILLS (cores azul/branco/amarelo) ===== */
         .skills-wrapper {
             background: linear-gradient(145deg, #0D47A1, #1565C0);
             margin-top: 30px;
@@ -263,70 +289,101 @@
         .footer-note {
             text-align: center;
             margin-top: 30px;
-            color: rgba(255,255,255,0.8);
-            font-size: 0.8rem;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.85rem;
+        }
+
+        .footer-note a {
+            color: #FFC107;
+            text-decoration: none;
         }
 
         /* responsividade */
-        @media (max-width: 640px) {
-            .feed-container {
-                padding: 12px;
+        @media (max-width: 680px) {
+            .instagram-header {
+                flex-direction: column;
+                gap: 12px;
+                align-items: stretch;
             }
-            .post-card {
-                border-radius: 8px;
+            .nav-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            .header-icons {
+                justify-content: center;
+            }
+            .feed-container {
+                padding: 0 12px;
             }
             .skills-title {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
             .skill-card {
-                padding: 8px 20px;
+                padding: 8px 18px;
             }
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
+<!-- Header com navegação completa -->
 <header class="instagram-header">
-    <div class="logo">
-        <i class="fab fa-instagram"></i> Meu<span style="color:#FFC107;">Feed</span>
+    <div class="logo" onclick="window.location.href='#'">
+        <i class="fab fa-instagram"></i> Polo<span style="color:#FFC107;">Arapongas</span>
+    </div>
+    <div class="nav-links">
+        <a href="#inicio"><i class="fas fa-home"></i> Início</a>
+        <a href="#feed"><i class="fas fa-newspaper"></i> Feed</a>
+        <a href="#sobre"><i class="fas fa-school"></i> Sobre</a>
+        <a href="#contato"><i class="fas fa-envelope"></i> Contato</a>
     </div>
     <div class="header-icons">
-        <i class="far fa-heart"></i>
+        <i class="far fa-heart" id="notifHeart"></i>
         <i class="far fa-comment-dots"></i>
+        <i class="far fa-user-circle"></i>
     </div>
 </header>
 
-<main class="feed-container" id="feedContainer">
-    <!-- Os posts serão injetados via JS com as imagens listadas -->
+<main class="feed-container" id="feed">
+    <!-- Os posts serão inseridos via JS com as imagens e informações da escola -->
 </main>
 
-<!-- SEÇÃO DE SKILLS (no final) -->
-<div class="skills-wrapper">
+<!-- SEÇÃO DE DIFERENCIAIS / SKILLS (inspirada nas cores da escola) -->
+<div class="skills-wrapper" id="sobre">
     <div class="skills-container">
         <div class="skills-title">
-            <i class="fas fa-code"></i>
-            <span>Minhas Skills Tech</span>
-            <i class="fas fa-microchip"></i>
+            <i class="fas fa-star-of-life"></i>
+            <span>Diferenciais da Unidade Polo</span>
+            <i class="fas fa-chalkboard-user"></i>
         </div>
         <div class="skills-grid">
-            <div class="skill-card"><i class="fab fa-react"></i><span>React 18 • Next.js</span></div>
-            <div class="skill-card"><i class="fab fa-node-js"></i><span>Node.js • Express</span></div>
-            <div class="skill-card"><i class="fas fa-database"></i><span>PostgreSQL • MongoDB</span></div>
-            <div class="skill-card"><i class="fab fa-python"></i><span>Python • FastAPI</span></div>
-            <div class="skill-card"><i class="fas fa-cloud"></i><span>AWS • Docker</span></div>
-            <div class="skill-card"><i class="fas fa-palette"></i><span>UI/UX • Tailwind</span></div>
-            <div class="skill-card"><i class="fas fa-mobile-alt"></i><span>React Native</span></div>
-            <div class="skill-card"><i class="fas fa-shield-alt"></i><span>Cybersecurity</span></div>
+            <div class="skill-card"><i class="fas fa-laptop-code"></i><span>Laboratórios modernos</span></div>
+            <div class="skill-card"><i class="fas fa-chalkboard"></i><span>Professores experientes</span></div>
+            <div class="skill-card"><i class="fas fa-microchip"></i><span>Robótica educacional</span></div>
+            <div class="skill-card"><i class="fas fa-language"></i><span>Inglês técnico</span></div>
+            <div class="skill-card"><i class="fas fa-briefcase"></i><span>Preparação para o mercado</span></div>
+            <div class="skill-card"><i class="fas fa-handshake"></i><span>Parcerias com empresas</span></div>
+            <div class="skill-card"><i class="fas fa-gamepad"></i><span>Game dev & design</span></div>
+            <div class="skill-card"><i class="fas fa-certificate"></i><span>Certificações gratuitas</span></div>
         </div>
     </div>
-    <div class="footer-note">
-        <i class="fas fa-camera"></i> 9 publicações • Desenvolvedor full stack • Código com propósito
+    <div class="footer-note" id="contato">
+        <i class="fas fa-map-marker-alt"></i> Rua das Acácias, 123 – Centro, Arapongas/PR | 
+        <i class="fas fa-phone-alt"></i> (43) 3525-1234 | 
+        <i class="fas fa-envelope"></i> polo@escolaarapongas.edu.br<br>
+        <small>© 2026 Unidade Polo Arapongas – Educação que transforma</small>
     </div>
 </div>
 
 <script>
-    // Lista de imagens conforme fornecidas
+    // ========== CONFIGURAÇÃO DAS 9 IMAGENS E LEGENDAS ESCOLARES ==========
     const imagens = [
         "WhatsApp Image 2026-05-29 at 08.52.03 (1).jpeg",
         "WhatsApp Image 2026-05-29 at 08.52.03.jpeg",
@@ -339,28 +396,28 @@
         "WhatsApp Image 2026-05-29 at 08.52.35.jpeg"
     ];
 
-    // Nomes de usuário aleatórios mas fixos para cada post
-    const users = [
-        "@gabriel_dev", "@tech_lab", "@criativo.code", "@fullstack.vision", 
-        "@dev.master", "@pixel.arch", "@next.gen", "@code.artist", "@robson_teacher"
+    // Perfis e legendas alinhados à realidade da escola
+    const usuarios = [
+        "@escola_polo", "@prof_robson_tech", "@alunos_inovadores", "@lab_arapongas",
+        "@diretoria_polo", "@biblioteca_ativa", "@eventos_polo", "@ti_educacao", "@robo_polo"
     ];
 
-    const legends = [
-        "✨ Mergulhando no universo React • Novos projetos em breve!",
-        "🚀 Backend com Node.js + MongoDB • Performance absurda.",
-        "🎨 Design system e UI/UX • Cores que contam histórias.",
-        "⚡ API em FastAPI • Integração com IA generativa.",
-        "🐳 Docker + Kubernetes • Orquestração na prática.",
-        "📱 React Native • App multiplataforma em desenvolvimento.",
-        "🔒 Cybersecurity • Práticas de proteção de dados.",
-        "☁️ AWS Cloud • Infraestrutura como código.",
-        "🎓 Matéria do professor ROBSON • Projeto integrador."
+    const legendas = [
+        "🏫 Nossa fachada renovada! Orgulho de fazer parte da Unidade Polo Arapongas.",
+        "👨‍🏫 Professor Robson apresentando o projeto de desenvolvimento de sistemas para as turmas de DS.",
+        "👨‍🎓 Alunos do 3º ano em atividade prática no laboratório de informática.",
+        "💻 Laboratório de tecnologia: estações com computadores de última geração para todos os cursos.",
+        "📚 Biblioteca digital disponível 24h para alunos e professores.",
+        "🏆 Simulação empresarial: alunos criaram startups fictícias e apresentaram pitches incríveis.",
+        "🎓 Formatura dos cursos técnicos – turma 2025. Parabéns formandos!",
+        "🚀 Visita técnica à empresa Tecnopolo Arapongas – conexão com o mercado de trabalho.",
+        "🤖 Equipe de robótica classificada para a fase estadual da OBR."
     ];
 
-    const feedContainer = document.getElementById('feedContainer');
+    const feedContainer = document.getElementById('feed');
 
-    // Função auxiliar para criar o HTML de cada post
-    function criarPost(imgSrc, userName, legenda, index) {
+    // Função para criar cada post
+    function criarPost(imgSrc, userName, legenda, indice) {
         const postDiv = document.createElement('div');
         postDiv.className = 'post-card';
         
@@ -371,7 +428,7 @@
                 <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
             </div>
             <div class="post-image">
-                <img src="${imgSrc}" alt="Post image" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem+não+encontrada'">
+                <img src="${imgSrc}" alt="Publicação da escola" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem+Escola+Polo'">
             </div>
             <div class="post-actions">
                 <i class="far fa-heart like-btn" data-liked="false"></i>
@@ -388,13 +445,13 @@
                 <i class="far fa-smile-wink"></i>
             </div>
         `;
-        
-        // Evento de like individual
+
+        // Lógica de like funcional
         const likeBtn = postDiv.querySelector('.like-btn');
         const likesSpan = postDiv.querySelector('.likes-number');
-        let likes = Math.floor(Math.random() * 120) + 15; // likes iniciais aleatórios
+        let likes = Math.floor(Math.random() * 90) + 20; // entre 20 e 110 curtidas iniciais
         likesSpan.innerText = likes;
-        
+
         likeBtn.addEventListener('click', () => {
             const isLiked = likeBtn.getAttribute('data-liked') === 'true';
             if (!isLiked) {
@@ -412,30 +469,52 @@
             }
             likesSpan.innerText = likes;
         });
-        
+
         return postDiv;
     }
 
-    // Carregar todas as imagens no feed (ordem da lista)
+    // Carregar todas as imagens no feed
     imagens.forEach((img, idx) => {
-        // decodifica nome para evitar problemas, mas mantém o original
-        const imgPath = img; // assume que está no mesmo diretório
-        const user = users[idx % users.length];
-        const legenda = legends[idx % legends.length];
-        const post = criarPost(imgPath, user, legenda, idx);
+        const imgPath = img;
+        const usuario = usuarios[idx % usuarios.length];
+        const legenda = legendas[idx % legendas.length];
+        const post = criarPost(imgPath, usuario, legenda, idx);
         feedContainer.appendChild(post);
     });
 
-    // Caso alguma imagem falhe, já temos fallback inline no onerror
-    // Adicionalmente, pequeno efeito de clique nos ícones do header
-    document.querySelectorAll('.header-icons i').forEach(icon => {
-        icon.addEventListener('click', () => {
-            alert('🔔 Funcionalidade em desenvolvimento • Feed interativo!');
+    // ========== INTERAÇÕES DA BARRA DE NAVEGAÇÃO ==========
+    // Scroll suave ao clicar nos links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.getAttribute('href');
+            if (targetId && targetId !== '#') {
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
         });
     });
-    
-    // Simular animação de loading suave
-    console.log("✅ Feed estilo Instagram carregado com 9 imagens e skills ao final");
+
+    // Ícone de coração no header mostra notificação
+    const heartIcon = document.getElementById('notifHeart');
+    if (heartIcon) {
+        heartIcon.addEventListener('click', () => {
+            alert('📢 Últimas novidades: Feira de profissões será dia 10/06! Participe!');
+        });
+    }
+
+    // Mensagem amigável nos outros ícones do header
+    document.querySelectorAll('.header-icons i:not(#notifHeart)').forEach(icon => {
+        icon.addEventListener('click', () => {
+            alert('🔔 Em breve, central de mensagens e perfil do aluno.');
+        });
+    });
+
+    // Pequeno efeito de boas-vindas no console
+    console.log("%c📸 Feed da Unidade Polo Arapongas carregado com sucesso!", "color: #0D47A1; font-size: 14px; font-weight: bold;");
+    console.log("%c9 publicações • Conecte-se com a comunidade escolar", "color: #FFC107");
 </script>
 </body>
 </html>
