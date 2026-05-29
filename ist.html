@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>📸 Unidade Polo Arapongas | Feed + Destaques</title>
+    <title>📸 Unidade Polo Arapongas | Feed + Stories</title>
     <style>
         * {
             margin: 0;
@@ -93,14 +93,66 @@
             color: #FFC107;
         }
 
-        /* ===== CONTAINER DO FEED ===== */
+        /* ===== STORIES (carrossel horizontal) ===== */
+        .stories-container {
+            max-width: 600px;
+            margin: 16px auto 20px;
+            padding: 0 12px;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: thin;
+            background: transparent;
+        }
+        .stories-list {
+            display: flex;
+            gap: 16px;
+            padding: 8px 0;
+        }
+        .story-item {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .story-item:hover {
+            transform: scale(1.02);
+        }
+        .story-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #FFC107, #0D47A1);
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .story-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid white;
+            background: white;
+        }
+        .story-name {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #262626;
+            max-width: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ===== FEED ===== */
         .feed-container {
             max-width: 600px;
-            margin: 20px auto;
+            margin: 0 auto;
             padding: 0 12px;
         }
 
-        /* CARD DE POST (ESTILO INSTAGRAM) */
         .post-card {
             background: white;
             border: 1px solid #dbdbdb;
@@ -186,7 +238,7 @@
         }
 
         .caption {
-            padding: 0 16px 12px 16px;
+            padding: 0 16px 8px 16px;
             font-size: 0.9rem;
             line-height: 1.4;
         }
@@ -196,16 +248,55 @@
             margin-right: 6px;
         }
 
-        .comment-section {
-            padding: 8px 16px 16px;
-            border-top: 1px solid #efefef;
-            font-size: 0.8rem;
-            color: #8e8e8e;
+        /* Comentários simulados */
+        .comments-list {
+            padding: 4px 16px 8px;
+            font-size: 0.85rem;
+            color: #262626;
+        }
+        .comment {
+            margin-bottom: 6px;
             display: flex;
-            justify-content: space-between;
+            gap: 8px;
+        }
+        .comment strong {
+            font-weight: 600;
+        }
+        .comment-time {
+            color: #8e8e8e;
+            font-size: 0.7rem;
+            margin-top: 2px;
+        }
+        .view-all-comments {
+            color: #8e8e8e;
+            font-size: 0.8rem;
+            padding: 6px 16px;
+            cursor: pointer;
+        }
+        .add-comment {
+            padding: 8px 16px 12px;
+            border-top: 1px solid #efefef;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .add-comment input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 0.85rem;
+            padding: 8px 0;
+        }
+        .add-comment button {
+            background: none;
+            border: none;
+            color: #0D47A1;
+            font-weight: 600;
+            cursor: pointer;
         }
 
-        /* ===== SEÇÃO DE DIFERENCIAIS / SKILLS (cores azul/branco/amarelo) ===== */
+        /* ===== SEÇÃO DE DIFERENCIAIS ===== */
         .skills-wrapper {
             background: linear-gradient(145deg, #0D47A1, #1565C0);
             margin-top: 30px;
@@ -221,7 +312,6 @@
             border-radius: 40px;
             padding: 30px 20px;
             text-align: center;
-            backdrop-filter: blur(4px);
         }
 
         .skills-title {
@@ -255,35 +345,26 @@
             border-radius: 50px;
             padding: 12px 28px;
             border: 1px solid rgba(255,193,7,0.4);
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .skill-card i {
             font-size: 1.8rem;
             color: #0D47A1;
-            transition: 0.2s;
         }
 
         .skill-card span {
             font-weight: 600;
             color: #1e2a3a;
-            font-size: 1rem;
         }
 
         .skill-card:hover {
             transform: translateY(-6px);
             border-color: #FFC107;
             background: #FFF9E6;
-            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.15);
-        }
-
-        .skill-card:hover i {
-            color: #FF8F00;
-            transform: scale(1.1);
         }
 
         .footer-note {
@@ -293,12 +374,6 @@
             font-size: 0.85rem;
         }
 
-        .footer-note a {
-            color: #FFC107;
-            text-decoration: none;
-        }
-
-        /* responsividade */
         @media (max-width: 680px) {
             .instagram-header {
                 flex-direction: column;
@@ -308,32 +383,20 @@
             .nav-links {
                 justify-content: center;
                 flex-wrap: wrap;
-                gap: 15px;
             }
-            .header-icons {
-                justify-content: center;
+            .stories-container {
+                margin-top: 12px;
             }
-            .feed-container {
-                padding: 0 12px;
+            .story-avatar {
+                width: 60px;
+                height: 60px;
             }
-            .skills-title {
-                font-size: 1.5rem;
-            }
-            .skill-card {
-                padding: 8px 18px;
-            }
-        }
-
-        /* Scroll suave */
-        html {
-            scroll-behavior: smooth;
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 
-<!-- Header com navegação completa -->
 <header class="instagram-header">
     <div class="logo" onclick="window.location.href='#'">
         <i class="fab fa-instagram"></i> Polo<span style="color:#FFC107;">Arapongas</span>
@@ -351,11 +414,14 @@
     </div>
 </header>
 
-<main class="feed-container" id="feed">
-    <!-- Os posts serão inseridos via JS com as imagens e informações da escola -->
-</main>
+<!-- SEÇÃO DE STORIES -->
+<div class="stories-container" id="storiesSection">
+    <div class="stories-list" id="storiesList"></div>
+</div>
 
-<!-- SEÇÃO DE DIFERENCIAIS / SKILLS (inspirada nas cores da escola) -->
+<main class="feed-container" id="feed"></main>
+
+<!-- SEÇÃO DE DIFERENCIAIS -->
 <div class="skills-wrapper" id="sobre">
     <div class="skills-container">
         <div class="skills-title">
@@ -383,7 +449,33 @@
 </div>
 
 <script>
-    // ========== CONFIGURAÇÃO DAS 9 IMAGENS E LEGENDAS ESCOLARES ==========
+    // ========== STORIES: dados simulados ==========
+    const storiesData = [
+        { name: "Escola Polo", img: "https://randomuser.me/api/portraits/women/68.jpg" },
+        { name: "Prof. Robson", img: "https://randomuser.me/api/portraits/men/32.jpg" },
+        { name: "Lab. Informática", img: "https://randomuser.me/api/portraits/men/45.jpg" },
+        { name: "Biblioteca", img: "https://randomuser.me/api/portraits/women/50.jpg" },
+        { name: "Eventos", img: "https://randomuser.me/api/portraits/men/22.jpg" },
+        { name: "Robótica", img: "https://randomuser.me/api/portraits/women/12.jpg" },
+        { name: "Alunos Destaque", img: "https://randomuser.me/api/portraits/men/75.jpg" },
+        { name: "Direção", img: "https://randomuser.me/api/portraits/women/90.jpg" }
+    ];
+
+    const storiesContainer = document.getElementById("storiesList");
+    storiesData.forEach(story => {
+        const storyDiv = document.createElement("div");
+        storyDiv.className = "story-item";
+        storyDiv.onclick = () => alert(`📖 Story de ${story.name}\n\n🎓 Conteúdo exclusivo da Unidade Polo!`);
+        storyDiv.innerHTML = `
+            <div class="story-avatar">
+                <img src="${story.img}" alt="${story.name}" onerror="this.src='https://via.placeholder.com/70?text=Story'">
+            </div>
+            <span class="story-name">${story.name}</span>
+        `;
+        storiesContainer.appendChild(storyDiv);
+    });
+
+    // ========== CONFIGURAÇÃO DAS IMAGENS E POSTS ==========
     const imagens = [
         "WhatsApp Image 2026-05-29 at 08.52.03 (1).jpeg",
         "WhatsApp Image 2026-05-29 at 08.52.03.jpeg",
@@ -396,30 +488,47 @@
         "WhatsApp Image 2026-05-29 at 08.52.35.jpeg"
     ];
 
-    // Perfis e legendas alinhados à realidade da escola
     const usuarios = [
         "@escola_polo", "@prof_robson_tech", "@alunos_inovadores", "@lab_arapongas",
         "@diretoria_polo", "@biblioteca_ativa", "@eventos_polo", "@ti_educacao", "@robo_polo"
     ];
 
     const legendas = [
-        "🏫 Nossa fachada renovada! Orgulho de fazer parte da Unidade Polo Arapongas.",
-        "👨‍🏫 Professor Robson apresentando o projeto de desenvolvimento de sistemas para as turmas de DS.",
-        "👨‍🎓 Alunos do 3º ano em atividade prática no laboratório de informática.",
-        "💻 Laboratório de tecnologia: estações com computadores de última geração para todos os cursos.",
-        "📚 Biblioteca digital disponível 24h para alunos e professores.",
-        "🏆 Simulação empresarial: alunos criaram startups fictícias e apresentaram pitches incríveis.",
-        "🎓 Formatura dos cursos técnicos – turma 2025. Parabéns formandos!",
-        "🚀 Visita técnica à empresa Tecnopolo Arapongas – conexão com o mercado de trabalho.",
-        "🤖 Equipe de robótica classificada para a fase estadual da OBR."
+        "🏫 Nossa fachada renovada! Orgulho de fazer parte da Unidade Polo Arapongas. #EducaçãoQueTransforma",
+        "👨‍🏫 Professor Robson apresentando o projeto de desenvolvimento de sistemas para as turmas de DS. #TecnologiaNaEscola",
+        "👨‍🎓 Alunos do 3º ano em atividade prática no laboratório de informática. Mãos à obra! #FuturoDev",
+        "💻 Laboratório de tecnologia: estações com computadores de última geração para todos os cursos. #Inovação",
+        "📚 Biblioteca digital disponível 24h para alunos e professores. Leitura é poder!",
+        "🏆 Simulação empresarial: alunos criaram startups fictícias e apresentaram pitches incríveis. #Empreendedorismo",
+        "🎓 Formatura dos cursos técnicos – turma 2025. Parabéns formandos! #NovosProfissionais",
+        "🚀 Visita técnica à empresa Tecnopolo Arapongas – conexão direta com o mercado de trabalho.",
+        "🤖 Equipe de robótica classificada para a fase estadual da OBR. Vamos com tudo!"
     ];
 
-    const feedContainer = document.getElementById('feed');
+    // Comentários simulados para cada post
+    const comentariosExemplo = [
+        ["Que legal! 🚀", "Parabéns escola!", "Incrível estrutura"],
+        ["Professor top! 👏", "Aulas muito boas", "Adoro essa matéria"],
+        ["Alunos dedicados", "Futuro garantido!", "Show de bola"],
+        ["Laboratório moderno demais", "Queria ter um desses", "Tecnologia de ponta"],
+        ["Biblioteca incrível", "Já usei muito!", "Ambiente acolhedor"],
+        ["Startups iradas", "Ideias inovadoras", "Parabéns aos alunos"],
+        ["Emocionante demais", "Sucesso a todos!", "Formatura linda"],
+        ["Empresa sensacional", "Aprendizado real", "Visita valiosa"],
+        ["Robôs dominando", "Vai Polo!", "Campeões"]
+    ];
 
-    // Função para criar cada post
-    function criarPost(imgSrc, userName, legenda, indice) {
+    function criarPost(imgSrc, userName, legenda, idx) {
         const postDiv = document.createElement('div');
         postDiv.className = 'post-card';
+        
+        // Gera 2 comentários de exemplo aleatórios
+        const comentariosPost = comentariosExemplo[idx % comentariosExemplo.length];
+        const comentariosHTML = comentariosPost.slice(0, 2).map(com => `
+            <div class="comment">
+                <strong>${userName}_oficial</strong> <span>${com}</span>
+            </div>
+        `).join('');
         
         postDiv.innerHTML = `
             <div class="post-header">
@@ -440,18 +549,24 @@
             <div class="caption">
                 <span>${userName}</span> ${legenda}
             </div>
-            <div class="comment-section">
-                <span>Ver todos os comentários</span>
+            <div class="comments-list">
+                ${comentariosHTML}
+                <div class="comment-time">Há 2 horas • Ver tradução</div>
+            </div>
+            <div class="view-all-comments">Ver todos os 12 comentários</div>
+            <div class="add-comment">
                 <i class="far fa-smile-wink"></i>
+                <input type="text" placeholder="Adicione um comentário...">
+                <button class="publish-comment">Publicar</button>
             </div>
         `;
-
-        // Lógica de like funcional
+        
+        // Lógica de like
         const likeBtn = postDiv.querySelector('.like-btn');
         const likesSpan = postDiv.querySelector('.likes-number');
-        let likes = Math.floor(Math.random() * 90) + 20; // entre 20 e 110 curtidas iniciais
+        let likes = Math.floor(Math.random() * 90) + 20;
         likesSpan.innerText = likes;
-
+        
         likeBtn.addEventListener('click', () => {
             const isLiked = likeBtn.getAttribute('data-liked') === 'true';
             if (!isLiked) {
@@ -469,52 +584,58 @@
             }
             likesSpan.innerText = likes;
         });
-
+        
+        // Comentário simples
+        const commentInput = postDiv.querySelector('.add-comment input');
+        const publishBtn = postDiv.querySelector('.publish-comment');
+        const commentsListDiv = postDiv.querySelector('.comments-list');
+        
+        publishBtn.addEventListener('click', () => {
+            const newComment = commentInput.value.trim();
+            if (newComment !== "") {
+                const newCommentDiv = document.createElement('div');
+                newCommentDiv.className = 'comment';
+                newCommentDiv.innerHTML = `<strong>voce_escola</strong> <span>${newComment}</span>`;
+                commentsListDiv.insertBefore(newCommentDiv, commentsListDiv.firstChild);
+                commentInput.value = "";
+                // Pequeno feedback
+                alert("💬 Comentário adicionado!");
+            }
+        });
+        
         return postDiv;
     }
 
-    // Carregar todas as imagens no feed
+    const feedContainer = document.getElementById('feed');
     imagens.forEach((img, idx) => {
-        const imgPath = img;
         const usuario = usuarios[idx % usuarios.length];
         const legenda = legendas[idx % legendas.length];
-        const post = criarPost(imgPath, usuario, legenda, idx);
+        const post = criarPost(img, usuario, legenda, idx);
         feedContainer.appendChild(post);
     });
 
-    // ========== INTERAÇÕES DA BARRA DE NAVEGAÇÃO ==========
-    // Scroll suave ao clicar nos links
+    // ========== INTERAÇÕES GERAIS ==========
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
             if (targetId && targetId !== '#') {
                 e.preventDefault();
                 const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
 
-    // Ícone de coração no header mostra notificação
     const heartIcon = document.getElementById('notifHeart');
     if (heartIcon) {
-        heartIcon.addEventListener('click', () => {
-            alert('📢 Últimas novidades: Feira de profissões será dia 10/06! Participe!');
-        });
+        heartIcon.addEventListener('click', () => alert('📢 Últimas novidades: Feira de profissões será dia 10/06! Participe!'));
     }
-
-    // Mensagem amigável nos outros ícones do header
     document.querySelectorAll('.header-icons i:not(#notifHeart)').forEach(icon => {
-        icon.addEventListener('click', () => {
-            alert('🔔 Em breve, central de mensagens e perfil do aluno.');
-        });
+        icon.addEventListener('click', () => alert('🔔 Em breve, central de mensagens e perfil do aluno.'));
     });
-
-    // Pequeno efeito de boas-vindas no console
-    console.log("%c📸 Feed da Unidade Polo Arapongas carregado com sucesso!", "color: #0D47A1; font-size: 14px; font-weight: bold;");
-    console.log("%c9 publicações • Conecte-se com a comunidade escolar", "color: #FFC107");
+    
+    console.log("%c📸 Feed + Stories da Unidade Polo Arapongas carregado com sucesso!", "color: #0D47A1; font-size: 14px; font-weight: bold;");
+    console.log("%cStories interativos + comentários simulados", "color: #FFC107");
 </script>
 </body>
 </html>
