@@ -600,67 +600,20 @@
 <script>
     (function() {
         // ========================================
-        // 1. BOTÕES E INTERAÇÕES PREMIUM
+        // 1. BOTÃO EXPLORAR JORNADA - REDIRECIONA PARA ist.html
         // ========================================
         const exploreBtn = document.getElementById('premiumExploreBtn');
         const welcomeLink = document.getElementById('premiumWelcomeLink');
         
-        function showElegantToast(message, icon = '✨') {
-            const existingToast = document.querySelector('.premium-toast');
-            if(existingToast) existingToast.remove();
-            
-            const toast = document.createElement('div');
-            toast.className = 'premium-toast';
-            toast.innerHTML = `
-                <div style="
-                    background: #0D47A1;
-                    backdrop-filter: blur(20px);
-                    border: 1px solid #FFC107;
-                    border-radius: 48px;
-                    padding: 14px 28px;
-                    display: flex;
-                    align-items: center;
-                    gap: 14px;
-                    box-shadow: 0 25px 40px -12px black;
-                    font-family: 'Poppins', sans-serif;
-                    color: #FFC107;
-                    font-weight: 500;
-                ">
-                    <span style="font-size: 28px;">${icon}</span>
-                    <span style="font-size: 0.95rem; letter-spacing: 0.3px;">${message}</span>
-                    <button id="closePremiumToast" style="background: none; border: none; color: #FFC107; font-size: 24px; cursor: pointer; line-height: 1;">&times;</button>
-                </div>
-            `;
-            toast.style.position = 'fixed';
-            toast.style.bottom = '30px';
-            toast.style.left = '50%';
-            toast.style.transform = 'translateX(-50%)';
-            toast.style.zIndex = '10000';
-            toast.style.animation = 'fadeSlideUp 0.3s ease-out';
-            document.body.appendChild(toast);
-            
-            const closeBtn = toast.querySelector('#closePremiumToast');
-            closeBtn.addEventListener('click', () => toast.remove());
-            setTimeout(() => {
-                if(toast && toast.remove) toast.remove();
-            }, 4200);
-        }
-        
+        // REDIRECIONAMENTO DIRETO para ist.html
         if(exploreBtn) {
             exploreBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                showElegantToast('🌌 Portfólio em evolução — Em breve, projetos visionários! Fique ligado. 🚀', '💎');
+                // Pequeno efeito visual antes do redirecionamento (opcional)
                 exploreBtn.style.transform = 'scale(0.96)';
-                setTimeout(() => { exploreBtn.style.transform = ''; }, 200);
-                
-                const blueLayer = document.querySelector('.golden-sanctum');
-                if(blueLayer) {
-                    blueLayer.style.transition = 'box-shadow 0.2s';
-                    blueLayer.style.boxShadow = 'inset 0 0 40px rgba(255,193,7,0.4), 0 15px 35px rgba(0,0,0,0.3)';
-                    setTimeout(() => {
-                        blueLayer.style.boxShadow = '';
-                    }, 500);
-                }
+                setTimeout(() => {
+                    window.location.href = 'ist.html';
+                }, 120);
             });
         }
         
