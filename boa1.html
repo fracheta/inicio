@@ -2,840 +2,440 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>✨ Harmony Tech | Portfólio Premium ✨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>📸 Meu Insta | Feed + Skills Tech</title>
     <style>
-        /* ============================================
-           RESET & GLOBAL STYLES - BASE HARMÔNICA
-           AZUL 60% | BRANCO 30% | AMARELO 10%
-        ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --blue-primary: #1565C0;
-            --blue-deep: #0D47A1;
-            --blue-light: #42A5F5;
-            --white-soft: #F8F9FA;
-            --white-pure: #FFFFFF;
-            --gold-accent: #FFC107;
-            --gold-light: #FFE082;
-            --gold-dark: #FF8F00;
-            --dark-text: #1e1e2f;
-            --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --shadow-glow: 0 25px 45px -12px rgba(0,0,0,0.25);
-            --shadow-blue: 0 0 15px rgba(21,101,192,0.3);
-        }
-
         body {
-            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--blue-deep);
-            overflow-x: hidden;
-            height: 100vh;
-            width: 100vw;
-            position: relative;
+            background: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #262626;
+            padding-bottom: 40px;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* ============================================
-           CONTAINER PRINCIPAL - 60% AZUL / 30% BRANCO
-        ============================================ */
-        .welcome-master {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            overflow-x: hidden;
-            scroll-snap-type: y mandatory;
-        }
-
-        /* CAMADA AZUL (60% da altura) */
-        .golden-sanctum {
-            position: relative;
-            height: 60vh;
-            min-height: 500px;
-            width: 100%;
-            background: radial-gradient(ellipse at 30% 40%, #1976D2 0%, #0D47A1 70%, #0A2E6E 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            scroll-snap-align: start;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            isolation: isolate;
-        }
-
-        /* CAMADA BRANCA (30% da altura) */
-        .obsidian-realm {
-            position: relative;
-            height: 40vh;
-            min-height: 350px;
-            width: 100%;
-            background: linear-gradient(145deg, #F8F9FA 0%, #FFFFFF 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            scroll-snap-align: start;
-            border-top: 2px solid rgba(255,193,7,0.3);
-            overflow: hidden;
-        }
-
-        /* ============================================
-           BACKGROUND TECNOLÓGICO AVANÇADO (COM AZUL E AMARELO)
-        ============================================ */
-        .tech-cosmos {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(90deg, rgba(255,193,7,0.08) 0px, rgba(255,193,7,0.08) 1px, transparent 1px, transparent 12px),
-                repeating-linear-gradient(0deg, rgba(21,101,192,0.12) 0px, rgba(21,101,192,0.12) 1px, transparent 1px, transparent 12px),
-                repeating-radial-gradient(circle at 20% 30%, rgba(255,193,7,0.06) 0px, rgba(255,193,7,0.06) 2px, transparent 2px, transparent 8px),
-                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBmaWxsPSIjZmZkYzAwIiBmaWxsLW9wYWNpdHk9IjAuMDgiIGQ9Ik0wIDBoNDB2NDBIMHoiLz48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSI4IiBzdHJva2U9IiNmZmRjMDAiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjMiIGZpbGw9IiNmZmRjMDAiIGZpbGwtb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPg==');
-            background-repeat: repeat, repeat, repeat, repeat;
-            background-size: auto, auto, auto, 48px;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.45;
-            mix-blend-mode: overlay;
-        }
-
-        .obsidian-realm .tech-cosmos {
-            opacity: 0.25;
-            mix-blend-mode: soft-light;
-        }
-
-        /* Overlay de brilho dinâmico */
-        .glow-aura {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,193,7,0.2) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 1;
-            transition: background 0.1s ease;
-        }
-
-        /* ============================================
-           CONTEÚDO PRINCIPAL - HERO SECTION
-        ============================================ */
-        .hero-vortex {
-            position: relative;
-            z-index: 20;
-            text-align: center;
-            padding: 2rem;
-            max-width: 950px;
-            backdrop-filter: blur(3px);
-            border-radius: 72px;
-            animation: floatReveal 1.2s var(--transition-smooth) forwards;
-        }
-
-        @keyframes floatReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(40px) scale(0.96);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .glitch-title {
-            font-size: clamp(2.8rem, 9vw, 5.6rem);
-            font-weight: 800;
-            color: #FFFFFF;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-            text-shadow: 3px 3px 12px rgba(0,0,0,0.25);
-            margin-bottom: 0.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .glitch-title::before,
-        .glitch-title::after {
-            content: attr(data-text);
-            position: absolute;
+        /* ===== HEADER ESTILO INSTAGRAM ===== */
+        .instagram-header {
+            background: #FFFFFF;
+            border-bottom: 1px solid #dbdbdb;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        .glitch-title::before {
-            animation: glitch-anim 3s infinite linear alternate-reverse;
-            color: #FFC107;
-            z-index: -1;
-        }
-
-        @keyframes glitch-anim {
-            0% { clip-path: inset(0 0 85% 0); transform: translate(-2px, 2px); opacity: 0.6; }
-            20% { clip-path: inset(15% 0 70% 0); transform: translate(2px, -2px); }
-            40% { clip-path: inset(35% 0 50% 0); transform: translate(-1px, 1px); }
-            60% { clip-path: inset(10% 0 75% 0); transform: translate(1px, -1px); }
-            80% { clip-path: inset(60% 0 25% 0); transform: translate(-1px, 0); }
-            100% { clip-path: inset(0 0 0 0); transform: translate(0); }
-        }
-
-        .highlight-gold {
-            background: rgba(0,0,0,0.2);
-            padding: 0.1rem 0.5rem;
-            border-radius: 24px;
-            backdrop-filter: blur(4px);
-        }
-
-        .tech-tagline {
-            font-size: clamp(1rem, 4vw, 1.55rem);
-            font-weight: 500;
-            color: #F0F4FA;
-            margin: 1rem 0 2rem 0;
+            z-index: 100;
+            padding: 12px 20px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
             flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.96);
         }
 
-        .tech-tagline i {
-            background: rgba(255,255,255,0.15);
-            padding: 8px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            color: #FFC107;
-        }
-
-        /* BOTÕES PREMIUM (AMARELO 10%) */
-        .button-constellation {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 0.5rem;
-        }
-
-        .btn-luxury {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 1rem 2.4rem;
-            font-size: 1.05rem;
+        .logo {
+            font-size: 1.8rem;
             font-weight: 600;
-            border-radius: 80px;
+            background: linear-gradient(135deg, #0D47A1, #1565C0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            background: none;
+            color: #FFC107;
+            font-size: 1.6rem;
+            margin-right: 5px;
+        }
+
+        .header-icons i {
+            font-size: 1.5rem;
+            margin-left: 20px;
+            color: #0D47A1;
+            transition: 0.2s;
             cursor: pointer;
-            transition: all 0.4s var(--transition-smooth);
-            font-family: inherit;
-            border: none;
-            text-decoration: none;
-            position: relative;
+        }
+
+        .header-icons i:hover {
+            color: #FFC107;
+        }
+
+        /* ===== CONTAINER DO FEED ===== */
+        .feed-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* CARD DE POST (ESTILO INSTAGRAM) */
+        .post-card {
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 12px;
+            margin-bottom: 24px;
             overflow: hidden;
-            z-index: 1;
-            backdrop-filter: blur(2px);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .btn-primary {
-            background: #FFC107;
-            color: #0D47A1;
-            box-shadow: 0 12px 28px -8px rgba(0,0,0,0.3);
+        .post-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-            z-index: -1;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.4);
-            background: #FFD54F;
-            gap: 16px;
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.95);
-            color: #0D47A1;
-            border: 1px solid #FFC107;
-            box-shadow: 0 8px 20px -6px rgba(0,0,0,0.1);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-5px) scale(1.02);
-            background: #FFFFFF;
-            border-color: #FF8F00;
-            box-shadow: 0 15px 30px -8px rgba(255,193,7,0.3);
-            gap: 16px;
-        }
-
-        /* ============================================
-           SKILLS TECH - ÁREA BRANCA (30% BRANCO)
-        ============================================ */
-        .skills-orbit {
-            position: relative;
-            z-index: 20;
+        .post-header {
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(145deg, #0D47A1, #1565C0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 2rem;
-            max-width: 1200px;
-            padding: 1.8rem 2rem;
-            animation: fadeSlideUp 0.9s 0.2s backwards;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(35px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .tech-card {
-            background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(8px);
-            border-radius: 48px;
-            padding: 1.2rem 1.8rem;
-            border: 1px solid rgba(255,193,7,0.4);
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            text-align: center;
-            min-width: 140px;
-            cursor: default;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-        }
-
-        .tech-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(255,193,7,0.08), transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .tech-card:hover::after {
-            opacity: 1;
-        }
-
-        .tech-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: #FFC107;
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
-            background: #FFFFFF;
-        }
-
-        .tech-card i {
-            font-size: 2.3rem;
-            color: #0D47A1;
-            display: block;
-            margin-bottom: 12px;
-            transition: transform 0.2s;
-        }
-
-        .tech-card:hover i {
-            transform: scale(1.1);
-            color: #FF8F00;
-        }
-
-        .tech-card span {
+        .username {
             font-weight: 600;
-            color: #1e2a3a;
-            letter-spacing: 0.3px;
             font-size: 0.95rem;
         }
 
-        .quote-footer {
-            width: 100%;
-            text-align: center;
-            margin-top: 1.6rem;
+        .post-options {
+            margin-left: auto;
+            color: #262626;
+            cursor: pointer;
         }
 
-        .quote-footer p {
-            display: inline-block;
-            background: rgba(13,71,161,0.08);
-            backdrop-filter: blur(8px);
-            border-radius: 60px;
-            padding: 0.5rem 1.8rem;
+        .post-image {
+            width: 100%;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            max-height: 600px;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-actions {
+            display: flex;
+            padding: 8px 16px;
+            gap: 18px;
+            font-size: 1.6rem;
+        }
+
+        .post-actions i {
+            cursor: pointer;
+            transition: 0.2s;
+            color: #262626;
+        }
+
+        .post-actions i:hover {
+            transform: scale(1.05);
+        }
+
+        .fa-heart.liked {
+            color: #ed4956;
+        }
+
+        .likes-count {
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0 16px 8px 16px;
+        }
+
+        .caption {
+            padding: 0 16px 12px 16px;
             font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .caption span {
+            font-weight: 600;
+            margin-right: 6px;
+        }
+
+        .comment-section {
+            padding: 8px 16px 16px;
+            border-top: 1px solid #efefef;
+            font-size: 0.8rem;
+            color: #8e8e8e;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ===== SEÇÃO DE SKILLS (no final, cores azul/branco/amarelo) ===== */
+        .skills-wrapper {
+            background: linear-gradient(145deg, #0D47A1, #1565C0);
+            margin-top: 30px;
+            padding: 40px 20px;
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.05);
+        }
+
+        .skills-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            border-radius: 40px;
+            padding: 30px 20px;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .skills-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0D47A1, #1976D2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .skills-title i {
+            color: #FFC107;
+            font-size: 2rem;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: #FFFFFF;
+            border-radius: 50px;
+            padding: 12px 28px;
+            border: 1px solid rgba(255,193,7,0.4);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .skill-card i {
+            font-size: 1.8rem;
+            color: #0D47A1;
+            transition: 0.2s;
+        }
+
+        .skill-card span {
+            font-weight: 600;
             color: #1e2a3a;
-            border: 1px solid rgba(255,193,7,0.3);
+            font-size: 1rem;
         }
 
-        /* ============================================
-           PARTÍCULAS FLUTUANTES (AZUL E AMARELO)
-        ============================================ */
-        .floating-particles {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 999;
+        .skill-card:hover {
+            transform: translateY(-6px);
+            border-color: #FFC107;
+            background: #FFF9E6;
+            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.15);
         }
 
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, #FFC107, #1565C0);
-            border-radius: 50%;
-            opacity: 0;
-            animation: particleDrift linear infinite;
+        .skill-card:hover i {
+            color: #FF8F00;
+            transform: scale(1.1);
         }
 
-        @keyframes particleDrift {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            15% {
-                opacity: 0.6;
-            }
-            85% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-120px) translateX(30px) rotate(180deg);
-                opacity: 0;
-            }
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.8rem;
         }
 
-        /* Linhas de grade animada */
-        .grid-lines {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(to right, rgba(255,193,7,0.12) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255,193,7,0.12) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 1;
-            animation: gridMove 20s linear infinite;
-        }
-
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 40px 40px; }
-        }
-
-        /* ============================================
-           RESPONSIVIDADE
-        ============================================ */
-        @media (max-width: 780px) {
-            .golden-sanctum {
-                min-height: 550px;
+        /* responsividade */
+        @media (max-width: 640px) {
+            .feed-container {
+                padding: 12px;
             }
-            .obsidian-realm {
-                min-height: auto;
-                padding: 2rem 0;
+            .post-card {
+                border-radius: 8px;
             }
-            .skills-orbit {
-                gap: 1rem;
-                padding: 1rem;
+            .skills-title {
+                font-size: 1.6rem;
             }
-            .tech-card {
-                min-width: 110px;
-                padding: 0.8rem 1rem;
-            }
-            .btn-luxury {
-                padding: 0.75rem 1.6rem;
-                font-size: 0.9rem;
-            }
-            .button-constellation {
-                gap: 1rem;
-            }
-        }
-
-        @keyframes subtlePulse {
-            0% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
-
-        .welcome-master::-webkit-scrollbar {
-            width: 6px;
-        }
-        .welcome-master::-webkit-scrollbar-track {
-            background: #0D47A1;
-        }
-        .welcome-master::-webkit-scrollbar-thumb {
-            background: #FFC107;
-            border-radius: 10px;
-        }
-
-        .shooting-star {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 6px 2px rgba(255,193,7,0.9);
-            animation: shootStar 8s linear infinite;
-            opacity: 0;
-            z-index: 5;
-        }
-
-        @keyframes shootStar {
-            0% {
-                transform: translateX(0) translateY(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            20% {
-                transform: translateX(-120px) translateY(80px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(-300px) translateY(200px);
-                opacity: 0;
+            .skill-card {
+                padding: 8px 20px;
             }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="welcome-master">
-    <!-- 60% AZUL - SEÇÃO PRINCIPAL -->
-    <section class="golden-sanctum">
-        <div class="tech-cosmos"></div>
-        <div class="grid-lines"></div>
-        <div class="glow-aura" id="glowAura"></div>
-        
-        <!-- Estrelas cadentes dinâmicas -->
-        <div class="shooting-star" style="top: 20%; left: 70%; animation-delay: 0s;"></div>
-        <div class="shooting-star" style="top: 50%; left: 85%; animation-delay: 3s;"></div>
-        <div class="shooting-star" style="top: 15%; left: 40%; animation-delay: 6s;"></div>
-        
-        <div class="hero-vortex">
-            <h1 class="glitch-title" data-text="Unidade POLO"> Unidade POLO </h1>
-            <div class="tech-tagline">
-                <i class="fas fa-crown"></i>
-                <span>Arquiteto de experiências digitais</span>
-                <i class="fas fa-code-branch"></i>
-            </div>
-            <div class="button-constellation">
-                <button class="btn-luxury btn-primary" id="premiumExploreBtn">
-                    <i class="fas fa-compass"></i> Explorar Jornada
-                </button>
-                <a href="welcome.html" class="btn-luxury btn-secondary" id="premiumWelcomeLink">
-                    <i class="fas fa-gem"></i> Portal para a Matéria do professor ROBSON
-                </a>
-            </div>
-            <div style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.8; color: #e0e0e0;">
-                <i class="fas fa-mouse-pointer"></i> role para descobrir skills
-            </div>
-        </div>
-    </section>
+<header class="instagram-header">
+    <div class="logo">
+        <i class="fab fa-instagram"></i> Meu<span style="color:#FFC107;">Feed</span>
+    </div>
+    <div class="header-icons">
+        <i class="far fa-heart"></i>
+        <i class="far fa-comment-dots"></i>
+    </div>
+</header>
 
-    <!-- 30% BRANCO - SEÇÃO DE HABILIDADES TECH -->
-    <section class="obsidian-realm">
-        <div class="tech-cosmos"></div>
-        <div class="grid-lines" style="animation-duration: 25s;"></div>
-        
-        <div class="skills-orbit">
-            <div class="tech-card">
-                <i class="fab fa-react"></i>
-                <span>React 18 • Next.js 14</span>
-            </div>
-            <div class="tech-card">
-                <i class="fab fa-node-js"></i>
-                <span>Node.js • Express • NestJS</span>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-database"></i>
-                <span>PostgreSQL • MongoDB • Prisma</span>
-            </div>
-            <div class="tech-card">
-                <i class="fab fa-python"></i>
-                <span>Python • FastAPI • IA</span>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-cloud"></i>
-                <span>AWS • Docker • Kubernetes</span>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-palette"></i>
-                <span>UI/UX • Framer • Tailwind</span>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-mobile-alt"></i>
-                <span>React Native • Flutter</span>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-shield-alt"></i>
-                <span>Cybersecurity • OWASP</span>
-            </div>
-            <div class="quote-footer">
-                <p><i class="fas fa-quote-left"></i> Código com alma, design com propósito e tecnologia que transforma. <i class="fas fa-quote-right"></i></p>
-            </div>
+<main class="feed-container" id="feedContainer">
+    <!-- Os posts serão injetados via JS com as imagens listadas -->
+</main>
+
+<!-- SEÇÃO DE SKILLS (no final) -->
+<div class="skills-wrapper">
+    <div class="skills-container">
+        <div class="skills-title">
+            <i class="fas fa-code"></i>
+            <span>Minhas Skills Tech</span>
+            <i class="fas fa-microchip"></i>
         </div>
-    </section>
+        <div class="skills-grid">
+            <div class="skill-card"><i class="fab fa-react"></i><span>React 18 • Next.js</span></div>
+            <div class="skill-card"><i class="fab fa-node-js"></i><span>Node.js • Express</span></div>
+            <div class="skill-card"><i class="fas fa-database"></i><span>PostgreSQL • MongoDB</span></div>
+            <div class="skill-card"><i class="fab fa-python"></i><span>Python • FastAPI</span></div>
+            <div class="skill-card"><i class="fas fa-cloud"></i><span>AWS • Docker</span></div>
+            <div class="skill-card"><i class="fas fa-palette"></i><span>UI/UX • Tailwind</span></div>
+            <div class="skill-card"><i class="fas fa-mobile-alt"></i><span>React Native</span></div>
+            <div class="skill-card"><i class="fas fa-shield-alt"></i><span>Cybersecurity</span></div>
+        </div>
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-camera"></i> 9 publicações • Desenvolvedor full stack • Código com propósito
+    </div>
 </div>
 
-<div class="floating-particles" id="particleContainer"></div>
-
 <script>
-    (function() {
-        // ========================================
-        // 1. BOTÕES E INTERAÇÕES PREMIUM
-        // ========================================
-        const exploreBtn = document.getElementById('premiumExploreBtn');
-        const welcomeLink = document.getElementById('premiumWelcomeLink');
-        
-        function showElegantToast(message, icon = '✨') {
-            const existingToast = document.querySelector('.premium-toast');
-            if(existingToast) existingToast.remove();
-            
-            const toast = document.createElement('div');
-            toast.className = 'premium-toast';
-            toast.innerHTML = `
-                <div style="
-                    background: #0D47A1;
-                    backdrop-filter: blur(20px);
-                    border: 1px solid #FFC107;
-                    border-radius: 48px;
-                    padding: 14px 28px;
-                    display: flex;
-                    align-items: center;
-                    gap: 14px;
-                    box-shadow: 0 25px 40px -12px black;
-                    font-family: 'Poppins', sans-serif;
-                    color: #FFC107;
-                    font-weight: 500;
-                ">
-                    <span style="font-size: 28px;">${icon}</span>
-                    <span style="font-size: 0.95rem; letter-spacing: 0.3px;">${message}</span>
-                    <button id="closePremiumToast" style="background: none; border: none; color: #FFC107; font-size: 24px; cursor: pointer; line-height: 1;">&times;</button>
-                </div>
-            `;
-            toast.style.position = 'fixed';
-            toast.style.bottom = '30px';
-            toast.style.left = '50%';
-            toast.style.transform = 'translateX(-50%)';
-            toast.style.zIndex = '10000';
-            toast.style.animation = 'fadeSlideUp 0.3s ease-out';
-            document.body.appendChild(toast);
-            
-            const closeBtn = toast.querySelector('#closePremiumToast');
-            closeBtn.addEventListener('click', () => toast.remove());
-            setTimeout(() => {
-                if(toast && toast.remove) toast.remove();
-            }, 4200);
-        }
-        
-        if(exploreBtn) {
-            exploreBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                showElegantToast('🌌 Portfólio em evolução — Em breve, projetos visionários! Fique ligado. 🚀', '💎');
-                exploreBtn.style.transform = 'scale(0.96)';
-                setTimeout(() => { exploreBtn.style.transform = ''; }, 200);
-                
-                const blueLayer = document.querySelector('.golden-sanctum');
-                if(blueLayer) {
-                    blueLayer.style.transition = 'box-shadow 0.2s';
-                    blueLayer.style.boxShadow = 'inset 0 0 40px rgba(255,193,7,0.4), 0 15px 35px rgba(0,0,0,0.3)';
-                    setTimeout(() => {
-                        blueLayer.style.boxShadow = '';
-                    }, 500);
-                }
-            });
-        }
-        
-        // ========================================
-        // 2. SEGUIMENTO DO MOUSE PARA O GLOW AURA
-        // ========================================
-        const glowElement = document.getElementById('glowAura');
-        if(glowElement) {
-            document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth) * 100;
-                const y = (e.clientY / window.innerHeight) * 100;
-                glowElement.style.setProperty('--x', `${x}%`);
-                glowElement.style.setProperty('--y', `${y}%`);
-            });
-        }
-        
-        // ========================================
-        // 3. PARTÍCULAS FLUTUANTES
-        // ========================================
-        const particleContainer = document.getElementById('particleContainer');
-        function generateParticles(count = 130) {
-            for(let i = 0; i < count; i++) {
-                const particle = document.createElement('div');
-                const size = Math.random() * 6 + 2;
-                particle.classList.add('particle');
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 12 + 6}s`;
-                particle.style.animationDelay = `${Math.random() * 8}s`;
-                particle.style.background = `radial-gradient(circle, rgba(255,193,7,0.7), rgba(21,101,192,0.3))`;
-                particle.style.boxShadow = `0 0 6px rgba(255,193,7,0.5)`;
-                particleContainer.appendChild(particle);
-            }
-        }
-        generateParticles(130);
-        
-        // ========================================
-        // 4. ANIMAÇÃO NOS CARDS (DESTAQUE ROTATIVO)
-        // ========================================
-        const techCards = document.querySelectorAll('.tech-card');
-        let currentIndex = 0;
-        let pulseInterval;
-        
-        function startCardPulse() {
-            if(pulseInterval) clearInterval(pulseInterval);
-            pulseInterval = setInterval(() => {
-                if(techCards.length === 0) return;
-                techCards.forEach(card => {
-                    card.style.transition = 'all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-                    card.style.transform = '';
-                    card.style.borderColor = 'rgba(255,193,7,0.4)';
-                    card.style.boxShadow = '0 8px 20px rgba(0,0,0,0.05)';
-                });
-                const activeCard = techCards[currentIndex % techCards.length];
-                if(activeCard) {
-                    activeCard.style.transform = 'translateY(-8px) scale(1.02)';
-                    activeCard.style.borderColor = '#FFC107';
-                    activeCard.style.boxShadow = '0 20px 30px -12px rgba(0,0,0,0.15)';
-                }
-                currentIndex = (currentIndex + 1) % techCards.length;
-            }, 2200);
-        }
-        startCardPulse();
-        
-        // ========================================
-        // 5. GLITCH OCASIONAL
-        // ========================================
-        const glitchElement = document.querySelector('.glitch-title');
-        if(glitchElement) {
-            setInterval(() => {
-                if(Math.random() > 0.85) {
-                    glitchElement.style.animation = 'glitch-anim 0.3s ease-in-out';
-                    setTimeout(() => {
-                        glitchElement.style.animation = '';
-                    }, 300);
-                }
-            }, 3000);
-        }
-        
-        // ========================================
-        // 6. ANIMAÇÃO DE ENTRADA
-        // ========================================
-        const hero = document.querySelector('.hero-vortex');
-        if(hero) hero.style.animation = 'floatReveal 1.2s forwards';
-        
-        // Throttle para performance
-        let ticking = false;
-        document.addEventListener('mousemove', (e) => {
-            if(!ticking) {
-                requestAnimationFrame(() => {
-                    if(glowElement) {
-                        const x = (e.clientX / window.innerWidth) * 100;
-                        const y = (e.clientY / window.innerHeight) * 100;
-                        glowElement.style.setProperty('--x', `${x}%`);
-                        glowElement.style.setProperty('--y', `${y}%`);
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-        
-        // ========================================
-        // 7. CONSOLE LOG
-        // ========================================
-        console.log("%c✨ PORTFOLIO PREMIUM — 60% Azul | 30% Branco | 10% Amarelo ✨", "color: #FFC107; font-size: 16px; font-weight: bold;");
-        console.log("%cDesign harmônico • Cores ajustadas • Experiência premium", "color: #1565C0; font-size: 12px;");
-        
-        if(welcomeLink) {
-            welcomeLink.addEventListener('click', (e) => {
-                console.log("Redirecionando para welcome.html...");
-            });
-        }
-        
-        // ========================================
-        // 8. ESTRELAS CADENTES ADICIONAIS
-        // ========================================
-        function addShootingStars() {
-            const starContainer = document.querySelector('.golden-sanctum');
-            for(let i = 0; i < 5; i++) {
-                const star = document.createElement('div');
-                star.classList.add('shooting-star');
-                star.style.top = `${Math.random() * 80}%`;
-                star.style.left = `${Math.random() * 90}%`;
-                star.style.animationDelay = `${Math.random() * 10}s`;
-                starContainer.appendChild(star);
-            }
-        }
-        addShootingStars();
-        
-        window.addEventListener('beforeunload', () => {
-            if(pulseInterval) clearInterval(pulseInterval);
-        });
-        
-        if('ontouchstart' in window) {
-            const btns = document.querySelectorAll('.btn-luxury');
-            btns.forEach(btn => {
-                btn.addEventListener('touchstart', function() {
-                    this.style.transform = 'scale(0.97)';
-                    setTimeout(() => { this.style.transform = ''; }, 150);
-                });
-            });
-        }
-    })();
-</script>
+    // Lista de imagens conforme fornecidas
+    const imagens = [
+        "WhatsApp Image 2026-05-29 at 08.52.03 (1).jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.03.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.05.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.06.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.07.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.08.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.33.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.35 (1).jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.35.jpeg"
+    ];
 
-<style>
-    .premium-toast {
-        animation: fadeSlideUp 0.3s ease-out;
+    // Nomes de usuário aleatórios mas fixos para cada post
+    const users = [
+        "@gabriel_dev", "@tech_lab", "@criativo.code", "@fullstack.vision", 
+        "@dev.master", "@pixel.arch", "@next.gen", "@code.artist", "@robson_teacher"
+    ];
+
+    const legends = [
+        "✨ Mergulhando no universo React • Novos projetos em breve!",
+        "🚀 Backend com Node.js + MongoDB • Performance absurda.",
+        "🎨 Design system e UI/UX • Cores que contam histórias.",
+        "⚡ API em FastAPI • Integração com IA generativa.",
+        "🐳 Docker + Kubernetes • Orquestração na prática.",
+        "📱 React Native • App multiplataforma em desenvolvimento.",
+        "🔒 Cybersecurity • Práticas de proteção de dados.",
+        "☁️ AWS Cloud • Infraestrutura como código.",
+        "🎓 Matéria do professor ROBSON • Projeto integrador."
+    ];
+
+    const feedContainer = document.getElementById('feedContainer');
+
+    // Função auxiliar para criar o HTML de cada post
+    function criarPost(imgSrc, userName, legenda, index) {
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post-card';
+        
+        postDiv.innerHTML = `
+            <div class="post-header">
+                <div class="avatar">${userName.charAt(1).toUpperCase()}</div>
+                <div class="username">${userName}</div>
+                <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
+            </div>
+            <div class="post-image">
+                <img src="${imgSrc}" alt="Post image" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem+não+encontrada'">
+            </div>
+            <div class="post-actions">
+                <i class="far fa-heart like-btn" data-liked="false"></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-paper-plane"></i>
+                <i class="far fa-bookmark" style="margin-left:auto;"></i>
+            </div>
+            <div class="likes-count">❤️ <span class="likes-number">0</span> curtidas</div>
+            <div class="caption">
+                <span>${userName}</span> ${legenda}
+            </div>
+            <div class="comment-section">
+                <span>Ver todos os comentários</span>
+                <i class="far fa-smile-wink"></i>
+            </div>
+        `;
+        
+        // Evento de like individual
+        const likeBtn = postDiv.querySelector('.like-btn');
+        const likesSpan = postDiv.querySelector('.likes-number');
+        let likes = Math.floor(Math.random() * 120) + 15; // likes iniciais aleatórios
+        likesSpan.innerText = likes;
+        
+        likeBtn.addEventListener('click', () => {
+            const isLiked = likeBtn.getAttribute('data-liked') === 'true';
+            if (!isLiked) {
+                likeBtn.classList.add('liked');
+                likeBtn.classList.remove('far');
+                likeBtn.classList.add('fas');
+                likes++;
+                likeBtn.setAttribute('data-liked', 'true');
+            } else {
+                likeBtn.classList.remove('liked');
+                likeBtn.classList.remove('fas');
+                likeBtn.classList.add('far');
+                likes--;
+                likeBtn.setAttribute('data-liked', 'false');
+            }
+            likesSpan.innerText = likes;
+        });
+        
+        return postDiv;
     }
-    @keyframes fadeSlideUp {
-        from {
-            opacity: 0;
-            transform: translateX(-50%) translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-    }
-    .glitch-title {
-        animation: subtlePulse 3s infinite alternate;
-    }
-    @keyframes subtlePulse {
-        0% { text-shadow: 2px 2px 8px rgba(0,0,0,0.15); }
-        100% { text-shadow: 4px 4px 15px rgba(0,0,0,0.3); }
-    }
-    .floating-particles {
-        pointer-events: none;
-    }
-    .welcome-master {
-        scroll-behavior: smooth;
-    }
-</style>
+
+    // Carregar todas as imagens no feed (ordem da lista)
+    imagens.forEach((img, idx) => {
+        // decodifica nome para evitar problemas, mas mantém o original
+        const imgPath = img; // assume que está no mesmo diretório
+        const user = users[idx % users.length];
+        const legenda = legends[idx % legends.length];
+        const post = criarPost(imgPath, user, legenda, idx);
+        feedContainer.appendChild(post);
+    });
+
+    // Caso alguma imagem falhe, já temos fallback inline no onerror
+    // Adicionalmente, pequeno efeito de clique nos ícones do header
+    document.querySelectorAll('.header-icons i').forEach(icon => {
+        icon.addEventListener('click', () => {
+            alert('🔔 Funcionalidade em desenvolvimento • Feed interativo!');
+        });
+    });
+    
+    // Simular animação de loading suave
+    console.log("✅ Feed estilo Instagram carregado com 9 imagens e skills ao final");
+</script>
 </body>
 </html>
