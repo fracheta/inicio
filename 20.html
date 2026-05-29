@@ -3,27 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev Portfólio | Gabriel</title>
+    <title>Dev Portfólio | Gabriel - Unidade Polo</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-color: #f7df1e;
-            --bg-dark: #0d1117;
-            --card-bg: rgba(23, 28, 36, 0.8);
-            --text-main: #e6edf3;
-            --accent: #30363d;
-            --glow: rgba(247, 223, 30, 0.2);
+            /* NOVA PALETA: 60% Azul, 30% Branco, 10% Amarelo */
+            --primary-blue: #0D47A1;      /* Azul principal (60% da superfície) */
+            --blue-soft: #1565C0;
+            --white-bg: #F8F9FA;           /* Branco para áreas de leitura (30%) */
+            --white-card: #FFFFFF;
+            --yellow-accent: #FFC107;      /* Amarelo para destaques (10%) */
+            --yellow-hover: #FFB300;
+            --text-dark: #1e2a3a;
+            --text-light: #F0F4FA;
+            --border-light: rgba(255,193,7,0.3);
+            --shadow-card: 0 8px 20px rgba(0,0,0,0.08);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg-dark);
-            background-image: radial-gradient(circle at 2px 2px, #1f242c 1px, transparent 0);
+            background: var(--primary-blue);  /* 60% Azul */
+            background-image: radial-gradient(circle at 2px 2px, rgba(255,193,7,0.08) 1px, transparent 0);
             background-size: 40px 40px;
             font-family: 'Inter', sans-serif;
-            color: var(--text-main);
+            color: var(--text-light);
             line-height: 1.6;
         }
 
@@ -34,15 +39,24 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            background: linear-gradient(180deg, rgba(13,17,23,0) 0%, rgba(13,17,23,1) 100%);
+            background: linear-gradient(180deg, rgba(13,71,161,0.95) 0%, var(--primary-blue) 100%);
             padding: 20px;
         }
 
         .profile-pic {
             width: 100px; height: 100px;
             border-radius: 50%;
-            border: 3px solid var(--primary-color);
+            border: 3px solid var(--yellow-accent);
             margin-bottom: 15px;
+            background: var(--white-card);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+        h1 span {
+            color: var(--yellow-accent);
         }
 
         .controls {
@@ -57,34 +71,40 @@
         }
 
         .search-box {
-            background: var(--card-bg);
-            border: 1px solid var(--accent);
+            background: var(--white-card);
+            border: 1px solid var(--yellow-accent);
             padding: 12px 20px;
             border-radius: 30px;
-            color: white;
+            color: var(--text-dark);
             width: 100%;
             max-width: 400px;
             outline: none;
+            font-weight: 500;
         }
 
-        .search-box:focus { border-color: var(--primary-color); }
+        .search-box:focus { 
+            border-color: var(--yellow-hover);
+            box-shadow: 0 0 0 2px rgba(255,193,7,0.2);
+        }
 
         .filter-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
 
         .btn-filter {
-            background: var(--accent);
+            background: rgba(255,255,255,0.2);
             border: none;
-            color: white;
+            color: var(--text-light);
             padding: 8px 16px;
-            border-radius: 20px;
+            border-radius: 30px;
             cursor: pointer;
             transition: 0.3s;
             font-weight: bold;
+            backdrop-filter: blur(4px);
         }
 
         .btn-filter.active, .btn-filter:hover {
-            background: var(--primary-color);
-            color: black;
+            background: var(--yellow-accent);
+            color: #0D47A1;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
         .main-content { max-width: 1100px; margin: 0 auto 100px; padding: 0 20px; }
@@ -96,28 +116,55 @@
         }
 
         .project-card {
-            background: var(--card-bg);
-            border: 1px solid var(--accent);
-            border-radius: 16px;
+            background: var(--white-card);   /* 30% Branco */
+            border: 1px solid var(--border-light);
+            border-radius: 20px;
             padding: 25px;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.25s ease;
             display: flex;
             flex-direction: column;
+            color: var(--text-dark);
+            box-shadow: var(--shadow-card);
         }
 
         .project-card:hover {
             transform: translateY(-5px);
-            border-color: var(--primary-color);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-color: var(--yellow-accent);
+            box-shadow: 0 15px 30px -8px rgba(0,0,0,0.2);
+            background: #FFFFFF;
         }
 
         .card-icon { font-size: 2rem; margin-bottom: 15px; }
-        .card-footer { margin-top: auto; padding-top: 20px; font-family: 'Fira Code', monospace; color: var(--primary-color); font-size: 0.8rem; }
+        .project-card h3 {
+            color: #0D47A1;
+            margin-bottom: 10px;
+        }
+        .project-card p {
+            color: #2c3e4e;
+            font-size: 0.9rem;
+        }
+        .card-footer { 
+            margin-top: auto; 
+            padding-top: 20px; 
+            font-family: 'Fira Code', monospace; 
+            color: var(--yellow-accent); 
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
         
         .hidden { display: none !important; }
 
-        footer { text-align: center; padding: 40px; border-top: 1px solid var(--accent); color: #484f58; }
+        footer { 
+            text-align: center; 
+            padding: 30px; 
+            border-top: 1px solid rgba(255,193,7,0.2);
+            color: rgba(255,255,255,0.8);
+            background: #0A2E6E;
+        }
+        footer p {
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
@@ -133,7 +180,7 @@
         <div class="filter-buttons">
             <button class="btn-filter active" onclick="filterSelection('all', event)">Todos</button>
             <button class="btn-filter" onclick="filterSelection('js', event)">Scripts JS</button>
-            <button class="btn-filter" onclick="filterSelection('gamma', event)">Apresentações </button>
+            <button class="btn-filter" onclick="filterSelection('gamma', event)">Apresentações</button>
             <button class="btn-filter" onclick="filterSelection('mobile', event)">Mobile</button>
         </div>
     </section>
@@ -281,7 +328,6 @@
                 <div class="card-footer">#python #pygame</div>
             </div>
             
-            
             <div class="project-card gamma" onclick="window.open('https://notebooklm.google.com/notebook/cf96d718-f86e-4a2f-9dfe-035ffc1f8963/artifact/101f0b48-c396-41bf-b249-cfb6826fedf8?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_', '_blank')">
                 <div class="card-icon">🚀</div>
                 <h3>Ecossistema das IA's 2026</h3>
@@ -289,20 +335,17 @@
                 <div class="card-footer">#NotebookLM #Inovacao</div>
             </div>
 
-              <div class="project-card js" onclick="window.location.href = 'produto.html'">
+            <div class="project-card js" onclick="window.location.href = 'produto.html'">
                 <div class="card-icon">🔢</div>
                 <h3>venda de produto</h3>
                 <p>venda.</p>
                 <div class="card-footer">#javascript</div>
             </div>
-            
-            
-            
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 Gabriel | Desenvolvedor</p>
+        <p>&copy; 2026 Gabriel | Desenvolvedor • Unidade Polo Arapongas</p>
     </footer>
 
     <script>
