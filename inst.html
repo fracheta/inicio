@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>📸 Meu Insta | Feed + Skills Tech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fafafa;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #262626;
+            padding-bottom: 40px;
+        }
+
+        /* ===== HEADER ESTILO INSTAGRAM ===== */
+        .instagram-header {
+            background: #FFFFFF;
+            border-bottom: 1px solid #dbdbdb;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.96);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #0D47A1, #1565C0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo i {
+            background: none;
+            color: #FFC107;
+            font-size: 1.6rem;
+            margin-right: 5px;
+        }
+
+        .header-icons i {
+            font-size: 1.5rem;
+            margin-left: 20px;
+            color: #0D47A1;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .header-icons i:hover {
+            color: #FFC107;
+        }
+
+        /* ===== CONTAINER DO FEED ===== */
+        .feed-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        /* CARD DE POST (ESTILO INSTAGRAM) */
+        .post-card {
+            background: white;
+            border: 1px solid #dbdbdb;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .post-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(145deg, #0D47A1, #1565C0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .username {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .post-options {
+            margin-left: auto;
+            color: #262626;
+            cursor: pointer;
+        }
+
+        .post-image {
+            width: 100%;
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            max-height: 600px;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            display: block;
+        }
+
+        .post-actions {
+            display: flex;
+            padding: 8px 16px;
+            gap: 18px;
+            font-size: 1.6rem;
+        }
+
+        .post-actions i {
+            cursor: pointer;
+            transition: 0.2s;
+            color: #262626;
+        }
+
+        .post-actions i:hover {
+            transform: scale(1.05);
+        }
+
+        .fa-heart.liked {
+            color: #ed4956;
+        }
+
+        .likes-count {
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0 16px 8px 16px;
+        }
+
+        .caption {
+            padding: 0 16px 12px 16px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .caption span {
+            font-weight: 600;
+            margin-right: 6px;
+        }
+
+        .comment-section {
+            padding: 8px 16px 16px;
+            border-top: 1px solid #efefef;
+            font-size: 0.8rem;
+            color: #8e8e8e;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* ===== SEÇÃO DE SKILLS (no final, cores azul/branco/amarelo) ===== */
+        .skills-wrapper {
+            background: linear-gradient(145deg, #0D47A1, #1565C0);
+            margin-top: 30px;
+            padding: 40px 20px;
+            border-radius: 30px 30px 0 0;
+            box-shadow: 0 -10px 25px rgba(0,0,0,0.05);
+        }
+
+        .skills-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.95);
+            border-radius: 40px;
+            padding: 30px 20px;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .skills-title {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0D47A1, #1976D2);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .skills-title i {
+            color: #FFC107;
+            font-size: 2rem;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .skill-card {
+            background: #FFFFFF;
+            border-radius: 50px;
+            padding: 12px 28px;
+            border: 1px solid rgba(255,193,7,0.4);
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .skill-card i {
+            font-size: 1.8rem;
+            color: #0D47A1;
+            transition: 0.2s;
+        }
+
+        .skill-card span {
+            font-weight: 600;
+            color: #1e2a3a;
+            font-size: 1rem;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-6px);
+            border-color: #FFC107;
+            background: #FFF9E6;
+            box-shadow: 0 15px 25px -10px rgba(0,0,0,0.15);
+        }
+
+        .skill-card:hover i {
+            color: #FF8F00;
+            transform: scale(1.1);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.8rem;
+        }
+
+        /* responsividade */
+        @media (max-width: 640px) {
+            .feed-container {
+                padding: 12px;
+            }
+            .post-card {
+                border-radius: 8px;
+            }
+            .skills-title {
+                font-size: 1.6rem;
+            }
+            .skill-card {
+                padding: 8px 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<header class="instagram-header">
+    <div class="logo">
+        <i class="fab fa-instagram"></i> Meu<span style="color:#FFC107;">Feed</span>
+    </div>
+    <div class="header-icons">
+        <i class="far fa-heart"></i>
+        <i class="far fa-comment-dots"></i>
+    </div>
+</header>
+
+<main class="feed-container" id="feedContainer">
+    <!-- Os posts serão injetados via JS com as imagens listadas -->
+</main>
+
+<!-- SEÇÃO DE SKILLS (no final) -->
+<div class="skills-wrapper">
+    <div class="skills-container">
+        <div class="skills-title">
+            <i class="fas fa-code"></i>
+            <span>Minhas Skills Tech</span>
+            <i class="fas fa-microchip"></i>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card"><i class="fab fa-react"></i><span>React 18 • Next.js</span></div>
+            <div class="skill-card"><i class="fab fa-node-js"></i><span>Node.js • Express</span></div>
+            <div class="skill-card"><i class="fas fa-database"></i><span>PostgreSQL • MongoDB</span></div>
+            <div class="skill-card"><i class="fab fa-python"></i><span>Python • FastAPI</span></div>
+            <div class="skill-card"><i class="fas fa-cloud"></i><span>AWS • Docker</span></div>
+            <div class="skill-card"><i class="fas fa-palette"></i><span>UI/UX • Tailwind</span></div>
+            <div class="skill-card"><i class="fas fa-mobile-alt"></i><span>React Native</span></div>
+            <div class="skill-card"><i class="fas fa-shield-alt"></i><span>Cybersecurity</span></div>
+        </div>
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-camera"></i> 9 publicações • Desenvolvedor full stack • Código com propósito
+    </div>
+</div>
+
+<script>
+    // Lista de imagens conforme fornecidas
+    const imagens = [
+        "WhatsApp Image 2026-05-29 at 08.52.03 (1).jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.03.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.05.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.06.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.07.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.08.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.33.jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.35 (1).jpeg",
+        "WhatsApp Image 2026-05-29 at 08.52.35.jpeg"
+    ];
+
+    // Nomes de usuário aleatórios mas fixos para cada post
+    const users = [
+        "@gabriel_dev", "@tech_lab", "@criativo.code", "@fullstack.vision", 
+        "@dev.master", "@pixel.arch", "@next.gen", "@code.artist", "@robson_teacher"
+    ];
+
+    const legends = [
+        "✨ Mergulhando no universo React • Novos projetos em breve!",
+        "🚀 Backend com Node.js + MongoDB • Performance absurda.",
+        "🎨 Design system e UI/UX • Cores que contam histórias.",
+        "⚡ API em FastAPI • Integração com IA generativa.",
+        "🐳 Docker + Kubernetes • Orquestração na prática.",
+        "📱 React Native • App multiplataforma em desenvolvimento.",
+        "🔒 Cybersecurity • Práticas de proteção de dados.",
+        "☁️ AWS Cloud • Infraestrutura como código.",
+        "🎓 Matéria do professor ROBSON • Projeto integrador."
+    ];
+
+    const feedContainer = document.getElementById('feedContainer');
+
+    // Função auxiliar para criar o HTML de cada post
+    function criarPost(imgSrc, userName, legenda, index) {
+        const postDiv = document.createElement('div');
+        postDiv.className = 'post-card';
+        
+        postDiv.innerHTML = `
+            <div class="post-header">
+                <div class="avatar">${userName.charAt(1).toUpperCase()}</div>
+                <div class="username">${userName}</div>
+                <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
+            </div>
+            <div class="post-image">
+                <img src="${imgSrc}" alt="Post image" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem+não+encontrada'">
+            </div>
+            <div class="post-actions">
+                <i class="far fa-heart like-btn" data-liked="false"></i>
+                <i class="far fa-comment"></i>
+                <i class="far fa-paper-plane"></i>
+                <i class="far fa-bookmark" style="margin-left:auto;"></i>
+            </div>
+            <div class="likes-count">❤️ <span class="likes-number">0</span> curtidas</div>
+            <div class="caption">
+                <span>${userName}</span> ${legenda}
+            </div>
+            <div class="comment-section">
+                <span>Ver todos os comentários</span>
+                <i class="far fa-smile-wink"></i>
+            </div>
+        `;
+        
+        // Evento de like individual
+        const likeBtn = postDiv.querySelector('.like-btn');
+        const likesSpan = postDiv.querySelector('.likes-number');
+        let likes = Math.floor(Math.random() * 120) + 15; // likes iniciais aleatórios
+        likesSpan.innerText = likes;
+        
+        likeBtn.addEventListener('click', () => {
+            const isLiked = likeBtn.getAttribute('data-liked') === 'true';
+            if (!isLiked) {
+                likeBtn.classList.add('liked');
+                likeBtn.classList.remove('far');
+                likeBtn.classList.add('fas');
+                likes++;
+                likeBtn.setAttribute('data-liked', 'true');
+            } else {
+                likeBtn.classList.remove('liked');
+                likeBtn.classList.remove('fas');
+                likeBtn.classList.add('far');
+                likes--;
+                likeBtn.setAttribute('data-liked', 'false');
+            }
+            likesSpan.innerText = likes;
+        });
+        
+        return postDiv;
+    }
+
+    // Carregar todas as imagens no feed (ordem da lista)
+    imagens.forEach((img, idx) => {
+        // decodifica nome para evitar problemas, mas mantém o original
+        const imgPath = img; // assume que está no mesmo diretório
+        const user = users[idx % users.length];
+        const legenda = legends[idx % legends.length];
+        const post = criarPost(imgPath, user, legenda, idx);
+        feedContainer.appendChild(post);
+    });
+
+    // Caso alguma imagem falhe, já temos fallback inline no onerror
+    // Adicionalmente, pequeno efeito de clique nos ícones do header
+    document.querySelectorAll('.header-icons i').forEach(icon => {
+        icon.addEventListener('click', () => {
+            alert('🔔 Funcionalidade em desenvolvimento • Feed interativo!');
+        });
+    });
+    
+    // Simular animação de loading suave
+    console.log("✅ Feed estilo Instagram carregado com 9 imagens e skills ao final");
+</script>
+</body>
+</html>
