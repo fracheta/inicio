@@ -15,6 +15,11 @@
             box-sizing: border-box;
         }
 
+        /* Remove qualquer contorno amarelo padrão do navegador */
+        *:focus {
+            outline: none;
+        }
+
         :root {
             --blue-primary: #1565C0;
             --blue-deep: #0D47A1;
@@ -63,12 +68,11 @@
             height: 60vh;
             min-height: 500px;
             width: 100%;
-            /* Imagem de fundo principal */
             background-image: url('12375.png');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            background-attachment: fixed; /* efeito parallax suave */
+            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -78,7 +82,7 @@
             isolation: isolate;
         }
         
-        /* Overlay escuro para garantir contraste do texto (mantém a sensação "azul" original) */
+        /* Overlay escuro para garantir contraste do texto */
         .golden-sanctum::before {
             content: '';
             position: absolute;
@@ -86,7 +90,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(13, 71, 161, 0.65); /* tom azul sobre a imagem */
+            background: rgba(13, 71, 161, 0.65);
             backdrop-filter: brightness(0.85) saturate(1.2);
             z-index: 1;
             pointer-events: none;
@@ -108,7 +112,7 @@
         }
 
         /* ============================================
-           BACKGROUND TECNOLÓGICO AVANÇADO (COM AZUL E AMARELO)
+           BACKGROUND TECNOLÓGICO AVANÇADO
         ============================================ */
         .tech-cosmos {
             position: absolute;
@@ -123,7 +127,7 @@
             background-repeat: repeat, repeat, repeat, repeat;
             background-size: auto, auto, auto, 48px;
             pointer-events: none;
-            z-index: 2; /* acima do overlay escuro, mas abaixo do conteúdo */
+            z-index: 2;
             opacity: 0.45;
             mix-blend-mode: overlay;
         }
@@ -133,18 +137,8 @@
             mix-blend-mode: soft-light;
         }
 
-        /* Brilho dinâmico que segue o mouse */
-        .glow-aura {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,193,7,0.25) 0%, transparent 60%);
-            pointer-events: none;
-            z-index: 3;
-            transition: background 0.1s ease;
-        }
-
         /* ============================================
-           CONTEÚDO PRINCIPAL - HERO SECTION (acima da imagem e overlays)
+           CONTEÚDO PRINCIPAL - HERO SECTION
         ============================================ */
         .hero-vortex {
             position: relative;
@@ -233,7 +227,7 @@
             color: #FFC107;
         }
 
-        /* BOTÕES PREMIUM (AMARELO 10%) */
+        /* BOTÕES PREMIUM */
         .button-constellation {
             display: flex;
             gap: 1.5rem;
@@ -306,7 +300,7 @@
         }
 
         /* ============================================
-           SKILLS TECH - ÁREA BRANCA (30% BRANCO)
+           SKILLS TECH - ÁREA BRANCA
         ============================================ */
         .skills-orbit {
             position: relative;
@@ -404,7 +398,7 @@
         }
 
         /* ============================================
-           PARTÍCULAS FLUTUANTES (AZUL E AMARELO)
+           PARTÍCULAS FLUTUANTES
         ============================================ */
         .floating-particles {
             position: fixed;
@@ -536,7 +530,6 @@
         .golden-sanctum .hero-vortex,
         .golden-sanctum .tech-cosmos,
         .golden-sanctum .grid-lines,
-        .golden-sanctum .glow-aura,
         .golden-sanctum .shooting-star {
             z-index: 10;
         }
@@ -550,11 +543,10 @@
 <body>
 
 <div class="welcome-master">
-    <!-- 60% da altura - fundo agora com imagem + overlay azulado -->
+    <!-- 60% da altura - fundo com imagem + overlay azulado -->
     <section class="golden-sanctum">
         <div class="tech-cosmos"></div>
         <div class="grid-lines"></div>
-        <div class="glow-aura" id="glowAura"></div>
         
         <!-- Estrelas cadentes dinâmicas -->
         <div class="shooting-star" style="top: 20%; left: 70%; animation-delay: 0s;"></div>
@@ -648,20 +640,7 @@
         }
         
         // ========================================
-        // 2. SEGUIMENTO DO MOUSE PARA O GLOW AURA
-        // ========================================
-        const glowElement = document.getElementById('glowAura');
-        if(glowElement) {
-            document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth) * 100;
-                const y = (e.clientY / window.innerHeight) * 100;
-                glowElement.style.setProperty('--x', `${x}%`);
-                glowElement.style.setProperty('--y', `${y}%`);
-            });
-        }
-        
-        // ========================================
-        // 3. PARTÍCULAS FLUTUANTES
+        // 2. PARTÍCULAS FLUTUANTES
         // ========================================
         const particleContainer = document.getElementById('particleContainer');
         function generateParticles(count = 130) {
@@ -683,7 +662,7 @@
         generateParticles(130);
         
         // ========================================
-        // 4. ANIMAÇÃO NOS CARDS (DESTAQUE ROTATIVO)
+        // 3. ANIMAÇÃO NOS CARDS (DESTAQUE ROTATIVO)
         // ========================================
         const techCards = document.querySelectorAll('.tech-card');
         let currentIndex = 0;
@@ -711,7 +690,7 @@
         startCardPulse();
         
         // ========================================
-        // 5. GLITCH OCASIONAL
+        // 4. GLITCH OCASIONAL
         // ========================================
         const glitchElement = document.querySelector('.glitch-title');
         if(glitchElement) {
@@ -726,33 +705,16 @@
         }
         
         // ========================================
-        // 6. ANIMAÇÃO DE ENTRADA
+        // 5. ANIMAÇÃO DE ENTRADA
         // ========================================
         const hero = document.querySelector('.hero-vortex');
         if(hero) hero.style.animation = 'floatReveal 1.2s forwards';
         
-        // Throttle para performance
-        let ticking = false;
-        document.addEventListener('mousemove', (e) => {
-            if(!ticking) {
-                requestAnimationFrame(() => {
-                    if(glowElement) {
-                        const x = (e.clientX / window.innerWidth) * 100;
-                        const y = (e.clientY / window.innerHeight) * 100;
-                        glowElement.style.setProperty('--x', `${x}%`);
-                        glowElement.style.setProperty('--y', `${y}%`);
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-        
         // ========================================
-        // 7. CONSOLE LOG
+        // 6. CONSOLE LOG
         // ========================================
-        console.log("%c✨ PORTFOLIO PREMIUM — Fundo substituído por imagem 12375.png + overlay azul ✨", "color: #FFC107; font-size: 16px; font-weight: bold;");
-        console.log("%cDesign harmônico • Cores ajustadas • Experiência premium", "color: #1565C0; font-size: 12px;");
+        console.log("%c✨ PORTFOLIO PREMIUM — Efeito de glow amarelo removido! ✨", "color: #FFC107; font-size: 16px; font-weight: bold;");
+        console.log("%cAgora o mouse não fica amarelo ao clicar ou mover.", "color: #1565C0; font-size: 12px;");
         
         if(welcomeLink) {
             welcomeLink.addEventListener('click', (e) => {
@@ -761,7 +723,7 @@
         }
         
         // ========================================
-        // 8. ESTRELAS CADENTES ADICIONAIS
+        // 7. ESTRELAS CADENTES ADICIONAIS
         // ========================================
         function addShootingStars() {
             const starContainer = document.querySelector('.golden-sanctum');
