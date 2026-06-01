@@ -3,25 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>📸 Unidade Polo Arapongas | Feed + Stories</title>
+    <title>📸 Unidade Polo Arapongas | Feed + Stories (Estrutura Aprimorada)</title>
     <style>
+        /* ========== RESET & VARIÁVEIS ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-page: #fafafa;
+            --white: #ffffff;
+            --border-light: #dbdbdb;
+            --blue-primary: #0D47A1;
+            --blue-hover: #1565C0;
+            --gold: #FFC107;
+            --gold-dark: #FF8F00;
+            --text-dark: #262626;
+            --text-gray: #8e8e8e;
+            --like-red: #ed4956;
+            --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.2s ease;
+        }
+
         body {
-            background: #fafafa;
+            background: var(--bg-page);
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: #262626;
+            color: var(--text-dark);
             padding-bottom: 40px;
         }
 
-        /* ===== BARRA DE NAVEGAÇÃO (Instagram-style + links) ===== */
+        /* ========== HEADER (sticky) ========== */
         .instagram-header {
-            background: #FFFFFF;
-            border-bottom: 1px solid #dbdbdb;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-light);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -30,51 +47,48 @@
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            backdrop-filter: blur(10px);
-            background: rgba(255,255,255,0.96);
+            gap: 12px;
         }
 
         .logo {
             font-size: 1.8rem;
             font-weight: 600;
-            background: linear-gradient(135deg, #0D47A1, #1565C0);
+            background: linear-gradient(135deg, var(--blue-primary), var(--blue-hover));
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            letter-spacing: -0.5px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .logo i {
             background: none;
-            color: #FFC107;
+            color: var(--gold);
             font-size: 1.6rem;
-            margin-right: 5px;
         }
 
         .nav-links {
             display: flex;
             gap: 25px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
-            color: #0D47A1;
-            transition: 0.2s;
+            color: var(--blue-primary);
+            transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 6px;
         }
 
-        .nav-links a i {
-            font-size: 1.1rem;
-        }
-
         .nav-links a:hover {
-            color: #FFC107;
+            color: var(--gold);
         }
 
         .header-icons {
@@ -84,51 +98,51 @@
 
         .header-icons i {
             font-size: 1.5rem;
-            color: #0D47A1;
-            transition: 0.2s;
+            color: var(--blue-primary);
             cursor: pointer;
+            transition: var(--transition);
         }
 
         .header-icons i:hover {
-            color: #FFC107;
+            color: var(--gold);
         }
 
-        /* ===== STORIES (carrossel horizontal) ===== */
+        /* ========== STORIES (carrossel) ========== */
         .stories-container {
             max-width: 600px;
             margin: 16px auto 20px;
             padding: 0 12px;
             overflow-x: auto;
-            white-space: nowrap;
             scrollbar-width: thin;
-            background: transparent;
         }
+
         .stories-list {
             display: flex;
             gap: 16px;
             padding: 8px 0;
         }
+
         .story-item {
-            display: inline-flex;
+            display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
             cursor: pointer;
             transition: transform 0.2s;
         }
+
         .story-item:hover {
             transform: scale(1.02);
         }
+
         .story-avatar {
             width: 70px;
             height: 70px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #FFC107, #0D47A1);
+            background: linear-gradient(45deg, var(--gold), var(--blue-primary));
             padding: 2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
+
         .story-avatar img {
             width: 100%;
             height: 100%;
@@ -137,16 +151,17 @@
             border: 2px solid white;
             background: white;
         }
+
         .story-name {
             font-size: 0.7rem;
             font-weight: 500;
-            color: #262626;
             max-width: 70px;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        /* ===== FEED ===== */
+        /* ========== FEED ========== */
         .feed-container {
             max-width: 600px;
             margin: 0 auto;
@@ -154,16 +169,16 @@
         }
 
         .post-card {
-            background: white;
-            border: 1px solid #dbdbdb;
+            background: var(--white);
+            border: 1px solid var(--border-light);
             border-radius: 12px;
             margin-bottom: 24px;
             overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: box-shadow 0.2s;
         }
 
         .post-card:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-sm);
         }
 
         .post-header {
@@ -176,7 +191,7 @@
         .avatar {
             width: 42px;
             height: 42px;
-            background: linear-gradient(145deg, #0D47A1, #1565C0);
+            background: linear-gradient(145deg, var(--blue-primary), var(--blue-hover));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -184,6 +199,7 @@
             color: white;
             font-weight: bold;
             font-size: 1.2rem;
+            text-transform: uppercase;
         }
 
         .username {
@@ -193,7 +209,6 @@
 
         .post-options {
             margin-left: auto;
-            color: #262626;
             cursor: pointer;
         }
 
@@ -203,8 +218,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             max-height: 600px;
+            overflow: hidden;
         }
 
         .post-image img {
@@ -223,22 +238,25 @@
 
         .post-actions i {
             cursor: pointer;
-            transition: 0.2s;
-            color: #262626;
+            transition: transform 0.1s ease;
+        }
+
+        .post-actions i:active {
+            transform: scale(0.9);
         }
 
         .fa-heart.liked {
-            color: #ed4956;
+            color: var(--like-red);
         }
 
         .likes-count {
             font-weight: 600;
             font-size: 0.85rem;
-            padding: 0 16px 8px 16px;
+            padding: 0 16px 8px;
         }
 
         .caption {
-            padding: 0 16px 8px 16px;
+            padding: 0 16px 8px;
             font-size: 0.9rem;
             line-height: 1.4;
         }
@@ -248,31 +266,36 @@
             margin-right: 6px;
         }
 
-        /* Comentários simulados */
         .comments-list {
             padding: 4px 16px 8px;
             font-size: 0.85rem;
-            color: #262626;
         }
+
         .comment {
             margin-bottom: 6px;
             display: flex;
             gap: 8px;
+            flex-wrap: wrap;
         }
+
         .comment strong {
             font-weight: 600;
         }
+
         .comment-time {
-            color: #8e8e8e;
+            color: var(--text-gray);
             font-size: 0.7rem;
             margin-top: 2px;
         }
+
         .view-all-comments {
-            color: #8e8e8e;
+            color: var(--text-gray);
             font-size: 0.8rem;
             padding: 6px 16px;
             cursor: pointer;
+            display: inline-block;
         }
+
         .add-comment {
             padding: 8px 16px 12px;
             border-top: 1px solid #efefef;
@@ -280,6 +303,7 @@
             gap: 12px;
             align-items: center;
         }
+
         .add-comment input {
             flex: 1;
             border: none;
@@ -288,27 +312,27 @@
             font-size: 0.85rem;
             padding: 8px 0;
         }
+
         .add-comment button {
             background: none;
             border: none;
-            color: #0D47A1;
+            color: var(--blue-primary);
             font-weight: 600;
             cursor: pointer;
         }
 
-        /* ===== SEÇÃO DE DIFERENCIAIS ===== */
+        /* ========== SEÇÃO DIFERENCIAIS ========== */
         .skills-wrapper {
-            background: linear-gradient(145deg, #0D47A1, #1565C0);
+            background: linear-gradient(145deg, var(--blue-primary), var(--blue-hover));
             margin-top: 30px;
             padding: 40px 20px;
             border-radius: 30px 30px 0 0;
-            box-shadow: 0 -10px 25px rgba(0,0,0,0.05);
         }
 
         .skills-container {
             max-width: 1000px;
             margin: 0 auto;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             border-radius: 40px;
             padding: 30px 20px;
             text-align: center;
@@ -317,7 +341,7 @@
         .skills-title {
             font-size: 2rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #0D47A1, #1976D2);
+            background: linear-gradient(135deg, var(--blue-primary), var(--blue-hover));
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
@@ -329,7 +353,7 @@
         }
 
         .skills-title i {
-            color: #FFC107;
+            color: var(--gold);
             font-size: 2rem;
         }
 
@@ -341,11 +365,11 @@
         }
 
         .skill-card {
-            background: #FFFFFF;
+            background: var(--white);
             border-radius: 50px;
             padding: 12px 28px;
-            border: 1px solid rgba(255,193,7,0.4);
-            transition: all 0.3s;
+            border: 1px solid rgba(255, 193, 7, 0.4);
+            transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 12px;
@@ -353,39 +377,113 @@
 
         .skill-card i {
             font-size: 1.8rem;
-            color: #0D47A1;
+            color: var(--blue-primary);
         }
 
         .skill-card span {
             font-weight: 600;
-            color: #1e2a3a;
         }
 
         .skill-card:hover {
             transform: translateY(-6px);
-            border-color: #FFC107;
+            border-color: var(--gold);
             background: #FFF9E6;
         }
 
         .footer-note {
             text-align: center;
             margin-top: 30px;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 0.85rem;
         }
 
+        /* ========== MODAL (Stories e Comentários) ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+        }
+
+        .modal-content {
+            background: var(--white);
+            max-width: 90%;
+            width: 500px;
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .modal-story-img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 16px 0;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-gray);
+        }
+
+        .comments-modal-list {
+            max-height: 300px;
+            overflow-y: auto;
+            text-align: left;
+            margin: 16px 0;
+            padding-right: 8px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            z-index: 1100;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        /* Responsivo */
         @media (max-width: 680px) {
             .instagram-header {
                 flex-direction: column;
-                gap: 12px;
                 align-items: stretch;
             }
             .nav-links {
                 justify-content: center;
-                flex-wrap: wrap;
-            }
-            .stories-container {
-                margin-top: 12px;
             }
             .story-avatar {
                 width: 60px;
@@ -399,7 +497,7 @@
 
 <header class="instagram-header">
     <div class="logo" onclick="window.location.href='#'">
-        <i class="fab fa-instagram"></i> Polo<span style="color:#FFC107;">Arapongas</span>
+        <i class="fab fa-instagram"></i> Polo<span style="color:var(--gold);">Arapongas</span>
     </div>
     <div class="nav-links">
         <a href="#inicio"><i class="fas fa-home"></i> Início</a>
@@ -414,14 +512,18 @@
     </div>
 </header>
 
-<!-- SEÇÃO DE STORIES -->
-<div class="stories-container" id="storiesSection">
+<!-- Seção âncora Início -->
+<div id="inicio"></div>
+
+<!-- Stories -->
+<div class="stories-container">
     <div class="stories-list" id="storiesList"></div>
 </div>
 
+<!-- Feed -->
 <main class="feed-container" id="feed"></main>
 
-<!-- SEÇÃO DE DIFERENCIAIS -->
+<!-- Seção Diferenciais + Contato -->
 <div class="skills-wrapper" id="sobre">
     <div class="skills-container">
         <div class="skills-title">
@@ -448,194 +550,345 @@
     </div>
 </div>
 
+<!-- Modais -->
+<div id="storyModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 id="storyModalTitle"></h3>
+        <img id="storyModalImage" class="modal-story-img" alt="Story">
+        <p id="storyModalDesc"></p>
+    </div>
+</div>
+
+<div id="commentsModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3>💬 Todos os comentários</h3>
+        <div id="commentsModalList" class="comments-modal-list"></div>
+        <div class="add-comment" style="border-top: none; padding-top: 0;">
+            <input type="text" id="modalCommentInput" placeholder="Adicione um comentário...">
+            <button id="modalCommentBtn">Publicar</button>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
 <script>
-    // ========== STORIES: dados simulados ==========
-    const storiesData = [
-        { name: "Escola Polo", img: "https://randomuser.me/api/portraits/women/68.jpg" },
-        { name: "Prof. Robson", img: "https://randomuser.me/api/portraits/men/32.jpg" },
-        { name: "Lab. Informática", img: "https://randomuser.me/api/portraits/men/45.jpg" },
-        { name: "Biblioteca", img: "https://randomuser.me/api/portraits/women/50.jpg" },
-        { name: "Eventos", img: "https://randomuser.me/api/portraits/men/22.jpg" },
-        { name: "Robótica", img: "https://randomuser.me/api/portraits/women/12.jpg" },
-        { name: "Alunos Destaque", img: "https://randomuser.me/api/portraits/men/75.jpg" },
-        { name: "Direção", img: "https://randomuser.me/api/portraits/women/90.jpg" }
-    ];
+    (function(){
+        // ========== DADOS ==========
+        const storiesData = [
+            { name: "Escola Polo", img: "https://randomuser.me/api/portraits/women/68.jpg", desc: "🏛️ Conheça nossa estrutura moderna e acolhedora." },
+            { name: "Prof. Robson", img: "https://randomuser.me/api/portraits/men/32.jpg", desc: "👨‍🏫 Dicas de tecnologia e programação. Fique ligado!" },
+            { name: "Lab. Informática", img: "https://randomuser.me/api/portraits/men/45.jpg", desc: "💻 Laboratório com 30 estações de última geração." },
+            { name: "Biblioteca", img: "https://randomuser.me/api/portraits/women/50.jpg", desc: "📚 Acervo digital e físico disponível 24h." },
+            { name: "Eventos", img: "https://randomuser.me/api/portraits/men/22.jpg", desc: "🎉 Feira de profissões: 10 de junho. Participe!" },
+            { name: "Robótica", img: "https://randomuser.me/api/portraits/women/12.jpg", desc: "🤖 Equipe campeã estadual de robótica." },
+            { name: "Alunos Destaque", img: "https://randomuser.me/api/portraits/men/75.jpg", desc: "🌟 Alunos desenvolvem app de sustentabilidade." },
+            { name: "Direção", img: "https://randomuser.me/api/portraits/women/90.jpg", desc: "🗣️ Mensagem da diretora: inovação e inclusão." }
+        ];
 
-    const storiesContainer = document.getElementById("storiesList");
-    storiesData.forEach(story => {
-        const storyDiv = document.createElement("div");
-        storyDiv.className = "story-item";
-        storyDiv.onclick = () => alert(`📖 Story de ${story.name}\n\n🎓 Conteúdo exclusivo da Unidade Polo!`);
-        storyDiv.innerHTML = `
-            <div class="story-avatar">
-                <img src="${story.img}" alt="${story.name}" onerror="this.src='https://via.placeholder.com/70?text=Story'">
-            </div>
-            <span class="story-name">${story.name}</span>
-        `;
-        storiesContainer.appendChild(storyDiv);
-    });
+        const imagens = [
+            "WhatsApp Image 2026-05-29 at 08.52.03 (1).jpeg",
+            "WhatsApp Image 2026-05-29 at 08.52.03.jpeg",
+            "WhatsApp Image 2026-05-29 at 08.52.05.jpeg",
+            "WhatsApp Image 2026-05-29 at 08.52.06.jpeg",
+            "WhatsApp Image 2026-05-29 at 08.52.07.jpeg",
+            "WhatsApp Image 2026-05-29 at 08.52.08.jpeg",
+            "WhatsApp Image 2026-05-29 at 08.52.33.jpeg",
+            "WhatsApp Image 2026-05-29 at 08.52.35 (1).jpeg",
+            "WhatsApp Image 2026-05-29 at 08.52.35.jpeg"
+        ];
 
-    // ========== CONFIGURAÇÃO DAS IMAGENS E POSTS ==========
-    const imagens = [
-        "WhatsApp Image 2026-05-29 at 08.52.03 (1).jpeg",
-        "WhatsApp Image 2026-05-29 at 08.52.03.jpeg",
-        "WhatsApp Image 2026-05-29 at 08.52.05.jpeg",
-        "WhatsApp Image 2026-05-29 at 08.52.06.jpeg",
-        "WhatsApp Image 2026-05-29 at 08.52.07.jpeg",
-        "WhatsApp Image 2026-05-29 at 08.52.08.jpeg",
-        "WhatsApp Image 2026-05-29 at 08.52.33.jpeg",
-        "WhatsApp Image 2026-05-29 at 08.52.35 (1).jpeg",
-        "WhatsApp Image 2026-05-29 at 08.52.35.jpeg"
-    ];
+        const usuarios = [
+            "@escola_polo", "@prof_robson_tech", "@alunos_inovadores", "@lab_arapongas",
+            "@diretoria_polo", "@biblioteca_ativa", "@eventos_polo", "@ti_educacao", "@robo_polo"
+        ];
 
-    const usuarios = [
-        "@escola_polo", "@prof_robson_tech", "@alunos_inovadores", "@lab_arapongas",
-        "@diretoria_polo", "@biblioteca_ativa", "@eventos_polo", "@ti_educacao", "@robo_polo"
-    ];
+        const legendas = [
+            "🏫 Nossa fachada renovada! Orgulho de fazer parte da Unidade Polo Arapongas. #EducaçãoQueTransforma",
+            "👨‍🏫 Professor Robson apresentando o projeto de desenvolvimento de sistemas para as turmas de DS. #TecnologiaNaEscola",
+            "👨‍🎓 Alunos do 3º ano em atividade prática no laboratório de informática. Mãos à obra! #FuturoDev",
+            "💻 Laboratório de tecnologia: estações com computadores de última geração para todos os cursos. #Inovação",
+            "📚 Biblioteca digital disponível 24h para alunos e professores. Leitura é poder!",
+            "🏆 Simulação empresarial: alunos criaram startups fictícias e apresentaram pitches incríveis. #Empreendedorismo",
+            "🎓 Formatura dos cursos técnicos – turma 2025. Parabéns formandos! #NovosProfissionais",
+            "🚀 Visita técnica à empresa Tecnopolo Arapongas – conexão direta com o mercado de trabalho.",
+            "🤖 Equipe de robótica classificada para a fase estadual da OBR. Vamos com tudo!"
+        ];
 
-    const legendas = [
-        "🏫 Nossa fachada renovada! Orgulho de fazer parte da Unidade Polo Arapongas. #EducaçãoQueTransforma",
-        "👨‍🏫 Professor Robson apresentando o projeto de desenvolvimento de sistemas para as turmas de DS. #TecnologiaNaEscola",
-        "👨‍🎓 Alunos do 3º ano em atividade prática no laboratório de informática. Mãos à obra! #FuturoDev",
-        "💻 Laboratório de tecnologia: estações com computadores de última geração para todos os cursos. #Inovação",
-        "📚 Biblioteca digital disponível 24h para alunos e professores. Leitura é poder!",
-        "🏆 Simulação empresarial: alunos criaram startups fictícias e apresentaram pitches incríveis. #Empreendedorismo",
-        "🎓 Formatura dos cursos técnicos – turma 2025. Parabéns formandos! #NovosProfissionais",
-        "🚀 Visita técnica à empresa Tecnopolo Arapongas – conexão direta com o mercado de trabalho.",
-        "🤖 Equipe de robótica classificada para a fase estadual da OBR. Vamos com tudo!"
-    ];
+        // Comentários profundos para cada post (arrays)
+        const deepComments = [
+            ["Que estrutura incrível!", "Adoraria estudar aqui", "Parabéns polo!", "Show de bola"],
+            ["Melhor professor!", "Aulas dinâmicas", "Recomendo demais", "Aprendi muito"],
+            ["Alunos dedicados", "Futuro promissor", "Inovação total", "Muito talento"],
+            ["Lab dos sonhos", "Equipamentos top", "Quero fazer curso técnico", "Tecnologia avançada"],
+            ["Biblioteca completa", "Leitura é essencial", "Ambiente silencioso", "Parabéns pelo acervo"],
+            ["Startups incríveis", "Ideias revolucionárias", "Empreendedorismo na prática", "Amei o pitch"],
+            ["Formatura emocionante", "Sucesso a todos", "Merecido!", "Lindo evento"],
+            ["Empresa parceira", "Networking valioso", "Aprendizado real", "Visita produtiva"],
+            ["Robôs fantásticos", "Vai Polo!", "Campeões estaduais", "Orgulho da escola"]
+        ];
 
-    // Comentários simulados para cada post
-    const comentariosExemplo = [
-        ["Que legal! 🚀", "Parabéns escola!", "Incrível estrutura"],
-        ["Professor top! 👏", "Aulas muito boas", "Adoro essa matéria"],
-        ["Alunos dedicados", "Futuro garantido!", "Show de bola"],
-        ["Laboratório moderno demais", "Queria ter um desses", "Tecnologia de ponta"],
-        ["Biblioteca incrível", "Já usei muito!", "Ambiente acolhedor"],
-        ["Startups iradas", "Ideias inovadoras", "Parabéns aos alunos"],
-        ["Emocionante demais", "Sucesso a todos!", "Formatura linda"],
-        ["Empresa sensacional", "Aprendizado real", "Visita valiosa"],
-        ["Robôs dominando", "Vai Polo!", "Campeões"]
-    ];
+        // Gera timestamp relativo (ex: há 2 horas)
+        function getRelativeTime(date) {
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMins = Math.floor(diffMs / 60000);
+            if (diffMins < 1) return "agora mesmo";
+            if (diffMins < 60) return `há ${diffMins} minutos`;
+            const diffHours = Math.floor(diffMins / 60);
+            if (diffHours < 24) return `há ${diffHours} horas`;
+            const diffDays = Math.floor(diffHours / 24);
+            if (diffDays === 1) return "há 1 dia";
+            return `há ${diffDays} dias`;
+        }
 
-    function criarPost(imgSrc, userName, legenda, idx) {
-        const postDiv = document.createElement('div');
-        postDiv.className = 'post-card';
+        // Toast rápido
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.style.opacity = '1';
+            setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+        }
+
+        // ========== MODAL DE STORIES ==========
+        const storyModal = document.getElementById('storyModal');
+        const storyModalTitle = document.getElementById('storyModalTitle');
+        const storyModalImage = document.getElementById('storyModalImage');
+        const storyModalDesc = document.getElementById('storyModalDesc');
+        const closeModalBtns = document.querySelectorAll('.close-modal');
         
-        // Gera 2 comentários de exemplo aleatórios
-        const comentariosPost = comentariosExemplo[idx % comentariosExemplo.length];
-        const comentariosHTML = comentariosPost.slice(0, 2).map(com => `
-            <div class="comment">
-                <strong>${userName}_oficial</strong> <span>${com}</span>
-            </div>
-        `).join('');
-        
-        postDiv.innerHTML = `
-            <div class="post-header">
-                <div class="avatar">${userName.charAt(1).toUpperCase()}</div>
-                <div class="username">${userName}</div>
-                <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
-            </div>
-            <div class="post-image">
-                <img src="${imgSrc}" alt="Publicação da escola" onerror="this.src='https://via.placeholder.com/600x400?text=Imagem+Escola+Polo'">
-            </div>
-            <div class="post-actions">
-                <i class="far fa-heart like-btn" data-liked="false"></i>
-                <i class="far fa-comment"></i>
-                <i class="far fa-paper-plane"></i>
-                <i class="far fa-bookmark" style="margin-left:auto;"></i>
-            </div>
-            <div class="likes-count">❤️ <span class="likes-number">0</span> curtidas</div>
-            <div class="caption">
-                <span>${userName}</span> ${legenda}
-            </div>
-            <div class="comments-list">
-                ${comentariosHTML}
-                <div class="comment-time">Há 2 horas • Ver tradução</div>
-            </div>
-            <div class="view-all-comments">Ver todos os 12 comentários</div>
-            <div class="add-comment">
+        function openStoryModal(story) {
+            storyModalTitle.textContent = story.name;
+            storyModalImage.src = story.img;
+            storyModalImage.onerror = () => { storyModalImage.src = 'https://via.placeholder.com/400x400?text=Story+Polo'; };
+            storyModalDesc.textContent = story.desc;
+            storyModal.style.display = 'flex';
+        }
+
+        // Fechar modais
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                storyModal.style.display = 'none';
+                document.getElementById('commentsModal').style.display = 'none';
+            });
+        });
+        window.addEventListener('click', (e) => {
+            if (e.target === storyModal) storyModal.style.display = 'none';
+            if (e.target === document.getElementById('commentsModal')) document.getElementById('commentsModal').style.display = 'none';
+        });
+
+        // Renderizar Stories
+        const storiesContainer = document.getElementById("storiesList");
+        storiesData.forEach(story => {
+            const storyDiv = document.createElement("div");
+            storyDiv.className = "story-item";
+            storyDiv.setAttribute('aria-label', `Ver story de ${story.name}`);
+            storyDiv.onclick = () => openStoryModal(story);
+            storyDiv.innerHTML = `
+                <div class="story-avatar">
+                    <img src="${story.img}" alt="${story.name}" onerror="this.src='https://via.placeholder.com/70?text=Polo'">
+                </div>
+                <span class="story-name">${story.name}</span>
+            `;
+            storiesContainer.appendChild(storyDiv);
+        });
+
+        // ========== CRIAÇÃO DOS POSTS ==========
+        const feedContainer = document.getElementById('feed');
+        let posts = [];
+
+        // Helper fallback image
+        function handleImageError(img) {
+            img.src = 'https://via.placeholder.com/600x400?text=Unidade+Polo';
+        }
+
+        // Cria post individual
+        function createPost(imgSrc, userName, legenda, idx, postDate) {
+            const postDiv = document.createElement('div');
+            postDiv.className = 'post-card';
+            const avatarLetter = userName.charAt(1).toUpperCase() || 'P';
+            const commentsArray = deepComments[idx % deepComments.length];
+            let currentComments = [...commentsArray]; // cópia mutável
+            
+            // Função para renderizar lista de comentários (limite 2)
+            function renderCommentsList(container, showAll = false) {
+                container.innerHTML = '';
+                const toShow = showAll ? currentComments : currentComments.slice(0, 2);
+                toShow.forEach(com => {
+                    const commentDiv = document.createElement('div');
+                    commentDiv.className = 'comment';
+                    commentDiv.innerHTML = `<strong>${userName}_oficial</strong> <span>${com}</span>`;
+                    container.appendChild(commentDiv);
+                });
+                if (!showAll && currentComments.length > 2) {
+                    const viewAll = document.createElement('div');
+                    viewAll.className = 'view-all-comments';
+                    viewAll.textContent = `Ver todos os ${currentComments.length} comentários`;
+                    viewAll.onclick = () => openCommentsModal();
+                    container.appendChild(viewAll);
+                }
+            }
+            
+            const commentsListDiv = document.createElement('div');
+            commentsListDiv.className = 'comments-list';
+            renderCommentsList(commentsListDiv, false);
+            
+            // Modal de comentários (post específico)
+            function openCommentsModal() {
+                const modal = document.getElementById('commentsModal');
+                const modalList = document.getElementById('commentsModalList');
+                modalList.innerHTML = '';
+                currentComments.forEach(com => {
+                    const p = document.createElement('div');
+                    p.className = 'comment';
+                    p.innerHTML = `<strong>${userName}_oficial</strong> <span>${com}</span>`;
+                    modalList.appendChild(p);
+                });
+                modal.style.display = 'flex';
+                
+                // Publicar do modal
+                const modalInput = document.getElementById('modalCommentInput');
+                const modalBtn = document.getElementById('modalCommentBtn');
+                const oldHandler = modalBtn.onclick;
+                modalBtn.onclick = () => {
+                    const newCom = modalInput.value.trim();
+                    if (newCom) {
+                        currentComments.push(newCom);
+                        renderCommentsList(commentsListDiv, false);
+                        modalInput.value = '';
+                        showToast('💬 Comentário adicionado!');
+                        // Atualiza também o modal aberto
+                        const updatedList = document.getElementById('commentsModalList');
+                        const newCommentDiv = document.createElement('div');
+                        newCommentDiv.className = 'comment';
+                        newCommentDiv.innerHTML = `<strong>${userName}_oficial</strong> <span>${newCom}</span>`;
+                        updatedList.appendChild(newCommentDiv);
+                    } else {
+                        showToast('Digite um comentário.');
+                    }
+                };
+            }
+            
+            postDiv.innerHTML = `
+                <div class="post-header">
+                    <div class="avatar">${avatarLetter}</div>
+                    <div class="username">${userName}</div>
+                    <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
+                </div>
+                <div class="post-image">
+                    <img src="${imgSrc}" alt="Publicação da ${userName}" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x400?text=Imagem+Escola+Polo'">
+                </div>
+                <div class="post-actions">
+                    <i class="far fa-heart like-btn" data-liked="false"></i>
+                    <i class="far fa-comment"></i>
+                    <i class="far fa-paper-plane"></i>
+                    <i class="far fa-bookmark" style="margin-left:auto;"></i>
+                </div>
+                <div class="likes-count">❤️ <span class="likes-number">0</span> curtidas</div>
+                <div class="caption">
+                    <span>${userName}</span> ${legenda}
+                </div>
+                <div class="comment-time" style="padding:0 16px 8px;">${getRelativeTime(postDate)}</div>
+            `;
+            // Anexa commentsListDiv
+            postDiv.appendChild(commentsListDiv);
+            
+            // Add comment box
+            const addCommentDiv = document.createElement('div');
+            addCommentDiv.className = 'add-comment';
+            addCommentDiv.innerHTML = `
                 <i class="far fa-smile-wink"></i>
                 <input type="text" placeholder="Adicione um comentário...">
                 <button class="publish-comment">Publicar</button>
-            </div>
-        `;
-        
-        // Lógica de like
-        const likeBtn = postDiv.querySelector('.like-btn');
-        const likesSpan = postDiv.querySelector('.likes-number');
-        let likes = Math.floor(Math.random() * 90) + 20;
-        likesSpan.innerText = likes;
-        
-        likeBtn.addEventListener('click', () => {
-            const isLiked = likeBtn.getAttribute('data-liked') === 'true';
-            if (!isLiked) {
-                likeBtn.classList.add('liked');
-                likeBtn.classList.remove('far');
-                likeBtn.classList.add('fas');
-                likes++;
-                likeBtn.setAttribute('data-liked', 'true');
-            } else {
-                likeBtn.classList.remove('liked');
-                likeBtn.classList.remove('fas');
-                likeBtn.classList.add('far');
-                likes--;
-                likeBtn.setAttribute('data-liked', 'false');
-            }
+            `;
+            postDiv.appendChild(addCommentDiv);
+            
+            // Lógica like
+            const likeBtn = postDiv.querySelector('.like-btn');
+            const likesSpan = postDiv.querySelector('.likes-number');
+            let likes = Math.floor(Math.random() * 90) + 20;
             likesSpan.innerText = likes;
+            
+            likeBtn.addEventListener('click', () => {
+                const isLiked = likeBtn.getAttribute('data-liked') === 'true';
+                if (!isLiked) {
+                    likeBtn.classList.add('liked');
+                    likeBtn.classList.remove('far');
+                    likeBtn.classList.add('fas');
+                    likes++;
+                    likeBtn.setAttribute('data-liked', 'true');
+                    showToast('❤️ Você curtiu essa publicação!');
+                } else {
+                    likeBtn.classList.remove('liked');
+                    likeBtn.classList.remove('fas');
+                    likeBtn.classList.add('far');
+                    likes--;
+                    likeBtn.setAttribute('data-liked', 'false');
+                }
+                likesSpan.innerText = likes;
+            });
+            
+            // Comentar direto no post
+            const commentInput = addCommentDiv.querySelector('input');
+            const publishBtn = addCommentDiv.querySelector('.publish-comment');
+            publishBtn.addEventListener('click', () => {
+                const newComment = commentInput.value.trim();
+                if (newComment) {
+                    currentComments.push(newComment);
+                    renderCommentsList(commentsListDiv, false);
+                    commentInput.value = '';
+                    showToast('💬 Comentário publicado!');
+                } else {
+                    showToast('Escreva algo antes de publicar.');
+                }
+            });
+            
+            // Ícone de comentário abre modal
+            const commentIcon = postDiv.querySelector('.post-actions .fa-comment');
+            commentIcon.addEventListener('click', openCommentsModal);
+            
+            return postDiv;
+        }
+        
+        // Gerar posts com datas decrescentes (últimos 5 dias)
+        imagens.forEach((img, idx) => {
+            const user = usuarios[idx % usuarios.length];
+            const leg = legendas[idx % legendas.length];
+            const postDate = new Date();
+            postDate.setDate(postDate.getDate() - (idx % 5)); // datas variadas
+            const post = createPost(img, user, leg, idx, postDate);
+            feedContainer.appendChild(post);
         });
         
-        // Comentário simples
-        const commentInput = postDiv.querySelector('.add-comment input');
-        const publishBtn = postDiv.querySelector('.publish-comment');
-        const commentsListDiv = postDiv.querySelector('.comments-list');
-        
-        publishBtn.addEventListener('click', () => {
-            const newComment = commentInput.value.trim();
-            if (newComment !== "") {
-                const newCommentDiv = document.createElement('div');
-                newCommentDiv.className = 'comment';
-                newCommentDiv.innerHTML = `<strong>voce_escola</strong> <span>${newComment}</span>`;
-                commentsListDiv.insertBefore(newCommentDiv, commentsListDiv.firstChild);
-                commentInput.value = "";
-                // Pequeno feedback
-                alert("💬 Comentário adicionado!");
-            }
+        // ========== NAVEGAÇÃO SUAVE ==========
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const targetId = link.getAttribute('href');
+                if (targetId && targetId !== '#') {
+                    e.preventDefault();
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else if (targetId === '#feed') {
+                        document.getElementById('feed').scrollIntoView({ behavior: 'smooth' });
+                    }
+                }
+            });
         });
         
-        return postDiv;
-    }
-
-    const feedContainer = document.getElementById('feed');
-    imagens.forEach((img, idx) => {
-        const usuario = usuarios[idx % usuarios.length];
-        const legenda = legendas[idx % legendas.length];
-        const post = criarPost(img, usuario, legenda, idx);
-        feedContainer.appendChild(post);
-    });
-
-    // ========== INTERAÇÕES GERAIS ==========
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const targetId = link.getAttribute('href');
-            if (targetId && targetId !== '#') {
-                e.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+        // Header ícone coração
+        const heartIcon = document.getElementById('notifHeart');
+        if (heartIcon) {
+            heartIcon.addEventListener('click', () => showToast('📢 Feira de profissões: 10/06! Participe!'));
+        }
+        document.querySelectorAll('.header-icons i:not(#notifHeart)').forEach(icon => {
+            icon.addEventListener('click', () => showToast('🔔 Em breve, central de mensagens e perfil do aluno.'));
         });
-    });
-
-    const heartIcon = document.getElementById('notifHeart');
-    if (heartIcon) {
-        heartIcon.addEventListener('click', () => alert('📢 Últimas novidades: Feira de profissões será dia 10/06! Participe!'));
-    }
-    document.querySelectorAll('.header-icons i:not(#notifHeart)').forEach(icon => {
-        icon.addEventListener('click', () => alert('🔔 Em breve, central de mensagens e perfil do aluno.'));
-    });
-    
-    console.log("%c📸 Feed + Stories da Unidade Polo Arapongas carregado com sucesso!", "color: #0D47A1; font-size: 14px; font-weight: bold;");
-    console.log("%cStories interativos + comentários simulados", "color: #FFC107");
+        
+        console.log("%c✨ Estrutura aprimorada: Stories modal + comentários dinâmicos + tempo relativo ✨", "color: #0D47A1; font-size: 14px; font-weight: bold;");
+    })();
 </script>
 </body>
 </html>
