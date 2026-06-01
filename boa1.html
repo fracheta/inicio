@@ -57,13 +57,18 @@
             scroll-snap-type: y mandatory;
         }
 
-        /* CAMADA AZUL (60% da altura) */
+        /* CAMADA DE FUNDO COM IMAGEM (substitui o azul 60%) */
         .golden-sanctum {
             position: relative;
             height: 60vh;
             min-height: 500px;
             width: 100%;
-            background: radial-gradient(ellipse at 30% 40%, #1976D2 0%, #0D47A1 70%, #0A2E6E 100%);
+            /* Imagem de fundo principal */
+            background-image: url('12375.png');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* efeito parallax suave */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,6 +76,20 @@
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             isolation: isolate;
+        }
+        
+        /* Overlay escuro para garantir contraste do texto (mantém a sensação "azul" original) */
+        .golden-sanctum::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 71, 161, 0.65); /* tom azul sobre a imagem */
+            backdrop-filter: brightness(0.85) saturate(1.2);
+            z-index: 1;
+            pointer-events: none;
         }
 
         /* CAMADA BRANCA (30% da altura) */
@@ -104,7 +123,7 @@
             background-repeat: repeat, repeat, repeat, repeat;
             background-size: auto, auto, auto, 48px;
             pointer-events: none;
-            z-index: 0;
+            z-index: 2; /* acima do overlay escuro, mas abaixo do conteúdo */
             opacity: 0.45;
             mix-blend-mode: overlay;
         }
@@ -114,18 +133,18 @@
             mix-blend-mode: soft-light;
         }
 
-        /* Overlay de brilho dinâmico */
+        /* Brilho dinâmico que segue o mouse */
         .glow-aura {
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,193,7,0.2) 0%, transparent 60%);
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255,193,7,0.25) 0%, transparent 60%);
             pointer-events: none;
-            z-index: 1;
+            z-index: 3;
             transition: background 0.1s ease;
         }
 
         /* ============================================
-           CONTEÚDO PRINCIPAL - HERO SECTION
+           CONTEÚDO PRINCIPAL - HERO SECTION (acima da imagem e overlays)
         ============================================ */
         .hero-vortex {
             position: relative;
@@ -155,7 +174,7 @@
             color: #FFFFFF;
             letter-spacing: -0.02em;
             line-height: 1.2;
-            text-shadow: 3px 3px 12px rgba(0,0,0,0.25);
+            text-shadow: 3px 3px 12px rgba(0,0,0,0.5);
             margin-bottom: 0.5rem;
             position: relative;
             display: inline-block;
@@ -203,10 +222,11 @@
             justify-content: center;
             gap: 0.8rem;
             flex-wrap: wrap;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
         }
 
         .tech-tagline i {
-            background: rgba(255,255,255,0.15);
+            background: rgba(0,0,0,0.3);
             padding: 8px;
             border-radius: 50%;
             font-size: 1.2rem;
@@ -427,7 +447,7 @@
                               linear-gradient(to bottom, rgba(255,193,7,0.12) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
-            z-index: 1;
+            z-index: 2;
             animation: gridMove 20s linear infinite;
         }
 
@@ -511,6 +531,18 @@
                 opacity: 0;
             }
         }
+        
+        /* Ajuste para garantir que o conteúdo fique acima do overlay */
+        .golden-sanctum .hero-vortex,
+        .golden-sanctum .tech-cosmos,
+        .golden-sanctum .grid-lines,
+        .golden-sanctum .glow-aura,
+        .golden-sanctum .shooting-star {
+            z-index: 10;
+        }
+        .golden-sanctum .hero-vortex {
+            z-index: 25;
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -518,7 +550,7 @@
 <body>
 
 <div class="welcome-master">
-    <!-- 60% AZUL - SEÇÃO PRINCIPAL -->
+    <!-- 60% da altura - fundo agora com imagem + overlay azulado -->
     <section class="golden-sanctum">
         <div class="tech-cosmos"></div>
         <div class="grid-lines"></div>
@@ -544,7 +576,7 @@
                     <i class="fas fa-gem"></i> Portal para a Matéria do professor ROBSON
                 </a>
             </div>
-            <div style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.8; color: #e0e0e0;">
+            <div style="margin-top: 2rem; font-size: 0.8rem; opacity: 0.9; color: #f0f0f0; text-shadow: 0 1px 2px black;">
                 <i class="fas fa-mouse-pointer"></i> role para descobrir skills
             </div>
         </div>
@@ -605,11 +637,9 @@
         const exploreBtn = document.getElementById('premiumExploreBtn');
         const welcomeLink = document.getElementById('premiumWelcomeLink');
         
-        // REDIRECIONAMENTO DIRETO para ist.html
         if(exploreBtn) {
             exploreBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Pequeno efeito visual antes do redirecionamento (opcional)
                 exploreBtn.style.transform = 'scale(0.96)';
                 setTimeout(() => {
                     window.location.href = 'ist.html';
@@ -721,7 +751,7 @@
         // ========================================
         // 7. CONSOLE LOG
         // ========================================
-        console.log("%c✨ PORTFOLIO PREMIUM — 60% Azul | 30% Branco | 10% Amarelo ✨", "color: #FFC107; font-size: 16px; font-weight: bold;");
+        console.log("%c✨ PORTFOLIO PREMIUM — Fundo substituído por imagem 12375.png + overlay azul ✨", "color: #FFC107; font-size: 16px; font-weight: bold;");
         console.log("%cDesign harmônico • Cores ajustadas • Experiência premium", "color: #1565C0; font-size: 12px;");
         
         if(welcomeLink) {
@@ -780,8 +810,8 @@
         animation: subtlePulse 3s infinite alternate;
     }
     @keyframes subtlePulse {
-        0% { text-shadow: 2px 2px 8px rgba(0,0,0,0.15); }
-        100% { text-shadow: 4px 4px 15px rgba(0,0,0,0.3); }
+        0% { text-shadow: 2px 2px 8px rgba(0,0,0,0.3); }
+        100% { text-shadow: 4px 4px 15px rgba(0,0,0,0.5); }
     }
     .floating-particles {
         pointer-events: none;
