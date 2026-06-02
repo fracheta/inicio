@@ -552,7 +552,7 @@
     </div>
 </div>
 
-<!-- Modal de comentários (único modal, sem stories) -->
+<!-- Modal de comentários -->
 <div id="commentsModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
@@ -610,9 +610,9 @@
         }
         
         // ========== DADOS DOS STORIES ==========
-        // ALTERAÇÃO: Imagem do Prof. Robson agora é "1556.png"
+        // Alterado: imagem da Escola Polo agora é "unidade polo.jpg.jpeg"
         const storiesData = [
-            { name: "Escola Polo", img: "https://randomuser.me/api/portraits/women/68.jpg", desc: "🏛️ Conheça nossa estrutura moderna e acolhedora." },
+            { name: "Escola Polo", img: "unidade polo.jpg.jpeg", desc: "🏛️ Conheça nossa estrutura moderna e acolhedora." },
             { name: "Prof. Robson", img: "1556.png", desc: "👨‍🏫 Dicas de tecnologia e programação." },
             { name: "Lab. Informática", img: "https://randomuser.me/api/portraits/men/45.jpg", desc: "💻 Laboratório com 30 estações de última geração." },
             { name: "Biblioteca", img: "https://randomuser.me/api/portraits/women/50.jpg", desc: "📚 Acervo digital e físico disponível 24h." },
@@ -689,8 +689,9 @@
             const storyDiv = document.createElement("div");
             storyDiv.className = "story-item";
             storyDiv.onclick = () => abrirPerfil(story.name);
-            // Fallback para a imagem 1556.png caso não carregue
-            const imgOnError = story.name === "Prof. Robson" ? "this.onerror=null;this.src='https://via.placeholder.com/70?text=Robson'" : "this.src='https://via.placeholder.com/70?text=Polo'";
+            let imgOnError = "this.src='https://via.placeholder.com/70?text=Polo'";
+            if (story.name === "Prof. Robson") imgOnError = "this.onerror=null;this.src='https://via.placeholder.com/70?text=Robson'";
+            if (story.name === "Escola Polo") imgOnError = "this.onerror=null;this.src='https://via.placeholder.com/70?text=Escola'";
             storyDiv.innerHTML = `
                 <div class="story-avatar">
                     <img src="${story.img}" alt="${story.name}" onerror="${imgOnError}">
@@ -900,7 +901,7 @@
             }
         });
         
-        console.log("%c✨ Imagem do Prof. Robson alterada para 1556.png nos Stories ✨", "color: #0D47A1; font-size: 14px; font-weight: bold;");
+        console.log("%c✨ Imagem da Escola Polo alterada para 'unidade polo.jpg.jpeg' ✨", "color: #0D47A1; font-size: 14px; font-weight: bold;");
     })();
 </script>
 </body>
