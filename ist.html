@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>📸 Unidade Polo Arapongas | Feed + Stories (Estrutura Aprimorada)</title>
+    <title>📸 Unidade Polo Arapongas | Feed + Perfis com Arquivos Externos</title>
     <style>
         /* ========== RESET & VARIÁVEIS ========== */
         * {
@@ -200,11 +200,18 @@
             font-weight: bold;
             font-size: 1.2rem;
             text-transform: uppercase;
+            cursor: pointer;
         }
 
         .username {
             font-weight: 600;
             font-size: 0.95rem;
+            cursor: pointer;
+            color: var(--blue-primary);
+            text-decoration: none;
+        }
+        .username:hover {
+            text-decoration: underline;
         }
 
         .post-options {
@@ -264,6 +271,11 @@
         .caption span {
             font-weight: 600;
             margin-right: 6px;
+            cursor: pointer;
+            color: var(--blue-primary);
+        }
+        .caption span:hover {
+            text-decoration: underline;
         }
 
         .comments-list {
@@ -397,7 +409,7 @@
             font-size: 0.85rem;
         }
 
-        /* ========== MODAL (Stories e Comentários) ========== */
+        /* ========== MODAL (apenas comentários) ========== */
         .modal {
             display: none;
             position: fixed;
@@ -421,14 +433,6 @@
             text-align: center;
             position: relative;
             animation: fadeInUp 0.3s ease;
-        }
-
-        .modal-story-img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 16px;
-            margin: 16px 0;
         }
 
         .close-modal {
@@ -476,7 +480,6 @@
             pointer-events: none;
         }
 
-        /* Responsivo */
         @media (max-width: 680px) {
             .instagram-header {
                 flex-direction: column;
@@ -512,7 +515,6 @@
     </div>
 </header>
 
-<!-- Seção âncora Início -->
 <div id="inicio"></div>
 
 <!-- Stories -->
@@ -550,16 +552,7 @@
     </div>
 </div>
 
-<!-- Modais -->
-<div id="storyModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal">&times;</span>
-        <h3 id="storyModalTitle"></h3>
-        <img id="storyModalImage" class="modal-story-img" alt="Story">
-        <p id="storyModalDesc"></p>
-    </div>
-</div>
-
+<!-- Modal de comentários (único modal, sem stories) -->
 <div id="commentsModal" class="modal">
     <div class="modal-content">
         <span class="close-modal">&times;</span>
@@ -576,10 +569,55 @@
 
 <script>
     (function(){
-        // ========== DADOS ==========
+        // ========== MAPEAMENTO DE PERFIS PARA ARQUIVOS ==========
+        // Lista exata fornecida pelo usuário (com duplicatas, mas consideramos os nomes únicos)
+        const nomesPerfis = [
+            "Escola Polo", "Prof. Robson", "Lab. Informática", "Biblioteca",
+            "Eventos", "Robótica", "Alunos Destaque", "Direção"
+        ];
+        
+        // Função para converter nome do perfil em nome de arquivo (ex: "Escola Polo" -> "escola_polo.html")
+        function gerarArquivoPerfil(nomePerfil) {
+            let nomeArquivo = nomePerfil.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // remove acentos
+            nomeArquivo = nomeArquivo.toLowerCase().replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
+            return nomeArquivo + ".html";
+        }
+        
+        // Mapa de nome do perfil -> URL do arquivo
+        const perfilToFile = {};
+        nomesPerfis.forEach(nome => {
+            perfilToFile[nome] = gerarArquivoPerfil(nome);
+        });
+        
+        // Mapa de usernames dos posts para os nomes de perfil (ajuste conforme os dados dos posts)
+        const usernameToPerfil = {
+            "@escola_polo": "Escola Polo",
+            "@prof_robson_tech": "Prof. Robson",
+            "@alunos_inovadores": "Alunos Destaque",
+            "@lab_arapongas": "Lab. Informática",
+            "@diretoria_polo": "Direção",
+            "@biblioteca_ativa": "Biblioteca",
+            "@eventos_polo": "Eventos",
+            "@ti_educacao": "Lab. Informática",
+            "@robo_polo": "Robótica"
+        };
+        
+        // Função que abre o arquivo do perfil em nova aba
+        function abrirPerfil(nomePerfil) {
+            if (!nomePerfil) return;
+            const arquivo = perfilToFile[nomePerfil];
+            if (arquivo) {
+                window.open(arquivo, '_blank');
+                showToast(`Abrindo perfil: ${nomePerfil}`);
+            } else {
+                showToast(`Perfil "${nomePerfil}" não possui arquivo configurado.`);
+            }
+        }
+        
+        // ========== DADOS DOS STORIES (agora sem modal, cada story abre o perfil) ==========
         const storiesData = [
             { name: "Escola Polo", img: "https://randomuser.me/api/portraits/women/68.jpg", desc: "🏛️ Conheça nossa estrutura moderna e acolhedora." },
-            { name: "Prof. Robson", img: "https://randomuser.me/api/portraits/men/32.jpg", desc: "👨‍🏫 Dicas de tecnologia e programação. Fique ligado!" },
+            { name: "Prof. Robson", img: "https://randomuser.me/api/portraits/men/32.jpg", desc: "👨‍🏫 Dicas de tecnologia e programação." },
             { name: "Lab. Informática", img: "https://randomuser.me/api/portraits/men/45.jpg", desc: "💻 Laboratório com 30 estações de última geração." },
             { name: "Biblioteca", img: "https://randomuser.me/api/portraits/women/50.jpg", desc: "📚 Acervo digital e físico disponível 24h." },
             { name: "Eventos", img: "https://randomuser.me/api/portraits/men/22.jpg", desc: "🎉 Feira de profissões: 10 de junho. Participe!" },
@@ -587,7 +625,7 @@
             { name: "Alunos Destaque", img: "https://randomuser.me/api/portraits/men/75.jpg", desc: "🌟 Alunos desenvolvem app de sustentabilidade." },
             { name: "Direção", img: "https://randomuser.me/api/portraits/women/90.jpg", desc: "🗣️ Mensagem da diretora: inovação e inclusão." }
         ];
-
+        
         const imagens = [
             "WhatsApp Image 2026-05-29 at 08.52.03 (1).jpeg",
             "WhatsApp Image 2026-05-29 at 08.52.03.jpeg",
@@ -599,12 +637,12 @@
             "WhatsApp Image 2026-05-29 at 08.52.35 (1).jpeg",
             "WhatsApp Image 2026-05-29 at 08.52.35.jpeg"
         ];
-
+        
         const usuarios = [
             "@escola_polo", "@prof_robson_tech", "@alunos_inovadores", "@lab_arapongas",
             "@diretoria_polo", "@biblioteca_ativa", "@eventos_polo", "@ti_educacao", "@robo_polo"
         ];
-
+        
         const legendas = [
             "🏫 Nossa fachada renovada! Orgulho de fazer parte da Unidade Polo Arapongas. #EducaçãoQueTransforma",
             "👨‍🏫 Professor Robson apresentando o projeto de desenvolvimento de sistemas para as turmas de DS. #TecnologiaNaEscola",
@@ -616,8 +654,7 @@
             "🚀 Visita técnica à empresa Tecnopolo Arapongas – conexão direta com o mercado de trabalho.",
             "🤖 Equipe de robótica classificada para a fase estadual da OBR. Vamos com tudo!"
         ];
-
-        // Comentários profundos para cada post (arrays)
+        
         const deepComments = [
             ["Que estrutura incrível!", "Adoraria estudar aqui", "Parabéns polo!", "Show de bola"],
             ["Melhor professor!", "Aulas dinâmicas", "Recomendo demais", "Aprendi muito"],
@@ -629,8 +666,7 @@
             ["Empresa parceira", "Networking valioso", "Aprendizado real", "Visita produtiva"],
             ["Robôs fantásticos", "Vai Polo!", "Campeões estaduais", "Orgulho da escola"]
         ];
-
-        // Gera timestamp relativo (ex: há 2 horas)
+        
         function getRelativeTime(date) {
             const now = new Date();
             const diffMs = now - date;
@@ -643,49 +679,20 @@
             if (diffDays === 1) return "há 1 dia";
             return `há ${diffDays} dias`;
         }
-
-        // Toast rápido
+        
         function showToast(msg) {
             const toast = document.getElementById('toast');
             toast.textContent = msg;
             toast.style.opacity = '1';
             setTimeout(() => { toast.style.opacity = '0'; }, 2000);
         }
-
-        // ========== MODAL DE STORIES ==========
-        const storyModal = document.getElementById('storyModal');
-        const storyModalTitle = document.getElementById('storyModalTitle');
-        const storyModalImage = document.getElementById('storyModalImage');
-        const storyModalDesc = document.getElementById('storyModalDesc');
-        const closeModalBtns = document.querySelectorAll('.close-modal');
         
-        function openStoryModal(story) {
-            storyModalTitle.textContent = story.name;
-            storyModalImage.src = story.img;
-            storyModalImage.onerror = () => { storyModalImage.src = 'https://via.placeholder.com/400x400?text=Story+Polo'; };
-            storyModalDesc.textContent = story.desc;
-            storyModal.style.display = 'flex';
-        }
-
-        // Fechar modais
-        closeModalBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                storyModal.style.display = 'none';
-                document.getElementById('commentsModal').style.display = 'none';
-            });
-        });
-        window.addEventListener('click', (e) => {
-            if (e.target === storyModal) storyModal.style.display = 'none';
-            if (e.target === document.getElementById('commentsModal')) document.getElementById('commentsModal').style.display = 'none';
-        });
-
-        // Renderizar Stories
+        // ========== RENDER STORIES (agora cada story abre o perfil) ==========
         const storiesContainer = document.getElementById("storiesList");
         storiesData.forEach(story => {
             const storyDiv = document.createElement("div");
             storyDiv.className = "story-item";
-            storyDiv.setAttribute('aria-label', `Ver story de ${story.name}`);
-            storyDiv.onclick = () => openStoryModal(story);
+            storyDiv.onclick = () => abrirPerfil(story.name);
             storyDiv.innerHTML = `
                 <div class="story-avatar">
                     <img src="${story.img}" alt="${story.name}" onerror="this.src='https://via.placeholder.com/70?text=Polo'">
@@ -694,32 +701,27 @@
             `;
             storiesContainer.appendChild(storyDiv);
         });
-
+        
         // ========== CRIAÇÃO DOS POSTS ==========
         const feedContainer = document.getElementById('feed');
-        let posts = [];
-
-        // Helper fallback image
-        function handleImageError(img) {
-            img.src = 'https://via.placeholder.com/600x400?text=Unidade+Polo';
-        }
-
-        // Cria post individual
+        
         function createPost(imgSrc, userName, legenda, idx, postDate) {
             const postDiv = document.createElement('div');
             postDiv.className = 'post-card';
             const avatarLetter = userName.charAt(1).toUpperCase() || 'P';
             const commentsArray = deepComments[idx % deepComments.length];
-            let currentComments = [...commentsArray]; // cópia mutável
+            let currentComments = [...commentsArray];
             
-            // Função para renderizar lista de comentários (limite 2)
+            // Descobrir nome do perfil real a partir do username do post
+            const nomePerfilPost = usernameToPerfil[userName] || "Escola Polo";
+            
             function renderCommentsList(container, showAll = false) {
                 container.innerHTML = '';
                 const toShow = showAll ? currentComments : currentComments.slice(0, 2);
                 toShow.forEach(com => {
                     const commentDiv = document.createElement('div');
                     commentDiv.className = 'comment';
-                    commentDiv.innerHTML = `<strong>${userName}_oficial</strong> <span>${com}</span>`;
+                    commentDiv.innerHTML = `<strong>${userName}</strong> <span>${com}</span>`;
                     container.appendChild(commentDiv);
                 });
                 if (!showAll && currentComments.length > 2) {
@@ -735,7 +737,6 @@
             commentsListDiv.className = 'comments-list';
             renderCommentsList(commentsListDiv, false);
             
-            // Modal de comentários (post específico)
             function openCommentsModal() {
                 const modal = document.getElementById('commentsModal');
                 const modalList = document.getElementById('commentsModalList');
@@ -743,15 +744,13 @@
                 currentComments.forEach(com => {
                     const p = document.createElement('div');
                     p.className = 'comment';
-                    p.innerHTML = `<strong>${userName}_oficial</strong> <span>${com}</span>`;
+                    p.innerHTML = `<strong>${userName}</strong> <span>${com}</span>`;
                     modalList.appendChild(p);
                 });
                 modal.style.display = 'flex';
                 
-                // Publicar do modal
                 const modalInput = document.getElementById('modalCommentInput');
                 const modalBtn = document.getElementById('modalCommentBtn');
-                const oldHandler = modalBtn.onclick;
                 modalBtn.onclick = () => {
                     const newCom = modalInput.value.trim();
                     if (newCom) {
@@ -759,11 +758,10 @@
                         renderCommentsList(commentsListDiv, false);
                         modalInput.value = '';
                         showToast('💬 Comentário adicionado!');
-                        // Atualiza também o modal aberto
                         const updatedList = document.getElementById('commentsModalList');
                         const newCommentDiv = document.createElement('div');
                         newCommentDiv.className = 'comment';
-                        newCommentDiv.innerHTML = `<strong>${userName}_oficial</strong> <span>${newCom}</span>`;
+                        newCommentDiv.innerHTML = `<strong>${userName}</strong> <span>${newCom}</span>`;
                         updatedList.appendChild(newCommentDiv);
                     } else {
                         showToast('Digite um comentário.');
@@ -773,8 +771,8 @@
             
             postDiv.innerHTML = `
                 <div class="post-header">
-                    <div class="avatar">${avatarLetter}</div>
-                    <div class="username">${userName}</div>
+                    <div class="avatar" data-perfil="${nomePerfilPost}">${avatarLetter}</div>
+                    <div class="username" data-perfil="${nomePerfilPost}">${userName}</div>
                     <div class="post-options"><i class="fas fa-ellipsis-h"></i></div>
                 </div>
                 <div class="post-image">
@@ -788,14 +786,12 @@
                 </div>
                 <div class="likes-count">❤️ <span class="likes-number">0</span> curtidas</div>
                 <div class="caption">
-                    <span>${userName}</span> ${legenda}
+                    <span class="caption-username" data-perfil="${nomePerfilPost}">${userName}</span> ${legenda}
                 </div>
                 <div class="comment-time" style="padding:0 16px 8px;">${getRelativeTime(postDate)}</div>
             `;
-            // Anexa commentsListDiv
             postDiv.appendChild(commentsListDiv);
             
-            // Add comment box
             const addCommentDiv = document.createElement('div');
             addCommentDiv.className = 'add-comment';
             addCommentDiv.innerHTML = `
@@ -805,12 +801,11 @@
             `;
             postDiv.appendChild(addCommentDiv);
             
-            // Lógica like
+            // Lógica de like
             const likeBtn = postDiv.querySelector('.like-btn');
             const likesSpan = postDiv.querySelector('.likes-number');
             let likes = Math.floor(Math.random() * 90) + 20;
             likesSpan.innerText = likes;
-            
             likeBtn.addEventListener('click', () => {
                 const isLiked = likeBtn.getAttribute('data-liked') === 'true';
                 if (!isLiked) {
@@ -830,7 +825,7 @@
                 likesSpan.innerText = likes;
             });
             
-            // Comentar direto no post
+            // Comentar direto
             const commentInput = addCommentDiv.querySelector('input');
             const publishBtn = addCommentDiv.querySelector('.publish-comment');
             publishBtn.addEventListener('click', () => {
@@ -845,24 +840,37 @@
                 }
             });
             
-            // Ícone de comentário abre modal
+            // Abrir modal de comentários pelo ícone
             const commentIcon = postDiv.querySelector('.post-actions .fa-comment');
             commentIcon.addEventListener('click', openCommentsModal);
+            
+            // Adicionar eventos de clique para abrir perfil (avatar, username, caption-username)
+            const avatarDiv = postDiv.querySelector('.avatar');
+            const usernameSpan = postDiv.querySelector('.username');
+            const captionUser = postDiv.querySelector('.caption-username');
+            
+            const abrirPerfilHandler = (e) => {
+                const perfil = e.currentTarget.getAttribute('data-perfil');
+                if (perfil) abrirPerfil(perfil);
+            };
+            if (avatarDiv) avatarDiv.addEventListener('click', abrirPerfilHandler);
+            if (usernameSpan) usernameSpan.addEventListener('click', abrirPerfilHandler);
+            if (captionUser) captionUser.addEventListener('click', abrirPerfilHandler);
             
             return postDiv;
         }
         
-        // Gerar posts com datas decrescentes (últimos 5 dias)
+        // Gerar posts
         imagens.forEach((img, idx) => {
             const user = usuarios[idx % usuarios.length];
             const leg = legendas[idx % legendas.length];
             const postDate = new Date();
-            postDate.setDate(postDate.getDate() - (idx % 5)); // datas variadas
+            postDate.setDate(postDate.getDate() - (idx % 5));
             const post = createPost(img, user, leg, idx, postDate);
             feedContainer.appendChild(post);
         });
         
-        // ========== NAVEGAÇÃO SUAVE ==========
+        // Navegação suave
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', (e) => {
                 const targetId = link.getAttribute('href');
@@ -878,7 +886,7 @@
             });
         });
         
-        // Header ícone coração
+        // Ícone coração
         const heartIcon = document.getElementById('notifHeart');
         if (heartIcon) {
             heartIcon.addEventListener('click', () => showToast('📢 Feira de profissões: 10/06! Participe!'));
@@ -887,7 +895,20 @@
             icon.addEventListener('click', () => showToast('🔔 Em breve, central de mensagens e perfil do aluno.'));
         });
         
-        console.log("%c✨ Estrutura aprimorada: Stories modal + comentários dinâmicos + tempo relativo ✨", "color: #0D47A1; font-size: 14px; font-weight: bold;");
+        // Fechar modais
+        const closeModalBtns = document.querySelectorAll('.close-modal');
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.getElementById('commentsModal').style.display = 'none';
+            });
+        });
+        window.addEventListener('click', (e) => {
+            if (e.target === document.getElementById('commentsModal')) {
+                document.getElementById('commentsModal').style.display = 'none';
+            }
+        });
+        
+        console.log("%c✨ Perfis agora abrem arquivos externos (ex: escola_polo.html). Cada story e nome de usuário redireciona para a página do perfil. ✨", "color: #0D47A1; font-size: 14px; font-weight: bold;");
     })();
 </script>
 </body>
