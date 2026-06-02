@@ -570,26 +570,22 @@
 <script>
     (function(){
         // ========== MAPEAMENTO DE PERFIS PARA ARQUIVOS ==========
-        // Lista exata fornecida pelo usuário (com duplicatas, mas consideramos os nomes únicos)
         const nomesPerfis = [
             "Escola Polo", "Prof. Robson", "Lab. Informática", "Biblioteca",
             "Eventos", "Robótica", "Alunos Destaque", "Direção"
         ];
         
-        // Função para converter nome do perfil em nome de arquivo (ex: "Escola Polo" -> "escola_polo.html")
         function gerarArquivoPerfil(nomePerfil) {
-            let nomeArquivo = nomePerfil.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); // remove acentos
+            let nomeArquivo = nomePerfil.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             nomeArquivo = nomeArquivo.toLowerCase().replace(/\s+/g, "_").replace(/[^\w\-]/g, "");
             return nomeArquivo + ".html";
         }
         
-        // Mapa de nome do perfil -> URL do arquivo
         const perfilToFile = {};
         nomesPerfis.forEach(nome => {
             perfilToFile[nome] = gerarArquivoPerfil(nome);
         });
         
-        // Mapa de usernames dos posts para os nomes de perfil (ajuste conforme os dados dos posts)
         const usernameToPerfil = {
             "@escola_polo": "Escola Polo",
             "@prof_robson_tech": "Prof. Robson",
@@ -602,7 +598,6 @@
             "@robo_polo": "Robótica"
         };
         
-        // Função que abre o arquivo do perfil em nova aba
         function abrirPerfil(nomePerfil) {
             if (!nomePerfil) return;
             const arquivo = perfilToFile[nomePerfil];
@@ -614,10 +609,11 @@
             }
         }
         
-        // ========== DADOS DOS STORIES (agora sem modal, cada story abre o perfil) ==========
+        // ========== DADOS DOS STORIES ==========
+        // ALTERAÇÃO: Imagem do Prof. Robson agora é "1556.png"
         const storiesData = [
             { name: "Escola Polo", img: "https://randomuser.me/api/portraits/women/68.jpg", desc: "🏛️ Conheça nossa estrutura moderna e acolhedora." },
-            { name: "Prof. Robson", img: "https://randomuser.me/api/portraits/men/32.jpg", desc: "👨‍🏫 Dicas de tecnologia e programação." },
+            { name: "Prof. Robson", img: "1556.png", desc: "👨‍🏫 Dicas de tecnologia e programação." },
             { name: "Lab. Informática", img: "https://randomuser.me/api/portraits/men/45.jpg", desc: "💻 Laboratório com 30 estações de última geração." },
             { name: "Biblioteca", img: "https://randomuser.me/api/portraits/women/50.jpg", desc: "📚 Acervo digital e físico disponível 24h." },
             { name: "Eventos", img: "https://randomuser.me/api/portraits/men/22.jpg", desc: "🎉 Feira de profissões: 10 de junho. Participe!" },
@@ -687,15 +683,17 @@
             setTimeout(() => { toast.style.opacity = '0'; }, 2000);
         }
         
-        // ========== RENDER STORIES (agora cada story abre o perfil) ==========
+        // ========== RENDER STORIES ==========
         const storiesContainer = document.getElementById("storiesList");
         storiesData.forEach(story => {
             const storyDiv = document.createElement("div");
             storyDiv.className = "story-item";
             storyDiv.onclick = () => abrirPerfil(story.name);
+            // Fallback para a imagem 1556.png caso não carregue
+            const imgOnError = story.name === "Prof. Robson" ? "this.onerror=null;this.src='https://via.placeholder.com/70?text=Robson'" : "this.src='https://via.placeholder.com/70?text=Polo'";
             storyDiv.innerHTML = `
                 <div class="story-avatar">
-                    <img src="${story.img}" alt="${story.name}" onerror="this.src='https://via.placeholder.com/70?text=Polo'">
+                    <img src="${story.img}" alt="${story.name}" onerror="${imgOnError}">
                 </div>
                 <span class="story-name">${story.name}</span>
             `;
@@ -712,7 +710,6 @@
             const commentsArray = deepComments[idx % deepComments.length];
             let currentComments = [...commentsArray];
             
-            // Descobrir nome do perfil real a partir do username do post
             const nomePerfilPost = usernameToPerfil[userName] || "Escola Polo";
             
             function renderCommentsList(container, showAll = false) {
@@ -801,7 +798,7 @@
             `;
             postDiv.appendChild(addCommentDiv);
             
-            // Lógica de like
+            // Like
             const likeBtn = postDiv.querySelector('.like-btn');
             const likesSpan = postDiv.querySelector('.likes-number');
             let likes = Math.floor(Math.random() * 90) + 20;
@@ -825,7 +822,7 @@
                 likesSpan.innerText = likes;
             });
             
-            // Comentar direto
+            // Comentar
             const commentInput = addCommentDiv.querySelector('input');
             const publishBtn = addCommentDiv.querySelector('.publish-comment');
             publishBtn.addEventListener('click', () => {
@@ -840,11 +837,9 @@
                 }
             });
             
-            // Abrir modal de comentários pelo ícone
             const commentIcon = postDiv.querySelector('.post-actions .fa-comment');
             commentIcon.addEventListener('click', openCommentsModal);
             
-            // Adicionar eventos de clique para abrir perfil (avatar, username, caption-username)
             const avatarDiv = postDiv.querySelector('.avatar');
             const usernameSpan = postDiv.querySelector('.username');
             const captionUser = postDiv.querySelector('.caption-username');
@@ -860,7 +855,6 @@
             return postDiv;
         }
         
-        // Gerar posts
         imagens.forEach((img, idx) => {
             const user = usuarios[idx % usuarios.length];
             const leg = legendas[idx % legendas.length];
@@ -886,7 +880,6 @@
             });
         });
         
-        // Ícone coração
         const heartIcon = document.getElementById('notifHeart');
         if (heartIcon) {
             heartIcon.addEventListener('click', () => showToast('📢 Feira de profissões: 10/06! Participe!'));
@@ -895,7 +888,6 @@
             icon.addEventListener('click', () => showToast('🔔 Em breve, central de mensagens e perfil do aluno.'));
         });
         
-        // Fechar modais
         const closeModalBtns = document.querySelectorAll('.close-modal');
         closeModalBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -908,7 +900,7 @@
             }
         });
         
-        console.log("%c✨ Perfis agora abrem arquivos externos (ex: escola_polo.html). Cada story e nome de usuário redireciona para a página do perfil. ✨", "color: #0D47A1; font-size: 14px; font-weight: bold;");
+        console.log("%c✨ Imagem do Prof. Robson alterada para 1556.png nos Stories ✨", "color: #0D47A1; font-size: 14px; font-weight: bold;");
     })();
 </script>
 </body>
