@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Gabriel Dev | Portfólio de Projetos - Laboratório Digital</title>
+    <title>Meu Portfólio | Projetos</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -20,7 +20,6 @@
             position: relative;
         }
 
-        /* Fundo com gradiente dinâmico */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -31,7 +30,6 @@
             z-index: -2;
         }
 
-        /* Partículas refinadas */
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -43,7 +41,6 @@
             opacity: 0.5;
         }
 
-        /* Orbes flutuantes */
         .glow-orb {
             position: fixed;
             width: 70vmax;
@@ -78,7 +75,7 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* ===== SERVICE BAR MELHORADA ===== */
+        /* Barra de navegação */
         .service-bar {
             position: fixed;
             top: 0;
@@ -123,17 +120,16 @@
 
         .service-logo img {
             height: 70px;
-            width: auto;
+            width: 70px;
             border-radius: 18px;
-            transition: all 0.3s ease;
+            object-fit: cover;
+            background: #1e2a3a;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 193, 7, 0.3);
-            filter: brightness(1.02) contrast(1.05);
+            transition: all 0.3s ease;
         }
 
         .service-logo img:hover {
-            filter: brightness(1.08) contrast(1.1);
             box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4), 0 0 0 3px rgba(255, 193, 7, 0.6);
-            transform: scale(1.01);
         }
 
         .logo-text {
@@ -144,7 +140,6 @@
             -webkit-background-clip: text;
             color: transparent;
             letter-spacing: -0.3px;
-            text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
         }
 
         .service-links {
@@ -239,7 +234,7 @@
             border-color: #fff;
         }
 
-        /* ===== MAIN CONTAINER ===== */
+        /* Container principal */
         .container {
             position: relative;
             z-index: 2;
@@ -247,7 +242,6 @@
             padding: 20px;
         }
 
-        /* ===== HERO CARD COM PROJETOS ===== */
         .hero-card {
             max-width: 1400px;
             width: 100%;
@@ -293,7 +287,6 @@
             margin: 0 auto;
         }
 
-        /* CONTROLES DE FILTRO */
         .controls {
             max-width: 1100px;
             margin: 0 auto 40px;
@@ -316,7 +309,7 @@
             font-weight: 500;
             font-family: 'Inter', sans-serif;
             transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
         }
 
         .search-box:focus {
@@ -343,7 +336,8 @@
             backdrop-filter: blur(4px);
         }
 
-        .btn-filter.active, .btn-filter:hover {
+        .btn-filter.active,
+        .btn-filter:hover {
             background: #FFC107;
             color: #0D47A1;
             border-color: #FFC107;
@@ -351,7 +345,6 @@
             transform: translateY(-2px);
         }
 
-        /* GRID DE PROJETOS */
         .grid-links {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
@@ -428,7 +421,6 @@
             display: none !important;
         }
 
-        /* FOOTER DO HERO */
         .footer-note {
             margin-top: 65px;
             padding-top: 30px;
@@ -459,7 +451,7 @@
             font-size: 1.6rem;
             font-weight: bold;
             color: #1e1e2a;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         .scroll-top.visible {
@@ -471,23 +463,6 @@
             background: #FF8F00;
             transform: translateY(-6px);
             box-shadow: 0 10px 25px #FFC107;
-        }
-
-        .tooltip {
-            position: fixed;
-            background: #1e1e2a;
-            color: #FFC107;
-            padding: 7px 18px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            pointer-events: none;
-            z-index: 2000;
-            border: 1px solid #FFC107;
-            white-space: nowrap;
-            font-family: monospace;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
         }
 
         @media (max-width: 900px) {
@@ -517,6 +492,7 @@
             }
             .service-logo img {
                 height: 55px;
+                width: 55px;
             }
         }
     </style>
@@ -527,24 +503,24 @@
     <div class="glow-orb"></div>
     <div class="glow-orb-2"></div>
 
-    <!-- BARRA DE SERVIÇO (BASE DO SEGUNDO CÓDIGO) -->
+    <!-- Barra de navegação fixa -->
     <div class="service-bar" id="serviceBar">
         <div class="service-container">
-            <div class="service-logo">
-                <img src="unidade polo.jpg" alt="Unidade Polo" onerror="this.src='https://via.placeholder.com/80x80?text=GD'">
-                <span class="logo-text">Gabriel Dev</span>
+            <div class="service-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+                <!-- Substitua 'avatar.png' pela sua imagem ou use um placeholder -->
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='20' fill='%231e2a3a'/%3E%3Ctext x='40' y='52' font-size='42' text-anchor='middle' fill='%23FFC107' font-family='Arial' font-weight='bold'%3E🚀%3C/text%3E%3C/svg%3E"
+                     alt="Logo"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect width=%2280%22 height=%2280%22 rx=%2220%22 fill=%22%231e2a3a%22/%3E%3Ctext x=%2240%22 y=%2252%22 font-size=%2242%22 text-anchor=%22middle%22 fill=%22%23FFC107%22%3E🚀%3C/text%3E%3C/svg%3E'">
+                <span class="logo-text">Meu Portfólio</span>
             </div>
             <div class="service-links">
-                <a class="service-link" data-dest="boa1.html">🏠 Início</a>
-                <a class="service-link" data-dest="20.html">💼 Portfólio</a>
-                <a class="service-link" data-dest="30.html">📁 Projetos</a>
-                <a class="service-link" data-dest="40.html">📞 Contato</a>
-                <a class="service-link" data-dest="50.html">📜 Certificados</a>
-                <a class="service-link" data-dest="60.html">📚 Aulas</a>
+                <a class="service-link" href="#">🏠 Início</a>
+                <a class="service-link" href="#">💼 Projetos</a>
+                <a class="service-link" href="#">📞 Contato</a>
             </div>
             <div class="service-status">
                 <span class="status-dot"></span>
-                <span>Online • 24/7</span>
+                <span>Online</span>
                 <span class="service-toggle" id="toggleBar">🔽 Ocultar</span>
             </div>
         </div>
@@ -553,160 +529,60 @@
     <div class="container">
         <div class="hero-card">
             <div class="projects-header">
-                <h1>✨ Projetos de <span style="color:#FFC107;">Gabriel</span></h1>
-                <p>Filtragem especializada entre Scripts, Apresentações, Mobile e muito mais.</p>
+                <h1>✨ Meus <span style="color:#FFC107;">Projetos</span></h1>
+                <p>Explore minha coleção de trabalhos. Use os filtros abaixo ou pesquise por nome.</p>
             </div>
 
             <!-- Filtros e busca -->
             <div class="controls">
-                <input type="text" class="search-box" id="searchInput" placeholder="🔍 Pesquisar projeto por nome ou descrição...">
+                <input type="text" class="search-box" id="searchInput" placeholder="🔍 Pesquisar projeto...">
                 <div class="filter-buttons">
                     <button class="btn-filter active" data-filter="all">📌 Todos</button>
-                    <button class="btn-filter" data-filter="js">🟨 Scripts JS</button>
-                    <button class="btn-filter" data-filter="gamma">📊 Apresentações</button>
+                    <button class="btn-filter" data-filter="web">🌐 Web</button>
                     <button class="btn-filter" data-filter="mobile">📱 Mobile</button>
+                    <button class="btn-filter" data-filter="outro">📦 Outros</button>
+                    <!-- Adicione mais categorias conforme necessário -->
                 </div>
             </div>
 
-            <!-- Grid de projetos (cards do primeiro código) -->
+            <!-- Grid de projetos -->
             <div class="grid-links" id="link-container">
-                <div class="project-card js" data-projeto="carro.js">
-                    <div class="card-icon">🚗</div>
-                    <h3>Análise de Veículos</h3>
-                    <p>Compara rendimento entre Carro A e B baseado em KM e preço.</p>
-                    <div class="card-footer">#javascript #logica</div>
-                </div>
-                <div class="project-card js" data-projeto="notas.js">
-                    <div class="card-icon">🎓</div>
-                    <h3>Calculadora de Médias</h3>
-                    <p>Calcula a média aritmética do aluno Petro.</p>
-                    <div class="card-footer">#javascript #calculo</div>
-                </div>
-                <div class="project-card js" data-projeto="teste2.js">
-                    <div class="card-icon">📐</div>
-                    <h3>Geometria (Área)</h3>
-                    <p>Cálculo de área de triângulo (Base x Altura).</p>
-                    <div class="card-footer">#javascript #geometria</div>
-                </div>
-                <div class="project-card js" data-projeto="teste3.js">
-                    <div class="card-icon">🧪</div>
-                    <h3>Bhaskara Lab</h3>
-                    <p>Resolve equações de 2º grau e encontra o Delta.</p>
-                    <div class="card-footer">#javascript #algebra</div>
-                </div>
-                <div class="project-card js" data-projeto="teste.html" data-externo="_blank">
+                <!-- 
+                MODELO DE CARD:
+                - Adicione classes de categoria (web, mobile, outro) para os filtros funcionarem.
+                - Use data-url para links externos ou data-projeto para arquivos locais.
+                - data-externo="_blank" abre em nova aba.
+                -->
+                <div class="project-card web" data-url="https://exemplo.com" data-externo="_blank">
                     <div class="card-icon">🌐</div>
-                    <h3>Página de Testes</h3>
-                    <p>Abre o seu arquivo HTML de experimentos.</p>
-                    <div class="card-footer">#html #javascript</div>
+                    <h3>Site Exemplo</h3>
+                    <p>Landing page responsiva com HTML/CSS/JS.</p>
+                    <div class="card-footer">#web #html</div>
                 </div>
-                <div class="project-card gamma" data-url="https://gamma.app/docs/Agenda-Escolar-Inteligente-zhlc75xq821pwub" data-externo="_blank">
-                    <div class="card-icon">📊</div>
-                    <h3>Agenda Escolar Inteligente</h3>
-                    <p>Apresentação de projeto no Gamma.</p>
-                    <div class="card-footer">#Gamma #Apresentacao</div>
-                </div>
-                <div class="project-card gamma" data-url="https://gamma.app/docs/Os-Pilares-da-Propriedade-Intelectual-pbq519sk1847qzm" data-externo="_blank">
-                    <div class="card-icon">📊</div>
-                    <h3>Propriedade Intelectual</h3>
-                    <p>Apresentação sobre os pilares da PI.</p>
-                    <div class="card-footer">#Gamma #Direito</div>
-                </div>
-                <div class="project-card gamma" data-url="https://gamma.app/docs/O-Ecossistema-de-Startups-2026-jkcqttp70rfdif2" data-externo="_blank">
-                    <div class="card-icon">🚀</div>
-                    <h3>Ecossistema de Startups 2026</h3>
-                    <p>Futuro das startups e inovação.</p>
-                    <div class="card-footer">#Gamma #Inovacao</div>
-                </div>
-                <div class="project-card mobile" data-url="SUA_IMAGEM.jpg" data-externo="_blank">
+                <div class="project-card mobile" data-projeto="app-tarefas.apk">
                     <div class="card-icon">📱</div>
-                    <h3>Visualizar Print 1</h3>
-                    <p>Captura de tela do projeto em ambiente mobile.</p>
-                    <div class="card-footer">#mobile #print</div>
+                    <h3>App de Tarefas</h3>
+                    <p>Protótipo de aplicativo mobile para organização pessoal.</p>
+                    <div class="card-footer">#mobile #react-native</div>
                 </div>
-                <div class="project-card mobile" data-url="fotocod.png" data-externo="_blank">
-                    <div class="card-icon">📱</div>
-                    <h3>Visualizar Print 2</h3>
-                    <p>Captura de tela do código ou interface mobile.</p>
-                    <div class="card-footer">#mobile #galeria</div>
+                <div class="project-card web" data-projeto="dashboard.html">
+                    <div class="card-icon">📊</div>
+                    <h3>Dashboard Interativo</h3>
+                    <p>Painel de dados com gráficos dinâmicos.</p>
+                    <div class="card-footer">#web #javascript</div>
                 </div>
-                <div class="project-card js" data-projeto="brake_continue.js">
-                    <div class="card-icon">🅿️</div>
-                    <h3>Estacionamento</h3>
-                    <p>Simulação de carros estacionados.</p>
-                    <div class="card-footer">#javascript #logica</div>
+                <div class="project-card outro" data-url="https://github.com/seuperfil" data-externo="_blank">
+                    <div class="card-icon">📦</div>
+                    <h3>Repositório GitHub</h3>
+                    <p>Acesse meu código aberto e contribuições.</p>
+                    <div class="card-footer">#github #open-source</div>
                 </div>
-                <div class="project-card js" data-projeto="filtrar.js">
-                    <div class="card-icon">🧪</div>
-                    <h3>Filtrar Objetos</h3>
-                    <p>Ordenando objetos por idade.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="selectionSorts.js">
-                    <div class="card-icon">🔢</div>
-                    <h3>Selection Sort</h3>
-                    <p>Algoritmo de ordenação eficiente.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="ordenando.js">
-                    <div class="card-icon">🔢</div>
-                    <h3>Ordenando Geral</h3>
-                    <p>Diversos algoritmos de ordenação.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="listaLivros.js">
-                    <div class="card-icon">📚</div>
-                    <h3>Lista de Livros</h3>
-                    <p>Manipulação de arrays de objetos.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="alterar.js">
-                    <div class="card-icon">🔄</div>
-                    <h3>Alterar Dados</h3>
-                    <p>Manipulação dinâmica de dados.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="leitura.js">
-                    <div class="card-icon">📖</div>
-                    <h3>Leitura de Arquivos</h3>
-                    <p>Script de processamento de arquivos.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="media_se.js" data-externo="_blank">
-                    <div class="card-icon">📁</div>
-                    <h3>Página de Testes / let</h3>
-                    <p>Arquivo JS de experimentos.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="variaveis.js" data-externo="_blank">
-                    <div class="card-icon">📁</div>
-                    <h3>Testes de Variáveis</h3>
-                    <p>Estudos sobre escopo e tipos.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card python" data-projeto="pacman.html" data-externo="_blank">
-                    <div class="card-icon">🐍</div>
-                    <h3>Pac-Man Python Pro</h3>
-                    <p>Jogo desenvolvido com Pygame, aplicando POO e vetores.</p>
-                    <div class="card-footer">#python #pygame</div>
-                </div>
-                <div class="project-card gamma" data-url="https://notebooklm.google.com/notebook/cf96d718-f86e-4a2f-9dfe-035ffc1f8963/artifact/101f0b48-c396-41bf-b249-cfb6826fedf8?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_" data-externo="_blank">
-                    <div class="card-icon">🚀</div>
-                    <h3>Ecossistema das IA's 2026</h3>
-                    <p>Inovação e tendências.</p>
-                    <div class="card-footer">#NotebookLM #Inovacao</div>
-                </div>
-                <div class="project-card js" data-projeto="produto.html">
-                    <div class="card-icon">🔢</div>
-                    <h3>Venda de produto</h3>
-                    <p>Simulação de venda.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
+                <!-- COLE SEUS PROJETOS AQUI -->
             </div>
 
             <div class="footer-note">
-                <p>© 2026 Gabriel | Desenvolvedor em formação • 3º Ano Técnico em Desenvolvimento de Sistemas</p>
-                <p style="margin-top: 10px;">✨ "Cada linha de código escrita é um passo mais perto da excelência" ✨</p>
+                <p>© 2026 • Desenvolvido com 💛</p>
+                <p style="margin-top: 10px;">✨ "Cada projeto é uma nova história para contar" ✨</p>
             </div>
         </div>
     </div>
@@ -714,7 +590,7 @@
     <div class="scroll-top" id="scrollTop">▲</div>
 
     <script>
-        // ========== PARTÍCULAS E ANIMAÇÕES (BASE DO SEGUNDO CÓDIGO) ==========
+        // ========== PARTÍCULAS DE FUNDO ==========
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -771,7 +647,7 @@
         initParticles();
         animateParticles();
 
-        // Barra de serviço scroll
+        // ========== BARRA DE NAVEGAÇÃO ==========
         let lastScroll = 0;
         const bar = document.getElementById('serviceBar');
         const toggle = document.getElementById('toggleBar');
@@ -789,76 +665,51 @@
             toggle.textContent = bar.classList.contains('hidden') ? '🔽 Mostrar' : '🔽 Ocultar';
         });
 
-        // Links da barra (apenas exemplo - não quebra a página)
-        document.querySelectorAll('.service-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                alert('Navegação rápida: esta seção será implementada em breve.');
-            });
-        });
-
-        // Botão scroll top
         document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // ========== FILTROS E PESQUISA (FUNCIONALIDADE DO PRIMEIRO CÓDIGO) ==========
+        // ========== FILTROS E PESQUISA ==========
         const searchInput = document.getElementById('searchInput');
         const cards = document.getElementsByClassName('project-card');
         const filterBtns = document.querySelectorAll('.btn-filter');
-
-        // Função de filtro (categoria + pesquisa)
         let currentFilter = 'all';
 
         function applyFilters() {
             const searchTerm = searchInput.value.toLowerCase();
-            for (let i = 0; i < cards.length; i++) {
-                const card = cards[i];
-                const title = card.querySelector('h3').innerText.toLowerCase();
-                const desc = card.querySelector('p').innerText.toLowerCase();
+            for (let card of cards) {
+                const title = card.querySelector('h3')?.innerText.toLowerCase() || '';
+                const desc = card.querySelector('p')?.innerText.toLowerCase() || '';
                 const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
                 const matchesCategory = (currentFilter === 'all') || card.classList.contains(currentFilter);
-                if (matchesSearch && matchesCategory) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+                card.classList.toggle('hidden', !(matchesSearch && matchesCategory));
             }
         }
 
-        // Evento de pesquisa
-        searchInput.addEventListener('keyup', () => {
-            // quando pesquisa, reseta botão ativo (muda para 'todos')
+        searchInput.addEventListener('input', () => {
+            // Resetar filtro de categoria ao pesquisar
             currentFilter = 'all';
             filterBtns.forEach(btn => btn.classList.remove('active'));
-            const allBtn = document.querySelector('.btn-filter[data-filter="all"]');
-            if (allBtn) allBtn.classList.add('active');
+            document.querySelector('.btn-filter[data-filter="all"]')?.classList.add('active');
             applyFilters();
         });
 
-        // Clique nos botões de filtro
         filterBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const filterValue = btn.getAttribute('data-filter');
-                currentFilter = filterValue;
+            btn.addEventListener('click', () => {
+                currentFilter = btn.getAttribute('data-filter');
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                // limpa busca visualmente mas mantém searchInput vazio, reaplica filtro
-                if (searchInput.value !== '') {
-                    searchInput.value = '';
-                }
+                if (searchInput.value) searchInput.value = '';
                 applyFilters();
             });
         });
 
-        // Navegação dos cards (redirecionamento)
+        // ========== NAVEGAÇÃO DOS CARDS ==========
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('click', (e) => {
-                // Evita conflito se clicou em algo interno
                 e.stopPropagation();
-                // Verifica se é link externo (gamma ou mobile com data-url)
                 const urlExterno = card.getAttribute('data-url');
                 const projetoLocal = card.getAttribute('data-projeto');
                 const externo = card.getAttribute('data-externo') === '_blank';
-                
+
                 if (urlExterno) {
                     if (externo) window.open(urlExterno, '_blank');
                     else window.location.href = urlExterno;
@@ -866,30 +717,13 @@
                     if (externo) window.open(projetoLocal, '_blank');
                     else window.location.href = projetoLocal;
                 } else {
-                    // fallback: tenta encontrar onclick antigo (nenhum, mas seguro)
-                    console.log('Ação não definida');
+                    alert('Link ainda não configurado para este projeto.');
                 }
             });
         });
 
-        // inicializa todos visíveis
+        // Inicializa exibindo todos
         applyFilters();
-
-        // tooltips pequenos para estatística (opcional)
-        let tooltip = null;
-        document.querySelectorAll('.stat-card, .feature-card').forEach(el => {
-            el?.addEventListener('mouseenter', (e) => {
-                if(!el) return;
-                tooltip = document.createElement('div');
-                tooltip.className = 'tooltip';
-                tooltip.textContent = '📌 Explore os projetos acima';
-                document.body.appendChild(tooltip);
-                const rect = el.getBoundingClientRect();
-                tooltip.style.left = rect.left + rect.width/2 - tooltip.offsetWidth/2 + 'px';
-                tooltip.style.top = rect.top - 40 + 'px';
-                setTimeout(() => { if(tooltip) tooltip.remove(); }, 1500);
-            });
-        });
     </script>
 </body>
 </html>
