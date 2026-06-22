@@ -1,765 +1,729 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <!-- CÓDIGO DE ÁREA DO PROJETO -->
-    <meta name="project-area-code" content="HT-POLO-2026-001">
-    <title>✨ Harmony Tech | Portfólio Premium ✨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Meu Portfólio | Projetos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* ============================================
-           RESET & GLOBAL STYLES - BASE HARMÔNICA
-           AZUL 60% | BRANCO 30% | AMARELO 10%
-        ============================================ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        *:focus {
-            outline: none;
-        }
-
-        :root {
-            --blue-primary: #1565C0;
-            --blue-deep: #0D47A1;
-            --blue-light: #42A5F5;
-            --white-soft: #F8F9FA;
-            --white-pure: #FFFFFF;
-            --gold-accent: #FFC107;
-            --gold-light: #FFE082;
-            --gold-dark: #FF8F00;
-            --dark-text: #1e1e2f;
-            --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --shadow-glow: 0 25px 45px -12px rgba(0,0,0,0.25);
-            --shadow-blue: 0 0 15px rgba(21,101,192,0.3);
-        }
-
         body {
-            font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: var(--blue-deep);
+            font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #0b5cad;
+            color: #1e1e2a;
             overflow-x: hidden;
-            height: 100vh;
-            width: 100vw;
             position: relative;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* ============================================
-           CONTAINER PRINCIPAL - 60% AZUL / 30% BRANCO
-        ============================================ */
-        .welcome-master {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            overflow-x: hidden;
-            scroll-snap-type: y mandatory;
-        }
-
-        /* CAMADA DE FUNDO COM IMAGEM (substitui o azul 60%) */
-        .golden-sanctum {
-            position: relative;
-            height: 60vh;
-            min-height: 500px;
-            width: 100%;
-            background-image: url('12375.png');
-            background-size: cover;
-            background-position: center center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            scroll-snap-align: start;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            isolation: isolate;
-        }
-
-        .golden-sanctum::before {
-            content: '';
-            position: absolute;
+        .bg-gradient {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(13, 71, 161, 0.65);
-            backdrop-filter: brightness(0.85) saturate(1.2);
-            z-index: 1;
-            pointer-events: none;
+            background: radial-gradient(circle at 30% 10%, #1976D2, #0a3e6d);
+            z-index: -2;
         }
 
-        /* CAMADA BRANCA (30% da altura) */
-        .obsidian-realm {
-            position: relative;
-            height: 40vh;
-            min-height: 350px;
-            width: 100%;
-            background: linear-gradient(145deg, #F8F9FA 0%, #FFFFFF 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            scroll-snap-align: start;
-            border-top: 2px solid rgba(255,193,7,0.3);
-            overflow: hidden;
-        }
-
-        /* ============================================
-           BACKGROUND TECNOLÓGICO AVANÇADO
-        ============================================ */
-        .tech-cosmos {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(90deg, rgba(255,193,7,0.08) 0px, rgba(255,193,7,0.08) 1px, transparent 1px, transparent 12px),
-                repeating-linear-gradient(0deg, rgba(21,101,192,0.12) 0px, rgba(21,101,192,0.12) 1px, transparent 1px, transparent 12px),
-                repeating-radial-gradient(circle at 20% 30%, rgba(255,193,7,0.06) 0px, rgba(255,193,7,0.06) 2px, transparent 2px, transparent 8px),
-                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDQwIDQwIj48cGF0aCBmaWxsPSIjZmZkYzAwIiBmaWxsLW9wYWNpdHk9IjAuMDgiIGQ9Ik0wIDBoNDB2NDBIMHoiLz48Y2lyY2xlIGN4PSIyMCIgY3k9IjIwIiByPSI4IiBzdHJva2U9IiNmZmRjMDAiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjMiIGZpbGw9IiNmZmRjMDAiIGZpbGwtb3BhY2l0eT0iMC4xNSIvPjwvc3ZnPg==');
-            background-repeat: repeat, repeat, repeat, repeat;
-            background-size: auto, auto, auto, 48px;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0.45;
-            mix-blend-mode: overlay;
-        }
-
-        .obsidian-realm .tech-cosmos {
-            opacity: 0.25;
-            mix-blend-mode: soft-light;
-        }
-
-        /* ============================================
-           CONTEÚDO PRINCIPAL - HERO SECTION
-        ============================================ */
-        .hero-vortex {
-            position: relative;
-            z-index: 20;
-            text-align: center;
-            padding: 2rem;
-            max-width: 950px;
-            backdrop-filter: blur(3px);
-            border-radius: 72px;
-            animation: floatReveal 1.2s var(--transition-smooth) forwards;
-        }
-
-        @keyframes floatReveal {
-            0% {
-                opacity: 0;
-                transform: translateY(40px) scale(0.96);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .glitch-title {
-            font-size: clamp(2.8rem, 9vw, 5.6rem);
-            font-weight: 800;
-            color: #FFFFFF;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-            text-shadow: 3px 3px 12px rgba(0,0,0,0.5);
-            margin-bottom: 0.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .glitch-title::before,
-        .glitch-title::after {
-            content: attr(data-text);
-            position: absolute;
+        #particle-canvas {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
         }
 
-        .glitch-title::before {
-            animation: glitch-anim 3s infinite linear alternate-reverse;
-            color: #FFC107;
+        .glow-orb {
+            position: fixed;
+            width: 70vmax;
+            height: 70vmax;
+            background: radial-gradient(circle, rgba(255, 235, 59, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            top: 20%;
+            left: -20%;
+            filter: blur(100px);
+            animation: floatGlow 18s ease-in-out infinite;
+            pointer-events: none;
             z-index: -1;
         }
 
-        @keyframes glitch-anim {
-            0% { clip-path: inset(0 0 85% 0); transform: translate(-2px, 2px); opacity: 0.6; }
-            20% { clip-path: inset(15% 0 70% 0); transform: translate(2px, -2px); }
-            40% { clip-path: inset(35% 0 50% 0); transform: translate(-1px, 1px); }
-            60% { clip-path: inset(10% 0 75% 0); transform: translate(1px, -1px); }
-            80% { clip-path: inset(60% 0 25% 0); transform: translate(-1px, 0); }
-            100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+        .glow-orb-2 {
+            position: fixed;
+            width: 60vmax;
+            height: 60vmax;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: 10%;
+            right: -15%;
+            filter: blur(120px);
+            animation: floatGlow 22s ease-in-out infinite reverse;
+            pointer-events: none;
+            z-index: -1;
         }
 
-        .highlight-gold {
-            background: rgba(0,0,0,0.2);
-            padding: 0.1rem 0.5rem;
-            border-radius: 24px;
+        @keyframes floatGlow {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(5%, 5%) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        /* Barra de navegação */
+        .service-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 25, 45, 0.92);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 193, 7, 0.5);
+            padding: 8px 0;
+            z-index: 1000;
+            transform: translateY(0);
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), background 0.2s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .service-bar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .service-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .service-logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .service-logo:hover {
+            transform: scale(1.02);
+        }
+
+        .service-logo img {
+            height: 70px;
+            width: 70px;
+            border-radius: 18px;
+            object-fit: cover;
+            background: #1e2a3a;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 193, 7, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .service-logo img:hover {
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4), 0 0 0 3px rgba(255, 193, 7, 0.6);
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #FFC107, #FF8F00);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .service-links {
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+        }
+
+        .service-link {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 6px 0;
+            position: relative;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 0.3px;
+        }
+
+        .service-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2.5px;
+            background: linear-gradient(90deg, #FFC107, #FF8F00, #FFD966);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+            box-shadow: 0 0 4px #FFC107;
+        }
+
+        .service-link:hover {
+            color: #FFD966;
+            text-shadow: 0 0 6px rgba(255, 193, 7, 0.5);
+        }
+
+        .service-link:hover::after {
+            width: 100%;
+        }
+
+        .service-status {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #e0e0e0;
+            background: rgba(255, 193, 7, 0.12);
+            padding: 6px 20px;
+            border-radius: 60px;
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            background: #2ecc71;
+            border-radius: 50%;
+            animation: pulse-green 1.8s infinite;
+            box-shadow: 0 0 6px #2ecc71;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 6px #2ecc71; }
+            50% { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 14px #2ecc71; }
+        }
+
+        .service-toggle {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid #FFC107;
+            padding: 5px 16px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            color: #FFD966;
             backdrop-filter: blur(4px);
         }
 
-        .tech-tagline {
-            font-size: clamp(1rem, 4vw, 1.55rem);
-            font-weight: 500;
-            color: #F0F4FA;
-            margin: 1rem 0 2rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        .service-toggle:hover {
+            background: #FFC107;
+            color: #1e1e2a;
+            transform: scale(1.03);
+            box-shadow: 0 0 12px #FFC107;
+            border-color: #fff;
         }
 
-        .tech-tagline i {
-            background: rgba(0,0,0,0.3);
-            padding: 8px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            color: #FFC107;
-        }
-
-        /* BOTÕES PREMIUM */
-        .button-constellation {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 0.5rem;
-        }
-
-        .btn-luxury {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 1rem 2.4rem;
-            font-size: 1.05rem;
-            font-weight: 600;
-            border-radius: 80px;
-            cursor: pointer;
-            transition: all 0.4s var(--transition-smooth);
-            font-family: inherit;
-            border: none;
-            text-decoration: none;
+        /* Container principal */
+        .container {
             position: relative;
-            overflow: hidden;
-            z-index: 1;
-            backdrop-filter: blur(2px);
+            z-index: 2;
+            min-height: 100vh;
+            padding: 20px;
         }
 
-        .btn-primary {
+        .hero-card {
+            max-width: 1400px;
+            width: 100%;
+            margin: 100px auto 40px;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(12px);
+            border-radius: 56px;
+            padding: 45px 50px;
+            animation: fadeInUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 35px 60px -25px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 193, 7, 0.3);
+            transition: box-shadow 0.4s, transform 0.2s;
+        }
+
+        .hero-card:hover {
+            box-shadow: 0 45px 70px -25px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(255, 193, 7, 0.5);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .projects-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .projects-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(125deg, #0D47A1, #1565C0, #FFC107);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .projects-header p {
+            color: #2c3e4e;
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .controls {
+            max-width: 1100px;
+            margin: 0 auto 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .search-box {
+            background: white;
+            border: 2px solid rgba(255, 193, 7, 0.5);
+            padding: 14px 24px;
+            border-radius: 50px;
+            color: #1e2a3a;
+            width: 100%;
+            max-width: 400px;
+            outline: none;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .search-box:focus {
+            border-color: #FFC107;
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-filter {
+            background: rgba(13, 71, 161, 0.08);
+            border: 1px solid rgba(13, 71, 161, 0.3);
+            color: #0D47A1;
+            padding: 10px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.25s ease;
+            font-weight: 700;
+            font-size: 0.85rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-filter.active,
+        .btn-filter:hover {
             background: #FFC107;
             color: #0D47A1;
-            box-shadow: 0 12px 28px -8px rgba(0,0,0,0.3);
+            border-color: #FFC107;
+            box-shadow: 0 5px 12px rgba(255, 193, 7, 0.3);
+            transform: translateY(-2px);
         }
 
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-            z-index: -1;
+        .grid-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+            gap: 28px;
         }
 
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 20px 35px -8px rgba(0,0,0,0.4);
-            background: #FFD54F;
-            gap: 16px;
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.95);
-            color: #0D47A1;
-            border: 1px solid #FFC107;
-            box-shadow: 0 8px 20px -6px rgba(0,0,0,0.1);
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-5px) scale(1.02);
+        .project-card {
             background: #FFFFFF;
-            border-color: #FF8F00;
-            box-shadow: 0 15px 30px -8px rgba(255,193,7,0.3);
-            gap: 16px;
-        }
-
-        /* ============================================
-           SKILLS TECH - ÁREA BRANCA
-        ============================================ */
-        .skills-orbit {
-            position: relative;
-            z-index: 20;
+            border-radius: 28px;
+            padding: 26px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            max-width: 1200px;
-            padding: 1.8rem 2rem;
-            animation: fadeSlideUp 0.9s 0.2s backwards;
-        }
-
-        @keyframes fadeSlideUp {
-            from {
-                opacity: 0;
-                transform: translateY(35px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .tech-card {
-            background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(8px);
-            border-radius: 48px;
-            padding: 1.2rem 1.8rem;
-            border: 1px solid rgba(255,193,7,0.4);
-            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            text-align: center;
-            min-width: 140px;
-            cursor: default;
+            flex-direction: column;
+            color: #1e2a3a;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(255, 193, 7, 0.3);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
         }
 
-        .tech-card::after {
+        .project-card::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(255,193,7,0.08), transparent);
+            background: radial-gradient(circle at 30% 20%, rgba(255, 193, 7, 0.08), transparent 80%);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.4s;
         }
 
-        .tech-card:hover::after {
+        .project-card:hover::before {
             opacity: 1;
         }
 
-        .tech-card:hover {
-            transform: translateY(-8px) scale(1.02);
+        .project-card:hover {
+            transform: translateY(-8px);
             border-color: #FFC107;
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.15);
-            background: #FFFFFF;
+            background: #fefcf5;
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 193, 7, 0.5);
         }
 
-        .tech-card i {
-            font-size: 2.3rem;
+        .card-icon {
+            font-size: 2.4rem;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 2px 6px rgba(255, 193, 7, 0.3));
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
             color: #0D47A1;
-            display: block;
             margin-bottom: 12px;
-            transition: transform 0.2s;
         }
 
-        .tech-card:hover i {
-            transform: scale(1.1);
-            color: #FF8F00;
-        }
-
-        .tech-card span {
-            font-weight: 600;
-            color: #1e2a3a;
-            letter-spacing: 0.3px;
-            font-size: 0.95rem;
-        }
-
-        .quote-footer {
-            width: 100%;
-            text-align: center;
-            margin-top: 1.6rem;
-        }
-
-        .quote-footer p {
-            display: inline-block;
-            background: rgba(13,71,161,0.08);
-            backdrop-filter: blur(8px);
-            border-radius: 60px;
-            padding: 0.5rem 1.8rem;
+        .project-card p {
+            color: #2c3e4e;
             font-size: 0.9rem;
-            color: #1e2a3a;
-            border: 1px solid rgba(255,193,7,0.3);
+            line-height: 1.5;
+            margin-bottom: 20px;
         }
 
-        /* ============================================
-           PARTÍCULAS FLUTUANTES
-        ============================================ */
-        .floating-particles {
+        .card-footer {
+            margin-top: auto;
+            padding-top: 18px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #FF8F00;
+            border-top: 1px dashed rgba(255, 193, 7, 0.4);
+            letter-spacing: 0.3px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .footer-note {
+            margin-top: 65px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 193, 7, 0.4);
+            text-align: center;
+            font-size: 0.85rem;
+            color: #3a3a4e;
+        }
+
+        .scroll-top {
             position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, #FFC107, #1565C0);
-            border-radius: 50%;
+            bottom: 30px;
+            right: 30px;
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 193, 7, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid #ffffff;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
             opacity: 0;
-            animation: particleDrift linear infinite;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #1e1e2a;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        @keyframes particleDrift {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-                opacity: 0;
-            }
-            15% {
-                opacity: 0.6;
-            }
-            85% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-120px) translateX(30px) rotate(180deg);
-                opacity: 0;
-            }
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
-        /* Linhas de grade animada */
-        .grid-lines {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: linear-gradient(to right, rgba(255,193,7,0.12) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255,193,7,0.12) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 2;
-            animation: gridMove 20s linear infinite;
+        .scroll-top:hover {
+            background: #FF8F00;
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px #FFC107;
         }
 
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 40px 40px; }
-        }
-
-        /* ============================================
-           RESPONSIVIDADE
-        ============================================ */
-        @media (max-width: 780px) {
-            .golden-sanctum {
-                min-height: 550px;
+        @media (max-width: 900px) {
+            .hero-card {
+                padding: 30px 20px;
+                margin-top: 110px;
             }
-            .obsidian-realm {
-                min-height: auto;
-                padding: 2rem 0;
+            .projects-header h1 {
+                font-size: 2.2rem;
             }
-            .skills-orbit {
-                gap: 1rem;
-                padding: 1rem;
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
             }
-            .tech-card {
-                min-width: 110px;
-                padding: 0.8rem 1rem;
+            .search-box {
+                max-width: 100%;
             }
-            .btn-luxury {
-                padding: 0.75rem 1.6rem;
-                font-size: 0.9rem;
+            .filter-buttons {
+                justify-content: center;
             }
-            .button-constellation {
-                gap: 1rem;
+            .service-container {
+                flex-direction: column;
+                padding: 0 20px;
             }
-        }
-
-        @keyframes subtlePulse {
-            0% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
-
-        .welcome-master::-webkit-scrollbar {
-            width: 6px;
-        }
-        .welcome-master::-webkit-scrollbar-track {
-            background: #0D47A1;
-        }
-        .welcome-master::-webkit-scrollbar-thumb {
-            background: #FFC107;
-            border-radius: 10px;
-        }
-
-        .shooting-star {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            box-shadow: 0 0 6px 2px rgba(255,193,7,0.9);
-            animation: shootStar 8s linear infinite;
-            opacity: 0;
-            z-index: 5;
-        }
-
-        @keyframes shootStar {
-            0% {
-                transform: translateX(0) translateY(0);
-                opacity: 0;
+            .service-links {
+                justify-content: center;
             }
-            10% {
-                opacity: 1;
+            .service-logo img {
+                height: 55px;
+                width: 55px;
             }
-            20% {
-                transform: translateX(-120px) translateY(80px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateX(-300px) translateY(200px);
-                opacity: 0;
-            }
-        }
-
-        .golden-sanctum .hero-vortex,
-        .golden-sanctum .tech-cosmos,
-        .golden-sanctum .grid-lines,
-        .golden-sanctum .shooting-star {
-            z-index: 10;
-        }
-        .golden-sanctum .hero-vortex {
-            z-index: 25;
-        }
-
-        .scroll-hint {
-            margin-top: 2rem;
-            font-size: 0.8rem;
-            opacity: 0.9;
-            color: #f0f0f0;
-            text-shadow: 0 1px 2px black;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="bg-gradient"></div>
+    <canvas id="particle-canvas"></canvas>
+    <div class="glow-orb"></div>
+    <div class="glow-orb-2"></div>
 
-<div class="welcome-master">
-    <!-- 60% da altura - fundo com imagem + overlay azulado -->
-    <section class="golden-sanctum">
-        <div class="tech-cosmos"></div>
-        <div class="grid-lines"></div>
-
-        <!-- Estrelas cadentes dinâmicas -->
-        <div class="shooting-star" style="top: 20%; left: 70%; animation-delay: 0s;"></div>
-        <div class="shooting-star" style="top: 50%; left: 85%; animation-delay: 3s;"></div>
-        <div class="shooting-star" style="top: 15%; left: 40%; animation-delay: 6s;"></div>
-
-        <div class="hero-vortex">
-            <h1 class="glitch-title" data-text="Unidade POLO"> Unidade POLO </h1>
-            <div class="tech-tagline">
-                <i class="fas fa-crown"></i>
-                <span>Arquiteto de experiências digitais</span>
-                <i class="fas fa-code-branch"></i>
+    <!-- Barra de navegação fixa -->
+    <div class="service-bar" id="serviceBar">
+        <div class="service-container">
+            <div class="service-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+                <!-- Substitua 'avatar.png' pela sua imagem ou use um placeholder -->
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Crect width='80' height='80' rx='20' fill='%231e2a3a'/%3E%3Ctext x='40' y='52' font-size='42' text-anchor='middle' fill='%23FFC107' font-family='Arial' font-weight='bold'%3E🚀%3C/text%3E%3C/svg%3E"
+                     alt="Logo"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect width=%2280%22 height=%2280%22 rx=%2220%22 fill=%22%231e2a3a%22/%3E%3Ctext x=%2240%22 y=%2252%22 font-size=%2242%22 text-anchor=%22middle%22 fill=%22%23FFC107%22%3E🚀%3C/text%3E%3C/svg%3E'">
+                <span class="logo-text">Meu Portfólio</span>
             </div>
-            <div class="button-constellation">
-                <button class="btn-luxury btn-primary" id="premiumExploreBtn">
-                    <i class="fas fa-compass"></i> Explorar Jornada
-                </button>
-                <a href="welcome.html" class="btn-luxury btn-secondary" id="premiumWelcomeLink">
-                    <i class="fas fa-gem"></i> Portal para a Matéria do professor ROBSON
-                </a>
+            <div class="service-links">
+                <a class="service-link" href="#">🏠 Início</a>
+                <a class="service-link" href="#">💼 Projetos</a>
+                <a class="service-link" href="#">📞 Contato</a>
             </div>
-            <div class="scroll-hint">
-                <i class="fas fa-mouse-pointer"></i> role para descobrir skills
+            <div class="service-status">
+                <span class="status-dot"></span>
+                <span>Online</span>
+                <span class="service-toggle" id="toggleBar">🔽 Ocultar</span>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- 30% BRANCO - SEÇÃO DE HABILIDADES TECH -->
-    <section class="obsidian-realm">
-        <div class="tech-cosmos"></div>
-        <div class="grid-lines" style="animation-duration: 25s;"></div>
+    <div class="container">
+        <div class="hero-card">
+            <div class="projects-header">
+                <h1>✨ Meus <span style="color:#FFC107;">Projetos</span></h1>
+                <p>Explore minha coleção de trabalhos. Use os filtros abaixo ou pesquise por nome.</p>
+            </div>
 
-        <div class="skills-orbit">
-            <div class="tech-card">
-                <i class="fab fa-react"></i>
-                <span>React 18 • Next.js 14</span>
+            <!-- Filtros e busca -->
+            <div class="controls">
+                <input type="text" class="search-box" id="searchInput" placeholder="🔍 Pesquisar projeto...">
+                <div class="filter-buttons">
+                    <button class="btn-filter active" data-filter="all">📌 Todos</button>
+                    <button class="btn-filter" data-filter="web">🌐 Web</button>
+                    <button class="btn-filter" data-filter="mobile">📱 Mobile</button>
+                    <button class="btn-filter" data-filter="outro">📦 Outros</button>
+                    <!-- Adicione mais categorias conforme necessário -->
+                </div>
             </div>
-            <div class="tech-card">
-                <i class="fab fa-node-js"></i>
-                <span>Node.js • Express • NestJS</span>
+
+            <!-- Grid de projetos -->
+            <div class="grid-links" id="link-container">
+                <!-- 
+                MODELO DE CARD:
+                - Adicione classes de categoria (web, mobile, outro) para os filtros funcionarem.
+                - Use data-url para links externos ou data-projeto para arquivos locais.
+                - data-externo="_blank" abre em nova aba.
+                -->
+                <div class="project-card web" data-url="https://exemplo.com" data-externo="_blank">
+                    <div class="card-icon">🌐</div>
+                    <h3>Site Exemplo</h3>
+                    <p>Landing page responsiva com HTML/CSS/JS.</p>
+                    <div class="card-footer">#web #html</div>
+                </div>
+                <div class="project-card mobile" data-projeto="app-tarefas.apk">
+                    <div class="card-icon">📱</div>
+                    <h3>App de Tarefas</h3>
+                    <p>Protótipo de aplicativo mobile para organização pessoal.</p>
+                    <div class="card-footer">#mobile #react-native</div>
+                </div>
+                <div class="project-card web" data-projeto="dashboard.html">
+                    <div class="card-icon">📊</div>
+                    <h3>Dashboard Interativo</h3>
+                    <p>Painel de dados com gráficos dinâmicos.</p>
+                    <div class="card-footer">#web #javascript</div>
+                </div>
+                <div class="project-card outro" data-url="https://github.com/seuperfil" data-externo="_blank">
+                    <div class="card-icon">📦</div>
+                    <h3>Repositório GitHub</h3>
+                    <p>Acesse meu código aberto e contribuições.</p>
+                    <div class="card-footer">#github #open-source</div>
+                </div>
+                <!-- COLE SEUS PROJETOS AQUI -->
             </div>
-            <div class="tech-card">
-                <i class="fas fa-database"></i>
-                <span>PostgreSQL • MongoDB • Prisma</span>
-            </div>
-            <div class="tech-card">
-                <i class="fab fa-python"></i>
-                <span>Python • FastAPI • IA</span>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-cloud"></i>
-                <span>AWS • Docker • Kubernetes</span>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-palette"></i>
-                <span>UI/UX • Framer • Tailwind</span>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-mobile-alt"></i>
-                <span>React Native • Flutter</span>
-            </div>
-            <div class="tech-card">
-                <i class="fas fa-shield-alt"></i>
-                <span>Cybersecurity • OWASP</span>
-            </div>
-            <div class="quote-footer">
-                <p><i class="fas fa-quote-left"></i> Código com alma, design com propósito e tecnologia que transforma. <i class="fas fa-quote-right"></i></p>
+
+            <div class="footer-note">
+                <p>© 2026 • Desenvolvido com 💛</p>
+                <p style="margin-top: 10px;">✨ "Cada projeto é uma nova história para contar" ✨</p>
             </div>
         </div>
-    </section>
-</div>
+    </div>
 
-<div class="floating-particles" id="particleContainer"></div>
+    <div class="scroll-top" id="scrollTop">▲</div>
 
-<script>
-    (function() {
-        // ========================================
-        // 1. BOTÃO EXPLORAR JORNADA - REDIRECIONA PARA ist.html
-        // ========================================
-        const exploreBtn = document.getElementById('premiumExploreBtn');
-        const welcomeLink = document.getElementById('premiumWelcomeLink');
+    <script>
+        // ========== PARTÍCULAS DE FUNDO ==========
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
 
-        if(exploreBtn) {
-            exploreBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                exploreBtn.style.transform = 'scale(0.96)';
-                setTimeout(() => {
-                    window.location.href = 'ist.html';
-                }, 120);
-            });
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
 
-        // ========================================
-        // 2. PARTÍCULAS FLUTUANTES
-        // ========================================
-        const particleContainer = document.getElementById('particleContainer');
-        function generateParticles(count = 130) {
-            for(let i = 0; i < count; i++) {
-                const particle = document.createElement('div');
-                const size = Math.random() * 6 + 2;
-                particle.classList.add('particle');
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 12 + 6}s`;
-                particle.style.animationDelay = `${Math.random() * 8}s`;
-                particle.style.background = `radial-gradient(circle, rgba(255,193,7,0.7), rgba(21,101,192,0.3))`;
-                particle.style.boxShadow = `0 0 6px rgba(255,193,7,0.5)`;
-                particleContainer.appendChild(particle);
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 0.45;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.color = `rgba(255, 200, 70, ${this.opacity})`;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
             }
         }
-        generateParticles(130);
 
-        // ========================================
-        // 3. ANIMAÇÃO NOS CARDS (DESTAQUE ROTATIVO)
-        // ========================================
-        const techCards = document.querySelectorAll('.tech-card');
-        let currentIndex = 0;
-        let pulseInterval;
-
-        function startCardPulse() {
-            if(pulseInterval) clearInterval(pulseInterval);
-            pulseInterval = setInterval(() => {
-                if(techCards.length === 0) return;
-                techCards.forEach(card => {
-                    card.style.transition = 'all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1)';
-                    card.style.transform = '';
-                    card.style.borderColor = 'rgba(255,193,7,0.4)';
-                    card.style.boxShadow = '0 8px 20px rgba(0,0,0,0.05)';
-                });
-                const activeCard = techCards[currentIndex % techCards.length];
-                if(activeCard) {
-                    activeCard.style.transform = 'translateY(-8px) scale(1.02)';
-                    activeCard.style.borderColor = '#FFC107';
-                    activeCard.style.boxShadow = '0 20px 30px -12px rgba(0,0,0,0.15)';
-                }
-                currentIndex = (currentIndex + 1) % techCards.length;
-            }, 2200);
-        }
-        startCardPulse();
-
-        // ========================================
-        // 4. GLITCH OCASIONAL
-        // ========================================
-        const glitchElement = document.querySelector('.glitch-title');
-        if(glitchElement) {
-            setInterval(() => {
-                if(Math.random() > 0.85) {
-                    glitchElement.style.animation = 'glitch-anim 0.3s ease-in-out';
-                    setTimeout(() => {
-                        glitchElement.style.animation = '';
-                    }, 300);
-                }
-            }, 3000);
+        function initParticles() {
+            particles = [];
+            const count = Math.min(140, Math.floor(window.innerWidth * 0.13));
+            for (let i = 0; i < count; i++) particles.push(new Particle());
         }
 
-        // ========================================
-        // 5. ANIMAÇÃO DE ENTRADA
-        // ========================================
-        const hero = document.querySelector('.hero-vortex');
-        if(hero) hero.style.animation = 'floatReveal 1.2s forwards';
-
-        // ========================================
-        // 6. CONSOLE LOG
-        // ========================================
-        console.log("%c✨ PORTFOLIO PREMIUM — Unidade POLO ✨", "color: #FFC107; font-size: 16px; font-weight: bold;");
-        console.log("%cProjeto: HT-POLO-2026-001", "color: #1565C0; font-size: 12px;");
-
-        if(welcomeLink) {
-            welcomeLink.addEventListener('click', (e) => {
-                console.log("Redirecionando para welcome.html...");
-            });
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            animationId = requestAnimationFrame(animateParticles);
         }
 
-        // ========================================
-        // 7. ESTRELAS CADENTES ADICIONAIS
-        // ========================================
-        function addShootingStars() {
-            const starContainer = document.querySelector('.golden-sanctum');
-            for(let i = 0; i < 5; i++) {
-                const star = document.createElement('div');
-                star.classList.add('shooting-star');
-                star.style.top = `${Math.random() * 80}%`;
-                star.style.left = `${Math.random() * 90}%`;
-                star.style.animationDelay = `${Math.random() * 10}s`;
-                starContainer.appendChild(star);
-            }
-        }
-        addShootingStars();
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+        resizeCanvas();
+        initParticles();
+        animateParticles();
 
-        window.addEventListener('beforeunload', () => {
-            if(pulseInterval) clearInterval(pulseInterval);
+        // ========== BARRA DE NAVEGAÇÃO ==========
+        let lastScroll = 0;
+        const bar = document.getElementById('serviceBar');
+        const toggle = document.getElementById('toggleBar');
+        window.addEventListener('scroll', () => {
+            const cur = window.pageYOffset;
+            if (cur > lastScroll && cur > 110) bar.classList.add('hidden');
+            else if (cur < lastScroll) bar.classList.remove('hidden');
+            lastScroll = cur;
+            const scrollBtn = document.getElementById('scrollTop');
+            if (cur > 280) scrollBtn.classList.add('visible');
+            else scrollBtn.classList.remove('visible');
+        });
+        toggle.addEventListener('click', () => {
+            bar.classList.toggle('hidden');
+            toggle.textContent = bar.classList.contains('hidden') ? '🔽 Mostrar' : '🔽 Ocultar';
         });
 
-        if('ontouchstart' in window) {
-            const btns = document.querySelectorAll('.btn-luxury');
-            btns.forEach(btn => {
-                btn.addEventListener('touchstart', function() {
-                    this.style.transform = 'scale(0.97)';
-                    setTimeout(() => { this.style.transform = ''; }, 150);
-                });
-            });
-        }
-    })();
-</script>
+        document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
+        // ========== FILTROS E PESQUISA ==========
+        const searchInput = document.getElementById('searchInput');
+        const cards = document.getElementsByClassName('project-card');
+        const filterBtns = document.querySelectorAll('.btn-filter');
+        let currentFilter = 'all';
+
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            for (let card of cards) {
+                const title = card.querySelector('h3')?.innerText.toLowerCase() || '';
+                const desc = card.querySelector('p')?.innerText.toLowerCase() || '';
+                const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
+                const matchesCategory = (currentFilter === 'all') || card.classList.contains(currentFilter);
+                card.classList.toggle('hidden', !(matchesSearch && matchesCategory));
+            }
+        }
+
+        searchInput.addEventListener('input', () => {
+            // Resetar filtro de categoria ao pesquisar
+            currentFilter = 'all';
+            filterBtns.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.btn-filter[data-filter="all"]')?.classList.add('active');
+            applyFilters();
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                currentFilter = btn.getAttribute('data-filter');
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                if (searchInput.value) searchInput.value = '';
+                applyFilters();
+            });
+        });
+
+        // ========== NAVEGAÇÃO DOS CARDS ==========
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const urlExterno = card.getAttribute('data-url');
+                const projetoLocal = card.getAttribute('data-projeto');
+                const externo = card.getAttribute('data-externo') === '_blank';
+
+                if (urlExterno) {
+                    if (externo) window.open(urlExterno, '_blank');
+                    else window.location.href = urlExterno;
+                } else if (projetoLocal) {
+                    if (externo) window.open(projetoLocal, '_blank');
+                    else window.location.href = projetoLocal;
+                } else {
+                    alert('Link ainda não configurado para este projeto.');
+                }
+            });
+        });
+
+        // Inicializa exibindo todos
+        applyFilters();
+    </script>
 </body>
 </html>
