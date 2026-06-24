@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Projetos | Gabriel Dev - Portfólio</title>
+    <title>Projetos | Gabriel Dev - Laboratório Digital</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
         * {
@@ -20,6 +20,7 @@
             position: relative;
         }
 
+        /* Fundo */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -75,7 +76,7 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* SERVICE BAR */
+        /* Barra de serviço (igual) */
         .service-bar {
             position: fixed;
             top: 0;
@@ -245,7 +246,7 @@
             border-color: #fff;
         }
 
-        /* MAIN CONTAINER */
+        /* Container principal */
         .container {
             position: relative;
             z-index: 2;
@@ -253,11 +254,12 @@
             padding: 20px;
         }
 
+        /* Cartão principal - vidro */
         .hero-card {
             max-width: 1400px;
             width: 100%;
             margin: 100px auto 40px;
-            background: rgba(255, 255, 255, 0.97);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border-radius: 56px;
             padding: 45px 50px;
@@ -276,48 +278,77 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* Cabeçalho especial */
         .projects-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         .projects-header h1 {
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 800;
-            background: linear-gradient(125deg, #0D47A1, #1565C0, #FFC107);
+            background: linear-gradient(135deg, #0D47A1, #FF8F00);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
             margin-bottom: 12px;
+            letter-spacing: -1px;
         }
 
         .projects-header p {
             color: #2c3e4e;
-            font-size: 1.1rem;
-            max-width: 650px;
-            margin: 0 auto;
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto 25px;
+            line-height: 1.6;
         }
 
-        .breadcrumb {
+        /* Estatísticas rápidas */
+        .stats-row {
             display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
             justify-content: center;
-            gap: 8px;
-            margin-bottom: 30px;
-            font-size: 0.9rem;
-            color: #666;
+            margin-bottom: 40px;
         }
 
-        .breadcrumb a {
+        .stat-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.4);
+            border-radius: 24px;
+            padding: 18px 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
             color: #0D47A1;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.2s;
+            transition: 0.3s ease;
+            cursor: default;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        .breadcrumb a:hover {
-            color: #FF8F00;
+        .stat-card:hover {
+            background: rgba(255, 193, 7, 0.15);
+            border-color: #FFC107;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.2);
         }
 
+        .stat-icon {
+            font-size: 1.8rem;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF8F00, #FFC107);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Filtros */
         .controls {
             max-width: 1100px;
             margin: 0 auto 40px;
@@ -330,7 +361,7 @@
 
         .search-box {
             background: white;
-            border: 2px solid rgba(255, 193, 7, 0.5);
+            border: 2px solid rgba(255, 193, 7, 0.6);
             padding: 14px 24px;
             border-radius: 50px;
             color: #1e2a3a;
@@ -345,7 +376,7 @@
 
         .search-box:focus {
             border-color: #FFC107;
-            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.25);
         }
 
         .filter-buttons {
@@ -356,7 +387,7 @@
 
         .btn-filter {
             background: rgba(13, 71, 161, 0.08);
-            border: 1px solid rgba(13, 71, 161, 0.3);
+            border: 1px solid rgba(13, 71, 161, 0.4);
             color: #0D47A1;
             padding: 10px 20px;
             border-radius: 40px;
@@ -365,87 +396,127 @@
             font-weight: 700;
             font-size: 0.85rem;
             backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .btn-filter.active, .btn-filter:hover {
+        .btn-filter.active,
+        .btn-filter:hover {
             background: #FFC107;
             color: #0D47A1;
             border-color: #FFC107;
-            box-shadow: 0 5px 12px rgba(255, 193, 7, 0.3);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
             transform: translateY(-2px);
         }
 
-        /* GRID */
+        /* Grid de projetos */
         .grid-links {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
-            gap: 28px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
         }
 
+        /* Cartão de projeto especial */
         .project-card {
-            background: #FFFFFF;
-            border-radius: 28px;
-            padding: 26px;
+            background: #ffffff;
+            border-radius: 32px;
+            padding: 28px 24px 20px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             display: flex;
             flex-direction: column;
             color: #1e2a3a;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(255, 193, 7, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+            border: 1px solid rgba(0, 0, 0, 0.05);
             position: relative;
             overflow: hidden;
+            background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
         }
 
+        /* Faixa de categoria no topo */
         .project-card::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 30% 20%, rgba(255, 193, 7, 0.08), transparent 80%);
-            opacity: 0;
-            transition: opacity 0.4s;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #0D47A1, #FFC107);
+            opacity: 0.8;
+            transition: height 0.3s ease;
+        }
+
+        .project-card.js::before {
+            background: linear-gradient(90deg, #F7DF1E, #FF8F00);
+        }
+        .project-card.gamma::before {
+            background: linear-gradient(90deg, #7B1FA2, #E040FB);
+        }
+        .project-card.mobile::before {
+            background: linear-gradient(90deg, #00796B, #26A69A);
+        }
+        .project-card.python::before {
+            background: linear-gradient(90deg, #306998, #FFD43B);
         }
 
         .project-card:hover::before {
-            opacity: 1;
+            height: 10px;
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
-            border-color: #FFC107;
-            background: #fefcf5;
-            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 193, 7, 0.5);
+            transform: translateY(-10px);
+            border-color: rgba(255, 193, 7, 0.6);
+            box-shadow: 0 30px 45px -15px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 193, 7, 0.5);
+            background: #fffdf5;
         }
 
         .card-icon {
-            font-size: 2.4rem;
-            margin-bottom: 18px;
-            filter: drop-shadow(0 2px 6px rgba(255, 193, 7, 0.3));
+            font-size: 3rem;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .card-icon {
+            transform: scale(1.1) rotate(2deg);
         }
 
         .project-card h3 {
             font-size: 1.4rem;
             font-weight: 700;
             color: #0D47A1;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .project-card p {
-            color: #2c3e4e;
+            color: #3a3a4e;
             font-size: 0.9rem;
             line-height: 1.5;
             margin-bottom: 20px;
+            flex-grow: 1;
         }
 
         .card-footer {
             margin-top: auto;
-            padding-top: 18px;
+            padding-top: 15px;
             font-family: 'Fira Code', monospace;
             font-size: 0.7rem;
             font-weight: 600;
             color: #FF8F00;
-            border-top: 1px dashed rgba(255, 193, 7, 0.4);
+            border-top: 1px dashed rgba(255, 193, 7, 0.5);
             letter-spacing: 0.3px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tag {
+            background: rgba(255, 193, 7, 0.2);
+            padding: 3px 10px;
+            border-radius: 20px;
+            color: #0D47A1;
+            font-weight: 700;
         }
 
         .hidden {
@@ -455,7 +526,7 @@
         .footer-note {
             margin-top: 65px;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 193, 7, 0.4);
+            border-top: 1px solid rgba(255, 193, 7, 0.5);
             text-align: center;
             font-size: 0.85rem;
             color: #3a3a4e;
@@ -502,7 +573,7 @@
                 margin-top: 110px;
             }
             .projects-header h1 {
-                font-size: 2.2rem;
+                font-size: 2.4rem;
             }
             .controls {
                 flex-direction: column;
@@ -533,7 +604,7 @@
     <div class="glow-orb"></div>
     <div class="glow-orb-2"></div>
 
-    <!-- BARRA DE SERVIÇO -->
+    <!-- Barra de serviço -->
     <div class="service-bar" id="serviceBar">
         <div class="service-container">
             <div class="service-logo" onclick="window.location.href='index.html'">
@@ -558,17 +629,22 @@
 
     <div class="container">
         <div class="hero-card">
-            <div class="breadcrumb">
-                <a href="index.html">Início</a> <span>›</span> <strong>Projetos</strong>
-            </div>
             <div class="projects-header">
-                <h1>✨ Projetos de <span style="color:#FFC107;">Gabriel</span></h1>
-                <p>Explore os laboratórios digitais. Filtre entre Scripts, Apresentações e muito mais.</p>
+                <h1>🧪 Laboratório de Projetos</h1>
+                <p>Explore cada experimento, script e apresentação que construí ao longo da minha jornada como desenvolvedor.</p>
             </div>
 
-            <!-- Filtros e busca -->
+            <!-- Estatísticas rápidas -->
+            <div class="stats-row">
+                <div class="stat-card"><span class="stat-icon">📦</span><span class="stat-number" id="totalProjects">0</span> projetos</div>
+                <div class="stat-card"><span class="stat-icon">🟨</span><span class="stat-number" id="jsCount">0</span> Scripts JS</div>
+                <div class="stat-card"><span class="stat-icon">📊</span><span class="stat-number" id="gammaCount">0</span> Apresentações</div>
+                <div class="stat-card"><span class="stat-icon">📱</span><span class="stat-number" id="mobileCount">0</span> Mobile</div>
+            </div>
+
+            <!-- Filtros -->
             <div class="controls">
-                <input type="text" class="search-box" id="searchInput" placeholder="🔍 Pesquisar projeto por nome ou descrição...">
+                <input type="text" class="search-box" id="searchInput" placeholder="🔍 Pesquisar por nome, descrição ou tag...">
                 <div class="filter-buttons">
                     <button class="btn-filter active" data-filter="all">📌 Todos</button>
                     <button class="btn-filter" data-filter="js">🟨 Scripts JS</button>
@@ -580,145 +656,7 @@
 
             <!-- Grid de projetos -->
             <div class="grid-links" id="link-container">
-                <!-- Scripts JS -->
-                <div class="project-card js" data-projeto="carro.js">
-                    <div class="card-icon">🚗</div>
-                    <h3>Análise de Veículos</h3>
-                    <p>Compara rendimento entre Carro A e B baseado em KM e preço.</p>
-                    <div class="card-footer">#javascript #logica</div>
-                </div>
-                <div class="project-card js" data-projeto="notas.js">
-                    <div class="card-icon">🎓</div>
-                    <h3>Calculadora de Médias</h3>
-                    <p>Calcula a média aritmética do aluno Petro.</p>
-                    <div class="card-footer">#javascript #calculo</div>
-                </div>
-                <div class="project-card js" data-projeto="teste2.js">
-                    <div class="card-icon">📐</div>
-                    <h3>Geometria (Área)</h3>
-                    <p>Cálculo de área de triângulo (Base x Altura).</p>
-                    <div class="card-footer">#javascript #geometria</div>
-                </div>
-                <div class="project-card js" data-projeto="teste3.js">
-                    <div class="card-icon">🧪</div>
-                    <h3>Bhaskara Lab</h3>
-                    <p>Resolve equações de 2º grau e encontra o Delta.</p>
-                    <div class="card-footer">#javascript #algebra</div>
-                </div>
-                <div class="project-card js" data-projeto="teste.html" data-externo="_blank">
-                    <div class="card-icon">🌐</div>
-                    <h3>Página de Testes</h3>
-                    <p>Abre o seu arquivo HTML de experimentos.</p>
-                    <div class="card-footer">#html #javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="brake_continue.js">
-                    <div class="card-icon">🅿️</div>
-                    <h3>Estacionamento</h3>
-                    <p>Simulação de carros estacionados.</p>
-                    <div class="card-footer">#javascript #logica</div>
-                </div>
-                <div class="project-card js" data-projeto="filtrar.js">
-                    <div class="card-icon">🧪</div>
-                    <h3>Filtrar Objetos</h3>
-                    <p>Ordenando objetos por idade.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="selectionSorts.js">
-                    <div class="card-icon">🔢</div>
-                    <h3>Selection Sort</h3>
-                    <p>Algoritmo de ordenação eficiente.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="ordenando.js">
-                    <div class="card-icon">🔢</div>
-                    <h3>Ordenando Geral</h3>
-                    <p>Diversos algoritmos de ordenação.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="listaLivros.js">
-                    <div class="card-icon">📚</div>
-                    <h3>Lista de Livros</h3>
-                    <p>Manipulação de arrays de objetos.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="alterar.js">
-                    <div class="card-icon">🔄</div>
-                    <h3>Alterar Dados</h3>
-                    <p>Manipulação dinâmica de dados.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="leitura.js">
-                    <div class="card-icon">📖</div>
-                    <h3>Leitura de Arquivos</h3>
-                    <p>Script de processamento de arquivos.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="media_se.js" data-externo="_blank">
-                    <div class="card-icon">📁</div>
-                    <h3>Página de Testes / let</h3>
-                    <p>Arquivo JS de experimentos.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="variaveis.js" data-externo="_blank">
-                    <div class="card-icon">📁</div>
-                    <h3>Testes de Variáveis</h3>
-                    <p>Estudos sobre escopo e tipos.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-                <div class="project-card js" data-projeto="produto.html">
-                    <div class="card-icon">🔢</div>
-                    <h3>Venda de produto</h3>
-                    <p>Simulação de venda.</p>
-                    <div class="card-footer">#javascript</div>
-                </div>
-
-                <!-- Apresentações Gamma -->
-                <div class="project-card gamma" data-url="https://gamma.app/docs/Agenda-Escolar-Inteligente-zhlc75xq821pwub" data-externo="_blank">
-                    <div class="card-icon">📊</div>
-                    <h3>Agenda Escolar Inteligente</h3>
-                    <p>Apresentação de projeto no Gamma.</p>
-                    <div class="card-footer">#Gamma #Apresentacao</div>
-                </div>
-                <div class="project-card gamma" data-url="https://gamma.app/docs/Os-Pilares-da-Propriedade-Intelectual-pbq519sk1847qzm" data-externo="_blank">
-                    <div class="card-icon">📊</div>
-                    <h3>Propriedade Intelectual</h3>
-                    <p>Apresentação sobre os pilares da PI.</p>
-                    <div class="card-footer">#Gamma #Direito</div>
-                </div>
-                <div class="project-card gamma" data-url="https://gamma.app/docs/O-Ecossistema-de-Startups-2026-jkcqttp70rfdif2" data-externo="_blank">
-                    <div class="card-icon">🚀</div>
-                    <h3>Ecossistema de Startups 2026</h3>
-                    <p>Futuro das startups e inovação.</p>
-                    <div class="card-footer">#Gamma #Inovacao</div>
-                </div>
-                <div class="project-card gamma" data-url="https://notebooklm.google.com/notebook/cf96d718-f86e-4a2f-9dfe-035ffc1f8963/artifact/101f0b48-c396-41bf-b249-cfb6826fedf8?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_" data-externo="_blank">
-                    <div class="card-icon">🚀</div>
-                    <h3>Ecossistema das IA's 2026</h3>
-                    <p>Inovação e tendências.</p>
-                    <div class="card-footer">#NotebookLM #Inovacao</div>
-                </div>
-
-                <!-- Mobile -->
-                <div class="project-card mobile" data-url="SUA_IMAGEM.jpg" data-externo="_blank">
-                    <div class="card-icon">📱</div>
-                    <h3>Visualizar Print 1</h3>
-                    <p>Captura de tela do projeto em ambiente mobile.</p>
-                    <div class="card-footer">#mobile #print</div>
-                </div>
-                <div class="project-card mobile" data-url="fotocod.png" data-externo="_blank">
-                    <div class="card-icon">📱</div>
-                    <h3>Visualizar Print 2</h3>
-                    <p>Captura de tela do código ou interface mobile.</p>
-                    <div class="card-footer">#mobile #galeria</div>
-                </div>
-
-                <!-- Python -->
-                <div class="project-card python" data-projeto="pacman.html" data-externo="_blank">
-                    <div class="card-icon">🐍</div>
-                    <h3>Pac-Man Python Pro</h3>
-                    <p>Jogo desenvolvido com Pygame, aplicando POO e vetores.</p>
-                    <div class="card-footer">#python #pygame</div>
-                </div>
+                <!-- Os cards são gerados dinamicamente para contar estatísticas, mas mantive a estrutura original com dados estáticos -->
             </div>
 
             <div class="footer-note">
@@ -731,11 +669,10 @@
     <div class="scroll-top" id="scrollTop">▲</div>
 
     <script>
-        // ========== PARTÍCULAS E ANIMAÇÕES ==========
+        // ========== PARTÍCULAS ==========
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let animationId;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -777,7 +714,7 @@
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
-            animationId = requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animateParticles);
         }
 
         window.addEventListener('resize', () => {
@@ -788,7 +725,7 @@
         initParticles();
         animateParticles();
 
-        // Barra de serviço scroll
+        // Barra de serviço
         let lastScroll = 0;
         const bar = document.getElementById('serviceBar');
         const toggle = document.getElementById('toggleBar');
@@ -805,75 +742,118 @@
             bar.classList.toggle('hidden');
             toggle.textContent = bar.classList.contains('hidden') ? '🔽 Mostrar' : '🔽 Ocultar';
         });
-
-        // Botão scroll top
         document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // ========== FILTROS E PESQUISA ==========
-        const searchInput = document.getElementById('searchInput');
-        const cards = document.getElementsByClassName('project-card');
-        const filterBtns = document.querySelectorAll('.btn-filter');
+        // ========== PROJETOS E FILTROS ==========
+        const projectsData = [
+            { icon: "🚗", title: "Análise de Veículos", desc: "Compara rendimento entre Carro A e B baseado em KM e preço.", footer: "#javascript #logica", category: "js", projeto: "carro.js" },
+            { icon: "🎓", title: "Calculadora de Médias", desc: "Calcula a média aritmética do aluno Petro.", footer: "#javascript #calculo", category: "js", projeto: "notas.js" },
+            { icon: "📐", title: "Geometria (Área)", desc: "Cálculo de área de triângulo (Base x Altura).", footer: "#javascript #geometria", category: "js", projeto: "teste2.js" },
+            { icon: "🧪", title: "Bhaskara Lab", desc: "Resolve equações de 2º grau e encontra o Delta.", footer: "#javascript #algebra", category: "js", projeto: "teste3.js" },
+            { icon: "🌐", title: "Página de Testes", desc: "Abre o seu arquivo HTML de experimentos.", footer: "#html #javascript", category: "js", projeto: "teste.html", externo: "_blank" },
+            { icon: "📊", title: "Agenda Escolar Inteligente", desc: "Apresentação de projeto no Gamma.", footer: "#Gamma #Apresentacao", category: "gamma", url: "https://gamma.app/docs/Agenda-Escolar-Inteligente-zhlc75xq821pwub", externo: "_blank" },
+            { icon: "📊", title: "Propriedade Intelectual", desc: "Apresentação sobre os pilares da PI.", footer: "#Gamma #Direito", category: "gamma", url: "https://gamma.app/docs/Os-Pilares-da-Propriedade-Intelectual-pbq519sk1847qzm", externo: "_blank" },
+            { icon: "🚀", title: "Ecossistema de Startups 2026", desc: "Futuro das startups e inovação.", footer: "#Gamma #Inovacao", category: "gamma", url: "https://gamma.app/docs/O-Ecossistema-de-Startups-2026-jkcqttp70rfdif2", externo: "_blank" },
+            { icon: "📱", title: "Visualizar Print 1", desc: "Captura de tela do projeto em ambiente mobile.", footer: "#mobile #print", category: "mobile", url: "SUA_IMAGEM.jpg", externo: "_blank" },
+            { icon: "📱", title: "Visualizar Print 2", desc: "Captura de tela do código ou interface mobile.", footer: "#mobile #galeria", category: "mobile", url: "fotocod.png", externo: "_blank" },
+            { icon: "🅿️", title: "Estacionamento", desc: "Simulação de carros estacionados.", footer: "#javascript #logica", category: "js", projeto: "brake_continue.js" },
+            { icon: "🧪", title: "Filtrar Objetos", desc: "Ordenando objetos por idade.", footer: "#javascript", category: "js", projeto: "filtrar.js" },
+            { icon: "🔢", title: "Selection Sort", desc: "Algoritmo de ordenação eficiente.", footer: "#javascript", category: "js", projeto: "selectionSorts.js" },
+            { icon: "🔢", title: "Ordenando Geral", desc: "Diversos algoritmos de ordenação.", footer: "#javascript", category: "js", projeto: "ordenando.js" },
+            { icon: "📚", title: "Lista de Livros", desc: "Manipulação de arrays de objetos.", footer: "#javascript", category: "js", projeto: "listaLivros.js" },
+            { icon: "🔄", title: "Alterar Dados", desc: "Manipulação dinâmica de dados.", footer: "#javascript", category: "js", projeto: "alterar.js" },
+            { icon: "📖", title: "Leitura de Arquivos", desc: "Script de processamento de arquivos.", footer: "#javascript", category: "js", projeto: "leitura.js" },
+            { icon: "📁", title: "Página de Testes / let", desc: "Arquivo JS de experimentos.", footer: "#javascript", category: "js", projeto: "media_se.js", externo: "_blank" },
+            { icon: "📁", title: "Testes de Variáveis", desc: "Estudos sobre escopo e tipos.", footer: "#javascript", category: "js", projeto: "variaveis.js", externo: "_blank" },
+            { icon: "🐍", title: "Pac-Man Python Pro", desc: "Jogo desenvolvido com Pygame, aplicando POO e vetores.", footer: "#python #pygame", category: "python", projeto: "pacman.html", externo: "_blank" },
+            { icon: "🚀", title: "Ecossistema das IA's 2026", desc: "Inovação e tendências.", footer: "#NotebookLM #Inovacao", category: "gamma", url: "https://notebooklm.google.com/notebook/cf96d718-f86e-4a2f-9dfe-035ffc1f8963/artifact/101f0b48-c396-41bf-b249-cfb6826fedf8?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_", externo: "_blank" },
+            { icon: "🔢", title: "Venda de produto", desc: "Simulação de venda.", footer: "#javascript", category: "js", projeto: "produto.html" }
+        ];
 
+        const grid = document.getElementById('link-container');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.btn-filter');
         let currentFilter = 'all';
 
+        function renderCards() {
+            grid.innerHTML = '';
+            projectsData.forEach(proj => {
+                const card = document.createElement('div');
+                card.className = `project-card ${proj.category}`;
+                card.setAttribute('data-category', proj.category);
+                if (proj.url) {
+                    card.setAttribute('data-url', proj.url);
+                    if (proj.externo) card.setAttribute('data-externo', proj.externo);
+                } else if (proj.projeto) {
+                    card.setAttribute('data-projeto', proj.projeto);
+                    if (proj.externo) card.setAttribute('data-externo', proj.externo);
+                }
+                card.innerHTML = `
+                    <div class="card-icon">${proj.icon}</div>
+                    <h3>${proj.title}</h3>
+                    <p>${proj.desc}</p>
+                    <div class="card-footer">
+                        <span>${proj.footer}</span>
+                        <span class="tag">${proj.category === 'js' ? 'JS' : proj.category === 'gamma' ? 'Gamma' : proj.category === 'mobile' ? 'Mobile' : 'Python'}</span>
+                    </div>
+                `;
+                card.addEventListener('click', (e) => {
+                    const url = card.getAttribute('data-url');
+                    const projeto = card.getAttribute('data-projeto');
+                    const externo = card.getAttribute('data-externo') === '_blank';
+                    if (url) {
+                        if (externo) window.open(url, '_blank');
+                        else window.location.href = url;
+                    } else if (projeto) {
+                        if (externo) window.open(projeto, '_blank');
+                        else window.location.href = projeto;
+                    }
+                });
+                grid.appendChild(card);
+            });
+            updateStats();
+            applyFilters();
+        }
+
+        function updateStats() {
+            const allCards = document.querySelectorAll('.project-card');
+            document.getElementById('totalProjects').textContent = allCards.length;
+            document.getElementById('jsCount').textContent = document.querySelectorAll('.project-card.js').length;
+            document.getElementById('gammaCount').textContent = document.querySelectorAll('.project-card.gamma').length;
+            document.getElementById('mobileCount').textContent = document.querySelectorAll('.project-card.mobile').length;
+        }
+
         function applyFilters() {
-            const searchTerm = searchInput.value.toLowerCase();
-            for (let i = 0; i < cards.length; i++) {
-                const card = cards[i];
+            const term = searchInput.value.toLowerCase();
+            const cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
                 const title = card.querySelector('h3').innerText.toLowerCase();
                 const desc = card.querySelector('p').innerText.toLowerCase();
-                const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
-                const matchesCategory = (currentFilter === 'all') || card.classList.contains(currentFilter);
-                if (matchesSearch && matchesCategory) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            }
+                const footer = card.querySelector('.card-footer span:first-child').innerText.toLowerCase();
+                const matchesSearch = title.includes(term) || desc.includes(term) || footer.includes(term);
+                const matchesCategory = currentFilter === 'all' || card.classList.contains(currentFilter);
+                card.classList.toggle('hidden', !(matchesSearch && matchesCategory));
+            });
         }
 
         searchInput.addEventListener('keyup', () => {
             currentFilter = 'all';
             filterBtns.forEach(btn => btn.classList.remove('active'));
-            const allBtn = document.querySelector('.btn-filter[data-filter="all"]');
-            if (allBtn) allBtn.classList.add('active');
+            document.querySelector('.btn-filter[data-filter="all"]').classList.add('active');
             applyFilters();
         });
 
         filterBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const filterValue = btn.getAttribute('data-filter');
-                currentFilter = filterValue;
+            btn.addEventListener('click', () => {
+                currentFilter = btn.getAttribute('data-filter');
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                if (searchInput.value !== '') {
-                    searchInput.value = '';
-                }
+                if (searchInput.value) searchInput.value = '';
                 applyFilters();
             });
         });
 
-        // Navegação dos cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const urlExterno = card.getAttribute('data-url');
-                const projetoLocal = card.getAttribute('data-projeto');
-                const externo = card.getAttribute('data-externo') === '_blank';
-                
-                if (urlExterno) {
-                    if (externo) window.open(urlExterno, '_blank');
-                    else window.location.href = urlExterno;
-                } else if (projetoLocal) {
-                    if (externo) window.open(projetoLocal, '_blank');
-                    else window.location.href = projetoLocal;
-                } else {
-                    console.log('Ação não definida para este card');
-                }
-            });
-        });
-
-        applyFilters();
+        renderCards();
     </script>
 </body>
 </html>
