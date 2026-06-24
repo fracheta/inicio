@@ -20,7 +20,6 @@
             position: relative;
         }
 
-        /* Fundo */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -76,7 +75,7 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* Barra de serviço (igual) */
+        /* Barra de serviço */
         .service-bar {
             position: fixed;
             top: 0;
@@ -254,9 +253,8 @@
             padding: 20px;
         }
 
-        /* Cartão principal - vidro */
         .hero-card {
-            max-width: 1400px;
+            max-width: 1000px;
             width: 100%;
             margin: 100px auto 40px;
             background: rgba(255, 255, 255, 0.95);
@@ -278,10 +276,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Cabeçalho especial */
         .projects-header {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         .projects-header h1 {
@@ -298,130 +295,23 @@
         .projects-header p {
             color: #2c3e4e;
             font-size: 1.15rem;
-            max-width: 700px;
-            margin: 0 auto 25px;
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.6;
         }
 
-        /* Estatísticas rápidas */
-        .stats-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 193, 7, 0.4);
-            border-radius: 24px;
-            padding: 18px 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 700;
-            color: #0D47A1;
-            transition: 0.3s ease;
-            cursor: default;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .stat-card:hover {
-            background: rgba(255, 193, 7, 0.15);
-            border-color: #FFC107;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.2);
-        }
-
-        .stat-icon {
-            font-size: 1.8rem;
-        }
-
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #FF8F00, #FFC107);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        /* Filtros */
-        .controls {
-            max-width: 1100px;
-            margin: 0 auto 40px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .search-box {
-            background: white;
-            border: 2px solid rgba(255, 193, 7, 0.6);
-            padding: 14px 24px;
-            border-radius: 50px;
-            color: #1e2a3a;
-            width: 100%;
-            max-width: 400px;
-            outline: none;
-            font-weight: 500;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-        }
-
-        .search-box:focus {
-            border-color: #FFC107;
-            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.25);
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn-filter {
-            background: rgba(13, 71, 161, 0.08);
-            border: 1px solid rgba(13, 71, 161, 0.4);
-            color: #0D47A1;
-            padding: 10px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.25s ease;
-            font-weight: 700;
-            font-size: 0.85rem;
-            backdrop-filter: blur(4px);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .btn-filter.active,
-        .btn-filter:hover {
-            background: #FFC107;
-            color: #0D47A1;
-            border-color: #FFC107;
-            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* Grid de projetos */
+        /* Grid centralizada para um card */
         .grid-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
         }
 
-        /* Cartão de projeto especial */
         .project-card {
             background: #ffffff;
             border-radius: 32px;
-            padding: 28px 24px 20px;
+            padding: 30px 28px 24px;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             display: flex;
@@ -432,9 +322,10 @@
             position: relative;
             overflow: hidden;
             background: linear-gradient(145deg, #ffffff 0%, #f8faff 100%);
+            max-width: 400px;
+            width: 100%;
         }
 
-        /* Faixa de categoria no topo */
         .project-card::before {
             content: '';
             position: absolute;
@@ -442,22 +333,9 @@
             left: 0;
             width: 100%;
             height: 6px;
-            background: linear-gradient(90deg, #0D47A1, #FFC107);
-            opacity: 0.8;
+            background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
+            opacity: 0.9;
             transition: height 0.3s ease;
-        }
-
-        .project-card.js::before {
-            background: linear-gradient(90deg, #F7DF1E, #FF8F00);
-        }
-        .project-card.gamma::before {
-            background: linear-gradient(90deg, #7B1FA2, #E040FB);
-        }
-        .project-card.mobile::before {
-            background: linear-gradient(90deg, #00796B, #26A69A);
-        }
-        .project-card.python::before {
-            background: linear-gradient(90deg, #306998, #FFD43B);
         }
 
         .project-card:hover::before {
@@ -472,59 +350,59 @@
         }
 
         .card-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 15px;
             filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
             transition: transform 0.3s;
+            text-align: center;
         }
 
         .project-card:hover .card-icon {
-            transform: scale(1.1) rotate(2deg);
+            transform: scale(1.1) rotate(5deg);
         }
 
         .project-card h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: #0D47A1;
             margin-bottom: 10px;
+            text-align: center;
         }
 
         .project-card p {
             color: #3a3a4e;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             line-height: 1.5;
             margin-bottom: 20px;
             flex-grow: 1;
+            text-align: center;
         }
 
         .card-footer {
             margin-top: auto;
             padding-top: 15px;
             font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: #FF8F00;
             border-top: 1px dashed rgba(255, 193, 7, 0.5);
             letter-spacing: 0.3px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            gap: 10px;
         }
 
         .tag {
-            background: rgba(255, 193, 7, 0.2);
+            background: rgba(66, 133, 244, 0.15);
             padding: 3px 10px;
             border-radius: 20px;
             color: #0D47A1;
             font-weight: 700;
         }
 
-        .hidden {
-            display: none !important;
-        }
-
         .footer-note {
-            margin-top: 65px;
+            margin-top: 50px;
             padding-top: 30px;
             border-top: 1px solid rgba(255, 193, 7, 0.5);
             text-align: center;
@@ -567,23 +445,16 @@
             box-shadow: 0 10px 25px #FFC107;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 600px) {
             .hero-card {
                 padding: 30px 20px;
                 margin-top: 110px;
             }
             .projects-header h1 {
-                font-size: 2.4rem;
+                font-size: 2.2rem;
             }
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .search-box {
-                max-width: 100%;
-            }
-            .filter-buttons {
-                justify-content: center;
+            .project-card {
+                padding: 20px;
             }
             .service-container {
                 flex-direction: column;
@@ -630,33 +501,21 @@
     <div class="container">
         <div class="hero-card">
             <div class="projects-header">
-                <h1>🧪 Laboratório de Projetos</h1>
-                <p>Explore cada experimento, script e apresentação que construí ao longo da minha jornada como desenvolvedor.</p>
+                <h1>🧪 Projeto em Destaque</h1>
+                <p>Aplicação criada no Google AI Studio, agora disponível para testes online.</p>
             </div>
 
-            <!-- Estatísticas rápidas -->
-            <div class="stats-row">
-                <div class="stat-card"><span class="stat-icon">📦</span><span class="stat-number" id="totalProjects">0</span> projetos</div>
-                <div class="stat-card"><span class="stat-icon">🟨</span><span class="stat-number" id="jsCount">0</span> Scripts JS</div>
-                <div class="stat-card"><span class="stat-icon">📊</span><span class="stat-number" id="gammaCount">0</span> Apresentações</div>
-                <div class="stat-card"><span class="stat-icon">📱</span><span class="stat-number" id="mobileCount">0</span> Mobile</div>
-            </div>
-
-            <!-- Filtros -->
-            <div class="controls">
-                <input type="text" class="search-box" id="searchInput" placeholder="🔍 Pesquisar por nome, descrição ou tag...">
-                <div class="filter-buttons">
-                    <button class="btn-filter active" data-filter="all">📌 Todos</button>
-                    <button class="btn-filter" data-filter="js">🟨 Scripts JS</button>
-                    <button class="btn-filter" data-filter="gamma">📊 Apresentações</button>
-                    <button class="btn-filter" data-filter="mobile">📱 Mobile</button>
-                    <button class="btn-filter" data-filter="python">🐍 Python</button>
+            <!-- Card único com o link -->
+            <div class="grid-links">
+                <div class="project-card" id="unicoProjeto" data-url="https://untitled-812821253329.us-east1.run.app" data-externo="_blank">
+                    <div class="card-icon">🤖</div>
+                    <h3>App Google AI Studio</h3>
+                    <p>Protótipo interativo desenvolvido com IA, rodando em cloud. Clique para testar!</p>
+                    <div class="card-footer">
+                        <span>#googleai #cloud</span>
+                        <span class="tag">AI Studio</span>
+                    </div>
                 </div>
-            </div>
-
-            <!-- Grid de projetos -->
-            <div class="grid-links" id="link-container">
-                <!-- Os cards são gerados dinamicamente para contar estatísticas, mas mantive a estrutura original com dados estáticos -->
             </div>
 
             <div class="footer-note">
@@ -744,116 +603,15 @@
         });
         document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // ========== PROJETOS E FILTROS ==========
-        const projectsData = [
-            { icon: "🚗", title: "Análise de Veículos", desc: "Compara rendimento entre Carro A e B baseado em KM e preço.", footer: "#javascript #logica", category: "js", projeto: "carro.js" },
-            { icon: "🎓", title: "Calculadora de Médias", desc: "Calcula a média aritmética do aluno Petro.", footer: "#javascript #calculo", category: "js", projeto: "notas.js" },
-            { icon: "📐", title: "Geometria (Área)", desc: "Cálculo de área de triângulo (Base x Altura).", footer: "#javascript #geometria", category: "js", projeto: "teste2.js" },
-            { icon: "🧪", title: "Bhaskara Lab", desc: "Resolve equações de 2º grau e encontra o Delta.", footer: "#javascript #algebra", category: "js", projeto: "teste3.js" },
-            { icon: "🌐", title: "Página de Testes", desc: "Abre o seu arquivo HTML de experimentos.", footer: "#html #javascript", category: "js", projeto: "teste.html", externo: "_blank" },
-            { icon: "📊", title: "Agenda Escolar Inteligente", desc: "Apresentação de projeto no Gamma.", footer: "#Gamma #Apresentacao", category: "gamma", url: "https://gamma.app/docs/Agenda-Escolar-Inteligente-zhlc75xq821pwub", externo: "_blank" },
-            { icon: "📊", title: "Propriedade Intelectual", desc: "Apresentação sobre os pilares da PI.", footer: "#Gamma #Direito", category: "gamma", url: "https://gamma.app/docs/Os-Pilares-da-Propriedade-Intelectual-pbq519sk1847qzm", externo: "_blank" },
-            { icon: "🚀", title: "Ecossistema de Startups 2026", desc: "Futuro das startups e inovação.", footer: "#Gamma #Inovacao", category: "gamma", url: "https://gamma.app/docs/O-Ecossistema-de-Startups-2026-jkcqttp70rfdif2", externo: "_blank" },
-            { icon: "📱", title: "Visualizar Print 1", desc: "Captura de tela do projeto em ambiente mobile.", footer: "#mobile #print", category: "mobile", url: "SUA_IMAGEM.jpg", externo: "_blank" },
-            { icon: "📱", title: "Visualizar Print 2", desc: "Captura de tela do código ou interface mobile.", footer: "#mobile #galeria", category: "mobile", url: "fotocod.png", externo: "_blank" },
-            { icon: "🅿️", title: "Estacionamento", desc: "Simulação de carros estacionados.", footer: "#javascript #logica", category: "js", projeto: "brake_continue.js" },
-            { icon: "🧪", title: "Filtrar Objetos", desc: "Ordenando objetos por idade.", footer: "#javascript", category: "js", projeto: "filtrar.js" },
-            { icon: "🔢", title: "Selection Sort", desc: "Algoritmo de ordenação eficiente.", footer: "#javascript", category: "js", projeto: "selectionSorts.js" },
-            { icon: "🔢", title: "Ordenando Geral", desc: "Diversos algoritmos de ordenação.", footer: "#javascript", category: "js", projeto: "ordenando.js" },
-            { icon: "📚", title: "Lista de Livros", desc: "Manipulação de arrays de objetos.", footer: "#javascript", category: "js", projeto: "listaLivros.js" },
-            { icon: "🔄", title: "Alterar Dados", desc: "Manipulação dinâmica de dados.", footer: "#javascript", category: "js", projeto: "alterar.js" },
-            { icon: "📖", title: "Leitura de Arquivos", desc: "Script de processamento de arquivos.", footer: "#javascript", category: "js", projeto: "leitura.js" },
-            { icon: "📁", title: "Página de Testes / let", desc: "Arquivo JS de experimentos.", footer: "#javascript", category: "js", projeto: "media_se.js", externo: "_blank" },
-            { icon: "📁", title: "Testes de Variáveis", desc: "Estudos sobre escopo e tipos.", footer: "#javascript", category: "js", projeto: "variaveis.js", externo: "_blank" },
-            { icon: "🐍", title: "Pac-Man Python Pro", desc: "Jogo desenvolvido com Pygame, aplicando POO e vetores.", footer: "#python #pygame", category: "python", projeto: "pacman.html", externo: "_blank" },
-            { icon: "🚀", title: "Ecossistema das IA's 2026", desc: "Inovação e tendências.", footer: "#NotebookLM #Inovacao", category: "gamma", url: "https://notebooklm.google.com/notebook/cf96d718-f86e-4a2f-9dfe-035ffc1f8963/artifact/101f0b48-c396-41bf-b249-cfb6826fedf8?utm_source=nlm_web_share&utm_medium=google_oo&utm_campaign=art_share_2&utm_content=&utm_smc=nlm_web_share_google_oo_art_share_2_", externo: "_blank" },
-            { icon: "🔢", title: "Venda de produto", desc: "Simulação de venda.", footer: "#javascript", category: "js", projeto: "produto.html" }
-        ];
-
-        const grid = document.getElementById('link-container');
-        const searchInput = document.getElementById('searchInput');
-        const filterBtns = document.querySelectorAll('.btn-filter');
-        let currentFilter = 'all';
-
-        function renderCards() {
-            grid.innerHTML = '';
-            projectsData.forEach(proj => {
-                const card = document.createElement('div');
-                card.className = `project-card ${proj.category}`;
-                card.setAttribute('data-category', proj.category);
-                if (proj.url) {
-                    card.setAttribute('data-url', proj.url);
-                    if (proj.externo) card.setAttribute('data-externo', proj.externo);
-                } else if (proj.projeto) {
-                    card.setAttribute('data-projeto', proj.projeto);
-                    if (proj.externo) card.setAttribute('data-externo', proj.externo);
-                }
-                card.innerHTML = `
-                    <div class="card-icon">${proj.icon}</div>
-                    <h3>${proj.title}</h3>
-                    <p>${proj.desc}</p>
-                    <div class="card-footer">
-                        <span>${proj.footer}</span>
-                        <span class="tag">${proj.category === 'js' ? 'JS' : proj.category === 'gamma' ? 'Gamma' : proj.category === 'mobile' ? 'Mobile' : 'Python'}</span>
-                    </div>
-                `;
-                card.addEventListener('click', (e) => {
-                    const url = card.getAttribute('data-url');
-                    const projeto = card.getAttribute('data-projeto');
-                    const externo = card.getAttribute('data-externo') === '_blank';
-                    if (url) {
-                        if (externo) window.open(url, '_blank');
-                        else window.location.href = url;
-                    } else if (projeto) {
-                        if (externo) window.open(projeto, '_blank');
-                        else window.location.href = projeto;
-                    }
-                });
-                grid.appendChild(card);
-            });
-            updateStats();
-            applyFilters();
-        }
-
-        function updateStats() {
-            const allCards = document.querySelectorAll('.project-card');
-            document.getElementById('totalProjects').textContent = allCards.length;
-            document.getElementById('jsCount').textContent = document.querySelectorAll('.project-card.js').length;
-            document.getElementById('gammaCount').textContent = document.querySelectorAll('.project-card.gamma').length;
-            document.getElementById('mobileCount').textContent = document.querySelectorAll('.project-card.mobile').length;
-        }
-
-        function applyFilters() {
-            const term = searchInput.value.toLowerCase();
-            const cards = document.querySelectorAll('.project-card');
-            cards.forEach(card => {
-                const title = card.querySelector('h3').innerText.toLowerCase();
-                const desc = card.querySelector('p').innerText.toLowerCase();
-                const footer = card.querySelector('.card-footer span:first-child').innerText.toLowerCase();
-                const matchesSearch = title.includes(term) || desc.includes(term) || footer.includes(term);
-                const matchesCategory = currentFilter === 'all' || card.classList.contains(currentFilter);
-                card.classList.toggle('hidden', !(matchesSearch && matchesCategory));
-            });
-        }
-
-        searchInput.addEventListener('keyup', () => {
-            currentFilter = 'all';
-            filterBtns.forEach(btn => btn.classList.remove('active'));
-            document.querySelector('.btn-filter[data-filter="all"]').classList.add('active');
-            applyFilters();
+        // Ação do card único
+        document.getElementById('unicoProjeto').addEventListener('click', function() {
+            const url = this.getAttribute('data-url');
+            const externo = this.getAttribute('data-externo') === '_blank';
+            if (url) {
+                if (externo) window.open(url, '_blank');
+                else window.location.href = url;
+            }
         });
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                currentFilter = btn.getAttribute('data-filter');
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                if (searchInput.value) searchInput.value = '';
-                applyFilters();
-            });
-        });
-
-        renderCards();
     </script>
 </body>
 </html>
