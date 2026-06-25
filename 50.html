@@ -585,58 +585,72 @@
     <div class="scroll-top" id="scrollTop">▲</div>
 
     <script>
-        // ---------- 🌟 COLEÇÃO DE CERTIFICADOS (EDITAR AQUI OS SEUS LINKS) 🌟 ----------
-        // Basta substituir os dados abaixo pelos seus certificados: título, emissor, data, descrição e link (URL do certificado)
+        // ---------- 🌟 COLEÇÃO DE CERTIFICADOS (LINKS ATUALIZADOS COM SEUS CURSOS DA ALURA) 🌟 ----------
         const certificados = [
             {
-                titulo: "JavaScript Avançado",
-                emissor: "Digital Innovation One",
-                data: "Março 2025",
-                descricao: "Conceitos de closures, promises, async/await e manipulação avançada do DOM.",
-                link: "https://seusite.com/certificados/js-avancado.pdf",   // <-- COLOQUE O LINK DO SEU CERTIFICADO AQUI
-                icone: "📜"
+                titulo: "Fundamentos de Agilidade",
+                emissor: "Alura",
+                data: "2025/2026",
+                descricao: "Princípios ágeis, Scrum, Kanban e mindset de melhoria contínua.",
+                link: "https://cursos.alura.com.br/user/gabriel-fracheta-souza/course/fundamentos-agilidade/certificate",
+                icone: "⚡"
             },
             {
-                titulo: "Desenvolvimento Web Full Stack",
-                emissor: "Curso em Vídeo",
-                data: "Janeiro 2026",
-                descricao: "HTML5, CSS3, JavaScript, Node.js e banco de dados relacional.",
-                link: "https://seusite.com/certificados/fullstack.pdf",
-                icone: "🌐"
+                titulo: "Arduino",
+                emissor: "Alura",
+                data: "2025/2026",
+                descricao: "Introdução à prototipagem eletrônica com Arduino, sensores e atuadores.",
+                link: "https://cursos.alura.com.br/user/gabriel-fracheta-souza/course/arduino/certificate",
+                icone: "🔌"
             },
             {
-                titulo: "Python para Análise de Dados",
-                emissor: "Data Science Academy",
-                data: "Dezembro 2025",
-                descricao: "Pandas, NumPy, Matplotlib e boas práticas com notebooks.",
-                link: "https://seusite.com/certificados/python-dados.pdf",
-                icone: "🐍"
+                titulo: "MySQL: Consultas SQL",
+                emissor: "Alura",
+                data: "2025/2026",
+                descricao: "Consultas avançadas, filtros, joins e manipulação de dados com SQL.",
+                link: "https://cursos.alura.com.br/user/gabriel-fracheta-souza/course/mysql-consultas-sql/certificate",
+                icone: "🗄️"
             },
             {
-                titulo: "UI/UX Design Fundamentals",
-                emissor: "Google / Coursera",
-                data: "Outubro 2025",
-                descricao: "Princípios de experiência do usuário, prototipagem e design centrado no ser humano.",
-                link: "https://seusite.com/certificados/ui-ux.pdf",
+                titulo: "Cores no Design: Teoria e Prática",
+                emissor: "Alura",
+                data: "2025/2026",
+                descricao: "Teoria das cores, psicologia cromática e aplicação em interfaces.",
+                link: "https://cursos.alura.com.br/user/gabriel-fracheta-souza/course/cores-design-teoria-pratica/certificate",
                 icone: "🎨"
             },
             {
-                titulo: "React + Next.js",
-                emissor: "Rocketseat",
-                data: "Fevereiro 2026",
-                descricao: "Construção de aplicações modernas com React hooks, Next.js e SSR.",
-                link: "https://seusite.com/certificados/react-next.pdf",
-                icone: "⚛️"
+                titulo: "Data Science: Primeiros Passos",
+                emissor: "Alura",
+                data: "2025/2026",
+                descricao: "Fundamentos de ciência de dados, análise exploratória e visualização.",
+                link: "https://cursos.alura.com.br/user/gabriel-fracheta-souza/course/data-science-primeiros-passos/certificate",
+                icone: "📊"
             },
             {
-                titulo: "Banco de Dados SQL & NoSQL",
+                titulo: "Design: Entenda e Conheça a Área",
                 emissor: "Alura",
-                data: "Agosto 2025",
-                descricao: "Modelagem, consultas avançadas e integração com MongoDB.",
-                link: "https://seusite.com/certificados/sql-nosql.pdf",
-                icone: "🗄️"
+                data: "2025/2026",
+                descricao: "Visão geral do design digital, UX/UI e ferramentas de prototipação.",
+                link: "https://cursos.alura.com.br/user/gabriel-fracheta-souza/course/design-entenda-conheca-area/certificate",
+                icone: "🧠"
+            },
+            {
+                titulo: "Empreendedorismo",
+                emissor: "Alura",
+                data: "2025/2026",
+                descricao: "Modelos de negócio, validação de ideias e mindset empreendedor.",
+                link: "https://cursos.alura.com.br/user/gabriel-fracheta-souza/course/empreendedorismo/certificate",
+                icone: "🚀"
+            },
+            {
+                titulo: "Estatística: Distribuições e Medidas",
+                emissor: "Alura",
+                data: "2025/2026",
+                descricao: "Distribuições de probabilidade, medidas de tendência central e dispersão.",
+                link: "https://cursos.alura.com.br/user/gabriel-fracheta-souza/course/estatistica-distribuicoes-e-medidas/certificate",
+                icone: "📈"
             }
-            // 👇 Adicione quantos certificados quiser seguindo o formato acima (não esqueça as vírgulas)
         ];
 
         // ========== SISTEMA DE PARTÍCULAS (IGUAL AO ORIGINAL) ==========
@@ -764,7 +778,6 @@
                 const dest = link.getAttribute('data-dest');
                 if (dest) {
                     if (dest === '50.html') {
-                        // já está na página de certificados, apenas recarrega? ou não faz nada.
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     } else {
                         window.location.href = dest;
@@ -773,7 +786,7 @@
             });
         });
 
-        // Tooltip para logo (detalhe extra) + qualquer interação
+        // Tooltip para logo (detalhe extra)
         let tooltip = null;
         const logoImg = document.querySelector('.service-logo img');
         if (logoImg) {
@@ -792,13 +805,12 @@
         // Botão scroll top
         document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // Adicionar efeito sutil nos cards de certificado (exibição de descrição)
+        // Renderiza os certificados
         renderCertificados();
 
-        // Mensagem amigável para links de certificados (opcional)
+        // Alerta amigável caso o link seja o placeholder antigo (já não se aplica, mas mantido)
         document.addEventListener('click', (e) => {
             if (e.target.classList && e.target.classList.contains('cert-link')) {
-                // apenas redireciona normalmente, mas podemos mostrar um alert opcional se o link for placeholder
                 if(e.target.getAttribute('href') && e.target.getAttribute('href').includes('seusite.com')) {
                     e.preventDefault();
                     alert("🔗 Exemplo de certificado! Substitua o link no array 'certificados' pelo seu link real.");
