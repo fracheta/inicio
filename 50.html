@@ -20,7 +20,6 @@
             position: relative;
         }
 
-        /* Fundo com gradiente dinâmico (mesmo estilo) */
         .bg-gradient {
             position: fixed;
             top: 0;
@@ -76,7 +75,6 @@
             100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* ===== SERVICE BAR (idêntica ao original) ===== */
         .service-bar {
             position: fixed;
             top: 0;
@@ -237,7 +235,6 @@
             border-color: #fff;
         }
 
-        /* ===== MAIN CONTAINER ===== */
         .container {
             position: relative;
             z-index: 2;
@@ -245,7 +242,6 @@
             padding: 20px;
         }
 
-        /* ===== CARD PRINCIPAL DOS CERTIFICADOS ===== */
         .certificates-card {
             max-width: 1300px;
             width: 100%;
@@ -309,7 +305,6 @@
             font-weight: 400;
         }
 
-        /* GRADE DE CERTIFICADOS */
         .certs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -317,7 +312,10 @@
             margin: 40px 0 20px;
         }
 
-        .cert-card {
+        /* Card agora é um link <a> */
+        a.cert-card {
+            text-decoration: none;
+            color: inherit;
             background: #ffffff;
             border-radius: 36px;
             padding: 28px 24px;
@@ -330,7 +328,7 @@
             flex-direction: column;
         }
 
-        .cert-card::before {
+        a.cert-card::before {
             content: '';
             position: absolute;
             inset: 0;
@@ -339,11 +337,11 @@
             transition: opacity 0.5s;
         }
 
-        .cert-card:hover::before {
+        a.cert-card:hover::before {
             opacity: 1;
         }
 
-        .cert-card:hover {
+        a.cert-card:hover {
             border-color: #FFC107;
             transform: translateY(-8px);
             background: #fefcf5;
@@ -393,31 +391,28 @@
             flex: 1;
         }
 
-        .cert-link {
+        /* Indicador visual de link (seta) no canto */
+        .cert-link-indicator {
             display: inline-flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 12px;
+            justify-content: center;
+            gap: 8px;
             background: linear-gradient(105deg, #FFC107, #FFA000);
             border: none;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 60px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #1e1e2a;
-            text-decoration: none;
-            transition: all 0.3s ease;
             margin-top: 8px;
             box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
-            text-align: center;
-            justify-content: center;
+            transition: all 0.3s ease;
         }
 
-        .cert-link:hover {
-            transform: translateX(6px);
+        a.cert-card:hover .cert-link-indicator {
             background: linear-gradient(105deg, #FFD54F, #FFB300);
             box-shadow: 0 8px 20px rgba(255, 193, 7, 0.5);
-            gap: 16px;
+            transform: translateX(4px);
         }
 
         .empty-state {
@@ -519,7 +514,6 @@
     <div class="glow-orb"></div>
     <div class="glow-orb-2"></div>
 
-    <!-- BARRA DE SERVIÇO (igual ao original) -->
     <div class="service-bar" id="serviceBar">
         <div class="service-container">
             <div class="service-logo">
@@ -556,28 +550,24 @@
             </h1>
             <div class="subhead">
                 📜 Cada certificado representa conhecimento adquirido, dedicação e evolução constante. 
-                Abaixo você encontra os links para visualizar ou baixar meus comprovantes de cursos, workshops e formações.
+                Clique em qualquer card para visualizar o certificado oficial na Alura.
             </div>
 
-            <!-- GRADE DINÂMICA DE CERTIFICADOS -->
             <div id="certsContainer" class="certs-grid">
-                <!-- Os certificados serão injetados via JS -->
                 <div class="empty-state">📄 Carregando certificados...</div>
             </div>
 
-            <!-- Estatística extra -->
             <div style="margin: 40px 0 20px; display: flex; justify-content: center;">
                 <div class="stat-card" style="background: rgba(255,255,245,0.9); border-radius: 48px; padding: 20px 35px; text-align: center; border: 1px solid #FFC107;">
                     <div style="font-size: 2rem; font-weight: 800; color:#E65100;" id="totalCertCount">0</div>
                     <div style="font-weight: 600;">Certificados Conquistados</div>
-                    <div style="font-size: 0.75rem; margin-top: 6px;">🔗 Clique no botão amarelo para acessar cada um</div>
+                    <div style="font-size: 0.75rem; margin-top: 6px;">🔗 Clique no card para acessar</div>
                 </div>
             </div>
 
             <div class="footer">
                 <p>© 2026 Gabriel | Desenvolvedor em formação • 3º Ano Técnico em Desenvolvimento de Sistemas</p>
                 <p style="margin-top: 12px;">✨ "Cada certificado é um degrau na escada do conhecimento" ✨</p>
-                <p style="margin-top: 12px; font-size: 0.75rem;">⚡ Atualize os links diretamente no código (array certificados)</p>
             </div>
         </div>
     </div>
@@ -585,7 +575,7 @@
     <div class="scroll-top" id="scrollTop">▲</div>
 
     <script>
-        // ---------- 🌟 COLEÇÃO DE CERTIFICADOS (LINKS ATUALIZADOS COM SEUS CURSOS DA ALURA) 🌟 ----------
+        // ---------- SEUS CERTIFICADOS (LINKS OFICIAIS DA ALURA) ----------
         const certificados = [
             {
                 titulo: "Fundamentos de Agilidade",
@@ -653,7 +643,7 @@
             }
         ];
 
-        // ========== SISTEMA DE PARTÍCULAS (IGUAL AO ORIGINAL) ==========
+        // ========== SISTEMA DE PARTÍCULAS ==========
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -710,13 +700,13 @@
         initParticles();
         animateParticles();
 
-        // ========== RENDERIZAR OS CERTIFICADOS NA TELA ==========
+        // ========== RENDERIZAR CARDS COMO LINKS ==========
         function renderCertificados() {
             const container = document.getElementById('certsContainer');
             if (!container) return;
 
             if (!certificados || certificados.length === 0) {
-                container.innerHTML = `<div class="empty-state">📭 Nenhum certificado adicionado ainda. Edite o array "certificados" no código.</div>`;
+                container.innerHTML = `<div class="empty-state">📭 Nenhum certificado adicionado ainda.</div>`;
                 document.getElementById('totalCertCount').innerText = '0';
                 return;
             }
@@ -724,23 +714,20 @@
             let html = '';
             for (let cert of certificados) {
                 html += `
-                    <div class="cert-card">
+                    <a href="${escapeHtml(cert.link)}" class="cert-card" target="_blank" rel="noopener noreferrer">
                         <div class="cert-icon">${cert.icone || '🏅'}</div>
                         <div class="cert-title">${escapeHtml(cert.titulo)}</div>
                         <div class="cert-issuer"><span>🏛️</span> ${escapeHtml(cert.emissor)}</div>
                         <div class="cert-date"><span>📅</span> ${escapeHtml(cert.data)}</div>
                         <div class="cert-desc">${escapeHtml(cert.descricao)}</div>
-                        <a href="${escapeHtml(cert.link)}" class="cert-link" target="_blank" rel="noopener noreferrer">
-                            🔗 Visualizar Certificado <span>→</span>
-                        </a>
-                    </div>
+                        <span class="cert-link-indicator">🔗 Acessar Certificado →</span>
+                    </a>
                 `;
             }
             container.innerHTML = html;
             document.getElementById('totalCertCount').innerText = certificados.length;
         }
 
-        // Função simples para evitar injeção XSS
         function escapeHtml(str) {
             if (!str) return '';
             return str.replace(/[&<>]/g, function(m) {
@@ -748,12 +735,10 @@
                 if (m === '<') return '&lt;';
                 if (m === '>') return '&gt;';
                 return m;
-            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-                return c;
             });
         }
 
-        // ========== INTERAÇÕES DA BARRA, SCROLL, TOOLTIP ==========
+        // ========== INTERAÇÕES DA BARRA, SCROLL ==========
         let lastScroll = 0;
         const bar = document.getElementById('serviceBar');
         const toggle = document.getElementById('toggleBar');
@@ -771,22 +756,19 @@
             toggle.textContent = bar.classList.contains('hidden') ? '🔽 Mostrar' : '🔽 Ocultar';
         });
 
-        // Redirecionamento dos links da barra (simulação, troque os destinos se necessário)
         document.querySelectorAll('.service-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const dest = link.getAttribute('data-dest');
-                if (dest) {
-                    if (dest === '50.html') {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    } else {
-                        window.location.href = dest;
-                    }
+                if (dest === '50.html') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    window.location.href = dest;
                 }
             });
         });
 
-        // Tooltip para logo (detalhe extra)
+        // Tooltip logo
         let tooltip = null;
         const logoImg = document.querySelector('.service-logo img');
         if (logoImg) {
@@ -802,21 +784,10 @@
             logoImg.addEventListener('mouseleave', () => { if(tooltip) { tooltip.remove(); tooltip = null; } });
         }
 
-        // Botão scroll top
         document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        // Renderiza os certificados
+        // Renderiza os certificados como links
         renderCertificados();
-
-        // Alerta amigável caso o link seja o placeholder antigo (já não se aplica, mas mantido)
-        document.addEventListener('click', (e) => {
-            if (e.target.classList && e.target.classList.contains('cert-link')) {
-                if(e.target.getAttribute('href') && e.target.getAttribute('href').includes('seusite.com')) {
-                    e.preventDefault();
-                    alert("🔗 Exemplo de certificado! Substitua o link no array 'certificados' pelo seu link real.");
-                }
-            }
-        });
     </script>
 </body>
 </html>
