@@ -6,518 +6,211 @@
     <title>Gabriel Dev | Portfólio de Projetos - Laboratório Digital</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #0b5cad;
-            color: #1e1e2a;
-            overflow-x: hidden;
-            position: relative;
+            background: #0b5cad; color: #1e1e2a; overflow-x: hidden; position: relative;
         }
-
-        /* Fundo com gradiente dinâmico */
         .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 10%, #1976D2, #0a3e6d);
-            z-index: -2;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 30% 10%, #1976D2, #0a3e6d); z-index: -2;
         }
-
-        /* Partículas refinadas */
         #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.5;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            pointer-events: none; opacity: 0.5;
         }
-
-        /* Orbes flutuantes */
         .glow-orb {
-            position: fixed;
-            width: 70vmax;
-            height: 70vmax;
+            position: fixed; width: 70vmax; height: 70vmax;
             background: radial-gradient(circle, rgba(255, 235, 59, 0.12) 0%, transparent 70%);
-            border-radius: 50%;
-            top: 20%;
-            left: -20%;
-            filter: blur(100px);
-            animation: floatGlow 18s ease-in-out infinite;
-            pointer-events: none;
-            z-index: -1;
+            border-radius: 50%; top: 20%; left: -20%; filter: blur(100px);
+            animation: floatGlow 18s ease-in-out infinite; pointer-events: none; z-index: -1;
         }
-
         .glow-orb-2 {
-            position: fixed;
-            width: 60vmax;
-            height: 60vmax;
+            position: fixed; width: 60vmax; height: 60vmax;
             background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            bottom: 10%;
-            right: -15%;
-            filter: blur(120px);
-            animation: floatGlow 22s ease-in-out infinite reverse;
-            pointer-events: none;
-            z-index: -1;
+            border-radius: 50%; bottom: 10%; right: -15%; filter: blur(120px);
+            animation: floatGlow 22s ease-in-out infinite reverse; pointer-events: none; z-index: -1;
         }
-
         @keyframes floatGlow {
             0% { transform: translate(0, 0) rotate(0deg); }
             50% { transform: translate(5%, 5%) rotate(5deg); }
             100% { transform: translate(0, 0) rotate(0deg); }
         }
-
-        /* ===== SERVICE BAR MELHORADA ===== */
         .service-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(15, 25, 45, 0.92);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 193, 7, 0.5);
-            padding: 8px 0;
-            z-index: 1000;
-            transform: translateY(0);
-            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1), background 0.2s;
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: rgba(15, 25, 45, 0.92); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 193, 7, 0.5); padding: 8px 0; z-index: 1000;
+            transform: translateY(0); transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
-
-        .service-bar.hidden {
-            transform: translateY(-100%);
-        }
-
+        .service-bar.hidden { transform: translateY(-100%); }
         .service-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-            flex-wrap: wrap;
-            gap: 20px;
+            max-width: 1400px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center; padding: 0 40px;
+            flex-wrap: wrap; gap: 20px;
         }
-
         .service-logo {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            cursor: pointer;
+            display: flex; align-items: center; gap: 16px; cursor: pointer;
             transition: transform 0.2s ease;
         }
-
-        .service-logo:hover {
-            transform: scale(1.02);
-        }
-
+        .service-logo:hover { transform: scale(1.02); }
         .service-logo img {
-            height: 70px;
-            width: auto;
-            border-radius: 18px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 193, 7, 0.3);
+            height: 70px; width: auto; border-radius: 18px;
+            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 193, 7, 0.3);
             filter: brightness(1.02) contrast(1.05);
         }
-
         .service-logo img:hover {
             filter: brightness(1.08) contrast(1.1);
             box-shadow: 0 8px 25px rgba(255, 193, 7, 0.4), 0 0 0 3px rgba(255, 193, 7, 0.6);
             transform: scale(1.01);
         }
-
         .logo-text {
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.3rem; font-weight: 700;
             background: linear-gradient(135deg, #FFC107, #FF8F00);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            letter-spacing: -0.3px;
-            text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: -0.3px; text-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
         }
-
-        .service-links {
-            display: flex;
-            gap: 28px;
-            flex-wrap: wrap;
-        }
-
+        .service-links { display: flex; gap: 28px; flex-wrap: wrap; }
         .service-link {
-            color: #f0f0f0;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            padding: 6px 0;
-            position: relative;
-            transition: all 0.25s ease;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            letter-spacing: 0.3px;
+            color: #f0f0f0; text-decoration: none; font-size: 0.95rem; font-weight: 600;
+            padding: 6px 0; position: relative; transition: all 0.25s ease; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; letter-spacing: 0.3px;
         }
-
         .service-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2.5px;
+            content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2.5px;
             background: linear-gradient(90deg, #FFC107, #FF8F00, #FFD966);
-            transition: width 0.3s ease;
-            border-radius: 2px;
-            box-shadow: 0 0 4px #FFC107;
+            transition: width 0.3s ease; border-radius: 2px; box-shadow: 0 0 4px #FFC107;
         }
-
-        .service-link:hover {
-            color: #FFD966;
-            text-shadow: 0 0 6px rgba(255, 193, 7, 0.5);
-        }
-
-        .service-link:hover::after {
-            width: 100%;
-        }
-
+        .service-link:hover { color: #FFD966; text-shadow: 0 0 6px rgba(255, 193, 7, 0.5); }
+        .service-link:hover::after { width: 100%; }
         .service-status {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #e0e0e0;
-            background: rgba(255, 193, 7, 0.12);
-            padding: 6px 20px;
-            border-radius: 60px;
-            backdrop-filter: blur(8px);
+            display: flex; align-items: center; gap: 15px; font-size: 0.85rem;
+            font-weight: 600; color: #e0e0e0; background: rgba(255, 193, 7, 0.12);
+            padding: 6px 20px; border-radius: 60px; backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 193, 7, 0.3);
         }
-
         .status-dot {
-            width: 10px;
-            height: 10px;
-            background: #2ecc71;
-            border-radius: 50%;
-            animation: pulse-green 1.8s infinite;
-            box-shadow: 0 0 6px #2ecc71;
+            width: 10px; height: 10px; background: #2ecc71; border-radius: 50%;
+            animation: pulse-green 1.8s infinite; box-shadow: 0 0 6px #2ecc71;
         }
-
         @keyframes pulse-green {
             0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 6px #2ecc71; }
             50% { opacity: 0.7; transform: scale(1.2); box-shadow: 0 0 14px #2ecc71; }
         }
-
         .service-toggle {
-            background: rgba(255, 193, 7, 0.2);
-            border: 1px solid #FFC107;
-            padding: 5px 16px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-weight: 700;
-            transition: all 0.2s ease;
-            color: #FFD966;
-            backdrop-filter: blur(4px);
+            background: rgba(255, 193, 7, 0.2); border: 1px solid #FFC107;
+            padding: 5px 16px; border-radius: 40px; cursor: pointer; font-size: 0.75rem;
+            font-weight: 700; transition: all 0.2s ease; color: #FFD966; backdrop-filter: blur(4px);
         }
-
         .service-toggle:hover {
-            background: #FFC107;
-            color: #1e1e2a;
-            transform: scale(1.03);
-            box-shadow: 0 0 12px #FFC107;
-            border-color: #fff;
+            background: #FFC107; color: #1e1e2a; transform: scale(1.03);
+            box-shadow: 0 0 12px #FFC107; border-color: #fff;
         }
-
-        /* ===== MAIN CONTAINER ===== */
-        .container {
-            position: relative;
-            z-index: 2;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        /* ===== HERO CARD COM PROJETOS ===== */
+        .container { position: relative; z-index: 2; min-height: 100vh; padding: 20px; }
         .hero-card {
-            max-width: 1400px;
-            width: 100%;
-            margin: 100px auto 40px;
-            background: rgba(255, 255, 255, 0.97);
-            backdrop-filter: blur(12px);
-            border-radius: 56px;
-            padding: 45px 50px;
+            max-width: 1400px; width: 100%; margin: 100px auto 40px;
+            background: rgba(255, 255, 255, 0.97); backdrop-filter: blur(12px);
+            border-radius: 56px; padding: 45px 50px;
             animation: fadeInUp 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             box-shadow: 0 35px 60px -25px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 193, 7, 0.3);
             transition: box-shadow 0.4s, transform 0.2s;
         }
-
         .hero-card:hover {
             box-shadow: 0 45px 70px -25px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(255, 193, 7, 0.5);
             transform: translateY(-3px);
         }
-
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .projects-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
+        .projects-header { text-align: center; margin-bottom: 40px; }
         .projects-header h1 {
-            font-size: 3rem;
-            font-weight: 800;
+            font-size: 3rem; font-weight: 800;
             background: linear-gradient(125deg, #0D47A1, #1565C0, #FFC107);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 12px;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px;
         }
-
-        .projects-header p {
-            color: #2c3e4e;
-            font-size: 1.1rem;
-            max-width: 650px;
-            margin: 0 auto;
-        }
-
-        /* CONTROLES DE FILTRO */
+        .projects-header p { color: #2c3e4e; font-size: 1.1rem; max-width: 650px; margin: 0 auto; }
         .controls {
-            max-width: 1100px;
-            margin: 0 auto 40px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 1100px; margin: 0 auto 40px; display: flex;
+            flex-wrap: wrap; gap: 20px; justify-content: space-between; align-items: center;
         }
-
         .search-box {
-            background: white;
-            border: 2px solid rgba(255, 193, 7, 0.5);
-            padding: 14px 24px;
-            border-radius: 50px;
-            color: #1e2a3a;
-            width: 100%;
-            max-width: 400px;
-            outline: none;
-            font-weight: 500;
-            font-family: 'Inter', sans-serif;
-            transition: all 0.2s;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            background: white; border: 2px solid rgba(255, 193, 7, 0.5);
+            padding: 14px 24px; border-radius: 50px; color: #1e2a3a;
+            width: 100%; max-width: 400px; outline: none; font-weight: 500;
+            font-family: 'Inter', sans-serif; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
         }
-
-        .search-box:focus {
-            border-color: #FFC107;
-            box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
-        }
-
-        .filter-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
+        .search-box:focus { border-color: #FFC107; box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2); }
+        .filter-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
         .btn-filter {
-            background: rgba(13, 71, 161, 0.08);
-            border: 1px solid rgba(13, 71, 161, 0.3);
-            color: #0D47A1;
-            padding: 10px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.25s ease;
-            font-weight: 700;
-            font-size: 0.85rem;
-            backdrop-filter: blur(4px);
+            background: rgba(13, 71, 161, 0.08); border: 1px solid rgba(13, 71, 161, 0.3);
+            color: #0D47A1; padding: 10px 20px; border-radius: 40px; cursor: pointer;
+            transition: 0.25s ease; font-weight: 700; font-size: 0.85rem; backdrop-filter: blur(4px);
         }
-
         .btn-filter.active, .btn-filter:hover {
-            background: #FFC107;
-            color: #0D47A1;
-            border-color: #FFC107;
-            box-shadow: 0 5px 12px rgba(255, 193, 7, 0.3);
-            transform: translateY(-2px);
+            background: #FFC107; color: #0D47A1; border-color: #FFC107;
+            box-shadow: 0 5px 12px rgba(255, 193, 7, 0.3); transform: translateY(-2px);
         }
-
-        /* GRID DE PROJETOS */
         .grid-links {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
             gap: 28px;
         }
-
         .project-card {
-            background: #FFFFFF;
-            border-radius: 28px;
-            padding: 26px;
-            cursor: pointer;
+            background: #FFFFFF; border-radius: 28px; padding: 26px; cursor: pointer;
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            display: flex;
-            flex-direction: column;
-            color: #1e2a3a;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            position: relative;
-            overflow: hidden;
+            display: flex; flex-direction: column; color: #1e2a3a;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04); border: 1px solid rgba(255, 193, 7, 0.3);
+            position: relative; overflow: hidden;
         }
-
         .project-card::before {
-            content: '';
-            position: absolute;
-            inset: 0;
+            content: ''; position: absolute; inset: 0;
             background: radial-gradient(circle at 30% 20%, rgba(255, 193, 7, 0.08), transparent 80%);
-            opacity: 0;
-            transition: opacity 0.4s;
+            opacity: 0; transition: opacity 0.4s;
         }
-
-        .project-card:hover::before {
-            opacity: 1;
-        }
-
+        .project-card:hover::before { opacity: 1; }
         .project-card:hover {
-            transform: translateY(-8px);
-            border-color: #FFC107;
-            background: #fefcf5;
-            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 193, 7, 0.5);
+            transform: translateY(-8px); border-color: #FFC107;
+            background: #fefcf5; box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 193, 7, 0.5);
         }
-
         .card-icon {
-            font-size: 2.4rem;
-            margin-bottom: 18px;
+            font-size: 2.4rem; margin-bottom: 18px;
             filter: drop-shadow(0 2px 6px rgba(255, 193, 7, 0.3));
         }
-
-        .project-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #0D47A1;
-            margin-bottom: 12px;
-        }
-
-        .project-card p {
-            color: #2c3e4e;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
+        .project-card h3 { font-size: 1.4rem; font-weight: 700; color: #0D47A1; margin-bottom: 12px; }
+        .project-card p { color: #2c3e4e; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; }
         .card-footer {
-            margin-top: auto;
-            padding-top: 18px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #FF8F00;
-            border-top: 1px dashed rgba(255, 193, 7, 0.4);
-            letter-spacing: 0.3px;
+            margin-top: auto; padding-top: 18px; font-family: 'Fira Code', monospace;
+            font-size: 0.7rem; font-weight: 600; color: #FF8F00;
+            border-top: 1px dashed rgba(255, 193, 7, 0.4); letter-spacing: 0.3px;
         }
-
-        .hidden {
-            display: none !important;
-        }
-
-        /* FOOTER DO HERO */
+        .hidden { display: none !important; }
         .footer-note {
-            margin-top: 65px;
-            padding-top: 30px;
+            margin-top: 65px; padding-top: 30px;
             border-top: 1px solid rgba(255, 193, 7, 0.4);
-            text-align: center;
-            font-size: 0.85rem;
-            color: #3a3a4e;
+            text-align: center; font-size: 0.85rem; color: #3a3a4e;
         }
-
         .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 55px;
-            height: 55px;
-            background: rgba(255, 193, 7, 0.9);
-            backdrop-filter: blur(8px);
-            border: 1px solid #ffffff;
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #1e1e2a;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            position: fixed; bottom: 30px; right: 30px; width: 55px; height: 55px;
+            background: rgba(255, 193, 7, 0.9); backdrop-filter: blur(8px);
+            border: 1px solid #ffffff; border-radius: 60px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000;
+            font-size: 1.6rem; font-weight: bold; color: #1e1e2a; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
+        .scroll-top.visible { opacity: 1; visibility: visible; }
         .scroll-top:hover {
-            background: #FF8F00;
-            transform: translateY(-6px);
-            box-shadow: 0 10px 25px #FFC107;
+            background: #FF8F00; transform: translateY(-6px); box-shadow: 0 10px 25px #FFC107;
         }
-
-        .tooltip {
-            position: fixed;
-            background: #1e1e2a;
-            color: #FFC107;
-            padding: 7px 18px;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            pointer-events: none;
-            z-index: 2000;
-            border: 1px solid #FFC107;
-            white-space: nowrap;
-            font-family: monospace;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
-        }
-
         @media (max-width: 900px) {
-            .hero-card {
-                padding: 30px 20px;
-                margin-top: 110px;
-            }
-            .projects-header h1 {
-                font-size: 2.2rem;
-            }
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .search-box {
-                max-width: 100%;
-            }
-            .filter-buttons {
-                justify-content: center;
-            }
-            .service-container {
-                flex-direction: column;
-                padding: 0 20px;
-            }
-            .service-links {
-                justify-content: center;
-            }
-            .service-logo img {
-                height: 55px;
-            }
+            .hero-card { padding: 30px 20px; margin-top: 110px; }
+            .projects-header h1 { font-size: 2.2rem; }
+            .controls { flex-direction: column; align-items: stretch; }
+            .search-box { max-width: 100%; }
+            .filter-buttons { justify-content: center; }
+            .service-container { flex-direction: column; padding: 0 20px; }
+            .service-links { justify-content: center; }
+            .service-logo img { height: 55px; }
         }
     </style>
 </head>
@@ -527,7 +220,7 @@
     <div class="glow-orb"></div>
     <div class="glow-orb-2"></div>
 
-    <!-- BARRA DE SERVIÇO (BASE DO SEGUNDO CÓDIGO) -->
+    <!-- BARRA DE SERVIÇO CORRIGIDA -->
     <div class="service-bar" id="serviceBar">
         <div class="service-container">
             <div class="service-logo">
@@ -535,12 +228,12 @@
                 <span class="logo-text">Gabriel Dev</span>
             </div>
             <div class="service-links">
-                <a class="service-link" data-dest="boa1.html">🏠 Início</a>
-                <a class="service-link" data-dest="20.html">💼 Portfólio</a>
-                <a class="service-link" data-dest="30.html">📁 Projetos</a>
-                <a class="service-link" data-dest="40.html">📞 Contato</a>
-                <a class="service-link" data-dest="50.html">📜 Certificados</a>
-                <a class="service-link" data-dest="60.html">📚 Aulas</a>
+                <a class="service-link" href="boa1.html">🏠 Início</a>
+                <a class="service-link" href="20.html">💼 Portfólio</a>
+                <a class="service-link" href="30.html">📁 Projetos</a>
+                <a class="service-link" href="40.html">📞 Contato</a>
+                <a class="service-link" href="50.html">📜 Certificados</a>
+                <a class="service-link" href="60.html">📚 Aulas</a>
             </div>
             <div class="service-status">
                 <span class="status-dot"></span>
@@ -557,7 +250,6 @@
                 <p>Filtragem especializada entre Scripts, Apresentações, Mobile e muito mais.</p>
             </div>
 
-            <!-- Filtros e busca -->
             <div class="controls">
                 <input type="text" class="search-box" id="searchInput" placeholder="🔍 Pesquisar projeto por nome ou descrição...">
                 <div class="filter-buttons">
@@ -568,8 +260,8 @@
                 </div>
             </div>
 
-            <!-- Grid de projetos (cards do primeiro código) -->
             <div class="grid-links" id="link-container">
+                <!-- Cards com data-projeto (arquivos locais) -->
                 <div class="project-card js" data-projeto="carro.js">
                     <div class="card-icon">🚗</div>
                     <h3>Análise de Veículos</h3>
@@ -600,6 +292,7 @@
                     <p>Abre o seu arquivo HTML de experimentos.</p>
                     <div class="card-footer">#html #javascript</div>
                 </div>
+                <!-- Links externos (Gamma) -->
                 <div class="project-card gamma" data-url="https://gamma.app/docs/Agenda-Escolar-Inteligente-zhlc75xq821pwub" data-externo="_blank">
                     <div class="card-icon">📊</div>
                     <h3>Agenda Escolar Inteligente</h3>
@@ -618,6 +311,7 @@
                     <p>Futuro das startups e inovação.</p>
                     <div class="card-footer">#Gamma #Inovacao</div>
                 </div>
+                <!-- Mobile prints -->
                 <div class="project-card mobile" data-url="SUA_IMAGEM.jpg" data-externo="_blank">
                     <div class="card-icon">📱</div>
                     <h3>Visualizar Print 1</h3>
@@ -714,11 +408,10 @@
     <div class="scroll-top" id="scrollTop">▲</div>
 
     <script>
-        // ========== PARTÍCULAS E ANIMAÇÕES (BASE DO SEGUNDO CÓDIGO) ==========
+        // ========== PARTÍCULAS ==========
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let animationId;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -760,7 +453,7 @@
         function animateParticles() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             particles.forEach(p => { p.update(); p.draw(); });
-            animationId = requestAnimationFrame(animateParticles);
+            requestAnimationFrame(animateParticles);
         }
 
         window.addEventListener('resize', () => {
@@ -771,10 +464,11 @@
         initParticles();
         animateParticles();
 
-        // Barra de serviço scroll
+        // ========== BARRA DE SERVIÇO ==========
         let lastScroll = 0;
         const bar = document.getElementById('serviceBar');
         const toggle = document.getElementById('toggleBar');
+
         window.addEventListener('scroll', () => {
             const cur = window.pageYOffset;
             if (cur > lastScroll && cur > 110) bar.classList.add('hidden');
@@ -784,112 +478,74 @@
             if (cur > 280) scrollBtn.classList.add('visible');
             else scrollBtn.classList.remove('visible');
         });
+
         toggle.addEventListener('click', () => {
             bar.classList.toggle('hidden');
-            toggle.textContent = bar.classList.contains('hidden') ? '🔽 Mostrar' : '🔽 Ocultar';
+            toggle.textContent = bar.classList.contains('hidden') ? '🔼 Mostrar' : '🔽 Ocultar';
         });
 
-        // Links da barra (apenas exemplo - não quebra a página)
-        document.querySelectorAll('.service-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                alert('Navegação rápida: esta seção será implementada em breve.');
-            });
+        // Scroll top
+        document.getElementById('scrollTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Botão scroll top
-        document.getElementById('scrollTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-        // ========== FILTROS E PESQUISA (FUNCIONALIDADE DO PRIMEIRO CÓDIGO) ==========
+        // ========== FILTROS E PESQUISA ==========
         const searchInput = document.getElementById('searchInput');
         const cards = document.getElementsByClassName('project-card');
         const filterBtns = document.querySelectorAll('.btn-filter');
-
-        // Função de filtro (categoria + pesquisa)
         let currentFilter = 'all';
 
         function applyFilters() {
             const searchTerm = searchInput.value.toLowerCase();
-            for (let i = 0; i < cards.length; i++) {
-                const card = cards[i];
+            for (let card of cards) {
                 const title = card.querySelector('h3').innerText.toLowerCase();
                 const desc = card.querySelector('p').innerText.toLowerCase();
                 const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
                 const matchesCategory = (currentFilter === 'all') || card.classList.contains(currentFilter);
-                if (matchesSearch && matchesCategory) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
+                card.classList.toggle('hidden', !(matchesSearch && matchesCategory));
             }
         }
 
-        // Evento de pesquisa
-        searchInput.addEventListener('keyup', () => {
-            // quando pesquisa, reseta botão ativo (muda para 'todos')
+        searchInput.addEventListener('input', () => {
+            // reseta filtro para "todos" ao digitar
             currentFilter = 'all';
             filterBtns.forEach(btn => btn.classList.remove('active'));
-            const allBtn = document.querySelector('.btn-filter[data-filter="all"]');
-            if (allBtn) allBtn.classList.add('active');
+            document.querySelector('.btn-filter[data-filter="all"]').classList.add('active');
             applyFilters();
         });
 
-        // Clique nos botões de filtro
         filterBtns.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const filterValue = btn.getAttribute('data-filter');
-                currentFilter = filterValue;
+            btn.addEventListener('click', () => {
+                currentFilter = btn.getAttribute('data-filter');
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                // limpa busca visualmente mas mantém searchInput vazio, reaplica filtro
-                if (searchInput.value !== '') {
-                    searchInput.value = '';
-                }
+                searchInput.value = ''; // limpa busca ao trocar filtro
                 applyFilters();
             });
         });
 
-        // Navegação dos cards (redirecionamento)
+        // ========== NAVEGAÇÃO DOS CARDS (CORRIGIDA) ==========
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('click', (e) => {
-                // Evita conflito se clicou em algo interno
                 e.stopPropagation();
-                // Verifica se é link externo (gamma ou mobile com data-url)
                 const urlExterno = card.getAttribute('data-url');
                 const projetoLocal = card.getAttribute('data-projeto');
                 const externo = card.getAttribute('data-externo') === '_blank';
-                
+
                 if (urlExterno) {
+                    // Links externos (Gamma, imagens)
                     if (externo) window.open(urlExterno, '_blank');
                     else window.location.href = urlExterno;
                 } else if (projetoLocal) {
+                    // Arquivos locais (abre na mesma aba ou nova, conforme atributo)
                     if (externo) window.open(projetoLocal, '_blank');
                     else window.location.href = projetoLocal;
-                } else {
-                    // fallback: tenta encontrar onclick antigo (nenhum, mas seguro)
-                    console.log('Ação não definida');
                 }
             });
         });
 
-        // inicializa todos visíveis
+        // Inicializa filtros
         applyFilters();
-
-        // tooltips pequenos para estatística (opcional)
-        let tooltip = null;
-        document.querySelectorAll('.stat-card, .feature-card').forEach(el => {
-            el?.addEventListener('mouseenter', (e) => {
-                if(!el) return;
-                tooltip = document.createElement('div');
-                tooltip.className = 'tooltip';
-                tooltip.textContent = '📌 Explore os projetos acima';
-                document.body.appendChild(tooltip);
-                const rect = el.getBoundingClientRect();
-                tooltip.style.left = rect.left + rect.width/2 - tooltip.offsetWidth/2 + 'px';
-                tooltip.style.top = rect.top - 40 + 'px';
-                setTimeout(() => { if(tooltip) tooltip.remove(); }, 1500);
-            });
-        });
     </script>
 </body>
 </html>
