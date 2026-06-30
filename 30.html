@@ -346,6 +346,11 @@
             background: linear-gradient(90deg, #4CAF50, #81C784);
         }
 
+        /* Novo estilo para o card do Class Connect */
+        .project-card.class-connect::before {
+            background: linear-gradient(90deg, #7C4DFF, #448AFF);
+        }
+
         .project-card:hover::before {
             height: 10px;
         }
@@ -513,7 +518,7 @@
                 <p>Aplicações web desenvolvidas com Google AI Studio, hospedadas na nuvem.</p>
             </div>
 
-            <!-- Grid com dois cards -->
+            <!-- Grid com os três cards -->
             <div class="grid-links">
                 <!-- Pet Shop -->
                 <div class="project-card pet-shop" data-url="https://untitled-812821253329.us-east1.run.app" data-externo="_blank">
@@ -534,6 +539,17 @@
                     <div class="card-footer">
                         <span>#financas #controle</span>
                         <span class="tag">Cloud Run</span>
+                    </div>
+                </div>
+
+                <!-- EduVibe Class Connect (novo card) -->
+                <div class="project-card class-connect" data-url="https://eduvibe-class-connect.base44.app" data-externo="_blank">
+                    <div class="card-icon">🎓</div>
+                    <h3>EduVibe Class Connect</h3>
+                    <p>Plataforma de conexão para aulas e aprendizado interativo.</p>
+                    <div class="card-footer">
+                        <span>#educação #conexão</span>
+                        <span class="tag">Web App</span>
                     </div>
                 </div>
             </div>
