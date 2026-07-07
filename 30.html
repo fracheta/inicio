@@ -356,6 +356,11 @@
             background: linear-gradient(90deg, #26A69A, #66BB6A);
         }
 
+        /* Estilo para o card do Google Docs (novo) */
+        .project-card.google-docs::before {
+            background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
+        }
+
         .project-card:hover::before {
             height: 10px;
         }
@@ -523,7 +528,7 @@
                 <p>Aplicações web desenvolvidas com Google AI Studio, hospedadas na nuvem.</p>
             </div>
 
-            <!-- Grid com os quatro cards -->
+            <!-- Grid com os cinco cards -->
             <div class="grid-links">
                 <!-- Pet Shop -->
                 <div class="project-card pet-shop" data-url="https://untitled-812821253329.us-east1.run.app" data-externo="_blank">
@@ -558,7 +563,7 @@
                     </div>
                 </div>
 
-                <!-- Estudo para Prova (novo card) -->
+                <!-- Estudo para Prova -->
                 <div class="project-card estudo-prova" data-url="https://fracheta.github.io/-1-estudo-para-prova/index.html" data-externo="_blank">
                     <div class="card-icon">📖</div>
                     <h3>Estudo para Prova</h3>
@@ -566,6 +571,17 @@
                     <div class="card-footer">
                         <span>#estudo #prova</span>
                         <span class="tag">GitHub Pages</span>
+                    </div>
+                </div>
+
+                <!-- Google Docs - Novo card adicionado -->
+                <div class="project-card google-docs" data-url="https://docs.google.com/document/d/1lwP5h1A7GNIoSGVycx9OPb5ESao8UZxrq46CuoBgCNE/edit?usp=sharing" data-externo="_blank">
+                    <div class="card-icon">📄</div>
+                    <h3>Documento do Projeto</h3>
+                    <p>Link para documentação ou anotações importantes do projeto no Google Docs.</p>
+                    <div class="card-footer">
+                        <span>#documentação #google</span>
+                        <span class="tag">Docs</span>
                     </div>
                 </div>
             </div>
