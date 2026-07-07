@@ -346,20 +346,56 @@
             background: linear-gradient(90deg, #4CAF50, #81C784);
         }
 
-        /* Novo estilo para o card do Class Connect */
         .project-card.class-connect::before {
             background: linear-gradient(90deg, #7C4DFF, #448AFF);
         }
 
-        /* Estilo para o card de Estudo para Prova */
         .project-card.estudo-prova::before {
             background: linear-gradient(90deg, #26A69A, #66BB6A);
         }
 
-        /* Estilo para o card do Google Docs (novo) */
         .project-card.google-docs::before {
             background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
         }
+
+        /* --- CARD ESPECIAL (Brother Fechado) --- */
+        .project-card.especial::before {
+            background: linear-gradient(90deg, #FFD700, #FFA500, #FF8C00);
+            height: 8px;
+            box-shadow: 0 0 20px #FFD700;
+        }
+
+        .project-card.especial {
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3), 0 15px 30px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #fffbe6, #fff8d6);
+        }
+
+        .project-card.especial:hover {
+            border-color: #FFA500;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.6), 0 30px 45px -15px rgba(0,0,0,0.2);
+            transform: translateY(-12px) scale(1.02);
+        }
+
+        .project-card.especial .card-icon {
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+        }
+
+        .project-card.especial .tag-especial {
+            background: #FFD700;
+            color: #1e1e2a;
+            font-weight: 800;
+            padding: 2px 14px;
+            border-radius: 30px;
+            box-shadow: 0 0 15px #FFD700;
+            animation: pulse-gold 1.8s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0%, 100% { box-shadow: 0 0 10px #FFD700; }
+            50% { box-shadow: 0 0 30px #FFA500, 0 0 60px #FFD700; }
+        }
+        /* ---------------------------------------- */
 
         .project-card:hover::before {
             height: 10px;
@@ -414,6 +450,7 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
         }
 
         .tag {
@@ -528,7 +565,7 @@
                 <p>Aplicações web desenvolvidas com Google AI Studio, hospedadas na nuvem.</p>
             </div>
 
-            <!-- Grid com os cinco cards -->
+            <!-- Grid com os cards -->
             <div class="grid-links">
                 <!-- Pet Shop -->
                 <div class="project-card pet-shop" data-url="https://untitled-812821253329.us-east1.run.app" data-externo="_blank">
@@ -574,14 +611,25 @@
                     </div>
                 </div>
 
-                <!-- Google Docs - Novo card adicionado -->
+                <!-- Google Docs -->
                 <div class="project-card google-docs" data-url="https://docs.google.com/document/d/1lwP5h1A7GNIoSGVycx9OPb5ESao8UZxrq46CuoBgCNE/edit?usp=sharing" data-externo="_blank">
                     <div class="card-icon">📄</div>
-                    <h3>Documento 🖨️ </h3>
+                    <h3>Documento 🖨️</h3>
                     <p>Link para documentação ou anotações importantes do projeto no Google Docs.</p>
                     <div class="card-footer">
                         <span>#documentação #google</span>
                         <span class="tag">Docs</span>
+                    </div>
+                </div>
+
+                <!-- NOVO CARD ESPECIAL: Brother Fechado -->
+                <div class="project-card especial" data-url="https://fracheta.github.io/00-Brother-Fechado-com-voc-/index.html" data-externo="_blank">
+                    <div class="card-icon">🤝</div>
+                    <h3>⭐ Brother Fechado</h3>
+                    <p>Projeto especial com funcionalidades únicas para você. Clique e descubra!</p>
+                    <div class="card-footer">
+                        <span>#exclusivo #brother</span>
+                        <span class="tag-especial">🌟 ESPECIAL</span>
                     </div>
                 </div>
             </div>
