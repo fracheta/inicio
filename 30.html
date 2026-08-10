@@ -374,7 +374,12 @@
             background: linear-gradient(90deg, #5D4037, #8D6E63);
         }
 
-        /* --- CARD ESPECIAL (Brother Fechado original - dourado) --- */
+        /* Novo card normal para 00Brother (site da empresa) */
+        .project-card.empresa::before {
+            background: linear-gradient(90deg, #1565C0, #42A5F5);
+        }
+
+        /* --- CARD ESPECIAL (Brother Fechado) --- */
         .project-card.especial::before {
             background: linear-gradient(90deg, #FFD700, #FFA500, #FF8C00);
             height: 8px;
@@ -412,45 +417,7 @@
             50% { box-shadow: 0 0 30px #FFA500, 0 0 60px #FFD700; }
         }
 
-        /* --- CARD ESPECIAL AZUL (Brother Azul) --- */
-        .project-card.especial-azul::before {
-            background: linear-gradient(90deg, #0D47A1, #1976D2);
-            height: 8px;
-            box-shadow: 0 0 20px #1976D2;
-        }
-
-        .project-card.especial-azul {
-            border: 2px solid #0D47A1;
-            box-shadow: 0 0 30px rgba(25, 118, 210, 0.4), 0 15px 30px rgba(0,0,0,0.1);
-            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
-        }
-
-        .project-card.especial-azul:hover {
-            border-color: #1976D2;
-            box-shadow: 0 0 50px rgba(25, 118, 210, 0.7), 0 30px 45px -15px rgba(0,0,0,0.2);
-            transform: translateY(-12px) scale(1.02);
-        }
-
-        .project-card.especial-azul .card-icon {
-            filter: drop-shadow(0 0 10px rgba(25, 118, 210, 0.6));
-        }
-
-        .project-card.especial-azul .tag-especial-azul {
-            background: #0D47A1;
-            color: #ffffff;
-            font-weight: 800;
-            padding: 2px 14px;
-            border-radius: 30px;
-            box-shadow: 0 0 15px #1976D2;
-            animation: pulse-blue 1.8s infinite;
-        }
-
-        @keyframes pulse-blue {
-            0%, 100% { box-shadow: 0 0 10px #1976D2; }
-            50% { box-shadow: 0 0 30px #0D47A1, 0 0 60px #42A5F5; }
-        }
-        /* ---------------------------------------- */
-
+        /* Hover padrão para cards normais */
         .project-card:hover::before {
             height: 10px;
         }
@@ -709,17 +676,6 @@
                     </div>
                 </div>
 
-                <!-- CARD ESPECIAL AZUL: Brother 0.html -->
-                <div class="project-card especial-azul" data-url="https://fracheta.github.io/00brother/0.html" data-externo="_blank">
-                    <div class="card-icon">🔵</div>
-                    <h3>⭐ Brother Fechado Azul</h3>
-                    <p>Versão azul especial do Brother Fechado, com a mesma energia e ainda mais surpresas.</p>
-                    <div class="card-footer">
-                        <span>#exclusivo #azul</span>
-                        <span class="tag-especial-azul">💎 ESPECIAL AZUL</span>
-                    </div>
-                </div>
-
                 <!-- Fair Code Quest -->
                 <div class="project-card fair-code-quest" data-url="https://fair-code-quest-learn.base44.app" data-externo="_blank">
                     <div class="card-icon">🧩</div>
@@ -752,6 +708,18 @@
                         <span class="tag">Web App</span>
                     </div>
                 </div>
+
+                <!-- ========== NOVO CARD: 00Brother (site da empresa) ========== -->
+                <div class="project-card empresa" data-url="https://fracheta.github.io/00brother/0.html" data-externo="_blank">
+                    <div class="card-icon">🏢</div>
+                    <h3>00Brother</h3>
+                    <p>Site oficial da empresa 00Brother. Conheça a marca e seus projetos.</p>
+                    <div class="card-footer">
+                        <span>#empresa #site</span>
+                        <span class="tag">GitHub Pages</span>
+                    </div>
+                </div>
+                <!-- ========== FIM DO CARD 00Brother ========== -->
             </div>
 
             <div class="footer-note">
