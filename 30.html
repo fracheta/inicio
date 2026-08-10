@@ -362,22 +362,19 @@
             background: linear-gradient(90deg, #FF6F00, #FFA000);
         }
 
-        /* --- NOVO CARD: Fair Code Quest --- */
         .project-card.fair-code-quest::before {
             background: linear-gradient(90deg, #6C63FF, #3F51B5);
         }
 
-        /* --- NOVO CARD: Academia --- */
         .project-card.academia::before {
             background: linear-gradient(90deg, #4CAF50, #FF9800);
         }
 
-        /* --- NOVO CARD: Terra Trek Hub --- */
         .project-card.terra-trek::before {
             background: linear-gradient(90deg, #5D4037, #8D6E63);
         }
 
-        /* --- CARD ESPECIAL (Brother Fechado) --- */
+        /* --- CARD ESPECIAL (Brother Fechado original - dourado) --- */
         .project-card.especial::before {
             background: linear-gradient(90deg, #FFD700, #FFA500, #FF8C00);
             height: 8px;
@@ -413,6 +410,44 @@
         @keyframes pulse-gold {
             0%, 100% { box-shadow: 0 0 10px #FFD700; }
             50% { box-shadow: 0 0 30px #FFA500, 0 0 60px #FFD700; }
+        }
+
+        /* --- CARD ESPECIAL AZUL (Brother Azul) --- */
+        .project-card.especial-azul::before {
+            background: linear-gradient(90deg, #0D47A1, #1976D2);
+            height: 8px;
+            box-shadow: 0 0 20px #1976D2;
+        }
+
+        .project-card.especial-azul {
+            border: 2px solid #0D47A1;
+            box-shadow: 0 0 30px rgba(25, 118, 210, 0.4), 0 15px 30px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+        }
+
+        .project-card.especial-azul:hover {
+            border-color: #1976D2;
+            box-shadow: 0 0 50px rgba(25, 118, 210, 0.7), 0 30px 45px -15px rgba(0,0,0,0.2);
+            transform: translateY(-12px) scale(1.02);
+        }
+
+        .project-card.especial-azul .card-icon {
+            filter: drop-shadow(0 0 10px rgba(25, 118, 210, 0.6));
+        }
+
+        .project-card.especial-azul .tag-especial-azul {
+            background: #0D47A1;
+            color: #ffffff;
+            font-weight: 800;
+            padding: 2px 14px;
+            border-radius: 30px;
+            box-shadow: 0 0 15px #1976D2;
+            animation: pulse-blue 1.8s infinite;
+        }
+
+        @keyframes pulse-blue {
+            0%, 100% { box-shadow: 0 0 10px #1976D2; }
+            50% { box-shadow: 0 0 30px #0D47A1, 0 0 60px #42A5F5; }
         }
         /* ---------------------------------------- */
 
@@ -641,7 +676,7 @@
                     </div>
                 </div>
 
-                <!-- NOVO CARD: Link fornecido -->
+                <!-- Documento Compartilhado -->
                 <div class="project-card google-docs" data-url="https://docs.google.com/document/d/1GsNiyYYwnOiGB1oA-9EBEykuZkxHj2TInrBdQi5CY6I/edit?usp=sharing" data-externo="_blank">
                     <div class="card-icon">📎</div>
                     <h3>Documento (Compartilhado)</h3>
@@ -663,7 +698,7 @@
                     </div>
                 </div>
 
-                <!-- CARD ESPECIAL: Brother Fechado -->
+                <!-- CARD ESPECIAL: Brother Fechado (dourado) -->
                 <div class="project-card especial" data-url="https://fracheta.github.io/00-Brother-Fechado-com-voc-/index.html" data-externo="_blank">
                     <div class="card-icon">🤝</div>
                     <h3>⭐ Brother Fechado</h3>
@@ -674,7 +709,18 @@
                     </div>
                 </div>
 
-                <!-- NOVO CARD: Fair Code Quest -->
+                <!-- CARD ESPECIAL AZUL: Brother 0.html -->
+                <div class="project-card especial-azul" data-url="https://fracheta.github.io/00brother/0.html" data-externo="_blank">
+                    <div class="card-icon">🔵</div>
+                    <h3>⭐ Brother Fechado Azul</h3>
+                    <p>Versão azul especial do Brother Fechado, com a mesma energia e ainda mais surpresas.</p>
+                    <div class="card-footer">
+                        <span>#exclusivo #azul</span>
+                        <span class="tag-especial-azul">💎 ESPECIAL AZUL</span>
+                    </div>
+                </div>
+
+                <!-- Fair Code Quest -->
                 <div class="project-card fair-code-quest" data-url="https://fair-code-quest-learn.base44.app" data-externo="_blank">
                     <div class="card-icon">🧩</div>
                     <h3>Fair Code Quest</h3>
@@ -685,7 +731,7 @@
                     </div>
                 </div>
 
-                <!-- NOVO CARD: Academia -->
+                <!-- Academia -->
                 <div class="project-card academia" data-url="https://fracheta.github.io/academia/index.html" data-externo="_blank">
                     <div class="card-icon">🏋️</div>
                     <h3>Academia</h3>
@@ -696,7 +742,7 @@
                     </div>
                 </div>
 
-                <!-- ========== NOVO CARD ADICIONADO: Terra Trek Hub ========== -->
+                <!-- Terra Trek Hub -->
                 <div class="project-card terra-trek" data-url="https://terra-trek-hub.base44.app" data-externo="_blank">
                     <div class="card-icon">🌍</div>
                     <h3>Terra Trek Hub</h3>
@@ -706,7 +752,6 @@
                         <span class="tag">Web App</span>
                     </div>
                 </div>
-                <!-- ========== FIM DO NOVO CARD ========== -->
             </div>
 
             <div class="footer-note">
